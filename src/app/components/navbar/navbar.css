@@ -1,0 +1,45 @@
+.marketplace-navbar {
+  background: #fff;
+  color: var(--dark-color);
+  box-shadow: var(--box-shadow);
+  padding: 0.6rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand .brand-text {
+  color: var(--dark-color);
+}
+
+.nav-link {
+  color: var(--dark-color) !important;
+  transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color) !important;
+}
+
+.btn-outline-dark {
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.btn-outline-dark:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.search-box input {
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+}
+
+.badge {
+  font-size: 0.7rem;
+}
+
+.logo-icon svg {
+  display: block;
+}

@@ -1,0 +1,136 @@
+
+
+
+    <!-- Page Header -->
+    <section class="bg-light py-5" style="margin-top: 76px;">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                </ol>
+            </nav>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="fw-bold mb-2">Shopping Cart</h1>
+                    <p class="text-muted mb-0">Review your selected fabrics</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="catalog.html" class="btn btn-outline-primary ripple">
+                        <i class="fas fa-arrow-left me-1"></i>Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <!-- Cart Items -->
+                <div class="col-lg-8">
+                    <div class="card shadow-sm card-lift animate-on-scroll">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-shopping-cart me-2"></i>Cart Items
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="cartItems">
+                                <!-- Cart items will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+                    <div class="card shadow-sm card-lift animate-on-scroll">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-receipt me-2"></i>Order Summary
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="orderSummary">
+                                <!-- Order summary will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Options -->
+                    <div class="card shadow-sm mt-4 animate-on-scroll">
+                        <div class="card-header bg-white">
+                            <h6 class="mb-0">
+                                <i class="fas fa-truck me-2"></i>Shipping Options
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="shipping" id="standardShipping" value="standard" checked>
+                                <label class="form-check-label" for="standardShipping">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Standard Shipping</span>
+                                        <span class="text-muted">$15.00</span>
+                                    </div>
+                                    <small class="text-muted">5-7 business days</small>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="shipping" id="expressShipping" value="express">
+                                <label class="form-check-label" for="expressShipping">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Express Shipping</span>
+                                        <span class="text-muted">$25.00</span>
+                                    </div>
+                                    <small class="text-muted">2-3 business days</small>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="shipping" id="overnightShipping" value="overnight">
+                                <label class="form-check-label" for="overnightShipping">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Overnight Shipping</span>
+                                        <span class="text-muted">$45.00</span>
+                                    </div>
+                                    <small class="text-muted">Next business day</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Promo Code -->
+                    <div class="card shadow-sm mt-4 animate-on-scroll">
+                        <div class="card-header bg-white">
+                            <h6 class="mb-0">
+                                <i class="fas fa-tag me-2"></i>Promo Code
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="promoCode" placeholder="Enter promo code">
+                                <button class="btn btn-outline-primary ripple" type="button" onclick="applyPromoCode()">Apply</button>
+                            </div>
+                            <div id="promoMessage" class="mt-2"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-3 ripple" onclick="openCheckout()">
+                        <i class="fas fa-lock me-1"></i>Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Empty Cart State -->
+    <div id="emptyCartState" class="text-center py-5 animate-on-scroll" style="display: none;">
+        <div class="container">
+            <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
+            <h3 class="text-muted mb-3">Your cart is empty</h3>
+            <p class="text-muted mb-4">Looks like you haven't added any fabrics to your cart yet.</p>
+            <a href="catalog.html" class="btn btn-primary btn-lg ripple">
+                <i class="fas fa-shopping-bag me-2"></i>Start Shopping
+            </a>
+        </div>
+    </div>

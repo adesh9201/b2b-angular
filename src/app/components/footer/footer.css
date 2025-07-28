@@ -1,0 +1,37 @@
+.footer-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.footer-divider {
+  height: 3px;
+  background: linear-gradient(90deg, #bfa046 0%, #ffffff 100%);
+  border-radius: 2px;
+  border: none;
+}
+
+.text-gold {
+  color: #bfa046;
+}
+
+.footer-logo-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+
+.footer-social {
+  color: #bfa046;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+.footer-social:hover {
+  color: #8ec5fc;
+}
+.btn{
+    background:#bfa046;
+    color:#fff;
+}
+

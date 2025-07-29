@@ -3,69 +3,72 @@
 
     <div class="container-fluid mt-5">
         <div class="row flex-nowrap">
-            <div class="col-auto col-lg-2 px-0 bg-light border-end min-vh-100">
+            <!-- <div class="col-auto col-lg-2 px-0 bg-light border-end min-vh-100">
                 <div class="d-flex flex-column align-items-center align-items-lg-start py-3 px-2">
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/dashboard" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-house-door-fill fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Dashboard</span>
                     </a>
-                    <a href="order.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/products" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-box fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Orders</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/order" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-list-task fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Product Catalog</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/inventory" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-building fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Inventory</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/pricing" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-currency-dollar fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Pricing</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/claims" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-shield-check fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Claims</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/payment" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-credit-card fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Payments</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/logistics" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-truck fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Logistics</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/analytics" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-bar-chart-line fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Analytics</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/marketing" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-megaphone fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Marketing</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/reviews" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-star fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Reviews</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/support" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-question-circle fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Support</span>
                     </a>
-                    <a href="vendorScreen.html" class="nav-link d-flex align-items-center text-dark mb-3">
+                    <a routerLink="/account-setting" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
                         <i class="bi bi-gear fs-5"></i>
                         <span class="d-none d-lg-inline ms-2">Account Settings</span>
                     </a>
                 </div>
-            </div>
+            </div> -->
+
+<!-- sidebar -->
+            <app-sidebar></app-sidebar>
 
             <div class="col px-4">
                 <section class="bg-light py-5">
                     <div class="container-fluid">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a routerLink="/home" class="nav-link">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                             </ol>
                         </nav>

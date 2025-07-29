@@ -1,7 +1,12 @@
-/* .card {
-  border-radius: 1rem;
+/* Always light background */
+.custom-card {
+  background-color: #ffffff !important;
+  color: #212529 !important; /* Bootstrap default text color */
+  border-radius: 8px;
 }
 
-input.ng-invalid.ng-touched {
-  border-color: #dc3545;
-} */
+/* Optional - form background forced */
+body {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+}

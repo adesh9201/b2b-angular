@@ -1,7 +1,37 @@
-/* .card {
-  border-radius: 1rem;
+/* Ensure container is centered and light in all modes */
+.login-container {
+  max-width: 420px;
+  margin: auto;
 }
 
-input.ng-invalid.ng-touched {
-  border-color: #dc3545;
-} */
+/* Force light background and text for the card regardless of system theme */
+.login-card {
+  background-color: #ffffff !important; /* White background */
+  color: #000000 !important; /* Black text */
+  border: 1px solid #ddd;
+}
+
+/* Form label and inputs */
+.login-card .form-label {
+  color: #000000 !important;
+}
+
+.login-card input.form-control {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-color: #ccc;
+}
+
+/* Fix button text */
+.login-card .btn-success {
+  color: #fff;
+}
+
+/* Anchor link style fix */
+.login-card a {
+  color: #0d6efd;
+}
+
+.login-card a:hover {
+  text-decoration: underline;
+}

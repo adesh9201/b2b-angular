@@ -1,13 +1,14 @@
+/* === Marketplace Navbar Specific === */
 .marketplace-navbar {
-  background: #fff;
-  color: var(--dark-color);
+  background: #ffffff !important; /* Always white */
+  color: var(--dark-color) !important;
   box-shadow: var(--box-shadow);
   padding: 0.6rem 1rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar-brand .brand-text {
-  color: var(--dark-color);
+  color: var(--dark-color) !important;
 }
 
 .nav-link {
@@ -22,6 +23,9 @@
 
 .btn-outline-dark {
   border-radius: var(--border-radius);
+  border: 1px solid var(--dark-color);
+  background-color: transparent;
+  color: var(--dark-color);
   transition: var(--transition);
 }
 

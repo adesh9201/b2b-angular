@@ -99,7 +99,7 @@ p, a, span, li, button, input, textarea, select {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    user-select: none;
+    /* user-select: none; */
     border: none;
     padding: 0.5rem 1.5rem;
     font-size: 1rem;

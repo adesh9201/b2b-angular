@@ -1,1 +1,36 @@
-<p class="bg-black text-bg-danger text-center mt-5">register works!</p>
+<!-- Info Message -->
+<p class="text-center bg-primary text-white py-2 rounded mb-4">Register works!</p>
+
+<div class="container mt-5" style="max-width: 420px;">
+  <div class="card shadow">
+    <div class="card-body">
+      <h3 class="text-center mb-4">Create Account</h3>
+      <form novalidate>
+        <div class="mb-3">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="name" required />
+          <div class="invalid-feedback">Full name is required</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" required />
+          <div class="invalid-feedback">Valid email is required</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" required />
+          <div class="invalid-feedback">Password is required</div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Register</button>
+
+        <p class="text-center mt-3 mb-0">
+          Already have an account?
+          <a routerLink="/login" class="text-decoration-none">Login here</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

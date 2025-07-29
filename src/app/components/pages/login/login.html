@@ -1,1 +1,30 @@
-<p class="bg-black text-bg-danger text-center mt-5">login works!</p>
+<!-- Success/Error Message -->
+<p class="text-center bg-dark text-white py-2 rounded mb-4">Login works!</p>
+
+<div class="container mt-5" style="max-width: 420px;">
+  <div class="card shadow">
+    <div class="card-body">
+      <h3 class="text-center mb-4">Login</h3>
+      <form novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username or Email</label>
+          <input type="text" class="form-control" id="username" required />
+          <div class="invalid-feedback">Username is required</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" required />
+          <div class="invalid-feedback">Password is required</div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Login</button>
+
+        <p class="text-center mt-3 mb-0">
+          Don't have an account?
+          <a routerLink="/register" class="text-decoration-none">Register here</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

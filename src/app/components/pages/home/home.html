@@ -123,146 +123,55 @@
   </div>
 
   <!-- Featured Products Section -->
-  <section class="py-5 bg-light featured-products-section">
-    <div class="container">
+   <!-- src/app/components/home/home.html -->
+<section class="py-5 bg-light featured-products-section">
+  <div class="container-fluid">
+    <!-- Title Section -->
+    <div class="text-center mb-4">
+      <h4 class="fw-bold text-primary">Featured Fabrics</h4>
+      <p class="text-muted small">Explore our premium selection of high-quality fabrics.</p>
+    </div>
 
-      <!-- Section Header -->
-      <div class="row mb-4">
-        <div class="col-12 text-center">
-          <h2 class="fw-bold display-6 font-poppins">Featured Fabrics</h2>
-          <p class="lead text-muted">Explore our premium selection</p>
-        </div>
-      </div>
-
-      <!-- Products Grid -->
-      <div class="row g-4">
-
-        <!-- Silk Blend -->
-        <div class="col-md-4 col-sm-6 col-6">
-          <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll">
-            <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
-              <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80"
-                alt="Silk Blend" class="img-fluid featured-img">
-            </div>
-            <h6 class="fw-bold mb-1 font-poppins">Silk Blend</h6>
-            <p class="text-muted small mb-2">Luxury, Soft, Shimmery</p>
-            <div class="fw-bold mb-2" style="color:#009688;">$24.99 / yard</div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
-              <a href="catalog.html#silk-blend" class="btn btn-outline-primary btn-sm">View Details</a>
+    <!-- Products Grid -->
+    <div class="row g-3">
+      <div class="col-lg-2 col-md-4 col-sm-6 col-6" *ngFor="let product of featuredProducts">
+        <div class="card border-0 shadow-sm h-100 product-card">
+          <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
+            <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid w-100 product-image"
+              style="height: 150px; object-fit: cover;">
+          </div>
+          <div class="card-body text-center px-2 py-3">
+            <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
+            <div>
+              <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
+              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD' }}</small>
             </div>
           </div>
-        </div>
-
-        <!-- Organic Cotton -->
-        <div class="col-md-4 col-sm-6 col-6">
-          <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll">
-            <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
-              <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80"
-                alt="Organic Cotton" class="img-fluid featured-img">
-            </div>
-            <h6 class="fw-bold mb-1 font-poppins">Organic Cotton</h6>
-            <p class="text-muted small mb-2">Eco-friendly, Breathable</p>
-            <div class="fw-bold mb-2" style="color:#009688;">$18.50 / yard</div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
-              <a href="catalog.html#organic-cotton" class="btn btn-outline-primary btn-sm">View Details</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Denim Indigo -->
-        <div class="col-md-4 col-sm-6 col-6">
-          <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll">
-            <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
-              <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
-                alt="Denim Indigo" class="img-fluid featured-img">
-            </div>
-            <h6 class="fw-bold mb-1 font-poppins">Denim Indigo</h6>
-            <p class="text-muted small mb-2">Durable, Classic</p>
-            <div class="fw-bold mb-2" style="color:#009688;">$15.99 / yard</div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
-              <a href="catalog.html#denim-indigo" class="btn btn-outline-primary btn-sm">View Details</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Linen Natural -->
-        <div class="col-md-4 col-sm-6 col-6">
-          <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll">
-            <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
-              <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
-                alt="Linen Natural" class="img-fluid featured-img">
-            </div>
-            <h6 class="fw-bold mb-1 font-poppins">Linen Natural</h6>
-            <p class="text-muted small mb-2">Lightweight, Breathable</p>
-            <div class="fw-bold mb-2" style="color:#009688;">$22.00 / yard</div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
-              <a href="catalog.html#linen-natural" class="btn btn-outline-primary btn-sm">View Details</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Wool Tweed -->
-        <div class="col-md-4 col-sm-6 col-6">
-          <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll">
-            <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
-              <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80"
-                alt="Wool Tweed" class="img-fluid featured-img">
-            </div>
-            <h6 class="fw-bold mb-1 font-poppins">Wool Tweed</h6>
-            <p class="text-muted small mb-2">Warm, Textured</p>
-            <div class="fw-bold mb-2" style="color:#009688;">$27.50 / yard</div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
-              <a href="catalog.html#wool-tweed" class="btn btn-outline-primary btn-sm">View Details</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bamboo Jersey -->
-        <div class="col-md-4 col-sm-6 col-6">
-          <div class="product-card glassmorphic card-lift featured-card position-relative animate-on-scroll">
-            <div class="img-hover-zoom rounded-4 overflow-hidden mb-3">
-              <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80"
-                alt="Bamboo Jersey" class="img-fluid featured-img">
-            </div>
-            <h6 class="fw-bold mb-1 font-poppins">Bamboo Jersey</h6>
-            <p class="text-muted small mb-2">Soft, Eco-friendly</p>
-            <div class="fw-bold mb-2" style="color:#009688;">$19.99 / yard</div>
-            <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-gradient btn-sm ripple">Buy Now</button>
-              <a href="catalog.html#bamboo-jersey" class="btn btn-outline-primary btn-sm">View Details</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Load More Button -->
-      <div class="row mt-4">
-        <div class="col-12 text-center">
-          <a href="catalog.html" class="btn btn-gradient btn-lg ripple">Load More Fabrics</a>
         </div>
       </div>
     </div>
 
-    <!-- SVG Divider -->
-    <div class="section-divider">
-      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"
-        style="width:100%;height:60px;display:block;">
-        <path d="M0,40 C480,120 960,0 1440,40 L1440,80 L0,80 Z" fill="url(#dividerGradient)" />
-        <defs>
-          <linearGradient id="dividerGradient" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#009688" />
-            <stop offset="100%" stop-color="#43e8d8" />
-          </linearGradient>
-        </defs>
-      </svg>
+    <!-- Load More Button -->
+    <div class="text-center mt-4">
+      <a routerLink="/catalogs" class="btn btn-outline-primary btn-sm px-4 rounded-pill shadow-sm">Load More Fabrics</a>
     </div>
-  </section>
+  </div>
+
+  <!-- SVG Divider -->
+  <div class="section-divider mt-4">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg"
+      style="width:100%;height:50px;display:block;">
+      <path d="M0,40 C480,120 960,0 1440,40 L1440,80 L0,80 Z" fill="url(#dividerGradient)" />
+      <defs>
+        <linearGradient id="dividerGradient" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#009688" />
+          <stop offset="100%" stop-color="#43e8d8" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</section>
+
 
   <!-- Stats Section -->
   <section class="py-5 bg-light fade-in-up stats-section visible">

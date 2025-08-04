@@ -1,15 +1,5 @@
-// // src/app/models/product.model.ts
-// export interface Product {
-//   id: number;
-//   name: string;
-//   description: string;
-//   price: number;
-//   imageUrl: string;
-//   category: string;
-//   attributes: string[];
-// }
 
-// src/app/models/product.model.ts
+
 export interface Product {
   id: number;
   name: string;

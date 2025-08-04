@@ -1,16 +1,32 @@
-.trust-logo {
-  max-height: 60px;
-  filter: grayscale(100%);
-  transition: all 0.3s ease;
-
-  &.pulse-on-hover:hover {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-  }
+.trust-section {
+  background-color: #ffffff;
 }
 
 .fabric-gradient {
-  background: linear-gradient(to right, #009688, #43e8d8);
+  background: linear-gradient(90deg, #121212, #343a40, #000000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.trust-logo {
+  max-height: 60px;
+  opacity: 0.85;
+  filter: grayscale(100%);
+  transition: all 0.3s ease-in-out;
+}
+
+.trust-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.pulse-on-hover:hover {
+  animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }

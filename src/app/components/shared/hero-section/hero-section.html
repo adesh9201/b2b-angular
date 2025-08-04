@@ -1,0 +1,61 @@
+<!-- Hero Carousel Section -->
+<div class="w-100 position-relative z-2">
+  <div id="heroB2BCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000"
+    aria-label="Hero Carousel">
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button *ngFor="let product of featuredProducts; let i = index"
+        type="button"
+        data-bs-target="#heroB2BCarousel"
+        [attr.data-bs-slide-to]="i"
+        [class.active]="i === 0"
+        [attr.aria-current]="i === 0 ? 'true' : null"
+        [attr.aria-label]="'Slide ' + (i + 1)">
+      </button>
+    </div>
+
+    <!-- Carousel Inner -->
+    <div class="carousel-inner">
+      <div *ngFor="let product of featuredProducts; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between px-4 px-md-5"
+          style="min-height: 60vh;">
+
+          <!-- Text Column -->
+          <div class="col-md-6 py-4 text-center text-md-start">
+            <h1 class="display-4 fw-bold mb-3 text-dark">{{ product.name }}</h1>
+            <p class="lead fs-5 text-muted">
+              {{ product.description || 'Explore top quality and premium value.' }}
+            </p>
+            <div class="d-flex justify-content-center justify-content-md-start gap-3 mt-3">
+              <a routerLink="/catalog" class="btn btn-lg px-4 py-2"
+                style="background:#a67c00;color:#fff;font-weight:600;border-radius:2em;box-shadow:0 4px 18px rgba(166,124,0,0.12);">
+                Shop Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Image Column -->
+          <div class="col-md-6 text-center">
+            <img [src]="product.imageUrl"
+              [alt]="product.name"
+              class="img-fluid rounded-4 shadow-lg"
+              style="max-height: 400px; object-fit: cover; border: 6px solid #fff;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroB2BCarousel" data-bs-slide="prev"
+      aria-label="Previous Slide">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroB2BCarousel" data-bs-slide="next"
+      aria-label="Next Slide">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

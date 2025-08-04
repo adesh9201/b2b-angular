@@ -1,137 +1,70 @@
 <!-- Top Filter Bar (Horizontal Layout + Sort + Title) -->
-<div class="container mb-4 mt-5">
-  <div class="card border-0 shadow-sm bg-light">
-    <div class="card-body">
+<section class="py-4 bg-light featured-products-section mt-5">
+  <div class="container-fluid">
+    <div class="row">
 
-      <!-- Title + Sort By -->
-      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
-        <div class="fw-bold fs-5" id="catalogCount" style="color:#0a2342;">All Fabrics</div>
-        <div class="d-flex align-items-center gap-2">
-          <label for="sortBy" class="form-label mb-0 fw-semibold">Sort by:</label>
-          <select class="form-select" id="sortBy" style="min-width:160px;">
-            <option value="newest">Newest</option>
-            <option value="priceLowHigh">Price: Low to High</option>
-            <option value="priceHighLow">Price: High to Low</option>
-            <option value="popularity">Popularity</option>
-            <option value="rating">Rating</option>
-          </select>
-        </div>
-      </div>
 
-      <!-- Filter Form -->
-      <form id="catalogFilters" class="row gy-3 gx-4 align-items-end">
+      <!-- Filters Sidebar -->
+      <aside class="col-lg-3 col-md-4 mb-4 d-none d-md-block">
+        <app-filter></app-filter>
+      </aside>
 
-        <!-- Category Filter -->
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold">Category</label>
-          <select class="form-select" id="filterCategory">
-            <option value="">All</option>
-            <option value="Cotton Fabric">Cotton Fabric</option>
-            <option value="Silk Fabric">Silk Fabric</option>
-            <option value="Linen Fabric">Linen Fabric</option>
-            <option value="Denim Fabric">Denim Fabric</option>
-            <option value="Rayon Fabric">Rayon Fabric</option>
-            <option value="Organza Fabric">Organza Fabric</option>
-            <option value="Printed Fabric">Printed Fabric</option>
-            <option value="Chiffon Fabric">Chiffon Fabric</option>
-            <option value="Georgette Fabric">Georgette Fabric</option>
-          </select>
+
+
+      <!-- Products Grid -->
+      <div class="col-lg-9 col-md-8">
+        <div class="text-center mb-4">
+          <h4 class="fw-bold text-primary">Featured Fabrics</h4>
+          <p class="text-muted small">Explore our premium selection of high-quality fabrics.</p>
         </div>
 
-        <!-- Price Range Filter -->
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold">Price Range</label>
+        <!-- ✅ Top Bar: Title + Sort By -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+          <div class="fw-bold fs-5" id="catalogCount" style="color:#0a2342;">All Fabrics</div>
           <div class="d-flex align-items-center gap-2">
-            <input type="number" class="form-control" id="filterPriceMin" placeholder="Min" min="0">
-            <input type="number" class="form-control" id="filterPriceMax" placeholder="Max" min="0">
+            <label for="sortBy" class="form-label mb-0 fw-semibold">Sort by:</label>
+            <select class="form-select" id="sortBy" style="min-width:160px;">
+              <option value="newest">Newest</option>
+              <option value="priceLowHigh">Price: Low to High</option>
+              <option value="priceHighLow">Price: High to Low</option>
+              <option value="popularity">Popularity</option>
+              <option value="rating">Rating</option>
+            </select>
           </div>
         </div>
 
-        <!-- Color Filter -->
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold">Color</label>
-          <select class="form-select" id="filterColor">
-            <option value="">All</option>
-            <option value="White">White</option>
-            <option value="Black">Black</option>
-            <option value="Blue">Blue</option>
-            <option value="Red">Red</option>
-            <option value="MultiColour">MultiColour</option>
-            <option value="Green">Green</option>
-            <option value="Yellow">Yellow</option>
-            <option value="Olive">Olive</option>
-            <option value="Fuscia">Fuscia</option>
-            <option value="Mehroon">Mehroon</option>
-            <option value="Brown">Brown</option>
-            <option value="Coral">Coral</option>
-            <option value="Lilac">Lilac</option>
-            <option value="Pink">Pink</option>
-            <option value="Cream">Cream</option>
-            <option value="Navy Blue">Navy Blue</option>
-            <option value="Dusty pink">Dusty Pink</option>
-            <option value="Rust">Rust</option>
-            <option value="Purple">Purple</option>
-            <option value="Orange">Orange</option>
-            <option value="Beige">Beige</option>
-          </select>
+        <div class="row g-3">
+          <div class="col-lg-3 col-md-3 col-sm-6 col-6" *ngFor="let product of featuredProducts">
+            <div class="card border-0 shadow-sm h-100 product-card">
+              <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
+                <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid w-100 product-image"
+                  style="height: 150px; object-fit: cover;">
+              </div>
+              <div class="card-body text-center px-2 py-3">
+                <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
+                <div>
+                  <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD'
+                    }}</span>
+                  <small class="text-muted text-decoration-line-through small">{{
+                    product.originalPrice | currency:'USD' }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Material Filter -->
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold">Material</label>
-          <select class="form-select" id="filterMaterial">
-            <option value="">All</option>
-            <option value="Cotton">Cotton</option>
-            <option value="Viscose">Viscose</option>
-            <option value="Polyester">Polyester</option>
-            <option value="Linen">Linen</option>
-            <option value="Nylon">Nylon</option>
-            <option value="Cotton Lycra">Cotton Lycra</option>
-            <option value="Special">Special</option>
-            <option value="Polyester Lycra">Polyester Lycra</option>
-          </select>
+        <!-- Load More Button -->
+        <div class="text-center mt-4">
+          <a routerLink="/catalog" class="btn btn-outline-primary btn-sm px-4 rounded-pill shadow-sm">Load
+            More Fabrics</a>
         </div>
+      </div>
 
-        <!-- Supplier Filter -->
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold">Supplier</label>
-          <select class="form-select" id="filterSupplier">
-            <option value="">All</option>
-            <option value="TexFab India">TexFab India</option>
-            <option value="Global Fabrics">Global Fabrics</option>
-            <option value="Elegant Textiles">Elegant Textiles</option>
-            <option value="WeaveWorld">WeaveWorld</option>
-            <option value="SilkMart">SilkMart</option>
-            <option value="Organic Looms">Organic Looms</option>
-          </select>
-        </div>
-
-        <!-- Rating Filter -->
-        <div class="col-6 col-md-2">
-          <label class="form-label fw-semibold">Rating</label>
-          <select class="form-select" id="filterRating">
-            <option value="">All</option>
-            <option value="4">4 stars & up</option>
-            <option value="3">3 stars & up</option>
-            <option value="2">2 stars & up</option>
-            <option value="1">1 star & up</option>
-          </select>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="col-12 d-flex justify-content-end gap-2 mt-3">
-          <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
-          <button type="button" class="btn btn-outline-secondary" id="resetFilters">Reset</button>
-        </div>
-
-      </form>
     </div>
   </div>
-</div>
+</section>
 
 
-
-<!-- src/app/home/home.html -->
 <!-- src/app/home/catalogs.html -->
 <section class="py-5 bg-light featured-products-section">
   <div class="container-fluid">
@@ -255,7 +188,8 @@
             <h5 class="fw-semibold text-dark mb-2">{{ product.name }}</h5>
             <div class="mb-0">
               <span class="fw-bold text-success me-1">{{ product.price | currency:'USD' }}</span>
-              <small class="text-muted text-decoration-line-through">{{ product.originalPrice | currency:'USD' }}</small>
+              <small class="text-muted text-decoration-line-through">{{ product.originalPrice | currency:'USD'
+                }}</small>
             </div>
           </div>
         </div>
@@ -333,7 +267,8 @@
             <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
             <div>
               <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
-              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD' }}</small>
+              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD'
+                }}</small>
             </div>
           </div>
         </div>
@@ -404,3 +339,5 @@
   }
 </style>
 
+
+<app-autoscroll-products></app-autoscroll-products>

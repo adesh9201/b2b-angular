@@ -1,0 +1,24 @@
+<section class="py-4 bg-white trust-section" *ngIf="brands.length">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2 class="fw-bold display-6 fabric-gradient">Trusted by Leading Brands</h2>
+        <p class="lead text-muted">Our partners and clients worldwide</p>
+      </div>
+    </div>
+
+    <!-- Brand Logos -->
+    <div class="row justify-content-center align-items-center g-4 trust-logos-row">
+      <div class="col-6 col-sm-4 col-md-2 text-center" *ngFor="let brand of brands">
+        <a *ngIf="brand.website" [href]="brand.website" target="_blank" rel="noopener">
+          <img [src]="brand.logoUrl" [alt]="brand.name"
+            class="trust-logo grayscale pulse-on-hover img-fluid" />
+        </a>
+        <img *ngIf="!brand.website" [src]="brand.logoUrl" [alt]="brand.name"
+          class="trust-logo grayscale pulse-on-hover img-fluid" />
+      </div>
+    </div>
+  </div>
+
+</section>

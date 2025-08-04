@@ -1,0 +1,119 @@
+
+
+         
+                <div class="card border-0 shadow-sm bg-light">
+                    <div class="card-body">
+                        <h5 class="fw-bold text-primary mb-4">Filters</h5>
+                        <form id="catalogFilters" class="vstack gap-3">
+                            <!-- Your entire filter content remains unchanged -->
+                            <!-- Category Filter -->
+                            <div>
+                                <label class="form-label fw-semibold">Category</label>
+                                <select class="form-select" id="filterCategory">
+                                    <option value="">All</option>
+                                    <option value="Cotton Fabric">Cotton Fabric</option>
+                                    <option value="Silk Fabric">Silk Fabric</option>
+                                    <option value="Linen Fabric">Linen Fabric</option>
+                                    <option value="Denim Fabric">Denim Fabric</option>
+                                    <option value="Rayon Fabric">Rayon Fabric</option>
+                                    <option value="Organza Fabric">Organza Fabric</option>
+                                    <option value="Printed Fabric">Printed Fabric</option>
+                                    <option value="Chiffon Fabric">Chiffon Fabric</option>
+                                    <option value="Georgette Fabric">Georgette Fabric</option>
+                                </select>
+                            </div>
+
+                            <!-- Price Range Filter -->
+                            <div>
+                                <label class="form-label fw-semibold">Price Range</label>
+                                <div class="d-flex align-items-center gap-2">
+                                    <input type="number" class="form-control" id="filterPriceMin" placeholder="Min"
+                                        min="0">
+                                    <span>-</span>
+                                    <input type="number" class="form-control" id="filterPriceMax" placeholder="Max"
+                                        min="0">
+                                </div>
+                            </div>
+
+                            <!-- Color Filter -->
+                            <div>
+                                <label class="form-label fw-semibold">Color</label>
+                                <select class="form-select" id="filterColor"
+                                    style="max-height: 300px; overflow-y: auto;">
+                                    <option value="">All</option>
+                                    <option value="White">White</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Red">Red</option>
+                                    <option value="MultiColour">MultiColour</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Yellow">Yellow</option>
+                                    <option value="Olive">Olive</option>
+                                    <option value="Fuscia">Fuscia</option>
+                                    <option value="Mehroon">Mehroon</option>
+                                    <option value="Brown">Brown</option>
+                                    <option value="Coral">Coral</option>
+                                    <option value="Lilac">Lilac</option>
+                                    <option value="Pink">Pink</option>
+                                    <option value="Cream">Cream</option>
+                                    <option value="Navy Blue">Navy Blue</option>
+                                    <option value="Dusty pink">Dusty Pink</option>
+                                    <option value="Rust">Rust</option>
+                                    <option value="Purple">Purple</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Beige">Beige</option>
+                                </select>
+                            </div>
+
+                            <!-- Material Filter -->
+                            <div>
+                                <label class="form-label fw-semibold">Material</label>
+                                <select class="form-select" id="filterMaterial">
+                                    <option value="">All</option>
+                                    <option value="Cotton">Cotton</option>
+                                    <option value="Viscose">Viscose</option>
+                                    <option value="Polyester">Polyester</option>
+                                    <option value="Linen">Linen</option>
+                                    <option value="Nylon">Nylon</option>
+                                    <option value="Cotton Lycra">Cotton Lycra</option>
+                                    <option value="Special">Special</option>
+                                    <option value="Polyester Lycra">Polyester Lycra</option>
+                                </select>
+                            </div>
+
+                            <!-- Supplier Filter -->
+                            <div>
+                                <label class="form-label fw-semibold">Supplier</label>
+                                <select class="form-select" id="filterSupplier">
+                                    <option value="">All</option>
+                                    <option value="TexFab India">TexFab India</option>
+                                    <option value="Global Fabrics">Global Fabrics</option>
+                                    <option value="Elegant Textiles">Elegant Textiles</option>
+                                    <option value="WeaveWorld">WeaveWorld</option>
+                                    <option value="SilkMart">SilkMart</option>
+                                    <option value="Organic Looms">Organic Looms</option>
+                                </select>
+                            </div>
+
+                            <!-- Rating Filter -->
+                            <div>
+                                <label class="form-label fw-semibold">Rating</label>
+                                <select class="form-select" id="filterRating">
+                                    <option value="">All</option>
+                                    <option value="4">4 stars & up</option>
+                                    <option value="3">3 stars & up</option>
+                                    <option value="2">2 stars & up</option>
+                                    <option value="1">1 star & up</option>
+                                </select>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-grid gap-2 mt-2">
+                                <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
+                                <button type="button" class="btn btn-outline-secondary" id="resetFilters">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+          
+

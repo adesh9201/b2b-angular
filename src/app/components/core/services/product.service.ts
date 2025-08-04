@@ -1,73 +1,3 @@
-// // src/app/services/product.service.ts
-// import { Injectable } from '@angular/core';
-// import { Product } from '../models/product.model';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ProductService {
-//   private products: Product[] = [
-//     {
-//       id: 1,
-//       name: 'Silk Blend',
-//       description: 'Luxury, Soft, Shimmery',
-//       price: 24.99,
-//       imageUrl: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80',
-//       category: 'Luxury',
-//       attributes: ['Luxury', 'Soft', 'Shimmery']
-//     },
-//     {
-//       id: 2,
-//       name: 'Organic Cotton',
-//       description: 'Eco-friendly, Breathable',
-//       price: 18.50,
-//       imageUrl: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80',
-//       category: 'Eco-Friendly',
-//       attributes: ['Eco-friendly', 'Breathable']
-//     },
-//     {
-//       id: 3,
-//       name: 'Denim Indigo',
-//       description: 'Durable, Classic',
-//       price: 15.99,
-//       imageUrl: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80',
-//       category: 'Denim',
-//       attributes: ['Durable', 'Classic']
-//     },
-//     {
-//       id: 4,
-//       name: 'Linen Natural',
-//       description: 'Lightweight, Breathable',
-//       price: 22.00,
-//       imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80',
-//       category: 'Natural',
-//       attributes: ['Lightweight', 'Breathable']
-//     },
-//     {
-//       id: 5,
-//       name: 'Wool Tweed',
-//       description: 'Warm, Textured',
-//       price: 27.50,
-//       imageUrl: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
-//       category: 'Wool',
-//       attributes: ['Warm', 'Textured']
-//     },
-//     {
-//       id: 6,
-//       name: 'Bamboo Jersey',
-//       description: 'Soft, Eco-friendly',
-//       price: 19.99,
-//       imageUrl: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80',
-//       category: 'Eco-Friendly',
-//       attributes: ['Soft', 'Eco-friendly']
-//     }
-//   ];
-
-//   getFeaturedProducts(): Product[] {
-//     return this.products;
-//   }
-// }
-
 
 // src/app/services/product.service.ts
 import { Injectable } from '@angular/core';
@@ -78,162 +8,503 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
   private products: Product[] = [
+    // Cotton Fabric Products (4 items)
     {
       id: 1,
       name: "Premium Cotton Fabric",
       description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
       price: 12.99,
       originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
+      category: "Cotton Fabric",
+      supplier: "TexFab India",
       stock: 150,
       unit: "yard",
       imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
       rating: 4.8,
       reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
+      colors: ["White", "Blue", "Red"],
+      material: "Cotton",
       weight: "200 GSM",
       width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
+      attributes: ["Breathable", "Soft", "Durable"]
+    },
+    {
+      id: 2,
+      name: "Organic Cotton Fabric",
+      description: "GOTS certified organic cotton fabric for eco-friendly clothing.",
+      price: 15.99,
+      originalPrice: 19.99,
+      category: "Cotton Fabric",
+      supplier: "Organic Looms",
+      stock: 85,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80",
+      rating: 4.5,
+      reviews: 92,
+      colors: ["White", "Green", "Beige"],
+      material: "Cotton",
+      weight: "180 GSM",
+      width: "58 inches",
+      attributes: ["Organic", "Eco-friendly", "Hypoallergenic"]
+    },
+    {
+      id: 3,
+      name: "Cotton Poplin Fabric",
+      description: "Smooth and crisp cotton poplin for shirts and dresses.",
+      price: 14.50,
+      originalPrice: 17.99,
+      category: "Cotton Fabric",
+      supplier: "Global Fabrics",
+      stock: 120,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1563170351-82e3805e1910?auto=format&fit=crop&w=400&q=80",
+      rating: 4.6,
+      reviews: 78,
+      colors: ["White", "Blue", "Pink"],
+      material: "Cotton",
+      weight: "140 GSM",
+      width: "44 inches",
+      attributes: ["Smooth", "Crisp", "Lightweight"]
+    },
+    {
+      id: 4,
+      name: "Cotton Jersey Fabric",
+      description: "Soft stretchy cotton jersey for comfortable apparel.",
+      price: 11.99,
+      originalPrice: 14.99,
+      category: "Cotton Fabric",
+      supplier: "WeaveWorld",
+      stock: 95,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=400&q=80",
+      rating: 4.3,
+      reviews: 65,
+      colors: ["Black", "Navy Blue", "Gray"],
+      material: "Cotton Lycra",
+      weight: "180 GSM",
+      width: "60 inches",
+      attributes: ["Stretchy", "Soft", "Comfortable"]
+    },
+
+    // Silk Fabric Products (3 items)
+    {
+      id: 5,
+      name: "Pure Silk Fabric",
+      description: "Luxurious pure silk fabric with natural sheen.",
+      price: 45.99,
+      originalPrice: 59.99,
+      category: "Silk Fabric",
+      supplier: "SilkMart",
+      stock: 42,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
+      rating: 4.9,
+      reviews: 215,
+      colors: ["White", "Black", "Navy Blue"],
+      material: "Silk",
+      weight: "16 momme",
+      width: "45 inches",
+      attributes: ["Luxurious", "Breathable", "Hypoallergenic"]
+    },
+    {
+      id: 6,
+      name: "Silk Satin Fabric",
+      description: "Lustrous silk satin with a smooth finish.",
+      price: 52.50,
+      originalPrice: 65.00,
+      category: "Silk Fabric",
+      supplier: "Elegant Textiles",
+      stock: 35,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 178,
+      colors: ["White", "Red", "Purple"],
+      material: "Silk",
+      weight: "19 momme",
+      width: "54 inches",
+      attributes: ["Lustrous", "Smooth", "Elegant"]
+    },
+    {
+      id: 7,
+      name: "Dupioni Silk Fabric",
+      description: "Textured dupioni silk with slubbed appearance.",
+      price: 38.99,
+      originalPrice: 48.99,
+      category: "Silk Fabric",
+      supplier: "SilkMart",
+      stock: 28,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.7,
+      reviews: 142,
+      colors: ["Gold", "Olive", "Rust"],
+      material: "Silk",
+      weight: "22 momme",
+      width: "45 inches",
+      attributes: ["Textured", "Slubbed", "Rich"]
+    },
+
+    // Linen Fabric Products (2 items)
+    {
+      id: 8,
+      name: "European Linen Fabric",
+      description: "Premium European linen fabric with natural texture.",
+      price: 22.50,
+      originalPrice: 28.00,
+      category: "Linen Fabric",
+      supplier: "Elegant Textiles",
+      stock: 67,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1563170351-82e3805e1910?auto=format&fit=crop&w=400&q=80",
+      rating: 4.7,
+      reviews: 178,
+      colors: ["White", "Olive", "Natural"],
+      material: "Linen",
+      weight: "250 GSM",
+      width: "55 inches",
+      attributes: ["Breathable", "Strong", "Absorbent"]
+    },
+    {
+      id: 9,
+      name: "Linen Blend Fabric",
+      description: "Linen-cotton blend for softer texture.",
+      price: 18.99,
+      originalPrice: 23.50,
+      category: "Linen Fabric",
+      supplier: "Global Fabrics",
+      stock: 89,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=400&q=80",
+      rating: 4.5,
+      reviews: 112,
+      colors: ["Beige", "Cream", "Dusty Pink"],
+      material: "Linen",
+      weight: "220 GSM",
+      width: "58 inches",
+      attributes: ["Soft", "Breathable", "Wrinkle-resistant"]
+    },
+
+    // Denim Fabric Products (2 items)
+    {
+      id: 10,
+      name: "Stretch Denim Fabric",
+      description: "Comfortable stretch denim for modern apparel.",
+      price: 18.75,
+      originalPrice: 24.99,
+      category: "Denim Fabric",
+      supplier: "Global Fabrics",
+      stock: 120,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.3,
+      reviews: 86,
+      colors: ["Blue", "Black"],
+      material: "Cotton Lycra",
+      weight: "300 GSM",
+      width: "58 inches",
+      attributes: ["Stretch", "Durable", "Comfortable"]
+    },
+    {
+      id: 11,
+      name: "Raw Denim Fabric",
+      description: "Heavyweight raw denim for authentic jeans.",
+      price: 24.99,
+      originalPrice: 32.99,
+      category: "Denim Fabric",
+      supplier: "TexFab India",
+      stock: 75,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
+      rating: 4.6,
+      reviews: 94,
+      colors: ["Blue", "Black"],
+      material: "Cotton",
+      weight: "14 oz",
+      width: "60 inches",
+      attributes: ["Heavyweight", "Durable", "Authentic"]
+    },
+
+    // Rayon Fabric Products (2 items)
+    {
+      id: 12,
+      name: "Viscose Rayon Fabric",
+      description: "Soft drapey rayon fabric with excellent flow.",
+      price: 14.99,
+      originalPrice: 18.99,
+      category: "Rayon Fabric",
+      supplier: "WeaveWorld",
+      stock: 95,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
+      rating: 4.2,
+      reviews: 64,
+      colors: ["Red", "Pink", "Purple"],
+      material: "Viscose",
+      weight: "180 GSM",
+      width: "45 inches",
+      attributes: ["Drapey", "Soft", "Breathable"]
+    },
+    {
+      id: 13,
+      name: "Rayon Challis Fabric",
+      description: "Lightweight rayon challis with beautiful drape.",
+      price: 16.50,
+      originalPrice: 21.99,
+      category: "Rayon Fabric",
+      supplier: "Elegant Textiles",
+      stock: 82,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.4,
+      reviews: 73,
+      colors: ["Green", "Blue", "MultiColour"],
+      material: "Viscose",
+      weight: "150 GSM",
+      width: "44 inches",
+      attributes: ["Lightweight", "Drapey", "Soft"]
+    },
+
+    // Organza Fabric Products (1 item)
+    {
+      id: 14,
+      name: "Sheer Organza Fabric",
+      description: "Delicate sheer organza for special occasion wear.",
+      price: 9.99,
+      originalPrice: 12.99,
+      category: "Organza Fabric",
+      supplier: "Elegant Textiles",
+      stock: 58,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
+      rating: 4.0,
+      reviews: 47,
+      colors: ["White", "Black", "Pink"],
+      material: "Polyester",
+      weight: "50 GSM",
+      width: "45 inches",
+      attributes: ["Sheer", "Crisp", "Lightweight"]
+    },
+
+    // Printed Fabric Products (2 items)
+    {
+      id: 15,
+      name: "Floral Printed Fabric",
+      description: "Beautiful floral printed cotton fabric.",
+      price: 16.50,
+      originalPrice: 20.99,
+      category: "Printed Fabric",
+      supplier: "TexFab India",
+      stock: 110,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80",
+      rating: 4.6,
+      reviews: 132,
+      colors: ["MultiColour"],
+      material: "Cotton",
+      weight: "200 GSM",
+      width: "44 inches",
+      attributes: ["Printed", "Colorful", "Versatile"]
+    },
+    {
+      id: 16,
+      name: "Geometric Printed Fabric",
+      description: "Modern geometric printed viscose fabric.",
+      price: 18.99,
+      originalPrice: 23.99,
+      category: "Printed Fabric",
+      supplier: "WeaveWorld",
+      stock: 87,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
+      rating: 4.5,
+      reviews: 98,
+      colors: ["MultiColour"],
+      material: "Viscose",
+      weight: "170 GSM",
+      width: "45 inches",
+      attributes: ["Printed", "Modern", "Drapey"]
+    },
+
+    // Chiffon Fabric Products (2 items)
+    {
+      id: 17,
+      name: "Silk Chiffon Fabric",
+      description: "Elegant silk chiffon for flowing garments.",
+      price: 32.99,
+      originalPrice: 39.99,
+      category: "Chiffon Fabric",
+      supplier: "SilkMart",
+      stock: 38,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
+      rating: 4.7,
+      reviews: 89,
+      colors: ["White", "Black", "Coral"],
+      material: "Silk",
+      weight: "30 GSM",
+      width: "45 inches",
+      attributes: ["Sheer", "Flowing", "Delicate"]
+    },
+    {
+      id: 18,
+      name: "Polyester Chiffon Fabric",
+      description: "Affordable polyester chiffon with good drape.",
+      price: 12.99,
+      originalPrice: 16.99,
+      category: "Chiffon Fabric",
+      supplier: "Global Fabrics",
+      stock: 105,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.2,
+      reviews: 67,
+      colors: ["Pink", "Lilac", "Dusty Pink"],
+      material: "Polyester",
+      weight: "35 GSM",
+      width: "45 inches",
+      attributes: ["Affordable", "Drapey", "Lightweight"]
+    },
+
+    // Georgette Fabric Products (2 items)
+    {
+      id: 19,
+      name: "Crinkle Georgette Fabric",
+      description: "Textured crinkle georgette with beautiful drape.",
+      price: 18.99,
+      originalPrice: 24.50,
+      category: "Georgette Fabric",
+      supplier: "Global Fabrics",
+      stock: 72,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.4,
+      reviews: 56,
+      colors: ["Purple", "Orange", "Fuscia"],
+      material: "Polyester",
+      weight: "80 GSM",
+      width: "45 inches",
+      attributes: ["Crinkle", "Drapey", "Lightweight"]
+    },
+    {
+      id: 20,
+      name: "Silk Georgette Fabric",
+      description: "Luxurious silk georgette with soft drape.",
+      price: 38.50,
+      originalPrice: 45.99,
+      category: "Georgette Fabric",
+      supplier: "SilkMart",
+      stock: 45,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
+      rating: 4.8,
+      reviews: 102,
+      colors: ["Mehroon", "Navy Blue", "Olive"],
+      material: "Silk",
+      weight: "40 GSM",
+      width: "45 inches",
+      attributes: ["Luxurious", "Soft", "Flowing"]
     },
         {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
+      id: 21,
+      name: "Crinkle Georgette Fabric",
+      description: "Textured crinkle georgette with beautiful drape.",
+      price: 18.99,
+      originalPrice: 24.50,
+      category: "Georgette Fabric",
+      supplier: "Global Fabrics",
+      stock: 72,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.4,
+      reviews: 56,
+      colors: ["Purple", "Orange", "Fuscia"],
+      material: "Polyester",
+      weight: "80 GSM",
+      width: "45 inches",
+      attributes: ["Crinkle", "Drapey", "Lightweight"]
+    },
+    {
+      id: 22,
+      name: "Silk Georgette Fabric",
+      description: "Luxurious silk georgette with soft drape.",
+      price: 38.50,
+      originalPrice: 45.99,
+      category: "Georgette Fabric",
+      supplier: "SilkMart",
+      stock: 45,
       unit: "yard",
       imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
       rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
+      reviews: 102,
+      colors: ["Mehroon", "Navy Blue", "Olive"],
+      material: "Silk",
+      weight: "40 GSM",
+      width: "45 inches",
+      attributes: ["Luxurious", "Soft", "Flowing"]
     },
         {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
+      id: 23,
+      name: "Crinkle Georgette Fabric",
+      description: "Textured crinkle georgette with beautiful drape.",
+      price: 18.99,
+      originalPrice: 24.50,
+      category: "Georgette Fabric",
+      supplier: "Global Fabrics",
+      stock: 72,
+      unit: "yard",
+      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      rating: 4.4,
+      reviews: 56,
+      colors: ["Purple", "Orange", "Fuscia"],
+      material: "Polyester",
+      weight: "80 GSM",
+      width: "45 inches",
+      attributes: ["Crinkle", "Drapey", "Lightweight"]
+    },
+    {
+      id: 24,
+      name: "Silk Georgette Fabric",
+      description: "Luxurious silk georgette with soft drape.",
+      price: 38.50,
+      originalPrice: 45.99,
+      category: "Georgette Fabric",
+      supplier: "SilkMart",
+      stock: 45,
       unit: "yard",
       imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
       rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
-    },
-        {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
-      unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
-    },
-       {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
-      unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
-    },
-       {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
-      unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
-    },
-        {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
-      unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
-    },
-        {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton",
-      supplier: "TextileCorp",
-      stock: 150,
-      unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red", "Green"],
-      material: "100% Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["High-quality", "Durable", "Breathable"]
-    },
-    // ... add more sample products here following the same pattern ...
+      reviews: 102,
+      colors: ["Mehroon", "Navy Blue", "Olive"],
+      material: "Silk",
+      weight: "40 GSM",
+      width: "45 inches",
+      attributes: ["Luxurious", "Soft", "Flowing"]
+    }
   ];
 
   getFeaturedProducts(): Product[] {
     return this.products;
+  }
+
+  // Additional methods to filter by different properties
+  getProductsByCategory(category: string): Product[] {
+    return this.products.filter(product => product.category === category);
+  }
+
+  getProductsByMaterial(material: string): Product[] {
+    return this.products.filter(product => product.material === material);
+  }
+
+  getProductsByColor(color: string): Product[] {
+    return this.products.filter(product => product.colors.includes(color));
+  }
+
+  getProductsBySupplier(supplier: string): Product[] {
+    return this.products.filter(product => product.supplier === supplier);
+  }
+
+  getProductsByRating(minRating: number): Product[] {
+    return this.products.filter(product => product.rating >= minRating);
   }
 }

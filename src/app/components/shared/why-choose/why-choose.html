@@ -1,0 +1,39 @@
+<section class="py-5 bg-light features-section position-relative" *ngIf="features.length"
+  aria-labelledby="featuresTitle">
+  <div class="container position-relative z-1">
+    <!-- Section Title -->
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 id="featuresTitle" class="fw-bold display-5 font-poppins text-dark">
+          Why Choose FabricHub?
+        </h2>
+        <p class="lead text-muted">
+          The ultimate platform for fabric trading
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="row g-4 justify-content-center">
+      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let feature of features; let i = index">
+        <div class="card shadow-sm p-4 h-100 text-center bg-white rounded-4 position-relative feature-card"
+          [attr.aria-labelledby]="'featureTitle' + i" [attr.aria-describedby]="'featureDesc' + i">
+
+          <!-- Icon -->
+          <div class="mb-3" [innerHTML]="feature.icon" [attr.aria-label]="feature.title" role="img" aria-hidden="false">
+          </div>
+
+          <!-- Title -->
+          <h5 id="featureTitle{{ i }}" class="card-title font-poppins text-dark">
+            {{ feature.title }}
+          </h5>
+
+          <!-- Description -->
+          <p id="featureDesc{{ i }}" class="card-text text-muted">
+            {{ feature.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

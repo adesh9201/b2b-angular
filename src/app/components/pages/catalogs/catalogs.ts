@@ -47,13 +47,15 @@ import { Component } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
+import { Filter } from '../../shared/filter/filter';
+import { AutoscrollProducts } from '../../shared/autoscroll-products/autoscroll-products';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-catalogs',
   standalone: true,
   templateUrl: './catalogs.html',
   styleUrls: ['./catalogs.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, Filter, AutoscrollProducts],
   providers: [CurrencyPipe]
 })
 export class Catalogs {

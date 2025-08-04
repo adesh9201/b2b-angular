@@ -1,0 +1,16 @@
+.trust-logo {
+  max-height: 60px;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+
+  &.pulse-on-hover:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+}
+
+.fabric-gradient {
+  background: linear-gradient(to right, #009688, #43e8d8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

@@ -1,24 +1,29 @@
-<section class="py-4 bg-white trust-section" *ngIf="brands.length">
+<section class="py-5 bg-white trust-section border-top border-bottom shadow-sm" *ngIf="brands.length">
   <div class="container">
+
     <!-- Section Header -->
-    <div class="row mb-4">
+    <div class="row mb-5">
       <div class="col-12 text-center">
-        <h2 class="fw-bold display-6 fabric-gradient">Trusted by Leading Brands</h2>
-        <p class="lead text-muted">Our partners and clients worldwide</p>
+        <h2 class="fw-bold display-5 fabric-gradient mb-3">
+          Trusted by Leading Brands
+        </h2>
+        <p class="lead text-muted">
+          Our partners and clients worldwide
+        </p>
+        <hr class="w-25 mx-auto mt-3 mb-0 border-dark-subtle">
       </div>
     </div>
 
-    <!-- Brand Logos -->
-    <div class="row justify-content-center align-items-center g-4 trust-logos-row">
-      <div class="col-6 col-sm-4 col-md-2 text-center" *ngFor="let brand of brands">
-        <a *ngIf="brand.website" [href]="brand.website" target="_blank" rel="noopener">
+    <!-- Brand Logos Grid -->
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-4 justify-content-center align-items-center trust-logos-row">
+      <div class="col text-center" *ngFor="let brand of brands">
+        <a *ngIf="brand.website" [href]="brand.website" target="_blank" rel="noopener noreferrer" class="d-block px-2">
           <img [src]="brand.logoUrl" [alt]="brand.name"
-            class="trust-logo grayscale pulse-on-hover img-fluid" />
+            class="trust-logo grayscale pulse-on-hover img-fluid mx-auto d-block" />
         </a>
         <img *ngIf="!brand.website" [src]="brand.logoUrl" [alt]="brand.name"
-          class="trust-logo grayscale pulse-on-hover img-fluid" />
+          class="trust-logo grayscale pulse-on-hover img-fluid mx-auto d-block px-2" />
       </div>
     </div>
   </div>
-
 </section>

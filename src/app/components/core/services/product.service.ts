@@ -26,7 +26,8 @@ export class ProductService {
       material: "Cotton",
       weight: "200 GSM",
       width: "60 inches",
-      attributes: ["Breathable", "Soft", "Durable"]
+      attributes: ["Breathable", "Soft", "Durable"],
+      discount: 10
     },
     {
       id: 2,
@@ -38,14 +39,15 @@ export class ProductService {
       supplier: "Organic Looms",
       stock: 85,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
       rating: 4.5,
       reviews: 92,
       colors: ["White", "Green", "Beige"],
       material: "Cotton",
       weight: "180 GSM",
       width: "58 inches",
-      attributes: ["Organic", "Eco-friendly", "Hypoallergenic"]
+      attributes: ["Organic", "Eco-friendly", "Hypoallergenic"],
+      discount: 20
     },
     {
       id: 3,
@@ -57,14 +59,15 @@ export class ProductService {
       supplier: "Global Fabrics",
       stock: 120,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1563170351-82e3805e1910?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80",
       rating: 4.6,
       reviews: 78,
       colors: ["White", "Blue", "Pink"],
       material: "Cotton",
       weight: "140 GSM",
       width: "44 inches",
-      attributes: ["Smooth", "Crisp", "Lightweight"]
+      attributes: ["Smooth", "Crisp", "Lightweight"],
+      discount: 30
     },
     {
       id: 4,
@@ -83,7 +86,8 @@ export class ProductService {
       material: "Cotton Lycra",
       weight: "180 GSM",
       width: "60 inches",
-      attributes: ["Stretchy", "Soft", "Comfortable"]
+      attributes: ["Stretchy", "Soft", "Comfortable"],
+      discount: 40
     },
 
     // Silk Fabric Products (3 items)
@@ -104,7 +108,8 @@ export class ProductService {
       material: "Silk",
       weight: "16 momme",
       width: "45 inches",
-      attributes: ["Luxurious", "Breathable", "Hypoallergenic"]
+      attributes: ["Luxurious", "Breathable", "Hypoallergenic"],
+      discount: 50
     },
     {
       id: 6,
@@ -123,7 +128,8 @@ export class ProductService {
       material: "Silk",
       weight: "19 momme",
       width: "54 inches",
-      attributes: ["Lustrous", "Smooth", "Elegant"]
+      attributes: ["Lustrous", "Smooth", "Elegant"],
+      discount: 60
     },
     {
       id: 7,
@@ -142,7 +148,8 @@ export class ProductService {
       material: "Silk",
       weight: "22 momme",
       width: "45 inches",
-      attributes: ["Textured", "Slubbed", "Rich"]
+      attributes: ["Textured", "Slubbed", "Rich"],
+      discount: 70
     },
 
     // Linen Fabric Products (2 items)
@@ -156,14 +163,15 @@ export class ProductService {
       supplier: "Elegant Textiles",
       stock: 67,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1563170351-82e3805e1910?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
       rating: 4.7,
       reviews: 178,
       colors: ["White", "Olive", "Natural"],
       material: "Linen",
       weight: "250 GSM",
       width: "55 inches",
-      attributes: ["Breathable", "Strong", "Absorbent"]
+      attributes: ["Breathable", "Strong", "Absorbent"],
+      discount: 80
     },
     {
       id: 9,
@@ -182,7 +190,8 @@ export class ProductService {
       material: "Linen",
       weight: "220 GSM",
       width: "58 inches",
-      attributes: ["Soft", "Breathable", "Wrinkle-resistant"]
+      attributes: ["Soft", "Breathable", "Wrinkle-resistant"],
+      discount: 90
     },
 
     // Denim Fabric Products (2 items)
@@ -196,14 +205,15 @@ export class ProductService {
       supplier: "Global Fabrics",
       stock: 120,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
       rating: 4.3,
       reviews: 86,
       colors: ["Blue", "Black"],
       material: "Cotton Lycra",
       weight: "300 GSM",
       width: "58 inches",
-      attributes: ["Stretch", "Durable", "Comfortable"]
+      attributes: ["Stretch", "Durable", "Comfortable"],
+      discount: 10
     },
     {
       id: 11,
@@ -222,7 +232,8 @@ export class ProductService {
       material: "Cotton",
       weight: "14 oz",
       width: "60 inches",
-      attributes: ["Heavyweight", "Durable", "Authentic"]
+      attributes: ["Heavyweight", "Durable", "Authentic"],
+      discount: 20
     },
 
     // Rayon Fabric Products (2 items)
@@ -243,7 +254,8 @@ export class ProductService {
       material: "Viscose",
       weight: "180 GSM",
       width: "45 inches",
-      attributes: ["Drapey", "Soft", "Breathable"]
+      attributes: ["Drapey", "Soft", "Breathable"],
+      discount: 30
     },
     {
       id: 13,
@@ -262,7 +274,8 @@ export class ProductService {
       material: "Viscose",
       weight: "150 GSM",
       width: "44 inches",
-      attributes: ["Lightweight", "Drapey", "Soft"]
+      attributes: ["Lightweight", "Drapey", "Soft"],
+      discount: 40
     },
 
     // Organza Fabric Products (1 item)
@@ -283,7 +296,8 @@ export class ProductService {
       material: "Polyester",
       weight: "50 GSM",
       width: "45 inches",
-      attributes: ["Sheer", "Crisp", "Lightweight"]
+      attributes: ["Sheer", "Crisp", "Lightweight"],
+      discount: 50
     },
 
     // Printed Fabric Products (2 items)
@@ -304,7 +318,8 @@ export class ProductService {
       material: "Cotton",
       weight: "200 GSM",
       width: "44 inches",
-      attributes: ["Printed", "Colorful", "Versatile"]
+      attributes: ["Printed", "Colorful", "Versatile"],
+      discount: 60
     },
     {
       id: 16,
@@ -323,7 +338,8 @@ export class ProductService {
       material: "Viscose",
       weight: "170 GSM",
       width: "45 inches",
-      attributes: ["Printed", "Modern", "Drapey"]
+      attributes: ["Printed", "Modern", "Drapey"],
+      discount: 70
     },
 
     // Chiffon Fabric Products (2 items)
@@ -344,7 +360,8 @@ export class ProductService {
       material: "Silk",
       weight: "30 GSM",
       width: "45 inches",
-      attributes: ["Sheer", "Flowing", "Delicate"]
+      attributes: ["Sheer", "Flowing", "Delicate"],
+      discount: 80
     },
     {
       id: 18,
@@ -363,7 +380,8 @@ export class ProductService {
       material: "Polyester",
       weight: "35 GSM",
       width: "45 inches",
-      attributes: ["Affordable", "Drapey", "Lightweight"]
+      attributes: ["Affordable", "Drapey", "Lightweight"],
+      discount: 90
     },
 
     // Georgette Fabric Products (2 items)
@@ -377,14 +395,15 @@ export class ProductService {
       supplier: "Global Fabrics",
       stock: 72,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
       rating: 4.4,
       reviews: 56,
       colors: ["Purple", "Orange", "Fuscia"],
       material: "Polyester",
       weight: "80 GSM",
       width: "45 inches",
-      attributes: ["Crinkle", "Drapey", "Lightweight"]
+      attributes: ["Crinkle", "Drapey", "Lightweight"],
+      discount: 10
     },
     {
       id: 20,
@@ -403,7 +422,8 @@ export class ProductService {
       material: "Silk",
       weight: "40 GSM",
       width: "45 inches",
-      attributes: ["Luxurious", "Soft", "Flowing"]
+      attributes: ["Luxurious", "Soft", "Flowing"],
+      discount: 20
     },
         {
       id: 21,
@@ -415,14 +435,15 @@ export class ProductService {
       supplier: "Global Fabrics",
       stock: 72,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
       rating: 4.4,
       reviews: 56,
       colors: ["Purple", "Orange", "Fuscia"],
       material: "Polyester",
       weight: "80 GSM",
       width: "45 inches",
-      attributes: ["Crinkle", "Drapey", "Lightweight"]
+      attributes: ["Crinkle", "Drapey", "Lightweight"],
+      discount: 30
     },
     {
       id: 22,
@@ -441,7 +462,8 @@ export class ProductService {
       material: "Silk",
       weight: "40 GSM",
       width: "45 inches",
-      attributes: ["Luxurious", "Soft", "Flowing"]
+      attributes: ["Luxurious", "Soft", "Flowing"],
+      discount: 40
     },
         {
       id: 23,
@@ -453,14 +475,15 @@ export class ProductService {
       supplier: "Global Fabrics",
       stock: 72,
       unit: "yard",
-      imageUrl: "https://images.unsplash.com/photo-1558769132-219dfd31b0b4?auto=format&fit=crop&w=400&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
       rating: 4.4,
       reviews: 56,
       colors: ["Purple", "Orange", "Fuscia"],
       material: "Polyester",
       weight: "80 GSM",
       width: "45 inches",
-      attributes: ["Crinkle", "Drapey", "Lightweight"]
+      attributes: ["Crinkle", "Drapey", "Lightweight"],
+      discount: 50
     },
     {
       id: 24,
@@ -479,7 +502,8 @@ export class ProductService {
       material: "Silk",
       weight: "40 GSM",
       width: "45 inches",
-      attributes: ["Luxurious", "Soft", "Flowing"]
+      attributes: ["Luxurious", "Soft", "Flowing"],
+      discount: 60
     }
   ];
 

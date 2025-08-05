@@ -9,6 +9,7 @@ import { HeroSection } from '../../shared/hero-section/hero-section';
 import { WhyChoose } from '../../shared/why-choose/why-choose';
 import { TrustedByUsers } from '../../shared/trusted-by-users/trusted-by-users';
 import { TrustedByBrands } from '../../shared/trusted-by-brands/trusted-by-brands';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { TrustedByBrands } from '../../shared/trusted-by-brands/trusted-by-brand
   standalone: true,
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
-  imports: [CommonModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands],
+  imports: [CommonModule, RouterModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands],
   providers: [CurrencyPipe]
 })
 export class Home {

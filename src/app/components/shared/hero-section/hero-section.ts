@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
-  imports: [CommonModule,],
+  imports: [CommonModule, RouterModule],
   providers: [CurrencyPipe],
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.css',

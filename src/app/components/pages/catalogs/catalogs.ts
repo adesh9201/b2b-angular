@@ -49,19 +49,29 @@ import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
 import { Filter } from '../../shared/filter/filter';
 import { AutoscrollProducts } from '../../shared/autoscroll-products/autoscroll-products';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-catalogs',
   standalone: true,
   templateUrl: './catalogs.html',
   styleUrls: ['./catalogs.css'],
-  imports: [CommonModule, Filter, AutoscrollProducts],
+  imports: [CommonModule, Filter, AutoscrollProducts, RouterModule],
   providers: [CurrencyPipe]
 })
 export class Catalogs {
   featuredProducts: Product[] = [];
+  productChunks: Product[][] = [];
 
   constructor(private productService: ProductService) {
     this.featuredProducts = this.productService.getFeaturedProducts();
+    this.chunkProducts();
+  }
+
+  private chunkProducts(): void {
+    const chunkSize = 6;
+    for (let i = 0; i < this.featuredProducts.length; i += chunkSize) {
+      this.productChunks.push(this.featuredProducts.slice(i, i + chunkSize));
+    }
   }
 }

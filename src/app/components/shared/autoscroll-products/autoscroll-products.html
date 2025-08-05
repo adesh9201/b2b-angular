@@ -2,9 +2,9 @@
 <div id="boxCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
   <!-- Indicators -->
   <div class="carousel-indicators">
-    <button title="dot-autoscroll-button" *ngFor="let chunk of productChunks; let i = index" type="button" [attr.data-bs-target]="'#boxCarousel'"
-      [attr.data-bs-slide-to]="i" [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null"
-      [attr.aria-label]="'Slide ' + (i + 1)">
+    <button title="dot-autoscroll-button" *ngFor="let chunk of productChunks; let i = index" type="button"
+      [attr.data-bs-target]="'#boxCarousel'" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
+      [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
     </button>
   </div>
 
@@ -13,18 +13,27 @@
     <div *ngFor="let chunk of productChunks; let i = index" class="carousel-item" [class.active]="i === 0">
       <div class="row g-0">
         <div class="col-2" *ngFor="let product of chunk">
-          <div class="square-box rounded-4 d-flex align-items-center justify-content-center overflow-hidden"
-            style="background-color: #f0f0f0;">
-            <img title="product-images" [src]="product.imageUrl" class="img-cover" [alt]="product.name">
-          </div>
-          <div class="card-body text-center px-2 py-3">
-            <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
-            <div>
-              <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
-              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD'
-                }}</small>
+
+          <!-- ✅ Make Product Clickable -->
+          <a [routerLink]="['/catalogs']" class="text-decoration-none text-reset d-block h-100">
+
+            <div class="square-box rounded-4 d-flex align-items-center justify-content-center overflow-hidden"
+              style="background-color: #f0f0f0;">
+              <img title="product-images" [src]="product.imageUrl" class="img-cover" [alt]="product.name">
             </div>
-          </div>
+            <div class="card-body text-center px-2 py-3">
+              <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
+              <div>
+                <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
+                <small class="text-muted text-decoration-line-through small">
+                  {{ product.originalPrice | currency:'USD' }}
+                </small>
+              </div>
+            </div>
+
+          </a>
+
+        </div>
       </div>
     </div>
   </div>

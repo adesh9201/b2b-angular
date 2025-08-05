@@ -18,4 +18,5 @@ export interface Product {
   weight: string;
   width: string;
   attributes: string[];
+  discount: number;
 }

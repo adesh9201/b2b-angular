@@ -6,15 +6,14 @@ import { RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'app-autoscroll-products',
+  selector: 'app-products',
   standalone: true,
   imports: [CommonModule, RouterModule],
   providers: [CurrencyPipe],
-  templateUrl: './autoscroll-products.html',
-  styleUrl: './autoscroll-products.css'
+  templateUrl: './products.html',
+  styleUrl: './products.css'
 })
-export class AutoscrollProducts {
-
+export class Products {
   featuredProducts: Product[] = [];
   productChunks: Product[][] = [];
 

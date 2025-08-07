@@ -10,6 +10,7 @@ import { WhyChoose } from '../../shared/why-choose/why-choose';
 import { TrustedByUsers } from '../../shared/trusted-by-users/trusted-by-users';
 import { TrustedByBrands } from '../../shared/trusted-by-brands/trusted-by-brands';
 import { RouterModule } from '@angular/router';
+import { FeatureProducts } from '../../shared/feature-products/feature-products';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
-  imports: [CommonModule, RouterModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands],
+  imports: [CommonModule, RouterModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands, FeatureProducts],
   providers: [CurrencyPipe]
 })
 export class Home {

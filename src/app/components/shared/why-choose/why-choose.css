@@ -1,8 +1,13 @@
-.features-section .feature-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+  border-color: rgba(5, 207, 164, 0.3);
 }
 
-.features-section .feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+i.bi {
+  transition: transform 0.3s;
+}
+
+.card:hover i.bi {
+  transform: scale(1.2);
 }

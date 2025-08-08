@@ -1,94 +1,106 @@
-<!-- Hero Carousel Section -->
-<div class="w-100 min-vh-100 position-relative z-2 bg-white border-bottom d-flex align-items-center">
-  <div id="heroB2BCarousel" class="carousel slide w-100" data-bs-ride="carousel" data-bs-interval="7000"
-    aria-label="Hero Carousel">
+  <div class="container-fluid min-vh-100 py-5">
+      <div class="row justify-content-center px-3 g-4">
+        <!-- Left Column (Images) -->
+        <div class="col-lg-8 d-flex flex-column gap-4">
+          <div class="row g-2">
+            <div
+              class="col-12"
+              style="aspect-ratio: 2 / 3; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpFm2o8D9Mvu-W571XO1emE8ubMhM9yaidUTfWvEzfTfTAHcVA6shjDA2DBN3B3_ody8iPIZFA3nq6sR7BOuczHSoPQfRMtNurOASzokUK-Cuy4Pkksssnm_wdOm7tpqcKQjfrVd15z_Rccym2gOrJzb6pRoLeerjYrV-BSZA31w7Qdqm7_NyjsKXmacS4joboss0tyEE_pHz1yyojaEJDkg6lVZbbeArHZf3UEokf4eARlcKzKsZfBgol4yDtj5roGAFwmXnnOds');"
+              class="bg-cover rounded-lg"
+            ></div>
+            <div class="col-6 bg-cover rounded-lg" style="aspect-ratio: 1 / 1; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAyLC01zmrTKCe3Q1k2sQ6nbawhOxlCKLBMNbwIGhN_VvOAy159YXuvARuyi6y3VWjdhjMWfvqNF0TGjwCgb-dIqC5Wbt8aj3O6girMLkq_l5NRg0b9GUzuIihUW-Pbf2fMV_u9h_GU_kEF0Fp5Z-_305xr47vRvDL6I9OYMXw4C9ACyemSPRpHC-rL3InaY_p206UnJ1RXTkB6txlZ6Tj_dRMmdj0JBDzun9XI0VzFc9xPuA-ksQUBa3xSJkiRQjj2sL5t07cXCl8');"></div>
+            <div class="col-6 bg-cover rounded-lg" style="aspect-ratio: 1 / 1; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyXXLB0RvjOKQItslVfzZPr74ANGeJTAuXveVjs5RrWIjD-io6NRDNaREGlGqNxHpXlyzEK4SIy3JNajuZ2CoSfu7OHIBNdNjonhX-4AzOCMgw3kC2Rp5gas2oTShGU3AvvdcddLyL558L5GJIYBRCVa5Jh2RBmoZbpMzd4zz1a8PRSsfcZ8gDd2dyaD6aazZ_SSFy-J29H45qXCnM0dFxswI4QyhVWtAxDAD_-Fbb6kpT_ND9unePhUZNYoQTIhMNF9sXJtdrJOU');"></div>
+            <div class="col-12 bg-cover rounded-lg" style="aspect-ratio: 2 / 3; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxQFHU6QRlHoQbiAI-15oQqfDMA55mrrAHL9Z6UfmfFcDQmV925PlNXV2vf24OYruTbkZ9nv5GQQ2iTFbvyme4jRS0YTCc_G64N5iub7r5IiaNT89IgcVDJ61s9FwVixbMPzcZVcjANn-C3kUINjar05wT1_UB1pvi11_N-TAIIjlkIKKzOTc99gfuboHScX3wL38AJlpbrSXQJ6ZUYeAQCjijztBFUSdSGu12GNxUCySJwEKx_ThFkPr18DDgtrE-3KcAMeO2Q9Q');"></div>
+          </div>
+        </div>
 
-    <!-- Carousel Indicators -->
-    <div class="carousel-indicators mb-0">
-      <button title="dot-button" *ngFor="let product of featuredProducts; let i = index" type="button"
-        data-bs-target="#heroB2BCarousel" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
-        [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
-      </button>
-    </div>
+        <!-- Right Column (Details) -->
+        <div class="col-lg-4">
+          <h1 class="fw-bold fs-4 text-dark">Floral Print Cotton Fabric</h1>
+          <p class="text-muted">Brand: FabricFinds</p>
 
-    <!-- Carousel Inner -->
-    <div class="carousel-inner">
-      <div *ngFor="let product of featuredProducts; let i = index" class="carousel-item" [class.active]="i === 0">
-        <div class="container-fluid py-5">
-
-          <!-- Row: 30% Left (text + discount) | 70% Right (image) -->
-          <div
-            class="d-flex justify-content-between align-items-center flex-wrap border border-5 border-warning rounded-4"
-            style="min-height: 55vh;">
-
-            <!-- Left: 30% -->
-            <div class="d-flex flex-column justify-content-between p-4" style="flex: 0 0 30%;">
-              <div>
-                <h1 class="fw-bold mb-3 text-dark" style="font-size: 2.5rem;">{{ product.name }}</h1>
-                <p class="text-muted fs-5">
-                  {{ product.description || 'Explore top quality and premium value.' }}
-                </p>
+          <div class="d-flex align-items-center gap-3 my-3">
+            <div>
+              <h2 class="fw-bold display-6 text-dark m-0">4.5</h2>
+              <div class="d-flex">
+                <svg class="star"><use xlink:href="#star-filled" /></svg>
+                <svg class="star"><use xlink:href="#star-filled" /></svg>
+                <svg class="star"><use xlink:href="#star-filled" /></svg>
+                <svg class="star"><use xlink:href="#star-filled" /></svg>
+                <svg class="star-outline"><use xlink:href="#star-outline" /></svg>
               </div>
-              <div class="mt-4">
-                <div class="bg-danger text-white px-4 py-3 rounded-4 shadow border border-white border-3 w-fit">
-                  <h2 class="fw-bold display-5 m-0">
-                    {{ product.discount }}<span class="fs-3">%</span> OFF
-                  </h2>
+              <p class="text-secondary m-0">120 reviews</p>
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-grid gap-2">
+                <div class="d-flex justify-content-between">
+                  <span>5</span>
+                  <div class="rating-bar flex-grow-1 mx-2">
+                    <div class="rating-bar-fill" style="width: 40%"></div>
+                  </div>
+                  <span class="text-muted">40%</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>4</span>
+                  <div class="rating-bar flex-grow-1 mx-2">
+                    <div class="rating-bar-fill" style="width: 30%"></div>
+                  </div>
+                  <span class="text-muted">30%</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>3</span>
+                  <div class="rating-bar flex-grow-1 mx-2">
+                    <div class="rating-bar-fill" style="width: 15%"></div>
+                  </div>
+                  <span class="text-muted">15%</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>2</span>
+                  <div class="rating-bar flex-grow-1 mx-2">
+                    <div class="rating-bar-fill" style="width: 10%"></div>
+                  </div>
+                  <span class="text-muted">10%</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>1</span>
+                  <div class="rating-bar flex-grow-1 mx-2">
+                    <div class="rating-bar-fill" style="width: 5%"></div>
+                  </div>
+                  <span class="text-muted">5%</span>
                 </div>
               </div>
             </div>
-
-            <!-- Right: 70% -->
-<div class="text-center p-4 d-flex align-items-center justify-content-center"
-     style="flex: 0 0 70%; height: 300px; width: 100%; max-width: 600px; background-color: #f9f9f9; border-radius: 1rem; border: 2px dashed #ddd;">
-  <img title="product-image"
-       [src]="product.imageUrl"
-       [alt]="product.name"
-       style="max-height: 100%; max-width: 100%; object-fit: contain; transition: transform 0.3s ease;"
-       onmouseover="this.style.transform='scale(1.02)'"
-       onmouseout="this.style.transform='scale(1)'"
-       class="img-fluid">
-</div>
-
-
           </div>
 
-          <!-- Shop Now Button -->
-          <div class="text-center mt-4">
-            <a routerLink="/catalogs" class="btn"
-              style="background-color: #a67c00; color: #fff; padding: 0.75rem 2rem; font-weight: 600; font-size: 1rem; border-radius: 2em; box-shadow: 0 4px 18px rgba(166, 124, 0, 0.15); transition: all 0.3s ease; text-decoration: none;"
-              onmouseover="this.style.backgroundColor='#8c6700'; this.style.boxShadow='0 6px 22px rgba(166, 124, 0, 0.25)'; this.style.transform='translateY(-2px)'"
-              onmouseout="this.style.backgroundColor='#a67c00'; this.style.boxShadow='0 4px 18px rgba(166, 124, 0, 0.15)'; this.style.transform='none'">
-              Shop Now
-            </a>
+          <h2 class="fw-bold fs-4 text-dark mt-4">$12.99 / yard</h2>
+
+          <label class="form-label mt-3 fw-bold">Length (in yards)</label>
+          <select class="form-select mb-3">
+            <option>Select Length</option>
+            <option>two</option>
+            <option>three</option>
+          </select>
+
+          <label class="form-label mt-3 fw-bold">Quantity</label>
+          <select class="form-select mb-3">
+            <option>Select Quantity</option>
+            <option>two</option>
+            <option>three</option>
+          </select>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary">Add to Cart</button>
+            <button class="btn btn-outline-light">Visualize</button>
           </div>
 
+          <h5 class="fw-bold mt-4">Material Composition</h5>
+          <p>100% Cotton</p>
+
+          <h5 class="fw-bold mt-4">Care Instructions</h5>
+          <p>Machine wash cold, tumble dry low. Do not bleach.</p>
+
+          <h5 class="fw-bold mt-4">Potential Uses</h5>
+          <p>Ideal for quilting, apparel, home decor, and crafts.</p>
         </div>
       </div>
     </div>
-
-    <!-- Carousel Controls -->
-    <button class="position-absolute start-0 top-50 translate-middle-y border-0" type="button"
-      data-bs-target="#heroB2BCarousel" data-bs-slide="prev" aria-label="Previous Slide"
-      style="width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.6); border-radius: 50%;">
-      <span class="carousel-control-prev-icon" aria-hidden="true"
-        style="filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(172deg) brightness(95%) contrast(86%);
-           width: 100%; height: 100%;">
-      </span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-
-    <button class="position-absolute end-0 top-50 translate-middle-y border-0" type="button"
-      data-bs-target="#heroB2BCarousel" data-bs-slide="next" aria-label="Next Slide"
-      style="width: 40px; height: 40px; background-color: rgba(255, 255, 255, 0.6); border-radius: 50%;">
-      <span class="carousel-control-next-icon" aria-hidden="true"
-        style="filter: invert(41%) sepia(0%) saturate(0%) hue-rotate(172deg) brightness(95%) contrast(86%);
-           width: 100%; height: 100%;">
-      </span>
-      <span class="visually-hidden">Next</span>
-    </button>
-
-  </div>
-</div>
-
-

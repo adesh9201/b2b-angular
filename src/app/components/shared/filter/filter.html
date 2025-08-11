@@ -1,119 +1,149 @@
+<div class="card border-0 shadow-sm bg-light">
+    <div class="card-body">
+        <h5 class="fw-bold text-primary mb-4">Filters</h5>
+        <form id="catalogFilters" class="vstack gap-3">
 
+            <div class="accordion" id="filterAccordion">
 
-         
-                <div class="card border-0 shadow-sm bg-light">
-                    <div class="card-body">
-                        <h5 class="fw-bold text-primary mb-4">Filters</h5>
-                        <form id="catalogFilters" class="vstack gap-3">
-                            <!-- Your entire filter content remains unchanged -->
-                            <!-- Category Filter -->
-                            <div>
-                                <label class="form-label fw-semibold">Category</label>
-                                <select class="form-select" id="filterCategory">
-                                    <option value="">All</option>
-                                    <option value="Cotton Fabric">Cotton Fabric</option>
-                                    <option value="Silk Fabric">Silk Fabric</option>
-                                    <option value="Linen Fabric">Linen Fabric</option>
-                                    <option value="Denim Fabric">Denim Fabric</option>
-                                    <option value="Rayon Fabric">Rayon Fabric</option>
-                                    <option value="Organza Fabric">Organza Fabric</option>
-                                    <option value="Printed Fabric">Printed Fabric</option>
-                                    <option value="Chiffon Fabric">Chiffon Fabric</option>
-                                    <option value="Georgette Fabric">Georgette Fabric</option>
-                                </select>
-                            </div>
-
-                            <!-- Price Range Filter -->
-                            <div>
-                                <label class="form-label fw-semibold">Price Range</label>
-                                <div class="d-flex align-items-center gap-2">
-                                    <input type="number" class="form-control" id="filterPriceMin" placeholder="Min"
-                                        min="0">
-                                    <span>-</span>
-                                    <input type="number" class="form-control" id="filterPriceMax" placeholder="Max"
-                                        min="0">
-                                </div>
-                            </div>
-
-                            <!-- Color Filter -->
-                            <div>
-                                <label class="form-label fw-semibold">Color</label>
-                                <select class="form-select" id="filterColor"
-                                    style="max-height: 300px; overflow-y: auto;">
-                                    <option value="">All</option>
-                                    <option value="White">White</option>
-                                    <option value="Black">Black</option>
-                                    <option value="Blue">Blue</option>
-                                    <option value="Red">Red</option>
-                                    <option value="MultiColour">MultiColour</option>
-                                    <option value="Green">Green</option>
-                                    <option value="Yellow">Yellow</option>
-                                    <option value="Olive">Olive</option>
-                                    <option value="Fuscia">Fuscia</option>
-                                    <option value="Mehroon">Mehroon</option>
-                                    <option value="Brown">Brown</option>
-                                    <option value="Coral">Coral</option>
-                                    <option value="Lilac">Lilac</option>
-                                    <option value="Pink">Pink</option>
-                                    <option value="Cream">Cream</option>
-                                    <option value="Navy Blue">Navy Blue</option>
-                                    <option value="Dusty pink">Dusty Pink</option>
-                                    <option value="Rust">Rust</option>
-                                    <option value="Purple">Purple</option>
-                                    <option value="Orange">Orange</option>
-                                    <option value="Beige">Beige</option>
-                                </select>
-                            </div>
-
-                            <!-- Material Filter -->
-                            <div>
-                                <label class="form-label fw-semibold">Material</label>
-                                <select class="form-select" id="filterMaterial">
-                                    <option value="">All</option>
-                                    <option value="Cotton">Cotton</option>
-                                    <option value="Viscose">Viscose</option>
-                                    <option value="Polyester">Polyester</option>
-                                    <option value="Linen">Linen</option>
-                                    <option value="Nylon">Nylon</option>
-                                    <option value="Cotton Lycra">Cotton Lycra</option>
-                                    <option value="Special">Special</option>
-                                    <option value="Polyester Lycra">Polyester Lycra</option>
-                                </select>
-                            </div>
-
-                            <!-- Supplier Filter -->
-                            <div>
-                                <label class="form-label fw-semibold">Supplier</label>
-                                <select class="form-select" id="filterSupplier">
-                                    <option value="">All</option>
-                                    <option value="TexFab India">TexFab India</option>
-                                    <option value="Global Fabrics">Global Fabrics</option>
-                                    <option value="Elegant Textiles">Elegant Textiles</option>
-                                    <option value="WeaveWorld">WeaveWorld</option>
-                                    <option value="SilkMart">SilkMart</option>
-                                    <option value="Organic Looms">Organic Looms</option>
-                                </select>
-                            </div>
-
-                            <!-- Rating Filter -->
-                            <div>
-                                <label class="form-label fw-semibold">Rating</label>
-                                <select class="form-select" id="filterRating">
-                                    <option value="">All</option>
-                                    <option value="4">4 stars & up</option>
-                                    <option value="3">3 stars & up</option>
-                                    <option value="2">2 stars & up</option>
-                                    <option value="1">1 star & up</option>
-                                </select>
-                            </div>
-
-                            <!-- Action Buttons -->
-                            <div class="d-grid gap-2 mt-2">
-                                <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
-                                <button type="button" class="btn btn-outline-secondary" id="resetFilters">Reset</button>
-                            </div>
-                        </form>
+                <!-- Category Filter -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filterCategoryCollapse">
+                            Category
+                        </button>
+                    </h2>
+                    <div id="filterCategoryCollapse" class="accordion-collapse collapse"
+                        data-bs-parent="#filterAccordion">
+                        <div class="accordion-body vstack gap-1">
+                            <label
+                                *ngFor="let cat of ['Cotton Fabric','Silk Fabric','Linen Fabric','Denim Fabric','Rayon Fabric','Organza Fabric','Printed Fabric','Chiffon Fabric','Georgette Fabric']">
+                                <input type="checkbox" [value]="cat"
+                                    [checked]="filters.categories.includes(cat)"
+                                    (change)="toggleFilter('categories', cat)">
+                                {{ cat }}
+                            </label>
+                        </div>
                     </div>
                 </div>
-          
 
+                <!-- Price Range Filter -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filterPriceCollapse">
+                            Price Range
+                        </button>
+                    </h2>
+                    <div id="filterPriceCollapse" class="accordion-collapse collapse" data-bs-parent="#filterAccordion">
+                        <div class="accordion-body">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <input type="number" class="form-control" placeholder="Min" min="0"
+                                    [(ngModel)]="filters.priceMin" name="priceMin">
+                                <span>-</span>
+                                <input type="number" class="form-control" placeholder="Max" min="0"
+                                    [(ngModel)]="filters.priceMax" name="priceMax">
+                            </div>
+                            <input type="range" class="form-range" min="0" max="10000" step="50"
+                                [(ngModel)]="filters.priceMax" name="priceRange">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Filter -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filterColorCollapse">
+                            Color
+                        </button>
+                    </h2>
+                    <div id="filterColorCollapse" class="accordion-collapse collapse" data-bs-parent="#filterAccordion">
+                        <div class="accordion-body vstack gap-1" style="max-height: 300px; overflow-y: auto;">
+                            <label
+                                *ngFor="let col of ['White','Black','Blue','Red','MultiColour','Green','Yellow','Olive','Fuscia','Mehroon','Brown','Coral','Lilac','Pink','Cream','Navy Blue','Dusty Pink','Rust','Purple','Orange','Beige']">
+                                <input type="checkbox" [value]="col"
+                                    [checked]="filters.colors.includes(col)"
+                                    (change)="toggleFilter('colors', col)">
+                                {{ col }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Filter -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filterMaterialCollapse">
+                            Material
+                        </button>
+                    </h2>
+                    <div id="filterMaterialCollapse" class="accordion-collapse collapse"
+                        data-bs-parent="#filterAccordion">
+                        <div class="accordion-body vstack gap-1">
+                            <label
+                                *ngFor="let mat of ['Cotton','Viscose','Polyester','Linen','Nylon','Cotton Lycra','Special','Polyester Lycra']">
+                                <input type="checkbox" [value]="mat"
+                                    [checked]="filters.materials.includes(mat)"
+                                    (change)="toggleFilter('materials', mat)">
+                                {{ mat }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Supplier Filter -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filterSupplierCollapse">
+                            Supplier
+                        </button>
+                    </h2>
+                    <div id="filterSupplierCollapse" class="accordion-collapse collapse"
+                        data-bs-parent="#filterAccordion">
+                        <div class="accordion-body vstack gap-1">
+                            <label
+                                *ngFor="let sup of ['TexFab India','Global Fabrics','Elegant Textiles','WeaveWorld','SilkMart','Organic Looms']">
+                                <input type="checkbox" [value]="sup"
+                                    [checked]="filters.suppliers.includes(sup)"
+                                    (change)="toggleFilter('suppliers', sup)">
+                                {{ sup }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filterRatingCollapse">
+                            Rating
+                        </button>
+                    </h2>
+                    <div id="filterRatingCollapse" class="accordion-collapse collapse"
+                        data-bs-parent="#filterAccordion">
+                        <div class="accordion-body vstack gap-1">
+                            <label *ngFor="let rate of [4,3,2,1]">
+                                <input type="checkbox" [value]="rate"
+                                    [checked]="filters.ratings.includes(rate)"
+                                    (change)="toggleFilter('ratings', rate)">
+                                {{ rate }} stars & up
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2 mt-3">
+                <button type="button" class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="resetFilters()">Reset</button>
+            </div>
+
+        </form>
+    </div>
+</div>

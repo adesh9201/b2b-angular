@@ -6,59 +6,38 @@
   <div class="container">
     <div class="row align-items-center">
       <!-- Hero Content -->
-      <div class="col-lg-6 hero-content">
-        <h1 class="hero-title">Welcome to FabricHub</h1>
-        <p class="hero-subtitle">Create stunning websites and applications with our powerful platform. Experience the
-          next generation of web development.</p>
+      <div class="col-lg-6 hero-content" *ngIf="heroData">
+        <h1 class="hero-title">{{ heroData.title }}</h1>
+        <p class="hero-subtitle">{{ heroData.subtitle }}</p>
 
         <!-- CTA Buttons -->
         <div class="hero-buttons">
-          <a href="/catalogs" class="btn btn-primary me-3 mb-2">Get Catalog</a>
-          <a href="./dashboard" class="btn btn-outline mb-2">Become Seller </a>
+          <a [routerLink]="heroData.ctaPrimary.url" class="btn btn-primary me-3 mb-2">
+            {{ heroData.ctaPrimary.label }}
+          </a>
+          <a [routerLink]="heroData.ctaSecondary.url" class="btn btn-outline mb-2">
+            {{ heroData.ctaSecondary.label }}
+          </a>
         </div>
 
         <!-- Stats -->
         <div class="hero-stats row">
-          <div class="col-4">
+          <div class="col-4" *ngFor="let stat of heroData.stats">
             <div class="stat-item">
-              <div class="stat-number">10K+</div>
-              <div class="stat-label">Active Users</div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="stat-item">
-              <div class="stat-number">99%</div>
-              <div class="stat-label">Satisfaction</div>
-            </div>
-          </div>
-          <div class="col-4">
-            <div class="stat-item">
-              <div class="stat-number">24/7</div>
-              <div class="stat-label">Support</div>
+              <div class="stat-number">{{ stat.number }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Hero Image -->
-      <div class="col-lg-6 hero-image">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80"
-          alt="Platform Dashboard" class="hero-image-main">
-
-        <!-- Floating Cards -->
-        <!-- <div class="floating-card card-1">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-success me-2"></i>
-                            <span>Project completed</span>
-                        </div>
-                    </div> -->
-
-        <!-- <div class="floating-card card-2">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning me-2"></i>
-                            <span>5.0 Rating</span>
-                        </div>
-                    </div> -->
+      <div class="col-lg-6 hero-image" *ngIf="heroData">
+        <img
+          [src]="heroData.imageUrl"
+          [alt]="heroData.title"
+          class="hero-image-main"
+        />
       </div>
     </div>
   </div>

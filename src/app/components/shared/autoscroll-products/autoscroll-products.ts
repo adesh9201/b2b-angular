@@ -1,32 +1,31 @@
 import { Component } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { ProductService } from '../../core/services/product.service';
-import { Product } from '../../core/models/product.model';
+import { CommonModule } from '@angular/common';
+import { AutoscrollProductsService } from '../../core/services/autoScrollProducts.services';
+import { AutoscrollProductsModel } from '../../core/models/autoScrollProducts.model';
 import { RouterModule } from '@angular/router';
-
 
 @Component({
   selector: 'app-autoscroll-products',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  providers: [CurrencyPipe],
   templateUrl: './autoscroll-products.html',
-  styleUrl: './autoscroll-products.css'
+  styleUrls: ['./autoscroll-products.css']
 })
 export class AutoscrollProducts {
+  allProducts: AutoscrollProductsModel[] = [];
+  productChunks: AutoscrollProductsModel[][] = [];
+  categoryName: string = 'Featured Products';
 
-  featuredProducts: Product[] = [];
-  productChunks: Product[][] = [];
-
-  constructor(private productService: ProductService) {
-    this.featuredProducts = this.productService.getFeaturedProducts();
+  constructor(private AutoscrollProductsService: AutoscrollProductsService) {
+    this.allProducts = this.AutoscrollProductsService.getAllProducts();
     this.chunkProducts();
   }
 
   private chunkProducts(): void {
     const chunkSize = 6;
-    for (let i = 0; i < this.featuredProducts.length; i += chunkSize) {
-      this.productChunks.push(this.featuredProducts.slice(i, i + chunkSize));
+    this.productChunks = [];  // clear before chunking (good practice)
+    for (let i = 0; i < this.allProducts.length; i += chunkSize) {
+      this.productChunks.push(this.allProducts.slice(i, i + chunkSize));
     }
   }
 }

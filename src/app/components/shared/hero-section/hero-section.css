@@ -1,166 +1,191 @@
-        .hero-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 0;
-            position: relative;
-            overflow: hidden;
-        }
+.hero-section {
+    background: linear-gradient(135deg, var(--color-background) 0%, var(--gray-100) 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
 
-        .hero-shape {
-            position: absolute;
-            background: linear-gradient(45deg, #6c5ce7, #a363d9);
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.1;
-            z-index: 1;
-        }
+.hero-shape {
+    position: absolute;
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.1;
+    z-index: 1;
+}
 
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            top: -200px;
-            right: -200px;
-        }
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    top: -200px;
+    right: -200px;
+}
 
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            bottom: -150px;
-            left: -150px;
-            background: linear-gradient(45deg, #a363d9, #6c5ce7);
-        }
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -150px;
+    left: -150px;
+    background: linear-gradient(45deg, var(--primary-400), var(--primary-700));
+}
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            background: linear-gradient(45deg, #2d3436 0%, #6c5ce7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    background: linear-gradient(45deg, var(--gray-900) 0%, var(--primary-700) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: #6c757d;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
 
-        .hero-buttons .btn {
-            padding: 0.8rem 2rem;
-            font-weight: 500;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
+.hero-buttons .btn {
+    padding: 0.8rem 2rem;
+    font-weight: 500;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+}
 
-        .btn-primary {
-            background: linear-gradient(45deg, #6c5ce7, #a363d9);
-            border: none;
-            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
-        }
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 150, 136, 0.2);
+}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(108,92,231,0.3);
-        }
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}
 
-        .btn-outline {
-            border: 2px solid #6c5ce7;
-            color: #6c5ce7;
-            background: transparent;
-        }
+.btn-outline {
+    border: 2px solid var(--primary-700);
+    color: var(--primary-700);
+    background: transparent;
+}
 
-        .btn-outline:hover {
-            background: linear-gradient(45deg, #6c5ce7, #a363d9);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(108,92,231,0.3);
-        }
+.btn-outline:hover {
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}
 
-        .hero-stats {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(0,0,0,0.1);
-        }
+.hero-stats {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
 
-        .stat-item {
-            text-align: center;
-        }
+.stat-item {
+    text-align: center;
+}
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2d3436;
-            margin-bottom: 0.5rem;
-        }
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
 
-        .stat-label {
-            color: #6c757d;
-            font-weight: 500;
-        }
+.stat-label {
+    color: var(--gray-600);
+    font-weight: 500;
+}
 
-        .hero-image {
-            position: relative;
-            z-index: 2;
-        }
+.hero-image {
+    position: relative;
+    z-index: 2;
+    perspective: 1200px; /* Enables realistic 3D effect for floating cards */
+}
 
-        .hero-image-main {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
-            transition: all 0.3s ease;
-        }
+.hero-image-main {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+    transition: var(--transition);
+}
 
-        .hero-image-main:hover {
-            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
-        }
+.hero-image-main:hover {
+    transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
 
-        .floating-card {
-            position: absolute;
-            background: white;
-            padding: 1rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: float 3s ease-in-out infinite;
-        }
+/* High-level floating animation combining 3D movement, scale, opacity, and shadow */
+@keyframes float-advanced {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  20% {
+    transform: translate3d(12px, -8px, 4px) rotate(2deg) scale(1.04);
+    opacity: 0.95;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.15);
+  }
+  40% {
+    transform: translate3d(-8px, -20px, 6px) rotate(-3deg) scale(1.07);
+    opacity: 0.9;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.2);
+  }
+  60% {
+    transform: translate3d(10px, -15px, 3px) rotate(3deg) scale(1.05);
+    opacity: 0.95;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.15);
+  }
+  80% {
+    transform: translate3d(-12px, -7px, 0) rotate(-2deg) scale(1.03);
+    opacity: 0.98;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+  }
+}
 
-        .card-1 {
-            top: 10%;
-            left: -10%;
-            animation-delay: 0s;
-        }
+.floating-card {
+    position: absolute;
+    background: white;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    animation: float-advanced 5s ease-in-out infinite;
+    will-change: transform, opacity, box-shadow; /* Optimize animation */
+}
 
-        .card-2 {
-            bottom: 10%;
-            right: -10%;
-            animation-delay: 1.5s;
-        }
+/* Different durations and delays for natural unsynchronized movement */
+.card-1 {
+    animation-duration: 5.2s;
+    animation-delay: 0s;
+}
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+.card-2 {
+    animation-duration: 4.3s;
+    animation-delay: 2s;
+}
 
-        @media (max-width: 991.98px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-image {
-                margin-top: 3rem;
-            }
-            
-            .floating-card {
-                display: none;
-            }
-        }
+@media (max-width: 991.98px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-image {
+        margin-top: 3rem;
+    }
+    
+    .floating-card {
+        display: none;
+    }
+}

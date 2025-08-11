@@ -74,4 +74,8 @@ export class Catalogs {
       this.productChunks.push(this.featuredProducts.slice(i, i + chunkSize));
     }
   }
+
+    onFiltersApplied(filtered: Product[]) {
+    this.featuredProducts = filtered;
+  }
 }

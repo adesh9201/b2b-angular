@@ -1,21 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { ProductService } from '../../core/services/product.service';
-import { Product } from '../../core/models/product.model';
+// hero-section.component.ts
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HeroSectionService } from '../../core/services/HeroSection.Service';
+import { HeroSectionModel } from '../../core/models/HeroSection.model';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  providers: [CurrencyPipe],
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.css',
 })
-export class HeroSection implements OnInit {
-  constructor() { }
+export class HeroSection implements OnInit, OnDestroy {
+  heroDataList: HeroSectionModel[] = [];
+  heroData!: HeroSectionModel;
+  currentIndex = 0;
+  intervalSubscription!: Subscription;
+
+  constructor(private heroService: HeroSectionService) {}
 
   ngOnInit(): void {
-    // Component initialization
+    this.heroService.getHeroDataList().subscribe(data => {
+      this.heroDataList = data;
+      this.heroData = this.heroDataList[0]; // Initial hero
+
+      // Change hero every 6 seconds
+      this.intervalSubscription = interval(6000).subscribe(() => {
+        this.currentIndex = (this.currentIndex + 1) % this.heroDataList.length;
+        this.heroData = this.heroDataList[this.currentIndex];
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
   }
 }

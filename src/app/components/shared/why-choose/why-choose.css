@@ -1,13 +1,40 @@
-.card:hover {
-  transform: translateY(-5px);
-  transition: all 0.3s ease;
-  border-color: rgba(5, 207, 164, 0.3);
+/* Card Hover Effect */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-i.bi {
-  transition: transform 0.3s;
+/* Icon Circle */
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  background: rgba(5, 207, 164, 0.1);
+  color: #05cfa4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.feature-card:hover .icon-circle {
+  background: rgba(5, 207, 164, 0.2);
+  transform: scale(1.1);
 }
 
-.card:hover i.bi {
-  transform: scale(1.2);
+/* Stat Box */
+.stat-box {
+  border-radius: 8px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.stat-box:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 193, 7, 0.05);
+}
+
+/* CTA Section */
+.bg-success {
+  background: linear-gradient(135deg, #05cfa4, #029e7f) !important;
 }

@@ -1,29 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { FormsModule } from '@angular/forms';
-// import { WhyChooseFeature } from '../../core/models/why-choose.model';
-// import { WhyChooseService } from '../../core/services/why-choose.service';
-// import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
-// @Component({
-//   selector: 'app-why-choose',
-//   standalone: true,
-//   imports: [CommonModule, FormsModule],
-//   templateUrl: './why-choose.html',
-//   styleUrls: ['./why-choose.css']
-// })
-// export class WhyChoose implements OnInit {
-//   features: WhyChooseFeature[] = [];
-
-//   constructor(private featureService: WhyChooseService) {}
-
-//   ngOnInit(): void {
-//     this.featureService.getFeatures().subscribe((data) => {
-//       this.features = data;
-//     });
-//   }
-// }
-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -47,37 +21,37 @@ export class WhyChoose {
     {
       icon: 'bi-shield-lock-fill',
       title: 'Verified Suppliers',
-      description: 'All suppliers undergo rigorous verification process for quality assurance',
+      description: 'We ensure every supplier is vetted and approved for quality assurance.',
       stat: '100% Verified'
     },
     {
       icon: 'bi-credit-card-fill',
       title: 'Secure Payments',
-      description: 'Protected transactions with multiple payment options and buyer protection',
+      description: 'Multiple payment methods with full buyer protection and SSL encryption.',
       stat: 'SSL Encrypted'
     },
     {
       icon: 'bi-truck',
       title: 'Global Shipping',
-      description: 'Worldwide delivery with tracking and insurance for all orders',
+      description: 'We ship worldwide with real-time tracking and insurance on every order.',
       stat: '50+ Countries'
     },
     {
       icon: 'bi-people-fill',
       title: 'Expert Support',
-      description: 'Dedicated account managers and 24/7 customer support',
+      description: 'Our dedicated support team is available 24/7 to assist you anytime.',
       stat: '24/7 Support'
     },
     {
       icon: 'bi-award-fill',
       title: 'Quality Guarantee',
-      description: "Money-back guarantee if products don't meet specified standards",
+      description: 'If it doesn’t match the promised quality, you get your money back.',
       stat: '100% Guarantee'
     },
     {
       icon: 'bi-clock-history',
       title: 'Fast Processing',
-      description: 'Quick quote responses and efficient order processing',
+      description: 'Get your quotes in under 24 hours and start production without delay.',
       stat: '24hr Response'
     }
   ];

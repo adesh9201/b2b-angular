@@ -3,8 +3,10 @@
 
     <!-- Header -->
     <div class="text-center mb-5">
-      <h2 class="fw-bold text-primary display-6">Why Choose <span class="text-success">FabricHub?</span></h2>
-      <p class="lead text-muted mx-auto" style="max-width: 650px;">
+      <h2 class="fw-bold display-6">
+        Why Choose <span class="fabrichub-accent">FabricHub?</span>
+      </h2>
+      <p class="lead mx-auto fabrichub-muted" style="max-width: 650px;">
         Your trusted partner for global textile sourcing — combining quality, trust, and world-class service.
       </p>
     </div>
@@ -12,9 +14,9 @@
     <!-- Stats Row -->
     <div class="row text-center mb-5 g-4">
       <div class="col-6 col-md-3" *ngFor="let stat of stats">
-        <div class="stat-box shadow-sm bg-white rounded p-3">
-          <div class="h2 fw-bold text-warning">{{ stat.number }}</div>
-          <div class="text-muted small">{{ stat.label }}</div>
+        <div class="stat-box shadow-sm rounded p-3 fabrichub-bg-light">
+          <div class="h2 fw-bold fabrichub-warning">{{ stat.number }}</div>
+          <div class="fabrichub-muted small">{{ stat.label }}</div>
         </div>
       </div>
     </div>
@@ -22,30 +24,30 @@
     <!-- Features Grid -->
     <div class="row g-4">
       <div class="col-12 col-md-6 col-lg-4" *ngFor="let feature of features">
-        <div class="card h-100 feature-card border-0 shadow-sm">
+        <div class="card h-100 feature-card border-0 shadow-sm fabrichub-bg-light">
           <div class="card-body text-center p-4">
-            <div class="icon-circle mb-3 mx-auto">
+            <div class="icon-circle mb-3 mx-auto fabrichub-primary-color">
               <i class="bi fs-3" [ngClass]="feature.icon"></i>
             </div>
-            <h5 class="card-title fw-semibold text-primary">{{ feature.title }}</h5>
-            <p class="card-text text-muted small">{{ feature.description }}</p>
-            <div class="fw-semibold text-success mt-2">{{ feature.stat }}</div>
+            <h5 class="card-title fw-semibold fabrichub-primary">{{ feature.title }}</h5>
+            <p class="card-text fabrichub-muted small">{{ feature.description }}</p>
+            <div class="fw-semibold fabrichub-success mt-2">{{ feature.stat }}</div>
           </div>
         </div>
       </div>
     </div>
 
     <!-- CTA Section -->
-    <div class="mt-5 p-5 bg-success text-white text-center rounded shadow-lg">
-      <h3 class="fw-bold mb-3">Ready to Start Your Fabric Journey?</h3>
-      <p class="text-light mb-4 mx-auto" style="max-width: 600px;">
+    <div class="mt-5 p-5 fabrichub-bg-success fabrichub-text-light text-center rounded shadow-lg">
+      <h3 class="fw-bold mb-3">{{ 'Ready to Start Your Fabric Journey?' }}</h3>
+      <p class="fabrichub-text-light mb-4 mx-auto" style="max-width: 600px;">
         Join thousands of satisfied buyers who trust FabricHub for their textile sourcing needs.
       </p>
       <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-        <button class="btn btn-warning text-dark fw-semibold px-4 py-2 shadow-sm">
+        <button class="btn fabrichub-btn-warning fabrichub-text-dark fw-semibold px-4 py-2 shadow-sm">
           Start Sourcing Now
         </button>
-        <button class="btn btn-outline-light fw-semibold px-4 py-2">
+        <button class="btn fabrichub-btn-outline-light fw-semibold px-4 py-2">
           Contact Sales Team
         </button>
       </div>

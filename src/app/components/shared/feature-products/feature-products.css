@@ -1,11 +1,15 @@
 .product-card {
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--background);
+    color: var(--text-color);
+    box-shadow: var(--shadow-sm);
+    border: none;
 }
 
 .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg); /* Use global shadow */
 }
 
 .product-image-wrapper {
@@ -15,6 +19,8 @@
 
 .product-image {
     transition: transform 0.4s ease;
+    height: 150px; /* Default height */
+    object-fit: cover;
 }
 
 .product-image-wrapper:hover .product-image {
@@ -23,12 +29,22 @@
 
 .product-title {
     font-size: 0.9rem;
+    color: var(--text-color);
 }
 
-.small {
+.product-price {
     font-size: 0.75rem;
 }
 
+.text-success {
+    color: var(--success) !important;
+}
+
+.text-muted {
+    color: var(--gray-400) !important;
+}
+
+/* Responsive adjustments */
 @media (max-width: 576px) {
     .product-image {
         height: 120px !important;
@@ -39,20 +55,45 @@
     }
 }
 
+/* Button styles */
 .btn {
-  transition: all 0.3s ease-in-out;
+  transition: var(--transition);
+}
+
+.btn-outline-primary {
+    background: transparent;
+    color: var(--primary-500);
+    border: 1px solid var(--primary-500);
+    border-radius: var(--border-radius-full);
+    padding: 0.25rem 1.5rem;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus {
-  background: linear-gradient(45deg, #6c5ce7, #a363d9);
-  color: #fff;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.2);
+    background: var(--primary-500);
+    color: var(--color-background);
+    border-color: var(--primary-500);
+    box-shadow: 0 6px 20px rgba(0, 150, 136, 0.2);
+    transform: translateY(-2px);
+    outline: none;
 }
 
-.btn:focus {
-  outline: 3px solid rgba(108, 92, 231, 0.3);
-  outline-offset: 2px;
+.btn-outline-primary:focus-visible {
+    outline: 3px solid rgba(0, 150, 136, 0.3);
+    outline-offset: 3px;
+}
+
+/* Titles and Explore text */
+.featured-fabrics-title,
+.featured-fabrics-explore {
+  color: var(--primary-700);
+  text-align: left;
+  padding-left: var(--space-1);
+  margin-bottom: var(--space-4);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.featured-fabrics-title {
+  font-size: var(--font-2xl);
+  font-weight: 700;
 }

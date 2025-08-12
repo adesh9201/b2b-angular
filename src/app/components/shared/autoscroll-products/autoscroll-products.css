@@ -3,11 +3,11 @@
   padding: var(--space-4) 0;
 }
 
-.category-carousel-title {
+.products-carousel-title {
   font-size: var(--font-2xl);
   font-weight: 700;
   color: var(--primary-700);
-  text-align: left;
+  text-align: center;
   padding-left: var(--space-1);
   margin-bottom: var(--space-4);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -74,7 +74,7 @@
 }
 
 @media (max-width: 991.98px) {
-  .category-carousel-title {
+  .products-carousel-title {
     font-size: var(--font-xl);
     padding-left: var(--space-0);
   }

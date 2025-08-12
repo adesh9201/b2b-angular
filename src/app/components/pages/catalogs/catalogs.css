@@ -50,3 +50,16 @@
     height: 200px;
   }
 }
+
+.btn-outline {
+  border: 2px solid var(--primary-700);
+  color: var(--primary-700);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+} 

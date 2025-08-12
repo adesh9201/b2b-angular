@@ -1,10 +1,14 @@
 /* === Marketplace Navbar Specific === */
 .marketplace-navbar {
-  background: #ffffff !important; /* Always white */
+  background: #ffffff !important;
   color: var(--dark-color) !important;
   box-shadow: var(--box-shadow);
   padding: 0.6rem 1rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px); /* keep scrollbar visible */
 }
 
 .navbar-brand .brand-text {
@@ -40,6 +44,11 @@
   border: 1px solid #ddd;
 }
 
+/* Center search bar in navbar */
+.search-box {
+  max-width: 350px;
+}
+
 .badge {
   font-size: 0.7rem;
 }
@@ -47,3 +56,47 @@
 .logo-icon svg {
   display: block;
 }
+
+.btn-outline {
+    border: 2px solid var(--primary-700);
+    color: var(--primary-700);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}
+
+/* Compact Dropdown Buttons */
+.dropdown-compact .btn {
+  min-width: 100px; /* fixed width for clean alignment */
+  padding: 0.25rem 0.5rem; /* smaller padding */
+  font-size: 0.85rem; /* smaller text */
+}
+
+/* Scrollable Dropdown Menu */
+.dropdown-scroll {
+  max-height: 250px; /* enough space for many options */
+  overflow-y: auto;
+  min-width: 180px; /* wider menu for better readability */
+}
+
+/* Smooth scrollbar styling */
+.dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/* Dropdown Item Hover */
+.dropdown-item:hover {
+  background-color: var(--primary-50, #f5f7fa);
+  color: var(--primary-color, #007bff);
+}
+

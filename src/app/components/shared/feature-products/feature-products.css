@@ -84,16 +84,23 @@
 }
 
 /* Titles and Explore text */
-.featured-fabrics-title,
-.featured-fabrics-explore {
+.featured-fabrics-title {
   color: var(--primary-700);
-  text-align: left;
+  text-align: center;
   padding-left: var(--space-1);
   margin-bottom: var(--space-4);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .featured-fabrics-title {
-  font-size: var(--font-2xl);
-  font-weight: 700;
+font-size: var(--font-2xl);
+font-weight: 700;
+}
+
+.featured-fabrics-explore {
+  font-size: var(--font-x5);
+  font-weight: 400;
+  color: var(--color-text);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

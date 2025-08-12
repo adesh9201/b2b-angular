@@ -18,15 +18,8 @@
     </a>
 
     <!-- Toggler -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -34,17 +27,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Home</a
-          >
+          <a class="nav-link" routerLink="/" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Home</a>
         </li>
         <li class="nav-item">
-          <!-- <a class="nav-link" routerLink="/catalogs" routerLinkActive="active">Catalogs</a> -->
-        <a class="nav-link" routerLink="/catalogs" routerLinkActive="active">Catalogs</a>
+          <a class="nav-link" routerLink="/catalogs" routerLinkActive="active">Catalogs</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/suppliers" routerLinkActive="active">Suppliers</a>
@@ -54,46 +41,42 @@
         </li>
       </ul>
 
+      <!-- Center Search -->
+      <form class="d-flex mx-auto search-box align-items-center">
+        <input class="form-control form-control-sm" type="search" placeholder="Search catalogs..." />
+        <button class="btn btn-sm btn-outline ms-2" type="submit" title="Search">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+
       <!-- Right Actions -->
       <div class="d-flex align-items-center gap-3">
-        <!-- Search -->
-        <form class="d-flex me-2 search-box d-none d-md-flex">
-          <input
-            class="form-control form-control-sm"
-            type="search"
-            placeholder="Search catalogs..."
-          />
-          <button class="btn btn-sm btn-outline-dark ms-2" type="submit" title="Search">
-            <i class="fas fa-search"></i>
-          </button>
-        </form>
+
+        <div>
+          <app-country-selector></app-country-selector>
+        </div>
 
         <!-- Cart -->
-        <a routerLink="/cart" class="btn btn-sm btn-outline-dark position-relative">
+        <a routerLink="/cart" class="btn btn-sm btn-outline position-relative">
           <i class="fas fa-shopping-cart"></i>
-          <span
-            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-          >
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {{ cartCount }}
           </span>
         </a>
 
         <!-- Account -->
         <div class="dropdown">
-          <button
-            class="btn btn-sm btn-outline-dark dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
+          <button class="btn btn-sm btn-outline dropdown-toggle" type="button" data-bs-toggle="dropdown">
             <i class="fas fa-user me-1"></i> Account
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" routerLink="/login" routerLinkActive="active">Login</a></li>
-          <li><a class="dropdown-item" routerLink="/register" routerLinkActive="active">Register</a></li>
-          <li><hr class="dropdown-divider"/></li>
-          <!-- <li><a class="dropdown-item" routerLink="/dashboard">Dashboard</a></li> -->
-           <li><a class="dropdown-item" routerLink="/dashboard" routerLinkActive="active">dashboard</a></li>
-        </ul>
+            <li><a class="dropdown-item" routerLink="/login" routerLinkActive="active">Login</a></li>
+            <li><a class="dropdown-item" routerLink="/register" routerLinkActive="active">Register</a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><a class="dropdown-item" routerLink="/dashboard" routerLinkActive="active">dashboard</a></li>
+          </ul>
         </div>
       </div>
     </div>

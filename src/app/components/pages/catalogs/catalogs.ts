@@ -56,7 +56,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './catalogs.html',
   styleUrls: ['./catalogs.css'],
-  imports: [CommonModule, Filter, AutoscrollProducts, RouterModule],
+  imports: [CommonModule, Filter, RouterModule],
   providers: [CurrencyPipe]
 })
 export class Catalogs {

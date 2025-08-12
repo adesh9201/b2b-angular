@@ -91,6 +91,7 @@
     --toast-bg: rgba(16,20,24,0.95);
     --background: #F7FAFC;
     --text-color: #23272F;
+    --scrollbar-bg: #f1f1f1; /* track ka color */
 }
 
 /* ================ DARK THEME SUPPORT ================ */
@@ -99,6 +100,9 @@
 body {
   background-color: var(--color-background);
   color: var(--color-text);
+    /* Scrollbar width */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--primary-color) var(--scrollbar-bg); /* Firefox */
 }
 
 /* ✅ Dark mode as top-level media query */
@@ -114,6 +118,9 @@ body {
   body {
     background-color: var(--color-background);
     color: var(--color-text);
+      /* Scrollbar width */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--primary-color) var(--scrollbar-bg); /* Firefox */
   }
 }
 
@@ -636,4 +643,23 @@ router-outlet+* {
         transition-duration: 0.001ms !important; 
         scroll-behavior: auto !important; 
     }
+}
+
+/* Chrome, Edge, Safari ke liye */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  border: 2px solid var(--scrollbar-bg); /* thumb ka gap effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #00796b; /* hover shade */
 }

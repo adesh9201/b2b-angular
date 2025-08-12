@@ -1,0 +1,35 @@
+<div class="country-selector">
+  <div class="dropdown dropdown-compact"
+       (mouseenter)="showLanguageDropdown = true"
+       (mouseleave)="showLanguageDropdown = false">
+
+    <!-- Button -->
+    <button
+      class="btn btn-sm btn-outline dropdown-toggle d-flex align-items-center"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <img [src]="selectedCountry.flag" class="me-2" width="20" height="14" alt="flag" />
+      {{ selectedCountry.short }} ({{ selectedCountry.currency }})
+    </button>
+
+    <!-- Country Dropdown -->
+    <ul class="dropdown-menu dropdown-menu-end dropdown-scroll">
+      <li *ngFor="let country of countries">
+        <a class="dropdown-item d-flex align-items-center"
+           href="#"
+           (click)="selectCountry(country); $event.preventDefault();"
+           [class.active]="country === selectedCountry">
+          <img [src]="country.flag" class="me-2" width="20" height="14" alt="flag" />
+          {{ country.name }} ({{ country.currency }})
+        </a>
+      </li>
+    </ul>
+
+    <!-- Language Dropdown -->
+    <ul class="dropdown-menu dropdown-menu-end dropdown-scroll mt-1"
+        *ngIf="showLanguageDropdown"
+        style="position: absolute; top: 100%; right: 0;">
+    </ul>
+  </div>
+</div>

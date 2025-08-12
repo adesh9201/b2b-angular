@@ -1,15 +1,51 @@
 .stat-card {
   background: rgba(255, 255, 255, 0.75);
-  /* backdrop-filter: blur(10px); */
-  border-radius: 1rem;
-  transition: transform 0.3s ease;
+  backdrop-filter: blur(10px); /* glassmorphic effect consistent with modern UI */
+  border-radius: var(--border-radius-lg); /* 1rem as per your global */
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  cursor: default;
+  height: 100%;
+  padding: var(--space-4);
 
-  &:hover {
-    transform: translateY(-5px);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  .stat-icon svg {
-    height: 48px;
-    width: 48px;
-  }
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(123, 47, 242, 0.2); /* slightly stronger shadow on hover */
+}
+
+.stat-icon svg {
+  height: 48px;
+  width: 48px;
+  color: var(--primary-color);
+  margin-bottom: var(--space-3);
+}
+
+.display-5 {
+  font-size: var(--font-3xl);
+  font-weight: 700;
+  color: var(--dark-color);
+  margin-bottom: var(--space-2);
+}
+
+.stat-label {
+  font-weight: 600;
+  font-size: var(--font-lg);
+  color: var(--primary-color);
+  margin-bottom: var(--space-1);
+}
+
+p.text-muted {
+  color: var(--gray-600);
+  font-size: var(--font-sm);
+  margin-bottom: 0;
+}
+
+.text-primary-global {
+  color: var(--primary-color);
 }

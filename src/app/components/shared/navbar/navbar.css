@@ -39,14 +39,24 @@
   border-color: var(--primary-color);
 }
 
-.search-box input {
-  border-radius: var(--border-radius);
-  border: 1px solid #ddd;
+/* Increase max-width of the search box container */
+.search-box {
+  max-width: 500px; /* increased from 350px */
+  width: 100%;      /* make it responsive */
 }
 
-/* Center search bar in navbar */
-.search-box {
-  max-width: 350px;
+/* Make the input fill the available width */
+.search-box input {
+  width: 100%;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  padding: 0.35rem 0.75rem; /* you can tweak padding as needed */
+  box-sizing: border-box;
+}
+
+/* Keep the button aligned next to input */
+.search-box button {
+  flex-shrink: 0; /* prevent shrinking */
 }
 
 .badge {
@@ -99,4 +109,6 @@
   background-color: var(--primary-50, #f5f7fa);
   color: var(--primary-color, #007bff);
 }
+
+
 

@@ -101,7 +101,7 @@ export class AboutService {
         {
           name: 'Michael Rodriguez',
           role: 'COO',
-          description: 'Operations expert specializing in logistics, and business development.',
+          description: 'Operations expert specializing in logistics operation, and in the business development.',
           imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80',
           socialLinks: [
             { platform: 'linkedin', url: '#', iconClass: 'fab fa-linkedin' },

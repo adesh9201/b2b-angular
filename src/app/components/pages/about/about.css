@@ -1,0 +1,90 @@
+/* Section backgrounds */
+.bg-section-light {
+  background-color: var(--background);
+}
+
+/* Text colors */
+.header-title,
+.section-title,
+.feature-title {
+  color: var(--primary-color);
+}
+
+.text-muted-custom,
+.section-text,
+.text-muted-custom small,
+p.text-muted-custom {
+  color: var(--gray-600);
+  opacity: 0.75;
+}
+
+.role-text {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Icon background and icon colors, fallback if dynamic classes are not applied */
+.icon-bg {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.icon-color {
+  color: var(--primary-color);
+}
+
+/* Cards */
+.card {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  border: none;
+  box-shadow: var(--box-shadow);
+}
+
+/* Card lifts and animation */
+.card-lift {
+  transition: transform 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-8px);
+}
+
+/* Stats number styles */
+.stat-number {
+  color: var(--primary-color);
+}
+
+/* Lists with icons */
+.list-icon-success i {
+  color: var(--success);
+}
+
+.list-icon-warning i {
+  color: var(--warning);
+}
+
+/* Social links */
+.social-links .social-link {
+  color: var(--gray-600);
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.social-links .social-link:hover {
+  color: var(--primary-color);
+}
+
+/* Team images */
+.team-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* Form validation error messages */
+.text-danger {
+  color: var(--danger);
+}
+
+/* Buttons use bootstrap global vars by default, so no override needed */

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { SupplierService } from '../../core/services/supplier.service';
 import { Supplier, Feature  } from '../../core/models/supplier.model';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-suppliers',
   templateUrl: './suppliers.html',
   styleUrls: ['./suppliers.css'],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule,],
 })
 export class Suppliers implements OnInit {
 

@@ -1,0 +1,52 @@
+/* Text colors using global variables */
+.header-title {
+  color: var(--primary-color);
+}
+
+.text-muted-custom {
+  color: var(--gray-600);
+  opacity: 0.75;
+}
+
+.feature-title {
+  color: var(--dark-color);
+}
+
+/* Badge styling relying on global variables */
+.badge-success {
+  background-color: var(--success);
+  color: white;
+  font-weight: 600;
+  padding: 0.25em 0.6em;
+  border-radius: 9999px; /* pill shape */
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+/* Remove background color from sections that previously had bg-light */
+section.py-5 {
+  background-color: var(--background);
+}
+
+/* Button colors come from global CSS already - no override needed */
+
+/* Card overrides to use global colors */
+.card {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  margin-bottom: 0.75rem;
+}
+
+/* Responsive tweaks if needed */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 1.75rem;
+  }
+}

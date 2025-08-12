@@ -16,7 +16,7 @@ export class HeroSectionService {
         subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
         imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
         ctaPrimary: { label: 'Get Catalog', url: '/catalogs' },
-        ctaSecondary: { label: 'Become Seller', url: './dashboard' },
+        ctaSecondary: { label: 'Become Seller', url: './suppliers' },
         stats: [
           { number: '10K+', label: 'Active Users' },
           { number: '99%', label: 'Satisfaction' },

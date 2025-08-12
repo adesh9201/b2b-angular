@@ -1,11 +1,11 @@
 <!-- Page Header -->
-<section class="bg-light py-5" style="margin-top: 76px;">
+<section class="py-5 mt-5">
   <div class="container">
     <nav aria-label="breadcrumb"></nav>
     <div class="row align-items-center">
       <div class="col-lg-6">
-        <h1 class="fw-bold mb-3">{{ aboutData.header.title }}</h1>
-        <p class="lead text-muted">{{ aboutData.header.subtitle }}</p>
+        <h1 class="fw-bold mb-3 header-title">{{ aboutData.header.title }}</h1>
+        <p class="lead text-muted-custom">{{ aboutData.header.subtitle }}</p>
       </div>
       <div class="col-lg-6">
         <img [src]="aboutData.header.imageUrl" [alt]="aboutData.header.imageAlt" class="img-fluid rounded shadow" />
@@ -19,16 +19,16 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 mx-auto text-center">
-        <h2 class="fw-bold mb-4">{{ aboutData.story.title }}</h2>
-        <p class="lead text-muted mb-5">{{ aboutData.story.subtitle }}</p>
+        <h2 class="fw-bold mb-4 header-title">{{ aboutData.story.title }}</h2>
+        <p class="lead text-muted-custom mb-5">{{ aboutData.story.subtitle }}</p>
         <div class="row g-4">
           <div class="col-md-4" *ngFor="let feature of aboutData.story.features">
             <div class="text-center">
-              <div [ngClass]="feature.bgClass + ' p-3 rounded-circle d-inline-block mb-3'">
-                <i [class]="feature.icon + ' fa-2x ' + feature.iconColorClass"></i>
+              <div [ngClass]="feature.bgClass + ' p-3 rounded-circle d-inline-block mb-3 icon-bg'">
+                <i [class]="feature.icon + ' fa-2x icon-color'"></i>
               </div>
-              <h5>{{ feature.title }}</h5>
-              <p class="text-muted">{{ feature.description }}</p>
+              <h5 class="feature-title">{{ feature.title }}</h5>
+              <p class="text-muted-custom">{{ feature.description }}</p>
             </div>
           </div>
         </div>
@@ -38,23 +38,23 @@
 </section>
 
 <!-- Mission & Vision -->
-<section class="py-5 bg-light">
+<section class="py-5 bg-section-light">
   <div class="container">
     <div class="row g-5">
       <!-- Mission -->
       <div class="col-lg-6">
-        <div class="card border-0 shadow-sm h-100 card-lift animate-on-scroll">
+        <div class="card card-lift animate-on-scroll">
           <div class="card-body p-4">
             <div class="d-flex align-items-center mb-4">
-              <div [ngClass]="aboutData.missionVision.mission.bgClass + ' p-3 rounded me-3'">
-                <i [class]="aboutData.missionVision.mission.icon + ' fa-2x ' + aboutData.missionVision.mission.iconColorClass"></i>
+              <div [ngClass]="aboutData.missionVision.mission.bgClass + ' p-3 rounded me-3 icon-bg'">
+                <i [class]="aboutData.missionVision.mission.icon + ' fa-2x icon-color'"></i>
               </div>
-              <h3 class="mb-0">{{ aboutData.missionVision.mission.title }}</h3>
+              <h3 class="mb-0 section-title">{{ aboutData.missionVision.mission.title }}</h3>
             </div>
-            <p class="lead mb-4">{{ aboutData.missionVision.mission.description }}</p>
+            <p class="lead section-text mb-4">{{ aboutData.missionVision.mission.description }}</p>
             <ul class="list-unstyled">
-              <li *ngFor="let point of aboutData.missionVision.mission.points" class="mb-2">
-                <i class="fas fa-check text-success me-2"></i>{{ point }}
+              <li *ngFor="let point of aboutData.missionVision.mission.points" class="mb-2 list-icon-success">
+                <i class="fas fa-check me-2"></i>{{ point }}
               </li>
             </ul>
           </div>
@@ -63,18 +63,18 @@
 
       <!-- Vision -->
       <div class="col-lg-6">
-        <div class="card border-0 shadow-sm h-100 card-lift animate-on-scroll">
+        <div class="card card-lift animate-on-scroll">
           <div class="card-body p-4">
             <div class="d-flex align-items-center mb-4">
-              <div [ngClass]="aboutData.missionVision.vision.bgClass + ' p-3 rounded me-3'">
-                <i [class]="aboutData.missionVision.vision.icon + ' fa-2x ' + aboutData.missionVision.vision.iconColorClass"></i>
+              <div [ngClass]="aboutData.missionVision.vision.bgClass + ' p-3 rounded me-3 icon-bg'">
+                <i [class]="aboutData.missionVision.vision.icon + ' fa-2x icon-color'"></i>
               </div>
-              <h3 class="mb-0">{{ aboutData.missionVision.vision.title }}</h3>
+              <h3 class="mb-0 section-title">{{ aboutData.missionVision.vision.title }}</h3>
             </div>
-            <p class="lead mb-4">{{ aboutData.missionVision.vision.description }}</p>
+            <p class="lead section-text mb-4">{{ aboutData.missionVision.vision.description }}</p>
             <ul class="list-unstyled">
-              <li *ngFor="let point of aboutData.missionVision.vision.points" class="mb-2">
-                <i class="fas fa-star text-warning me-2"></i>{{ point }}
+              <li *ngFor="let point of aboutData.missionVision.vision.points" class="mb-2 list-icon-warning">
+                <i class="fas fa-star me-2"></i>{{ point }}
               </li>
             </ul>
           </div>
@@ -90,8 +90,8 @@
     <div class="row text-center g-4">
       <div class="col-lg-3 col-md-6" *ngFor="let stat of aboutData?.stats">
         <div class="p-4">
-          <h2 class="fw-bold" [ngClass]="stat.colorClass + ' mb-2'">{{ stat.number }}</h2>
-          <p class="text-muted mb-0">{{ stat.description }}</p>
+          <h2 class="fw-bold mb-2" [ngClass]="stat.colorClass + ' stat-number'">{{ stat.number }}</h2>
+          <p class="text-muted-custom">{{ stat.description }}</p>
         </div>
       </div>
     </div>
@@ -99,24 +99,24 @@
 </section>
 
 <!-- Team -->
-<section class="py-5 bg-light">
+<section class="py-5 bg-section-light">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-5">
-        <h2 class="fw-bold">{{ aboutData.team.title }}</h2>
-        <p class="lead text-muted">{{ aboutData.team.subtitle }}</p>
+        <h2 class="fw-bold header-title">{{ aboutData.team.title }}</h2>
+        <p class="lead text-muted-custom">{{ aboutData.team.subtitle }}</p>
       </div>
     </div>
     <div class="row g-4">
       <div class="col-lg-3 col-md-6" *ngFor="let member of aboutData.team.members">
-        <div class="card border-0 shadow-sm text-center card-lift animate-on-scroll">
+        <div class="card card-lift animate-on-scroll text-center">
           <div class="card-body p-4">
-            <img [src]="member.imageUrl" [alt]="member.name" class="rounded-circle mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+            <img [src]="member.imageUrl" [alt]="member.name" class="rounded-circle mb-3 team-img" />
             <h5 class="mb-1">{{ member.name }}</h5>
-            <p class="text-primary mb-2">{{ member.role }}</p>
-            <p class="text-muted small">{{ member.description }}</p>
+            <p class="role-text mb-2">{{ member.role }}</p>
+            <p class="text-muted-custom small">{{ member.description }}</p>
             <div class="social-links">
-              <a *ngFor="let link of member.socialLinks" [href]="link.url" class="text-muted me-2" target="_blank" rel="noopener noreferrer">
+              <a *ngFor="let link of member.socialLinks" [href]="link.url" class="social-link" target="_blank" rel="noopener noreferrer">
                 <i [class]="link.iconClass"></i>
               </a>
             </div>
@@ -132,24 +132,24 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-5">
-        <h2 class="fw-bold">{{ aboutData.contact.title }}</h2>
-        <p class="lead text-muted">{{ aboutData.contact.subtitle }}</p>
+        <h2 class="fw-bold header-title">{{ aboutData.contact.title }}</h2>
+        <p class="lead text-muted-custom">{{ aboutData.contact.subtitle }}</p>
       </div>
     </div>
     <div class="row g-5">
       <div class="col-lg-6">
-        <div class="card border-0 shadow-sm card-lift animate-on-scroll">
+        <div class="card card-lift animate-on-scroll">
           <div class="card-body p-4">
-            <h4 class="mb-4">Contact Information</h4>
+            <h4 class="mb-4 section-title">Contact Information</h4>
             <div *ngFor="let item of aboutData.contact.infoItems" class="d-flex mb-3">
               <div class="flex-shrink-0">
-                <div [ngClass]="item.bgClass + ' p-2 rounded'">
-                  <i [class]="item.icon + ' ' + item.iconColorClass"></i>
+                <div [ngClass]="item.bgClass + ' p-2 rounded icon-bg'">
+                  <i [class]="item.icon + ' icon-color'"></i>
                 </div>
               </div>
               <div class="flex-grow-1 ms-3">
-                <h6 class="mb-1">{{ item.title }}</h6>
-                <p class="text-muted mb-0">{{ item.details }}</p>
+                <h6 class="mb-1 feature-title">{{ item.title }}</h6>
+                <p class="text-muted-custom mb-0">{{ item.details }}</p>
               </div>
             </div>
           </div>
@@ -158,9 +158,9 @@
 
       <!-- Contact Form -->
       <div class="col-lg-6">
-        <div class="card border-0 shadow-sm card-lift animate-on-scroll">
+        <div class="card card-lift animate-on-scroll">
           <div class="card-body p-4">
-            <h4 class="mb-4">Send us a Message</h4>
+            <h4 class="mb-4 section-title">Send us a Message</h4>
             <form id="contactForm" (ngSubmit)="onSubmit()" #contactForm="ngForm" novalidate>
               <div class="row">
                 <div class="col-md-6">

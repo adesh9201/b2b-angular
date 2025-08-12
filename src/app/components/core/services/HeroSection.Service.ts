@@ -13,7 +13,7 @@ export class HeroSectionService {
     const heroDataList: HeroSectionModel[] = [
       {
         title: 'Welcome to FabricHub',
-        subtitle: 'Create stunning websites and applications with our powerful platform. Experience the next generation of web development.',
+        subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
         imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
         ctaPrimary: { label: 'Get Catalog', url: '/catalogs' },
         ctaSecondary: { label: 'Become Seller', url: './dashboard' },

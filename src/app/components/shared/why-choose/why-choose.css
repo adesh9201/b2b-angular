@@ -1,4 +1,9 @@
-/* ================ FabricHub Custom Colors ================ */
+/* ================================================
+   FabricHub Global Theme Styles
+   Uses CSS variables for full theme consistency
+   ================================================ */
+
+/* ---------- Text Colors ---------- */
 .fabrichub-primary {
   color: var(--primary-color);
 }
@@ -21,16 +26,20 @@
   color: var(--dark-color);
 }
 
-/* Background Colors */
+/* ---------- Background Colors ---------- */
 .fabrichub-bg-light {
   background-color: var(--light-color);
+}
+.fabrichub-bg-primary {
+  background-color: var(--primary-900);
+  color: var(--light-color);
 }
 .fabrichub-bg-success {
   background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
   color: var(--light-color);
 }
 
-/* Buttons */
+/* ---------- Buttons ---------- */
 .fabrichub-btn-warning {
   background-color: var(--warning-color);
   color: var(--dark-color);
@@ -65,7 +74,7 @@
   color: var(--dark-color);
 }
 
-/* Card Hover Effect */
+/* ---------- Card Styles ---------- */
 .feature-card {
   transition: var(--transition);
   background-color: var(--light-color);
@@ -77,11 +86,11 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* Icon Circle */
+/* ---------- Icon Circle ---------- */
 .icon-circle {
   width: 60px;
   height: 60px;
-  background: rgba(var(--primary-500-rgb, 0, 150, 136), 0.1); /* fallback */
+  background: rgba(var(--primary-500-rgb, 0, 150, 136), 0.1);
   color: var(--primary-500);
   border-radius: var(--border-radius-full);
   display: flex;
@@ -94,7 +103,7 @@
   transform: scale(1.1);
 }
 
-/* Stat Box */
+/* ---------- Stat Box ---------- */
 .stat-box {
   border-radius: var(--border-radius-md);
   transition: var(--transition);
@@ -107,7 +116,7 @@
   background: rgba(var(--warning-color-rgb, 255, 213, 79), 0.05);
 }
 
-/* Utility Helpers */
+/* ---------- Utility Classes ---------- */
 .text-center {
   text-align: center;
 }
@@ -154,17 +163,11 @@
 .flex-column {
   flex-direction: column;
 }
-.flex-sm-row {
-  /* Use media query for responsive layout */
-}
 .gap-3 {
   gap: 1.5rem;
 }
 .justify-content-center {
   justify-content: center;
-}
-.text-muted {
-  color: var(--gray-600);
 }
 .fw-bold {
   font-weight: 700;
@@ -177,7 +180,7 @@
   font-weight: 400;
 }
 
-/* Responsive Flex Direction for .flex-sm-row */
+/* ---------- Responsive Flex Utilities ---------- */
 @media (min-width: 576px) {
   .flex-sm-row {
     flex-direction: row;

@@ -1,0 +1,152 @@
+/* Header offset using global header height variable */
+.mt-header {
+  margin-top: var(--header-height, 76px);
+}
+
+/* Card hover lift effect with subtle glass effect */
+.card-lift {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+.card-lift:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Cart image styling */
+.cart-img {
+  width: var(--cart-img-size, 80px);
+  height: var(--cart-img-size, 80px);
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cart-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Remove extra border from last cart item */
+.card-body > div:last-child {
+  border-bottom: none;
+}
+
+/* Buttons */
+.btn-outline {
+  border: 2px solid var(--primary-700);
+  color: var(--primary-700);
+  background: transparent;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+.btn-outline:hover {
+  background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 150, 136, 0.35);
+}
+
+/* Quantity controls */
+.qty-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background-color: var(--surface-bg);
+  transition: all 0.2s ease, box-shadow 0.2s ease;
+}
+.qty-btn:hover {
+  background-color: var(--primary-50);
+  border-color: var(--primary-400);
+  color: var(--primary-700);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.qty-btn:active {
+  transform: scale(0.95);
+}
+
+/* Input box improvements */
+input.form-control-sm {
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  text-align: center;
+  transition: all 0.2s ease, box-shadow 0.2s ease;
+}
+input.form-control-sm:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.2);
+  border-color: var(--primary-400);
+}
+
+/* Order Summary Card */
+.card {
+  border-radius: 12px;
+  background-color: rgba(255,255,255,0.97);
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+.card-header {
+  background-color: rgba(255,255,255,0.9);
+  border-bottom: 1px solid var(--surface-border);
+  font-weight: 600;
+}
+.card-body {
+  background-color: rgba(255,255,255,0.97);
+}
+
+/* Shipping and Promo Code */
+.form-check-input:checked {
+  border-color: var(--primary-600);
+  background-color: var(--primary-600);
+}
+input.form-control {
+  border-radius: 8px;
+}
+.btn-primary {
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* Ripple Effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+.ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.3);
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: inherit;
+}
+.ripple:active::after {
+  opacity: 1;
+  transition: opacity 0s;
+}
+
+/* Responsive spacing for small screens */
+@media (max-width: 768px) {
+  .card-lift {
+    margin-bottom: 1rem;
+  }
+  .qty-btn {
+    width: 32px;
+    height: 32px;
+  }
+  input.form-control-sm {
+    font-size: 14px;
+  }
+}

@@ -3,20 +3,17 @@
   <div class="container-fluid">
     <div class="row">
 
-
       <!-- Filters Sidebar -->
       <aside class="col-lg-3 col-md-4 mb-4 d-none d-md-block">
         <app-filter (filtersApplied)="onFiltersApplied($event)"></app-filter>
       </aside>
-
-
 
       <!-- Products Grid -->
       <div class="col-lg-9 col-md-8">
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
           <div class="fw-bold fs-5" id="catalogCount" style="color:#0a2342;">All Fabrics</div>
-          <div class="d-flex align-items-center gap-2 ">
+          <div class="d-flex align-items-center gap-2">
             <label for="sortBy" class="form-label mb-0 fw-semibold">Sort by:</label>
             <select class="form-select" id="sortBy" style="min-width:160px;">
               <option value="newest">Newest</option>
@@ -30,20 +27,22 @@
 
         <div class="row g-3">
           <div class="col-lg-3 col-md-3 col-sm-6 col-6" *ngFor="let product of featuredProducts">
-            <div class="card border-0 shadow-sm h-100 product-card">
-              <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
-                <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid w-100 product-image"
-                  style="height: 150px; object-fit: cover;">
-              </div>
-              <div class="card-body text-center px-2 py-3">
-                <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
-                <div>
-                  <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
-                  <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD'
-                    }}</small>
+            <!-- Make the entire card clickable -->
+            <a [routerLink]="['/products', product.id]" class="text-decoration-none">
+              <div class="card border-0 shadow-sm h-100 product-card">
+                <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
+                  <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid w-100 product-image"
+                    style="height: 150px; object-fit: cover;">
+                </div>
+                <div class="card-body text-center px-2 py-3">
+                  <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
+                  <div>
+                    <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
+                    <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD' }}</small>
+                  </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
 
@@ -54,18 +53,28 @@
 </section>
 
 
+ 
+<div *ngIf="showToast" class="toast-notif show">
+  <span class="icon">
+    <i class="fas fa-check-circle"></i>
+  </span>
+  <span class="message">{{ toastMessage }}</span>
+  <span class="close-btn" (click)="showToast = false">&times;</span>
+</div>
+
+
 <!-- src/app/home/catalogs.html -->
-<!-- <section class="py-5 bg-light featured-products-section">
-  <div class="container-fluid"> -->
+<section class="py-5 bg-light featured-products-section">
+  <div class="container-fluid">
 <!-- Title Section -->
-<!-- <div class="text-center mb-5">
+<div class="text-center mb-5">
       <h2 class="fw-bold display-5 text-primary">Featured Fabrics</h2>
       <p class="lead text-muted">Explore our premium selection of high-quality fabrics.</p>
-    </div> -->
+    </div>
 
 
 <!-- Products Grid -->
-<!-- <div class="row g-4">
+<div class="row g-4">
       <div class="col-lg-3 col-md-3 col-sm-6 col-6" *ngFor="let product of featuredProducts">
         <div class="card border-0 shadow-sm h-100 product-card transition hover-shadow">
           <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
@@ -96,25 +105,30 @@
 
             <div class="mt-auto">
               <div class="d-grid gap-2">
-                <button class="btn btn-outline-secondary rounded-pill py-2 shadow-sm">Add to Cart</button>
-                <button class="btn btn-primary rounded-pill py-2 shadow-sm">Buy Now</button>
+                <button class="btn btn-outline-secondary rounded-pill py-2 shadow-sm" (click)="addToCart(product)">Add to Cart</button>
+<button class="btn btn-primary rounded-pill py-2 shadow-sm" 
+        [routerLink]="['/products', product.id]">
+  Buy Now
+</button>
+
+
               </div>
             </div>
 
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
 
 <!-- Load More Button -->
-<!-- <div class="text-center mt-5">
+<div class="text-center mt-5">
       <a routerLink="/catalog" class="btn btn-outline-primary btn-lg px-5 rounded-pill shadow-sm">Load More Fabrics</a>
-    </div> -->
-<!-- </div>
-</section> -->
+    </div>
+</div>
+</section>
 
-<!-- <style>
+<style>
   .product-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
@@ -141,7 +155,7 @@
       height: 200px !important;
     }
   }
-</style> -->
+</style>
 
 <!-- <section class="py-5 bg-light featured-products-section"> -->
 <!-- <div class="container-fluid"> -->

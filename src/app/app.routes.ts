@@ -5,6 +5,7 @@ export const routes: Routes = [
   { path: '', component: Home },
   { path: 'catalogs', loadComponent: () => import('./components/pages/catalogs/catalogs').then(m => m.Catalogs) },
   { path: 'products', loadComponent: () => import('./components/pages/products/products').then(m => m.Products) },
+   { path: 'products/:id', loadComponent: () => import('./components/pages/products/products').then(m => m.Products) },
   { path: 'cart', loadComponent: () => import('./components/pages/cart/cart').then(m => m.Cart) },
   { path: 'about', loadComponent: () => import('./components/pages/about/about').then(m => m.About) },
   { path: 'suppliers', loadComponent: () => import('./components/pages/suppliers/suppliers').then(m => m.Suppliers) },

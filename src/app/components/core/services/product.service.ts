@@ -531,4 +531,10 @@ export class ProductService {
   getProductsByRating(minRating: number): Product[] {
     return this.products.filter(product => product.rating >= minRating);
   }
+
+getProductById(id: number): Product | null {
+  const product = this.products.find(p => p.id === id);
+  return product ? product : null;
+}
+
 }

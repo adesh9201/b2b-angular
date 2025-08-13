@@ -42,12 +42,16 @@
       </ul>
 
       <!-- Center Search -->
-      <form class="d-flex mx-auto search-box align-items-center">
-        <input class="form-control form-control-sm" type="search" placeholder="Search catalogs..." />
-        <button class="btn btn-sm btn-outline ms-2" type="submit" title="Search">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
+
+<div class="mx-auto flex-grow-1 flex-md-grow-0 me-md-3">
+  <form class="d-flex search-box align-items-center w-100">
+    <input class="form-control form-control-sm" type="search" placeholder="Search catalogs..." />
+    <button class="btn btn-sm btn-outline ms-2" type="submit" title="Search">
+      <i class="fas fa-search"></i>
+    </button>
+  </form>
+</div>
+
 
       <!-- Right Actions -->
       <div class="d-flex align-items-center gap-3">
@@ -59,9 +63,8 @@
         <!-- Cart -->
         <a routerLink="/cart" class="btn btn-sm btn-outline position-relative">
           <i class="fas fa-shopping-cart"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ cartCount }}
-          </span>
+      <span class="badge bg-danger position-absolute top-0 start-100 translate-middle"
+        *ngIf="(cartCount$ | async) as count">{{ count }}</span>
         </a>
 
         <!-- Account -->

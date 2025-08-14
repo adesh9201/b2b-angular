@@ -1,116 +1,116 @@
-  <!-- <div class="container-fluid min-vh-100 py-5">
-      <div class="row justify-content-center px-3 g-4">
- 
-        <div class="col-lg-8 d-flex flex-column gap-4">
-          <div class="row g-2">
-            <div
-              class="col-12"
-              style="aspect-ratio: 2 / 3; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpFm2o8D9Mvu-W571XO1emE8ubMhM9yaidUTfWvEzfTfTAHcVA6shjDA2DBN3B3_ody8iPIZFA3nq6sR7BOuczHSoPQfRMtNurOASzokUK-Cuy4Pkksssnm_wdOm7tpqcKQjfrVd15z_Rccym2gOrJzb6pRoLeerjYrV-BSZA31w7Qdqm7_NyjsKXmacS4joboss0tyEE_pHz1yyojaEJDkg6lVZbbeArHZf3UEokf4eARlcKzKsZfBgol4yDtj5roGAFwmXnnOds');"
-              class="bg-cover rounded-lg"
-            ></div>
-            <div class="col-6 bg-cover rounded-lg" style="aspect-ratio: 1 / 1; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAyLC01zmrTKCe3Q1k2sQ6nbawhOxlCKLBMNbwIGhN_VvOAy159YXuvARuyi6y3VWjdhjMWfvqNF0TGjwCgb-dIqC5Wbt8aj3O6girMLkq_l5NRg0b9GUzuIihUW-Pbf2fMV_u9h_GU_kEF0Fp5Z-_305xr47vRvDL6I9OYMXw4C9ACyemSPRpHC-rL3InaY_p206UnJ1RXTkB6txlZ6Tj_dRMmdj0JBDzun9XI0VzFc9xPuA-ksQUBa3xSJkiRQjj2sL5t07cXCl8');"></div>
-            <div class="col-6 bg-cover rounded-lg" style="aspect-ratio: 1 / 1; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCyXXLB0RvjOKQItslVfzZPr74ANGeJTAuXveVjs5RrWIjD-io6NRDNaREGlGqNxHpXlyzEK4SIy3JNajuZ2CoSfu7OHIBNdNjonhX-4AzOCMgw3kC2Rp5gas2oTShGU3AvvdcddLyL558L5GJIYBRCVa5Jh2RBmoZbpMzd4zz1a8PRSsfcZ8gDd2dyaD6aazZ_SSFy-J29H45qXCnM0dFxswI4QyhVWtAxDAD_-Fbb6kpT_ND9unePhUZNYoQTIhMNF9sXJtdrJOU');"></div>
-            <div class="col-12 bg-cover rounded-lg" style="aspect-ratio: 2 / 3; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxQFHU6QRlHoQbiAI-15oQqfDMA55mrrAHL9Z6UfmfFcDQmV925PlNXV2vf24OYruTbkZ9nv5GQQ2iTFbvyme4jRS0YTCc_G64N5iub7r5IiaNT89IgcVDJ61s9FwVixbMPzcZVcjANn-C3kUINjar05wT1_UB1pvi11_N-TAIIjlkIKKzOTc99gfuboHScX3wL38AJlpbrSXQJ6ZUYeAQCjijztBFUSdSGu12GNxUCySJwEKx_ThFkPr18DDgtrE-3KcAMeO2Q9Q');"></div>
-          </div>
-        </div>
+<div *ngIf="selectedProduct" class="container py-5 mt-5">
+  <div class="row gx-5 gy-4">
 
-    
-        <div class="col-lg-4">
-          <h1 class="fw-bold fs-4 text-dark">Floral Print Cotton Fabric</h1>
-          <p class="text-muted">Brand: FabricFinds</p>
+    <!-- Left Column: Product Images -->
+    <div class="col-lg-7">
+      <div class="position-relative">
+        <img [src]="selectedProduct.imageUrl" alt="{{ selectedProduct.name }}"
+             class="img-fluid rounded shadow-sm main-img mb-3" />
 
-          <div class="d-flex align-items-center gap-3 my-3">
-            <div>
-              <h2 class="fw-bold display-6 text-dark m-0">4.5</h2>
-              <div class="d-flex">
-                <svg class="star"><use xlink:href="#star-filled" /></svg>
-                <svg class="star"><use xlink:href="#star-filled" /></svg>
-                <svg class="star"><use xlink:href="#star-filled" /></svg>
-                <svg class="star"><use xlink:href="#star-filled" /></svg>
-                <svg class="star-outline"><use xlink:href="#star-outline" /></svg>
-              </div>
-              <p class="text-secondary m-0">120 reviews</p>
-            </div>
-            <div class="flex-grow-1">
-              <div class="d-grid gap-2">
-                <div class="d-flex justify-content-between">
-                  <span>5</span>
-                  <div class="rating-bar flex-grow-1 mx-2">
-                    <div class="rating-bar-fill" style="width: 40%"></div>
-                  </div>
-                  <span class="text-muted">40%</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span>4</span>
-                  <div class="rating-bar flex-grow-1 mx-2">
-                    <div class="rating-bar-fill" style="width: 30%"></div>
-                  </div>
-                  <span class="text-muted">30%</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span>3</span>
-                  <div class="rating-bar flex-grow-1 mx-2">
-                    <div class="rating-bar-fill" style="width: 15%"></div>
-                  </div>
-                  <span class="text-muted">15%</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span>2</span>
-                  <div class="rating-bar flex-grow-1 mx-2">
-                    <div class="rating-bar-fill" style="width: 10%"></div>
-                  </div>
-                  <span class="text-muted">10%</span>
-                </div>
-                <div class="d-flex justify-content-between">
-                  <span>1</span>
-                  <div class="rating-bar flex-grow-1 mx-2">
-                    <div class="rating-bar-fill" style="width: 5%"></div>
-                  </div>
-                  <span class="text-muted">5%</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Optional: Zoom icon overlay -->
+        <span class="zoom-icon"><i class="bi bi-zoom-in"></i></span>
+      </div>
 
-          <h2 class="fw-bold fs-4 text-dark mt-4">$12.99 / yard</h2>
-
-          <label class="form-label mt-3 fw-bold">Length (in yards)</label>
-          <select class="form-select mb-3">
-            <option>Select Length</option>
-            <option>two</option>
-            <option>three</option>
-          </select>
-
-          <label class="form-label mt-3 fw-bold">Quantity</label>
-          <select class="form-select mb-3">
-            <option>Select Quantity</option>
-            <option>two</option>
-            <option>three</option>
-          </select>
-
-          <div class="d-grid gap-2">
-            <button class="btn btn-primary">Add to Cart</button>
-            <button class="btn btn-outline-light">Visualize</button>
-          </div>
-
-          <h5 class="fw-bold mt-4">Material Composition</h5>
-          <p>100% Cotton</p>
-
-          <h5 class="fw-bold mt-4">Care Instructions</h5>
-          <p>Machine wash cold, tumble dry low. Do not bleach.</p>
-
-          <h5 class="fw-bold mt-4">Potential Uses</h5>
-          <p>Ideal for quilting, apparel, home decor, and crafts.</p>
+      <!-- Color Swatches -->
+      <div class="d-flex gap-2 mt-2 flex-wrap">
+        <div *ngFor="let color of selectedProduct.colors" 
+             class="color-swatch rounded-circle shadow-sm"
+             [style.backgroundColor]="color.toLowerCase()"
+             [title]="color">
         </div>
       </div>
-    </div> -->
+    </div>
 
+    <!-- Right Column: Product Details -->
+    <div class="col-lg-5">
+      <h1 class="fw-bold display-6 mb-2">{{ selectedProduct.name }}</h1>
+      <p class="text-muted mb-3">Brand: {{ selectedProduct.supplier }}</p>
 
+      <!-- Ratings -->
+      <div class="mb-3">
+        <div class="d-flex align-items-center mb-1">
+          <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+            <i class="bi" [ngClass]="i < selectedProduct.rating ? 'bi-star-fill text-warning' : 'bi-star text-muted'"></i>
+          </ng-container>
+          <span class="ms-2 text-muted">({{ selectedProduct.reviews }} reviews)</span>
+        </div>
 
+        <!-- Rating bars -->
+        <div *ngIf="selectedProduct.rating" class="rating-bars mt-2">
+          <div *ngFor="let rate of [5,4,3,2,1]" class="d-flex align-items-center mb-1">
+            <span class="me-2" style="width: 15px">{{ rate }}</span>
+            <div class="progress flex-grow-1 me-2" style="height: 6px">
+              <div class="progress-bar bg-warning" role="progressbar" [style.width.%]="20 * rate"></div>
+            </div>
+            <small class="text-muted">{{ 20 * rate }}%</small>
+          </div>
+        </div>
+      </div>
 
-    <div *ngIf="selectedProduct">
-  <h2>{{ selectedProduct.name }}</h2>
-  <img [src]="selectedProduct.imageUrl" alt="{{ selectedProduct.name }}" />
-  <p>{{ selectedProduct.description }}</p>
-  <span>{{ selectedProduct.price | currency:'USD' }}</span>
+      <!-- Price & Discount -->
+      <div class="mb-4">
+        <span class="fs-3 fw-bold text-primary">{{ selectedProduct.price | currency:'USD' }}</span>
+        <span class="text-muted text-decoration-line-through ms-2" *ngIf="selectedProduct.originalPrice">
+          {{ selectedProduct.originalPrice | currency:'USD' }}
+        </span>
+        <span class="badge bg-success ms-2" *ngIf="selectedProduct.discount">
+          {{ selectedProduct.discount }}% OFF
+        </span>
+      </div>
+
+      <!-- Options -->
+      <div class="mb-3">
+        <label class="form-label fw-bold">Length (in yards)</label>
+        <select class="form-select">
+          <option>Select Length</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-bold">Quantity</label>
+        <select class="form-select">
+          <option>Select Quantity</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="d-grid gap-2 mb-4">
+        <button class="btn btn-primary btn-lg">Add to Cart</button>
+        <button class="btn btn-outline-secondary btn-lg">Visualize</button>
+      </div>
+
+      <!-- Product Details -->
+      <div class="product-specs">
+        <h5 class="fw-bold">Material Composition</h5>
+        <p>{{ selectedProduct.material }}</p>
+
+        <h5 class="fw-bold">Weight</h5>
+        <p>{{ selectedProduct.weight }}</p>
+
+        <h5 class="fw-bold">Width</h5>
+        <p>{{ selectedProduct.width }}</p>
+
+        <h5 class="fw-bold">Category</h5>
+        <p>{{ selectedProduct.category }}</p>
+
+        <h5 class="fw-bold">Attributes</h5>
+        <ul>
+          <li *ngFor="let attr of selectedProduct.attributes">{{ attr }}</li>
+        </ul>
+
+        <h5 class="fw-bold">Stock</h5>
+        <p>{{ selectedProduct.stock }} {{ selectedProduct.unit }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!selectedProduct" class="container py-5 text-center">
+  <h3 class="text-danger">Product not found!</h3>
 </div>

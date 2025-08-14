@@ -1,5 +1,5 @@
+<!-- // src/app/core/services/hero-section.service.ts -->
 <section class="hero-section">
-  <!-- Background Shapes -->
   <div class="hero-shape shape-1"></div>
   <div class="hero-shape shape-2"></div>
 
@@ -10,17 +10,13 @@
         <h1 class="hero-title">{{ heroData.title }}</h1>
         <p class="hero-subtitle">{{ heroData.subtitle }}</p>
 
-        <!-- CTA Buttons -->
+        <!-- Static CTA Buttons -->
         <div class="hero-buttons">
-          <a [routerLink]="heroData.ctaPrimary.url" class="btn btn-primary me-3 mb-2">
-            {{ heroData.ctaPrimary.label }}
-          </a>
-          <a [routerLink]="heroData.ctaSecondary.url" class="btn btn-outline mb-2">
-            {{ heroData.ctaSecondary.label }}
-          </a>
+          <a routerLink="/catalogs" class="btn btn-primary me-3 mb-2">Get Catalog</a>
+          <a routerLink="/suppliers" class="btn btn-outline mb-2">Become Seller</a>
         </div>
 
-        <!-- Stats -->
+        <!-- Static Stats -->
         <div class="hero-stats row">
           <div class="col-4" *ngFor="let stat of heroData.stats">
             <div class="stat-item">
@@ -33,12 +29,7 @@
 
       <!-- Hero Image -->
       <div class="col-lg-6 hero-image" *ngIf="heroData">
-        <img
-          title="{{ heroData.title }}"
-          [src]="heroData.imageUrl"
-          [alt]="heroData.title"
-          class="hero-image-main"
-        />
+        <img title="{{ heroData.title }}" [src]="heroData.imageUrl" [alt]="heroData.title" class="hero-image-main" />
       </div>
     </div>
   </div>

@@ -112,7 +112,7 @@
 }
 
 /* ================ DARK THEME SUPPORT ================ */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     :root {
         --color-background: #121212;
         --color-text: #ffffff;
@@ -128,7 +128,7 @@
         --form-control-text: #ffffff;
         --scrollbar-bg: #2d2d2d;
     }
-}
+} */
 
 /* ================ RESET & BASE STYLES ================ */
 * {

@@ -1,55 +1,61 @@
-   body {
-        background-color: #f8fafc;
-        font-family: Inter, "Noto Sans", sans-serif;
-      }
+.main-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
 
-      .bg-cover {
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-      }
+.main-img:hover {
+  transform: scale(1.02);
+}
 
-      .rounded-lg {
-        border-radius: 0.5rem;
-      }
+.color-swatch {
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  border: 2px solid #ddd;
+  transition: all 0.3s;
+}
 
-      .form-select:focus {
-        box-shadow: none;
-        border-color: #cedae8;
-      }
+.color-swatch:hover {
+  transform: scale(1.1);
+  border-color: #333;
+}
 
-      .btn-primary {
-        background-color: #0d78f2;
-        border-color: #0d78f2;
-      }
+ul {
+  padding-left: 1rem;
+}
 
-      .btn-outline-light {
-        background-color: #e7edf4;
-        border: none;
-        color: #0d141c;
-      }
+ul li {
+  margin-bottom: 0.25rem;
+}
 
-      .rating-bar {
-        height: 8px;
-        background-color: #cedae8;
-        border-radius: 1rem;
-        overflow: hidden;
-      }
+.rating-bars .progress {
+  background-color: #f0f0f0;
+  border-radius: 3px;
+}
 
-      .rating-bar-fill {
-        height: 100%;
-        background-color: #0d78f2;
-      }
+.rating-bars .progress-bar {
+  border-radius: 3px;
+}
 
-      .star {
-        color: #0d78f2;
-        width: 18px;
-        height: 18px;
-      }
+.product-specs h5 {
+  margin-top: 15px;
+  font-weight: 600;
+}
 
-      .star-outline {
-        color: #0d78f2;
-        width: 18px;
-        height: 18px;
-        fill: none;
-      }
+.product-specs p, .product-specs ul {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 992px) {
+  .col-lg-7, .col-lg-5 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .color-swatch {
+    width: 35px;
+    height: 35px;
+  }
+}

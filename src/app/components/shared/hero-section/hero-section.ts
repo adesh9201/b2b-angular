@@ -21,18 +21,20 @@ export class HeroSection implements OnInit, OnDestroy {
 
   constructor(private heroService: HeroSectionService) {}
 
-  ngOnInit(): void {
-    this.heroService.getHeroDataList().subscribe(data => {
-      this.heroDataList = data;
-      this.heroData = this.heroDataList[0]; // Initial hero
+ngOnInit(): void {
+  this.heroService.getHeroDataList().subscribe(data => {
+    console.log('API Data:', data); // 👈 Console me check karein
+    this.heroDataList = data;
+    this.heroData = this.heroDataList[0]; // Initial hero
 
-      // Change hero every 6 seconds
-      this.intervalSubscription = interval(6000).subscribe(() => {
-        this.currentIndex = (this.currentIndex + 1) % this.heroDataList.length;
-        this.heroData = this.heroDataList[this.currentIndex];
-      });
+    // Change hero every 6 seconds
+    this.intervalSubscription = interval(6000).subscribe(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.heroDataList.length;
+      this.heroData = this.heroDataList[this.currentIndex];
     });
-  }
+  });
+}
+
 
   ngOnDestroy(): void {
     if (this.intervalSubscription) {
@@ -40,3 +42,4 @@ export class HeroSection implements OnInit, OnDestroy {
     }
   }
 }
+

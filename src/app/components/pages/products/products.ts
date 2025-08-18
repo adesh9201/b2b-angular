@@ -48,7 +48,7 @@
 // export class Products implements OnInit {
 //   quantity: number = 1;
 //   mainImage: string = '';
-  
+
 //   product = {
 //     id: 1,
 //     name: 'Premium Wireless Headphones',

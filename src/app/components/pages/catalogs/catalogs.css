@@ -1,117 +1,126 @@
-.container {
-  max-width: 1200px;
+/* === Product Card === */
+.product-card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.product-card h6 {
+  font-weight: 600;
+  font-size: var(--font-md);
+  color: var(--gray-900);
+}
+.product-card .price {
+  color: var(--primary-600);
+  font-weight: 700;
+  font-size: var(--font-md);
 }
 
-.card {
-  border-radius: 12px;
+/* === Product Image Wrapper === */
+.img-hover-zoom {
+  height: 250px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  transition: transform 0.2s ease-in-out;
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  background: var(--gray-100);
 }
-
-.card:hover {
-  transform: translateY(-5px);
+.img-hover-zoom img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
-
-.card-body h5 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.1rem;
+.img-hover-zoom:hover img {
+  transform: scale(1.08);
 }
-
-.card img {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-.badge {
-  font-size: 0.75rem;
-  padding: 0.4em 0.6em;
-  border-radius: 0.4rem;
-}
-
-.btn-primary {
-  background: linear-gradient(45deg, #009688, #43e8d8);
-  border: none;
-}
-
-.btn-outline-primary {
-  border: 2px solid #009688;
-  color: #009688;
-  transition: all 0.3s;
-}
-
-.btn-outline-primary:hover {
-  background-color: #009688;
-  color: white;
-}
-
-/* Responsive Tweaks */
-@media (max-width: 768px) {
-  .card img {
+@media (max-width: 576px) {
+  .img-hover-zoom {
     height: 200px;
   }
 }
 
-.btn-outline {
-  border: 2px solid var(--primary-700);
-  color: var(--primary-700);
-  background: transparent;
+/* === Overlay Add to Cart Button === */
+.btn-overlay-cart {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--light-color);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  padding: var(--space-2) 0;
+  border: none;
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  backdrop-filter: blur(6px);
 }
-.btn-outline:hover {
-  background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
-  color: white;
-  border-color: transparent;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
-} 
+.img-hover-zoom:hover .btn-overlay-cart {
+  opacity: 1;
+  pointer-events: auto;
+}
+.btn-overlay-cart:hover {
+  background: var(--primary-600);
+  letter-spacing: 0.5px;
+}
 
-/* === High-Level Toast Notification === */
+/* === Toast Notification === */
 .toast-notif {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  min-width: 250px;
-  max-width: 350px;
-  background: #4caf50;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  top: var(--space-3);
+  right: var(--space-3);
+  min-width: 260px;
+  max-width: 360px;
+  background: var(--success);
+  color: var(--toast-text);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
   font-weight: 500;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: inherit;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-2);
   opacity: 0;
-  transform: translateX(50px);
-  z-index: 9999;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(40px);
+  z-index: var(--z-toast);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* Show animation */
 .toast-notif.show {
   opacity: 1;
   transform: translateX(0);
 }
-
-/* Success Icon */
 .toast-notif .icon {
   font-size: 1.3rem;
   display: flex;
   align-items: center;
 }
-
-/* Toast Message */
 .toast-notif .message {
   flex: 1;
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
 }
-
-/* Close button */
 .toast-notif .close-btn {
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: var(--font-md);
   line-height: 1;
-  padding-left: 8px;
+  margin-left: var(--space-1);
+  transition: var(--transition);
 }
-
+.toast-notif .close-btn:hover {
+  color: var(--gray-200);
+}

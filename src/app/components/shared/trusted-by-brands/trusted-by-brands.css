@@ -1,14 +1,22 @@
 .trust-section {
-  background-color: var(--background);
-  border-top: 1px solid rgba(0,0,0,0.05);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background-color: var(--color-background);
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
   box-shadow: var(--shadow-sm);
+  padding: var(--space-5) 0;
 }
 
-.fabric-gradient {
-  background: linear-gradient(90deg, var(--dark-color), var(--gray-800), #000000);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.trust-section h2 {
+  color: var(--primary-700);
+  font-size: var(--font-3xl);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.trust-section p {
+  color: var(--gray-600);
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-5);
 }
 
 .trust-logo {
@@ -36,5 +44,5 @@
 }
 
 .text-primary-global {
-  color: var(--primary-color);
+  color: var(--primary-600);
 }

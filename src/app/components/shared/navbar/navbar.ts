@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
+   standalone: true,
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
   imports: [RouterLink, RouterLinkActive, CountrySelector, FormsModule, CommonModule]

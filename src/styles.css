@@ -1,16 +1,16 @@
 /* ================ GLOBAL VARIABLES ================ */
 :root {
     color-scheme: light;
-    
+
     /* Base Colors */
     --color-background: #f7fafc;
     --color-text: #23272f;
-    
+
     /* Surface Colors */
     --surface-bg: #ffffff;
     --surface-text: #000000;
     --surface-border: #ced4da;
-    
+
     /* Brand Colors */
     --primary-50: #e0f7f5;
     --primary-100: #b2ebe7;
@@ -111,25 +111,6 @@
     --input-success: #28a745;
 }
 
-/* ================ DARK THEME SUPPORT ================ */
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: #121212;
-        --color-text: #ffffff;
-        --surface-bg: #1e1e1e;
-        --surface-text: #ffffff;
-        --card-bg: #1e1e1e;
-        --navbar-bg: #121212;
-        --navbar-text: #ffffff;
-        --modal-bg: #252525;
-        --table-bg: #1e1e1e;
-        --table-header-bg: #252525;
-        --form-control-bg: #2d2d2d;
-        --form-control-text: #ffffff;
-        --scrollbar-bg: #2d2d2d;
-    }
-} */
-
 /* ================ RESET & BASE STYLES ================ */
 * {
     margin: 0;
@@ -139,16 +120,20 @@
 
 html,
 body {
-    height: 100%;
+    height: auto; /* 100% hataya */
+    min-height: 100%; /* screen se chhota na ho */
     font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     background-color: var(--color-background);
     color: var(--color-text);
     overflow-x: hidden;
+    overflow-y: auto; /* vertical scroll enable */
     -webkit-font-smoothing: antialiased;
     scrollbar-width: thin;
     scrollbar-color: var(--primary-color) var(--scrollbar-bg);
+    scroll-behavior: smooth; /* smooth scrolling */
 }
+
 
 /* ================ ACCESSIBILITY ================ */
 :focus {
@@ -838,11 +823,11 @@ select {
 }
 
 /* ================ ANGULAR ROUTER SPECIFIC ================ */
-router-outlet+* {
+/* router-outlet+* {
     display: block;
     min-height: calc(100vh - 56px);
     padding: 1rem;
-}
+} */
 
 /* ================ PRINT STYLES ================ */
 @media print {

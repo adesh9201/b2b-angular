@@ -25,6 +25,9 @@
 .fabrichub-text-dark {
   color: var(--dark-color);
 }
+.fabrichub-info {
+  color: var(--info);
+}
 
 /* ---------- Background Colors ---------- */
 .fabrichub-bg-light {

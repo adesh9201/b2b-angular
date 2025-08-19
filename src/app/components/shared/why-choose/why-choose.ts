@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { Stat, Feature } from '../../core/models/why-choose.model';
 import { WhyChooseService } from '../../core/services/why-choose.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-why-choose',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './why-choose.html',
   styleUrls: ['./why-choose.css']
 })

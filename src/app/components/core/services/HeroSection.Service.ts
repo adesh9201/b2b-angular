@@ -17,7 +17,7 @@ export class HeroSectionService {
   // Hardcoded fallback data
   private fallbackData: HeroSectionModel[] = [
     {
-      title: 'Welcome to FabricHub',
+      title: 'Welcome to FabHub',
       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
       imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
       stats: [
@@ -37,7 +37,7 @@ export class HeroSectionService {
       ]
     },
         {
-      title: 'Welcome to FabricHub',
+      title: 'Welcome to FabHub',
       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
       imageUrl: 'https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80',
       stats: [
@@ -95,7 +95,7 @@ export class HeroSectionService {
 //   getHeroDataList(): Observable<HeroSectionModel[]> { // ✅ Correct type
 //     const heroDataList: HeroSectionModel[] = [
 //       {
-//         title: 'Welcome to FabricHub',
+//         title: 'Welcome to FabHub',
 //         subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
 //         imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
 //         stats: [
@@ -147,7 +147,7 @@ export class HeroSectionService {
 //   // getHeroDataList(): Observable<HeroSectionModel[]> {
 //   //   const heroDataList: HeroSectionModel[] = [
 //   //     {
-//   //       title: 'Welcome to FabricHub',
+//   //       title: 'Welcome to FabHub',
 //   //       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
 //   //       imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
 //   //       stats: [

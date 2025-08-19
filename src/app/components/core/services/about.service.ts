@@ -8,14 +8,14 @@ import { AboutPageData } from '../models/about.model';
 export class AboutService {
   private aboutData: AboutPageData = {
     header: {
-      title: 'About FabricHub',
+      title: 'About FabHub',
       subtitle: "Connecting the world's fabric industry through innovative B2B solutions",
       imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      imageAlt: 'About FabricHub'
+      imageAlt: 'About FabHub'
     },
     story: {
       title: 'Our Story',
-      subtitle: 'Founded in 2020, FabricHub emerged from a simple vision: to revolutionize how the global fabric industry connects, trades, and grows together.',
+      subtitle: 'Founded in 2020, FabHub emerged from a simple vision: to revolutionize how the global fabric industry connects, trades, and grows together.',
       features: [
         {
           icon: 'fas fa-lightbulb',
@@ -76,7 +76,7 @@ export class AboutService {
     ],
     team: {
       title: 'Our Leadership Team',
-      subtitle: 'Meet the visionaries behind FabricHub',
+      subtitle: 'Meet the visionaries behind FabHub',
       members: [
         {
           name: 'David Chen',

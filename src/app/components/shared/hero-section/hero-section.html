@@ -1,4 +1,3 @@
-<!-- // src/app/core/services/hero-section.service.ts -->
 <section class="hero-section">
   <div class="hero-shape shape-1"></div>
   <div class="hero-shape shape-2"></div>
@@ -29,7 +28,11 @@
 
       <!-- Hero Image -->
       <div class="col-lg-6 hero-image" *ngIf="heroData">
-        <img title="{{ heroData.title }}" [src]="heroData.imageUrl" [alt]="heroData.title" class="hero-image-main" />
+        <img
+          title="{{ heroData.title }}"
+          [src]="heroData.imageUrl"
+          [alt]="heroData.title"
+          class="hero-image-main" />
       </div>
     </div>
   </div>

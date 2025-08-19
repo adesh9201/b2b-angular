@@ -12,7 +12,7 @@ export class TrustedByService {
     icon: `<i class="bi bi-people-fill fs-1 text-primary"></i>`,
     count: 5000,
     label: 'Happy Clients',
-    description: 'Businesses who trust FabricHub.'
+    description: 'Businesses who trust FabHub.'
   },
   {
     icon: `<i class="bi bi-box-seam fs-1 text-success"></i>`,

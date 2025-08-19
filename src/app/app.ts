@@ -5,10 +5,11 @@ import { Footer } from './components/shared/footer/footer'
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, Navbar, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('b2b-marketplace');
+  protected readonly title = signal('FabHub');
 }

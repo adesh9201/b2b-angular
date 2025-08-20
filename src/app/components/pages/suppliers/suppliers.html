@@ -1,3 +1,5 @@
+<!-- src/app/pages/suppliers/suppliers.html -->
+
 <!-- Page Header -->
 <section class="py-5 mt-3">
   <div class="container">
@@ -8,11 +10,14 @@
       </div>
       <div class="col-md-6 text-md-end">
         <div class="d-flex justify-content-md-end gap-2">
+          <!-- Location Filter -->
           <select class="form-select" id="locationFilter" style="width: auto;"
                   [(ngModel)]="selectedLocation" (change)="onFilterChange()">
             <option value="">All Locations</option>
             <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
           </select>
+
+          <!-- Rating Filter -->
           <select class="form-select" id="ratingFilter" style="width: auto;"
                   [(ngModel)]="selectedRating" (change)="onFilterChange()">
             <option value="">All Ratings</option>
@@ -30,12 +35,23 @@
     <div class="row g-4" id="suppliersGrid">
       <div class="col-md-4" *ngFor="let supplier of filteredSuppliers">
         <div class="card h-100 shadow-sm">
-          <img [src]="supplier.imageUrl" [alt]="supplier.name" class="card-img-top" />
+          <!-- Default image placeholder -->
+          <img [src]="supplier.imageUrl || 'assets/images/default-supplier.png'"
+               [alt]="supplier.name" class="card-img-top" />
+
           <div class="card-body">
             <h5 class="card-title header-title">{{ supplier.name }}</h5>
-            <p class="card-text text-muted-custom">{{ supplier.location }}</p>
-            <p class="card-text">{{ supplier.description }}</p>
-            <p><span class="badge badge-success">{{ supplier.rating }} ⭐</span></p>
+
+            <!-- Use address + state if location not provided -->
+            <p class="card-text text-muted-custom">
+              {{ supplier.location || (supplier.address + ', ' + supplier.state) }}
+            </p>
+
+            <!-- Description optional -->
+            <p class="card-text">{{ supplier.description || 'No description available.' }}</p>
+
+            <!-- Rating optional -->
+            <p *ngIf="supplier.rating"><span class="badge badge-success">{{ supplier.rating }} ⭐</span></p>
           </div>
         </div>
       </div>
@@ -49,7 +65,10 @@
     <div class="row align-items-center">
       <div class="col-lg-6">
         <h2 class="fw-bold mb-4 header-title">Become a Supplier</h2>
-        <p class="lead mb-4 text-muted-custom">Join our network of trusted fabric suppliers and reach customers worldwide.</p>
+        <p class="lead mb-4 text-muted-custom">
+          Join our network of trusted fabric suppliers and reach customers worldwide.
+        </p>
+
         <div class="row g-3 mb-4">
           <div class="col-md-6" *ngFor="let feature of features">
             <div class="d-flex align-items-center">
@@ -63,10 +82,12 @@
             </div>
           </div>
         </div>
+
         <button class="btn btn-primary btn-lg ripple" data-bs-toggle="modal" data-bs-target="#becomeSupplierModal">
           <i class="fas fa-plus me-2"></i>Apply Now
         </button>
       </div>
+
       <div class="col-lg-6">
         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
              alt="Become a Supplier" class="img-fluid rounded shadow" />

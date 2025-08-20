@@ -236,5 +236,19 @@
 
 /* Primary background utility */
 .fabrichub-bg-primary {
+  background: var(--primary-color);
+}
+
+.fabrichub-bg-primary-100 {
   background: var(--primary-100);
 }
+
+.fabrichub-bg-primary-900 {
+  background: var(--primary-900);
+}
+
+.fabrichub-bg-gray-300 {
+  background-color: var(--gray-300);
+}
+
+

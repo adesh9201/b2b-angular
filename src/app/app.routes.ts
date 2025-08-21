@@ -23,6 +23,7 @@ import { Reviews } from './components/vendor/reviews/reviews';
 import { Support } from './components/vendor/support/support';
 import { AccountSetting } from './components/vendor/account-setting/account-setting';
 import { Logistics } from './components/vendor/logistics/logistics';
+import { Test } from './components/pages/test/test';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -46,6 +47,13 @@ export const routes: Routes = [
   { path: 'support', component: Support },
   { path: 'account-setting', component: AccountSetting },
   { path: 'logistics', component: Logistics },
+
+
+
+  //test
+
+  { path: 'test', component: Test },
+
 
   // wildcard
   { path: '**', redirectTo: '' },

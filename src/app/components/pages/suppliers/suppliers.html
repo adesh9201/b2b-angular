@@ -10,18 +10,10 @@
       </div>
       <div class="col-md-6 text-md-end">
         <div class="d-flex justify-content-md-end gap-2">
-          <!-- Location Filter -->
-          <select class="form-select" id="locationFilter" style="width: auto;"
-                  [(ngModel)]="selectedLocation" (change)="onFilterChange()">
-            <option value="">All Locations</option>
-            <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
-          </select>
-
-          <!-- Rating Filter -->
-          <select class="form-select" id="ratingFilter" style="width: auto;"
-                  [(ngModel)]="selectedRating" (change)="onFilterChange()">
-            <option value="">All Ratings</option>
-            <option *ngFor="let rate of ratings" [value]="rate">{{ rate }}+ Stars</option>
+          <!-- State Filter -->
+          <select class="form-select" style="width:auto;" [(ngModel)]="selectedState" (change)="onFilterChange()">
+            <option value="">All States</option>
+            <option *ngFor="let state of states" [value]="state">{{ state }}</option>
           </select>
         </div>
       </div>
@@ -32,26 +24,14 @@
 <!-- Suppliers Grid -->
 <section class="py-5">
   <div class="container">
-    <div class="row g-4" id="suppliersGrid">
+    <div class="row g-4">
       <div class="col-md-4" *ngFor="let supplier of filteredSuppliers">
         <div class="card h-100 shadow-sm">
-          <!-- Default image placeholder -->
-          <img [src]="supplier.imageUrl || 'assets/images/default-supplier.png'"
-               [alt]="supplier.name" class="card-img-top" />
-
           <div class="card-body">
             <h5 class="card-title header-title">{{ supplier.name }}</h5>
-
-            <!-- Use address + state if location not provided -->
             <p class="card-text text-muted-custom">
-              {{ supplier.location || (supplier.address + ', ' + supplier.state) }}
+              {{ supplier.address }}, {{ supplier.state }} - {{ supplier.pincode }}
             </p>
-
-            <!-- Description optional -->
-            <p class="card-text">{{ supplier.description || 'No description available.' }}</p>
-
-            <!-- Rating optional -->
-            <p *ngIf="supplier.rating"><span class="badge badge-success">{{ supplier.rating }} ⭐</span></p>
           </div>
         </div>
       </div>
@@ -83,14 +63,16 @@
           </div>
         </div>
 
-        <button class="btn btn-primary btn-lg ripple" data-bs-toggle="modal" data-bs-target="#becomeSupplierModal">
-          <i class="fas fa-plus me-2"></i>Apply Now
+        <button class="btn btn-primary btn-lg ripple" [routerLink]="['/test']">
+          <i class="fas fa-plus me-2"></i> Apply Now
         </button>
+
       </div>
 
       <div class="col-lg-6">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-             alt="Become a Supplier" class="img-fluid rounded shadow" />
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+          alt="Become a Supplier" class="img-fluid rounded shadow" />
       </div>
     </div>
   </div>

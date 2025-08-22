@@ -13,20 +13,17 @@ export class Test {
 
  @Input() title: string = 'Discover Premium Fabrics for Your Business';
   @Input() subtitle: string = 'Connect with verified suppliers...';
-  @Input() primaryButtonText: string = 'Explore Fabrics';
-  @Input() secondaryButtonText: string = 'Become a Supplier';
-  @Input() backgroundImage: string = '/assets/images/aa.jpeg';
+  @Input() backgroundImage: string = '/assets/images/Cotton Poplin Print Fabric.jpeg';
 
   @Output() primaryButtonClick = new EventEmitter<void>();
   @Output() secondaryButtonClick = new EventEmitter<void>();
 
-  get backgroundStyle() {
-    return {
-      'background-image': `
-        url('${this.backgroundImage}')
-      `
-    };
-  }
+get backgroundStyle() {
+  return {
+    'background-image': `url('${this.backgroundImage}')`
+  };
+}
+
 
   onPrimaryClick(): void {
     this.primaryButtonClick.emit();

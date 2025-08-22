@@ -1,39 +1,28 @@
 <section
-  class="hero-section d-flex align-items-center justify-content-center text-center text-white"
+  class="hero-section text-white"
   [ngStyle]="backgroundStyle"
   role="banner"
   aria-label="Marketplace Hero Section"
 >
   <div class="container px-3 px-md-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <h1 class="display-4 fw-bold mb-3">{{ title }}</h1>
-        <p class="lead mb-4">{{ subtitle }}</p>
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-          <button
-  class="btn btn-primary-custom btn-lg"
-  [attr.aria-label]="primaryButtonText"
-  (click)="onPrimaryClick()">
-  {{ primaryButtonText }}
-</button>
+    <div class="row justify-content-start">
+      <div class="col-lg-8 text-start">
+        <!-- Title -->
+        <!-- <h1 class="mb-3">{{ title }}</h1> -->
 
-<button
-  class="btn btn-secondary-custom btn-lg"
-  [attr.aria-label]="secondaryButtonText"
-  (click)="onSecondaryClick()">
-  {{ secondaryButtonText }}
-</button>
+        <!-- Subtitle -->
+        <!-- <p class="lead">{{ subtitle }}</p> -->
 
-        </div>
+        <!-- Buttons -->
+        <!-- <div class="d-flex flex-wrap gap-3 hero-buttons">
+          <a routerLink="/catalogs" class="btn btn-primary me-3 mb-2">
+            Shop Now
+          </a>
+          <a routerLink="/suppliers" class="btn btn-outline mb-2">
+            Become a Supplier
+          </a>
+        </div> -->
       </div>
     </div>
   </div>
 </section>
-
-
-
-
-
-
-
-

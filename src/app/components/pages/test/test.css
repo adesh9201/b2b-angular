@@ -1,52 +1,115 @@
 .hero-section {
+  position: relative;
   margin-top: 70px;
   margin-bottom: 100px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 480px;
-  border-radius: 0.5rem;
-  transition: background-image 0.3s ease-in-out;
+  min-height: 520px;
+  border-radius: 0.75rem;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Primary background overlay */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--primary-200); /* global primary color */
+  opacity: 0.85; /* keeps image visible but adds primary tint */
+  z-index: 1;
+}
 
+/* Abstract fabric pattern overlays */
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/Kanchi_Tissue_fabrics_81b7bea3-1fc9-44e7-90e6-81c4ca54ae27.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;   /* 🔑 Full width & height cover */
+  opacity: 0.95;
+  z-index: 2;
+}
+
+
+
+
+/* .hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    url('/assets/images/Cotton Satin Print Fabric.jpeg'),
+    url('/assets/images/Cotton Cambric Flower Bird Print Fabric.jpeg'),
+    url('/assets/images/Cotton Poplin Print Fabric.jpeg'),
+    url('/assets/images/Cotton Twill Flower Bird and Animals Print.jpeg'),
+    url('/assets/images/Cotton YD Twill Weave Check Fabric.jpeg');
+  background-repeat: no-repeat;
+  background-position:  center, right top, right bottom ,  top right, bottom left;
+  background-size: 950px, 0px, 0px, 0px, 0px;
+  opacity: 0.8;
+  z-index: 2;
+} */
+
+/* Content sits above overlays */
+.hero-section .container {
+  position: relative;
+  z-index: 3;
+}
+
+/* Typography refinement */
 h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
+  font-size: clamp(4rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 p.lead {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  opacity: 0.9;
+  opacity: 0.95;
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
-
-.btn-primary-custom {
-  background-color: #007bff;
-  border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease-in-out;
-}
-.btn-primary-custom:hover {
-  background-color: #0056b3;
+/* Buttons will take global design */
+.hero-buttons .btn {
+    padding: 0.8rem 2rem;
+    font-weight: 500;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
 }
 
-.btn-secondary-custom {
-  background-color: #6c757d;
-  border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: background-color 0.2s ease-in-out;
-}
-.btn-secondary-custom:hover {
-  background-color: #495057;
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 150, 136, 0.2);
 }
 
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}
 
+.btn-outline {
+    border: 2px solid var(--primary-700);
+    color: var(--primary-700);
+    background: transparent;
+}
 
+.btn-outline:hover {
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}

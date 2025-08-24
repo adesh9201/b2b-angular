@@ -12,6 +12,8 @@ import { TrustedByBrands } from '../../shared/trusted-by-brands/trusted-by-brand
 import { RouterModule } from '@angular/router';
 import { FeatureProducts } from '../../shared/feature-products/feature-products';
 import { AutoscrollCategory} from "../../shared/autoscroll-category/autoscroll-category";
+import { FabricCategories } from '../../shared/fabric-categories/fabric-categories';
+import { FabricSubcategories } from '../../shared/fabric-subcategories/fabric-subcategories';
 
 
 @Component({
@@ -19,7 +21,7 @@ import { AutoscrollCategory} from "../../shared/autoscroll-category/autoscroll-c
   standalone: true,
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
-  imports: [CommonModule, RouterModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands, FeatureProducts, AutoscrollCategory],
+  imports: [CommonModule, RouterModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands, FeatureProducts, AutoscrollCategory, FabricCategories, FabricSubcategories],
   providers: [CurrencyPipe]
 })
 export class Home {

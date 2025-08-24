@@ -1,0 +1,29 @@
+<!-- category-carousel.component.html -->
+<section class="category-carousel-section py-4">
+  <div class="container-fluid">
+    <!-- Heading -->
+    <h2 class="category-carousel-title mb-4">{{ categoryName }}</h2>
+
+    <!-- Single-row infinite auto-scroll -->
+    <div class="auto-row" aria-label="Fabric categories auto scroll">
+      <div class="track">
+        <!-- 1st copy -->
+        <div class="category-item" *ngFor="let cat of allCategories">
+          <a class="square-box rounded-4 d-flex align-items-center justify-content-center"
+             [routerLink]="['/catalogs']"
+             [queryParams]="{ category: cat.name }">
+            <span class="fw-semibold text-global product-title">{{ cat.name }}</span>
+          </a>
+        </div>
+        <!-- 2nd copy (duplicate for seamless loop) -->
+        <div class="category-item" *ngFor="let cat of allCategories">
+          <a class="square-box rounded-4 d-flex align-items-center justify-content-center"
+             [routerLink]="['/catalogs']"
+             [queryParams]="{ category: cat.name }">
+            <span class="fw-semibold text-global product-title">{{ cat.name }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -61,7 +61,7 @@
 
               <!-- Price -->
               <div class="price mb-3">
-                {{ product.price | currency:'USD' }}
+                {{ product.price | currency:'INR' }}
                 <span class="text-muted fs-6">/ {{ product.unit }}</span>
               </div>
 
@@ -142,8 +142,8 @@
           <div class="card-body text-center px-3 py-4">
             <h5 class="fw-semibold text-dark mb-2">{{ product.name }}</h5>
             <div class="mb-0">
-              <span class="fw-bold text-success me-1">{{ product.price | currency:'USD' }}</span>
-              <small class="text-muted text-decoration-line-through">{{ product.originalPrice | currency:'USD'
+              <span class="fw-bold text-success me-1">{{ product.price | currency:'INR' }}</span>
+              <small class="text-muted text-decoration-line-through">{{ product.originalPrice | currency:'INR'
                 }}</small>
             </div>
           </div>
@@ -207,8 +207,8 @@
           <div class="card-body text-center px-2 py-3">
             <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
             <div>
-              <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
-              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD'
+              <span class="fw-bold text-success me-1 small">{{ product.price | currency:'INR' }}</span>
+              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'INR'
                 }}</small>
             </div>
           </div>

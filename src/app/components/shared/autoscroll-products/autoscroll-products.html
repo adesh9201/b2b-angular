@@ -26,10 +26,10 @@
           *ngFor="let chunk of productChunks; let i = index"
           class="carousel-item"
           [class.active]="i === 0">
-          
+
           <div class="row g-2">
             <div class="col-2" *ngFor="let product of chunk">
-              
+
               <!-- Clickable Product Card -->
               <a
                 [routerLink]="['/catalogs']"
@@ -48,20 +48,20 @@
 
                 <div class="card-body text-center px-2 py-3">
                   <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
-                  <div>
+                  <!-- <div>
                     <span class="fw-bold text-success me-1 small">{{ product.price | currency:'USD' }}</span>
                     <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'USD' }}</small>
-                  </div>
+                  </div> -->
                 </div>
 
               </a>
 
             </div>
           </div>
-          
+
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>

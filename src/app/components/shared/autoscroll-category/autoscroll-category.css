@@ -41,13 +41,30 @@
 
 .product-title {
   color: var(--primary-700);
-  font-size: var(--font-md);
   font-weight: 600;
   margin-bottom: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;       /* text wrap allow */
+  word-break: break-word;    /* long words bhi break ho jayenge */
+  overflow: visible;         /* truncate hata diya */
+  text-overflow: unset;      /* truncate effect off */
+  font-size: var(--font-md); /* default size */
 }
+
+/* Medium screen (tablets) */
+@media (max-width: 991.98px) {
+  .product-title {
+    font-size: var(--font-sm);  /* thoda chhota */
+  }
+}
+
+/* Small screen (mobiles) */
+@media (max-width: 575.98px) {
+  .product-title {
+    font-size: var(--font-xs);  /* aur chhota */
+    line-height: 1.2;           /* readability maintain */
+  }
+}
+
 
 .carousel-indicators {
   bottom: -40px;

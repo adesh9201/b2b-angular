@@ -1,4 +1,4 @@
-<!-- src/app/pages/suppliers/suppliers.html -->
+src/app/pages/suppliers/suppliers.html
 
 <!-- Page Header -->
 <section class="py-5 mt-3">
@@ -30,8 +30,12 @@
           <div class="card-body">
             <h5 class="card-title header-title">{{ supplier.name }}</h5>
             <p class="card-text text-muted-custom">
-              {{ supplier.address }}, {{ supplier.state }} - {{ supplier.pincode }}
+              {{ supplier.address }}, {{ supplier.city }}, {{ supplier.state }} - {{ supplier.pincode }}<br>
+              GSTIN: {{ supplier.gstin }} | PAN: {{ supplier.pan }}<br>
+              Email: {{ supplier.emailId }} | Phone: {{ supplier.phone }}<br>
+              Contact: {{ supplier.contact_Person }}
             </p>
+
           </div>
         </div>
       </div>

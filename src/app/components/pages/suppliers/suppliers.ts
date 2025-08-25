@@ -26,12 +26,12 @@ export class Suppliers implements OnInit {
 
   ngOnInit(): void {
     // Fetch suppliers
-    this.supplierService.getSuppliers().subscribe(data => {
+    this.supplierService.getAllSuppliers().subscribe(data => {
       this.suppliers = data;
       this.filteredSuppliers = data;
 
       // Extract unique states for filter dropdown
-      this.states = [...new Set(data.map(s => s.state).filter(Boolean))];
+      // this.states = [...new Set(data.map(s => s.state).filter(Boolean))];
     });
 
     // Use local features array
@@ -44,3 +44,6 @@ export class Suppliers implements OnInit {
     });
   }
 }
+
+
+

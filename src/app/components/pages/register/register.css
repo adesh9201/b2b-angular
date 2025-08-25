@@ -1,12 +1,140 @@
-/* Always light background */
-.custom-card {
-  background-color: #ffffff !important;
-  color: #212529 !important; /* Bootstrap default text color */
-  border-radius: 8px;
+/* ===================== SUPPLIER REGISTRATION PAGE ===================== */
+
+/* Container & Layout */
+.registration-container {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 2.5rem 2rem;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    animation: fadeInUp 0.8s ease-out;
+    transition: all 0.3s ease;
 }
 
-/* Optional - form background forced */
-body {
-  background-color: #f8f9fa !important;
-  color: #212529 !important;
+/* Heading */
+.registration-container h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: var(--font-3xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+/* Form Labels */
+.registration-container label {
+    font-weight: 500;
+    color: var(--form-control-text);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+/* Form Inputs */
+.registration-container .form-control {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--surface-border);
+    background-color: var(--form-control-bg);
+    color: var(--form-control-text);
+    font-size: var(--font-md);
+    transition: var(--transition);
+}
+
+.registration-container .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 150, 136, 0.25);
+    outline: none;
+}
+
+/* OTP Section */
+.registration-container .otp-section {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Buttons */
+.registration-container .btn {
+    display: inline-block;
+    padding: 0.65rem 1rem;
+    font-size: var(--font-md);
+    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.registration-container .btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: #fff;
+}
+
+.registration-container .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0056b3, var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
+}
+
+.registration-container .btn-success {
+    background: var(--success);
+    color: #fff;
+}
+
+.registration-container .btn-success:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Disabled Button */
+.registration-container .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Error Messages */
+.registration-container .text-danger {
+    font-size: var(--font-sm);
+}
+
+/* Placeholder Styling */
+.registration-container .form-control::placeholder {
+    color: var(--gray-400);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .registration-container {
+        padding: 2rem 1.5rem;
+        margin: 3rem auto;
+    }
+    .registration-container h2 {
+        font-size: var(--font-xl);
+    }
+}
+
+/* Accessibility Focus */
+.registration-container input:focus {
+    outline: 3px solid rgba(0, 150, 136, 0.18);
+    outline-offset: 2px;
+}
+
+/* Navigation to Login */
+.registration-container .login-nav {
+    font-size: var(--font-md);
+    margin-top: 2rem;
+}
+
+.registration-container .login-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.registration-container .login-nav a:hover {
+    text-decoration: underline;
+    transform: translateY(-1px);
 }

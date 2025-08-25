@@ -3,11 +3,11 @@ import { RouterLink } from '@angular/router';
 import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
-  selector: 'app-order',
+  selector: 'app-product-catalog',
   imports: [RouterLink, Sidebar],
-  templateUrl: './order.html',
-  styleUrl: './order.css'
+  templateUrl: './product-catalog.html',
+  styleUrl: './product-catalog.css'
 })
-export class Order {
+export class ProductCatalog {
 
 }

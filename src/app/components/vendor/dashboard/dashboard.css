@@ -1,0 +1,127 @@
+/* dashboard.css */
+
+/* --- Body & General --- */
+body, .container, .row {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h5, h6 {
+  color: #333;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+/* --- Cards --- */
+.card {
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card .card-body {
+  padding: 1.5rem;
+}
+
+.card .d-flex .bg-white {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .animated-counter {
+  margin-top: 0.5rem;
+}
+
+/* --- Tables --- */
+.table {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.table th, .table td {
+  vertical-align: middle !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(123, 47, 242, 0.1);
+}
+
+/* --- Badges --- */
+.badge {
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+}
+
+/* --- Forms --- */
+.form-label {
+  font-weight: 500;
+}
+
+.form-control {
+  border-radius: 0.5rem;
+  box-shadow: none;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #7b2ff2;
+  box-shadow: 0 0 0 0.2rem rgba(123, 47, 242, 0.25);
+}
+
+.form-select {
+  border-radius: 0.5rem;
+}
+
+button.btn {
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+button.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* --- Modals --- */
+.modal-content {
+  border-radius: 1rem;
+}
+
+.modal-header .btn-close {
+  border: none;
+  background: transparent;
+}
+
+/* --- Sidebar Placeholder --- */
+app-sidebar {
+  display: block;
+  min-height: 100vh;
+  background: #f8f9fa;
+  border-right: 1px solid #ddd;
+  padding-top: 1rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .card .d-flex .bg-white {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card .animated-counter {
+    font-size: 1.5rem;
+  }
+}

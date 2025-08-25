@@ -9,6 +9,7 @@ import { About } from './components/pages/about/about';
 import { Suppliers } from './components/pages/suppliers/suppliers';
 import { Login } from './components/pages/login/login';
 import { Register } from './components/pages/register/register';
+import { Test } from './components/pages/test/test';
 
 // Vendor Pages
 import { Dashboard } from './components/vendor/dashboard/dashboard';
@@ -23,9 +24,11 @@ import { Reviews } from './components/vendor/reviews/reviews';
 import { Support } from './components/vendor/support/support';
 import { AccountSetting } from './components/vendor/account-setting/account-setting';
 import { Logistics } from './components/vendor/logistics/logistics';
-import { Test } from './components/pages/test/test';
+import { ProductCatalog } from './components/vendor/product-catalog/product-catalog';
+
 
 export const routes: Routes = [
+  // Pages
   { path: '', component: Home },
   { path: 'catalogs', component: Catalogs },
   { path: 'products', component: Products },
@@ -35,6 +38,9 @@ export const routes: Routes = [
   { path: 'suppliers', component: Suppliers },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
+
+
+// Vendor Pages
   { path: 'dashboard', component: Dashboard },
   { path: 'order', component: Order },
   { path: 'inventory', component: Inventory },
@@ -45,9 +51,9 @@ export const routes: Routes = [
   { path: 'marketing', component: Marketing },
   { path: 'reviews', component: Reviews },
   { path: 'support', component: Support },
-  { path: 'account-setting', component: AccountSetting },
+  { path: 'accountsetting', component: AccountSetting },
   { path: 'logistics', component: Logistics },
-
+  { path: 'productcatalog', component: ProductCatalog },
 
 
   //test

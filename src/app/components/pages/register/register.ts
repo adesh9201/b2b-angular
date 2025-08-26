@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { SupplierService } from '../../core/services/supplier.service';
 import { SupplierRegister } from '../../core/models/supplier.model';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +19,16 @@ export class Register {
   otpVerified = false;
   otpCode = '';
 
-  constructor(private fb: FormBuilder, private supplierService: SupplierService) {
+  // 🔔 Toast state
+  showToast = false;
+  toastMessage = '';
+  isError = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private supplierService: SupplierService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       address: [''],
@@ -34,9 +43,22 @@ export class Register {
     });
   }
 
+  private triggerToast(message: string, isError: boolean = false) {
+    this.toastMessage = message;
+    this.isError = isError;
+    this.showToast = true;
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.showToast = false;
+      this.cdr.detectChanges();
+    }, 2500);
+  }
+
   register() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
+      this.triggerToast('Please fill all required fields ❌', true);
       return;
     }
 
@@ -45,17 +67,17 @@ export class Register {
     this.supplierService.register(supplier).subscribe({
       next: (res) => {
         console.log('Register response:', res);
-        alert('Registered successfully! Now verify OTP.');
+        this.triggerToast('Registered successfully! Now verify OTP ✅');
         this.sendOtp(supplier.emailId);
       },
       error: (err) => {
         console.error('Register error:', err);
         if (err.error) {
-          alert(err.error);
+          this.triggerToast(err.error, true);
         } else if (err.status === 0) {
-          alert('Cannot reach server. Check CORS or backend running.');
+          this.triggerToast('Cannot reach server. Check backend ❌', true);
         } else {
-          alert('Unexpected error: ' + err.message);
+          this.triggerToast('Unexpected error: ' + err.message, true);
         }
       }
     });
@@ -66,16 +88,16 @@ export class Register {
       next: (res) => {
         console.log('Send OTP response:', res);
         this.otpSent = true;
-        alert('OTP sent to email.');
+        this.triggerToast('OTP sent to email 📩');
       },
       error: (err) => {
         console.error('Send OTP error:', err);
         if (err.error) {
-          alert(err.error);
+          this.triggerToast(err.error, true);
         } else if (err.status === 0) {
-          alert('Cannot reach server. Check CORS or backend running.');
+          this.triggerToast('Cannot reach server. Check backend ❌', true);
         } else {
-          alert('Unexpected error: ' + err.message);
+          this.triggerToast('Unexpected error: ' + err.message, true);
         }
       }
     });
@@ -87,16 +109,16 @@ export class Register {
       next: (res) => {
         console.log('Verify OTP response:', res);
         this.otpVerified = true;
-        alert('OTP verified! You can now login.');
+        this.triggerToast('OTP verified! You can now login 🎉');
       },
       error: (err) => {
         console.error('Verify OTP error:', err);
         if (err.error) {
-          alert(err.error);
+          this.triggerToast(err.error, true);
         } else if (err.status === 0) {
-          alert('Cannot reach server. Check CORS or backend running.');
+          this.triggerToast('Cannot reach server. Check backend ❌', true);
         } else {
-          alert('Unexpected error: ' + err.message);
+          this.triggerToast('Unexpected error: ' + err.message, true);
         }
       }
     });

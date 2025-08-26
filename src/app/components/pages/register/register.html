@@ -1,3 +1,12 @@
+<!-- 🔔 Toast Notification -->
+<div *ngIf="showToast" class="toast-notif show" [ngClass]="{'error': isError}">
+  <span class="icon">
+    <i class="fas" [ngClass]="isError ? 'fa-times-circle' : 'fa-check-circle'"></i>
+  </span>
+  <span class="message">{{ toastMessage }}</span>
+  <span class="close-btn" (click)="showToast = false">&times;</span>
+</div>
+
 <div class="registration-container">
   <h2>Supplier Registration</h2>
   <form [formGroup]="registerForm" (ngSubmit)="register()">

@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SupplierRegister, SendOtpRequest, VerifyOtpRequest, SupplierLogin, Feature } from '../models/supplier.model';
+import { SupplierRegister, SendOtpRequest, VerifyOtpRequest, SupplierLogin, Feature, Supplier } from '../models/supplier.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,15 @@ export class SupplierService {
   getAllSuppliers(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
+
+
+
+getSupplierById(id: number) {
+  return this.http.get<Supplier>(`${this.apiUrl}/${id}`);
+}
+
+
+
 
     getFeatures(): Feature[] {
     return this.features;

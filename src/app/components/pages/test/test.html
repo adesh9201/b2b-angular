@@ -1,4 +1,76 @@
-<section
+<div class="container mt-5">
+  <h2>🎨 Image Color Details</h2>
+
+  <div *ngIf="loading" class="alert alert-info">Loading data...</div>
+
+  <table *ngIf="!loading && imageColors.length > 0" class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Folder</th>
+        <th>Image</th>
+        <th>Color</th>
+        <th>Inserted On</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of imageColors">
+        <td>{{ item.id }}</td>
+        <td>{{ item.folderName }}</td>
+        <td>{{ item.imageName }}</td>
+        <td>
+          <span class="me-2">{{ item.colorHex }}</span>
+          <div [style.background-color]="item.colorHex"
+               style="width: 25px; height: 25px; border: 1px solid #000; display:inline-block;">
+          </div>
+        </td>
+        <td>{{ item.insertedOn | date:'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && imageColors.length === 0" class="alert alert-warning">
+    No records found.
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section
   class="hero-section text-white"
   [ngStyle]="backgroundStyle"
   role="banner"
@@ -6,7 +78,7 @@
 >
   <div class="container px-3 px-md-5">
     <div class="row justify-content-start">
-      <div class="col-lg-8 text-start">
+      <div class="col-lg-8 text-start"> -->
         <!-- Title -->
         <!-- <h1 class="mb-3">{{ title }}</h1> -->
 
@@ -22,7 +94,7 @@
             Become a Supplier
           </a>
         </div> -->
-      </div>
+      <!-- </div>
     </div>
   </div>
-</section>
+</section> -->

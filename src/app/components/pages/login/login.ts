@@ -1,40 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { SupplierService } from '../../core/services/supplier.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class Login {
-
-
-
-
   contact = '';
   otp = '';
   otpSent = false;
 
-  constructor(private supplierService: SupplierService) {}
+
+  // 🔔 Toast state
+  showToast = false;
+  toastMessage = '';
+  isError = false;
+
+  constructor(
+    private supplierService: SupplierService,
+    private cdr: ChangeDetectorRef,
+      private router: Router
+  ) {}
+
+  private triggerToast(message: string, isError: boolean = false) {
+    this.toastMessage = message;
+    this.isError = isError;
+    this.showToast = true;
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.showToast = false;
+      this.cdr.detectChanges();
+    }, 2500);
+  }
 
   sendOtp() {
     this.supplierService.sendOtp(this.contact).subscribe({
       next: () => {
         this.otpSent = true;
-        alert('OTP sent!');
+        this.triggerToast('OTP sent successfully ✅');
       },
-      error: (err) => alert(err.error)
+      error: (err) =>
+        this.triggerToast(err.error || 'Failed to send OTP ❌', true)
     });
   }
 
   verifyOtp() {
     this.supplierService.verifyOtp(this.contact, this.otp).subscribe({
-      next: (res) => alert('Login successful! Supplier ID: ' + res.supplierId),
-      error: (err) => alert(err.error)
+      next: (res) => {
+        this.triggerToast(
+          'Login successful! Supplier ID: ' + res.supplierId
+        );
+
+        // ✅ Store supplier data in localStorage
+        localStorage.setItem('supplierData', JSON.stringify(res));
+
+        // ✅ Navigate to dashboard
+        this.router.navigate(['/dashboard']);
+
+      },
+      error: (err) =>
+        this.triggerToast(err.error || 'Invalid OTP ❌', true)
     });
   }
 }

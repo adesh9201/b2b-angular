@@ -1,48 +1,54 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../dashboard-core/services/dashboard.service';
-import { Product } from '../dashboard-core/models/product.model';
-import { Order } from '../dashboard-core/models/order.model';
-import { DashboardStats } from '../dashboard-core/models/dashboard.model';
-import { UserProfile } from '../dashboard-core/models/user.model';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { SupplierService } from '../../core/services/supplier.service';
+import { Supplier } from '../../core/models/supplier.model';
 import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink, Sidebar, CommonModule, FormsModule],
+  imports: [CommonModule, Sidebar],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
 export class Dashboard implements OnInit {
-  stats: DashboardStats = { totalProducts:0, totalOrders:0, totalRevenue:0, avgRating:0 };
-  products: Product[] = [];
-  orders: Order[] = [];
-  profile!: UserProfile;
+  supplierData: Supplier | null = null;
+  loading: boolean = true; // 🔄 loader handle karne ke liye
 
-  newProduct: Product = { id:0, name:'', category:'', price:0, stock:0, status:'active', material:'', weight:'', width:'', imageUrl:'', description:'', colors:[] };
+  constructor(private router: Router, private supplierService: SupplierService) {}
 
-  constructor(private dashboardService: DashboardService) {}
+  ngOnInit(): void {
+    const data = localStorage.getItem('supplierData');
 
-  ngOnInit(): void { this.loadDashboard(); }
+    if (!data) {
+      // ❌ Agar user login nahi hai → Login page pe bhej do
+      this.router.navigate(['/login']);
+      return;
+    }
 
-  loadDashboard() {
-    this.dashboardService.getDashboardStats().subscribe(data => this.stats = data);
-    this.dashboardService.getProducts().subscribe(data => this.products = data);
-    this.dashboardService.getOrders().subscribe(data => this.orders = data);
-    this.dashboardService.getProfile().subscribe(data => this.profile = data);
+    const parsed = JSON.parse(data);
+
+    // ✅ supplierId localStorage se uthao
+    const supplierId = parsed.supplierId;
+    if (supplierId) {
+      this.supplierService.getSupplierById(supplierId).subscribe({
+        next: (res: Supplier) => {
+          this.supplierData = res;
+          this.loading = false;
+        },
+        error: () => {
+          localStorage.removeItem('supplierData');
+          this.router.navigate(['/login']);
+        }
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
-  addProduct() {
-    this.dashboardService.addProduct(this.newProduct).subscribe(product => {
-      this.products.push(product);
-      this.newProduct = { id:0, name:'', category:'', price:0, stock:0, status:'active', material:'', weight:'', width:'', imageUrl:'', description:'', colors:[] };
-    });
-  }
-
-  updateProfile() {
-    this.dashboardService.updateProfile(this.profile).subscribe(updated => this.profile = updated);
+  logout() {
+    localStorage.removeItem('supplierData');
+    this.router.navigate(['/login']);
   }
 }

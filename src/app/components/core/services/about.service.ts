@@ -127,14 +127,14 @@ export class AboutService {
         {
           icon: 'fas fa-map-marker-alt',
           title: 'Address',
-          details: '123 Fabric Street, New York, NY 10001, USA',
+          details: 'Plot No 9, Sector 27-A, Main Mathura Road, Faridabad',
           bgClass: 'bg-primary bg-opacity-10',
           iconColorClass: 'text-primary'
         },
         {
           icon: 'fas fa-phone',
           title: 'Phone',
-          details: '+1 (555) 123-4567',
+          details: '+91 1234567890',
           bgClass: 'bg-success bg-opacity-10',
           iconColorClass: 'text-success'
         },

@@ -1,46 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { AboutService } from '../../core/services/about.service';
-import { AboutPageData } from '../../core/models/about.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { AboutService } from '../../core/services/about.service';
+import { LoggingService } from '../../core/services/logging.service';
 
 @Component({
   selector: 'app-about',
-  templateUrl: './about.html',
-  styleUrls: ['./about.css'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule],
+  templateUrl: './about.html',
+  styleUrls: ['./about.css']
 })
-export class About implements OnInit {
-  aboutData!: AboutPageData;
+export class AboutComponent implements OnInit {
+  aboutData: any = {};
+  teamMembers: any[] = [];
+  statistics: any[] = [];
+  isLoading = true;
 
-  contactFormData = {
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  };
-
-  constructor(private aboutService: AboutService) {}
+  constructor(
+    private aboutService: AboutService,
+    private loggingService: LoggingService
+  ) {}
 
   ngOnInit(): void {
-    this.aboutService.getAboutData().subscribe(data => {
-      this.aboutData = data;
-    });
+    this.loadAboutData();
+    this.loggingService.info('About page loaded');
   }
 
-  onSubmit() {
-    if (
-      !this.contactFormData.name ||
-      !this.contactFormData.email ||
-      !this.contactFormData.subject ||
-      !this.contactFormData.message
-    ) {
-      return;
-    }
-    console.log('Contact Form Data:', this.contactFormData);
-    alert('Thank you for your message, we will get back to you shortly.');
-    this.contactFormData = { name: '', email: '', subject: '', message: '' };
+  private loadAboutData(): void {
+    this.aboutService.getAboutData().subscribe({
+      next: (data) => {
+        this.aboutData = data;
+        this.teamMembers = data.team || [];
+        this.statistics = data.statistics || [];
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.loggingService.error('Failed to load about data', error);
+        this.isLoading = false;
+      }
+    });
   }
 }

@@ -1,115 +1,499 @@
-<section class="py-4 mt-5">
-  <div class="container" *ngIf="cartItems?.length; else emptyState">
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <div class="card shadow-sm card-lift">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Shipping Address</h5>
+<div class="checkout-container">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/cart">Cart</a></li>
+        <li class="breadcrumb-item active">Checkout</li>
+      </ol>
+    </nav>
+
+    <div class="checkout-header">
+      <h1>Checkout</h1>
+      <p>Complete your order securely</p>
+    </div>
+
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+      <div class="row">
+        <!-- Checkout Form -->
+        <div class="col-lg-8">
+          <!-- Billing Information -->
+          <div class="checkout-section">
+            <h2>Billing Information</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">First Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="billingFirstName"
+                    [class.is-invalid]="isFieldInvalid('billingFirstName')"
+                    placeholder="Enter first name"
+                  />
+                  <div *ngIf="isFieldInvalid('billingFirstName')" class="invalid-feedback">
+                    First name is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Last Name *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="billingLastName"
+                    [class.is-invalid]="isFieldInvalid('billingLastName')"
+                    placeholder="Enter last name"
+                  />
+                  <div *ngIf="isFieldInvalid('billingLastName')" class="invalid-feedback">
+                    Last name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Email Address *</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="billingEmail"
+                    [class.is-invalid]="isFieldInvalid('billingEmail')"
+                    placeholder="Enter email address"
+                  />
+                  <div *ngIf="isFieldInvalid('billingEmail')" class="invalid-feedback">
+                    Valid email is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Phone Number *</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    formControlName="billingPhone"
+                    [class.is-invalid]="isFieldInvalid('billingPhone')"
+                    placeholder="Enter phone number"
+                  />
+                  <div *ngIf="isFieldInvalid('billingPhone')" class="invalid-feedback">
+                    Phone number is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Company Name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="billingCompany"
+                placeholder="Enter company name (optional)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Address Line 1 *</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="billingAddress1"
+                [class.is-invalid]="isFieldInvalid('billingAddress1')"
+                placeholder="Enter street address"
+              />
+              <div *ngIf="isFieldInvalid('billingAddress1')" class="invalid-feedback">
+                Address is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Address Line 2</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="billingAddress2"
+                placeholder="Apartment, suite, etc. (optional)"
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-label">City *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="billingCity"
+                    [class.is-invalid]="isFieldInvalid('billingCity')"
+                    placeholder="Enter city"
+                  />
+                  <div *ngIf="isFieldInvalid('billingCity')" class="invalid-feedback">
+                    City is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-label">State *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="billingState"
+                    [class.is-invalid]="isFieldInvalid('billingState')"
+                    placeholder="Enter state"
+                  />
+                  <div *ngIf="isFieldInvalid('billingState')" class="invalid-feedback">
+                    State is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="form-label">ZIP Code *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="billingZipCode"
+                    [class.is-invalid]="isFieldInvalid('billingZipCode')"
+                    placeholder="Enter ZIP code"
+                  />
+                  <div *ngIf="isFieldInvalid('billingZipCode')" class="invalid-feedback">
+                    ZIP code is required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Country *</label>
+              <select
+                class="form-control"
+                formControlName="billingCountry"
+                [class.is-invalid]="isFieldInvalid('billingCountry')"
+              >
+                <option value="">Select country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="UK">United Kingdom</option>
+                <option value="IN">India</option>
+              </select>
+              <div *ngIf="isFieldInvalid('billingCountry')" class="invalid-feedback">
+                Country is required
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label" for="fullName">Full Name</label>
-                <input id="fullName" class="form-control" [(ngModel)]="shipping.fullName" placeholder="Enter full name">
+
+          <!-- Shipping Information -->
+          <div class="checkout-section">
+            <h2>Shipping Information</h2>
+            <div class="form-group">
+              <label class="checkbox-wrapper">
+                <input type="checkbox" formControlName="shippingSameAsBilling" />
+                <span class="checkmark"></span>
+                Same as billing address
+              </label>
+            </div>
+
+            <div *ngIf="!checkoutForm.get('shippingSameAsBilling')?.value">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">First Name *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="shippingFirstName"
+                      placeholder="Enter first name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Last Name *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="shippingLastName"
+                      placeholder="Enter last name"
+                    />
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6">
-                <label class="form-label" for="phone">Phone</label>
-                <input id="phone" class="form-control" [(ngModel)]="shipping.phone" placeholder="Enter phone">
+
+              <div class="form-group">
+                <label class="form-label">Company Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="shippingCompany"
+                  placeholder="Enter company name (optional)"
+                />
               </div>
-              <div class="col-12">
-                <label class="form-label" for="address">Address</label>
-                <input id="address" class="form-control" [(ngModel)]="shipping.address" placeholder="House no, street">
+
+              <div class="form-group">
+                <label class="form-label">Address Line 1 *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="shippingAddress1"
+                  placeholder="Enter street address"
+                />
               </div>
-              <div class="col-md-4">
-                <label class="form-label" for="city">City</label>
-                <input id="city" class="form-control" [(ngModel)]="shipping.city" placeholder="City">
+
+              <div class="form-group">
+                <label class="form-label">Address Line 2</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="shippingAddress2"
+                  placeholder="Apartment, suite, etc. (optional)"
+                />
               </div>
-              <div class="col-md-4">
-                <label class="form-label" for="state">State</label>
-                <input id="state" class="form-control" [(ngModel)]="shipping.state" placeholder="State">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">City *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="shippingCity"
+                      placeholder="Enter city"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">State *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="shippingState"
+                      placeholder="Enter state"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label">ZIP Code *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="shippingZipCode"
+                      placeholder="Enter ZIP code"
+                    />
+                  </div>
+                </div>
               </div>
-              <div class="col-md-4">
-                <label class="form-label" for="zip">ZIP</label>
-                <input id="zip" class="form-control" [(ngModel)]="shipping.zip" placeholder="Postal code">
+
+              <div class="form-group">
+                <label class="form-label">Country *</label>
+                <select class="form-control" formControlName="shippingCountry">
+                  <option value="">Select country</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="UK">United Kingdom</option>
+                  <option value="IN">India</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Information -->
+          <div class="checkout-section">
+            <h2>Payment Information</h2>
+            <div class="payment-methods">
+              <div class="payment-method">
+                <label class="payment-option">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="credit_card"
+                    [checked]="selectedPaymentMethod === 'credit_card'"
+                    (change)="onPaymentMethodChange('credit_card')"
+                  />
+                  <span class="payment-label">
+                    <i class="bi bi-credit-card"></i>
+                    Credit Card
+                  </span>
+                </label>
+              </div>
+              <div class="payment-method">
+                <label class="payment-option">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="paypal"
+                    [checked]="selectedPaymentMethod === 'paypal'"
+                    (change)="onPaymentMethodChange('paypal')"
+                  />
+                  <span class="payment-label">
+                    <i class="bi bi-paypal"></i>
+                    PayPal
+                  </span>
+                </label>
+              </div>
+              <div class="payment-method">
+                <label class="payment-option">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="bank_transfer"
+                    [checked]="selectedPaymentMethod === 'bank_transfer'"
+                    (change)="onPaymentMethodChange('bank_transfer')"
+                  />
+                  <span class="payment-label">
+                    <i class="bi bi-bank"></i>
+                    Bank Transfer
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="selectedPaymentMethod === 'credit_card'" class="credit-card-form">
+              <div class="form-group">
+                <label class="form-label">Card Number *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  maxlength="19"
+                />
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Expiry Date *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="cardExpiry"
+                      placeholder="MM/YY"
+                      maxlength="5"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">CVV *</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="cardCvv"
+                      placeholder="123"
+                      maxlength="4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Cardholder Name *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="cardName"
+                  placeholder="Name on card"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Notes -->
+          <div class="checkout-section">
+            <h2>Order Notes</h2>
+            <div class="form-group">
+              <label class="form-label">Special Instructions</label>
+              <textarea
+                class="form-control"
+                formControlName="orderNotes"
+                rows="4"
+                placeholder="Any special instructions for your order..."
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Terms and Conditions -->
+          <div class="checkout-section">
+            <div class="form-group">
+              <label class="checkbox-wrapper">
+                <input type="checkbox" formControlName="agreeToTerms" />
+                <span class="checkmark"></span>
+                I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a> *
+              </label>
+              <div *ngIf="isFieldInvalid('agreeToTerms')" class="invalid-feedback">
+                You must agree to the terms and conditions
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card shadow-sm mt-4 card-lift">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Payment</h5>
-          </div>
-          <div class="card-body">
-            <div class="mb-3">
-              <div class="form-check form-check-inline">
-                <input id="payCod" class="form-check-input" type="radio" name="pay" value="cod" [(ngModel)]="payment.method">
-                <label class="form-check-label" for="payCod">Cash on Delivery</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input id="payCard" class="form-check-input" type="radio" name="pay" value="card" [(ngModel)]="payment.method">
-                <label class="form-check-label" for="payCard">Card</label>
-              </div>
-            </div>
-
-            <div *ngIf="payment.method==='card'" class="row g-3">
-              <div class="col-12">
-                <label class="form-label" for="cardNumber">Card Number</label>
-                <input id="cardNumber" class="form-control" [(ngModel)]="payment.cardNumber" placeholder="1234 5678 9012 3456">
-              </div>
-              <div class="col-md-6">
-                <label class="form-label" for="nameOnCard">Name on Card</label>
-                <input id="nameOnCard" class="form-control" [(ngModel)]="payment.nameOnCard" placeholder="As printed on card">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label" for="expiry">Expiry</label>
-                <input id="expiry" class="form-control" [(ngModel)]="payment.expiry" placeholder="MM/YY">
-              </div>
-              <div class="col-md-3">
-                <label class="form-label" for="cvv">CVV</label>
-                <input id="cvv" class="form-control" [(ngModel)]="payment.cvv" placeholder="***">
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            
+            <div class="order-items">
+              <div class="order-item" *ngFor="let item of cartItems">
+                <div class="item-image">
+                  <img [src]="item.product.images[0] || '/assets/images/placeholder.jpg'" [alt]="item.product.name" />
+                </div>
+                <div class="item-details">
+                  <div class="item-name">{{ item.product.name }}</div>
+                  <div class="item-quantity">Qty: {{ item.quantity }}</div>
+                </div>
+                <div class="item-price">${{ item.product.price * item.quantity }}</div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="mt-3 text-danger" *ngIf="error">{{error}}</div>
-      </div>
+            <div class="summary-line">
+              <span>Subtotal ({{ getTotalItems() }} items)</span>
+              <span>${{ getSubtotal() }}</span>
+            </div>
+            
+            <div class="summary-line">
+              <span>Shipping</span>
+              <span *ngIf="getShippingCost() > 0">${{ getShippingCost() }}</span>
+              <span *ngIf="getShippingCost() === 0" class="text-success">FREE</span>
+            </div>
+            
+            <div class="summary-line">
+              <span>Tax</span>
+              <span>${{ getTaxAmount() }}</span>
+            </div>
+            
+            <div class="summary-line total">
+              <span>Total</span>
+              <span>${{ getTotal() }}</span>
+            </div>
 
-      <div class="col-lg-4">
-        <div class="card shadow-sm card-lift">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-receipt me-2"></i>Order Summary</h5>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled mb-3">
-              <li class="d-flex justify-content-between" *ngFor="let item of cartItems">
-                <span>{{item.name}} x {{item.quantity}}</span>
-                <span>₹{{item.price * item.quantity | number:'1.0-0'}}</span>
-              </li>
-            </ul>
-            <hr>
-            <div class="d-flex justify-content-between"><span>Subtotal</span><strong>₹{{summary.subtotal | number:'1.0-0'}}</strong></div>
-            <div class="d-flex justify-content-between"><span>Shipping</span><strong>₹{{summary.shipping | number:'1.0-0'}}</strong></div>
-            <div class="d-flex justify-content-between"><span>Discount</span><strong>-₹{{summary.discount | number:'1.0-0'}}</strong></div>
-            <div class="d-flex justify-content-between fs-5 mt-2"><span>Total</span><strong>₹{{summary.total | number:'1.0-0'}}</strong></div>
-
-            <button class="btn btn-primary w-100 mt-3 ripple" [disabled]="placing || !isFormValid()" (click)="placeOrder()">
-              <span *ngIf="!placing && !placed"><i class="fas fa-lock me-1"></i>Place Order</span>
-              <span *ngIf="placing"><i class="fas fa-spinner fa-spin me-2"></i>Placing...</span>
-              <span *ngIf="placed"><i class="fas fa-check me-2"></i>Order Placed</span>
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100"
+              [disabled]="checkoutForm.invalid || isLoading"
+            >
+              <span *ngIf="isLoading" class="spinner spinner-sm me-2"></span>
+              {{ isLoading ? 'Processing...' : 'Place Order' }}
             </button>
+
+            <div class="security-badges">
+              <div class="security-item">
+                <i class="bi bi-shield-check"></i>
+                <span>256-bit SSL encryption</span>
+              </div>
+              <div class="security-item">
+                <i class="bi bi-lock"></i>
+                <span>Secure payment processing</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
-
-  <ng-template #emptyState>
-    <div class="container text-center py-5">
-      <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-      <h4 class="text-muted">Cart is empty</h4>
-      <a routerLink="/products" class="btn btn-primary mt-2">Shop Now</a>
-    </div>
-  </ng-template>
-</section>
+</div>

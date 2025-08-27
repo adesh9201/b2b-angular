@@ -1,81 +1,271 @@
-<!-- Page Header -->
-<section class="py-5 mt-3">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-6">
-        <h1 class="fw-bold mb-2 header-title">Trusted Suppliers</h1>
-        <p class="mb-0 text-muted-custom">Connect with verified fabric suppliers worldwide</p>
-      </div>
-      <div class="col-md-6 text-md-end">
-        <div class="d-flex justify-content-md-end gap-2">
-          <!-- State Filter -->
-          <select class="form-select w-auto" title="Filter by state" [(ngModel)]="selectedState" (change)="onFilterChange()">
-            <option value="">All States</option>
-            <option *ngFor="let state of states" [value]="state">{{ state }}</option>
-          </select>
-        </div>
+<div class="suppliers-container">
+  <!-- Hero Section -->
+  <section class="suppliers-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Verified Suppliers</h1>
+        <p class="hero-subtitle">Connect with trusted fabric suppliers from around the world</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Suppliers Grid -->
-<section class="py-5">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-md-4" *ngFor="let supplier of filteredSuppliers">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title header-title">{{ supplier.name }}</h5>
-            <p class="card-text text-muted-custom">
-              {{ supplier.address }}, {{ supplier.city }}, {{ supplier.state }} - {{ supplier.pincode }}<br>
-              GSTIN: {{ supplier.gstin }} | PAN: {{ supplier.pan }}<br>
-              Email: {{ supplier.emailId }} | Phone: {{ supplier.phone }}<br>
-              Contact: {{ supplier.contact_Person }}
-            </p>
-
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-card">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Search Suppliers</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="searchTerm"
+                (input)="onSearchChange()"
+                placeholder="Search by name, specialty..."
+              />
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Become a Supplier Section -->
-<section class="py-5">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <h2 class="fw-bold mb-4 header-title">Become a Supplier</h2>
-        <p class="lead mb-4 text-muted-custom">
-          Join our network of trusted fabric suppliers and reach customers worldwide.
-        </p>
-
-        <div class="row g-3 mb-4">
-          <div class="col-md-6" *ngFor="let feature of features">
-            <div class="d-flex align-items-center">
-              <div [ngClass]="feature.bgClass + ' p-2 rounded me-3'">
-                <i [class]="feature.icon + ' ' + feature.iconColorClass"></i>
-              </div>
-              <div>
-                <h6 class="mb-1 feature-title">{{ feature.title }}</h6>
-                <small class="text-muted-custom">{{ feature.subtitle }}</small>
-              </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Category</label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedCategory"
+                (change)="onCategoryChange()"
+              >
+                <option value="">All Categories</option>
+                <option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Country</label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedCountry"
+                (change)="onCountryChange()"
+              >
+                <option value="">All Countries</option>
+                <option *ngFor="let country of countries" [value]="country.code">
+                  {{ country.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Sort By</label>
+              <select
+                class="form-control"
+                [(ngModel)]="sortBy"
+                (change)="onSortChange()"
+              >
+                <option value="name">Name</option>
+                <option value="rating">Rating</option>
+                <option value="products">Product Count</option>
+                <option value="country">Country</option>
+              </select>
             </div>
           </div>
         </div>
-
-        <button class="btn btn-primary btn-lg ripple" [routerLink]="['/test']">
-          <i class="fas fa-plus me-2"></i> Apply Now
-        </button>
-
-      </div>
-
-      <div class="col-lg-6">
-        <img
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-          alt="Become a Supplier" class="img-fluid rounded shadow" />
+        <div class="filter-actions">
+          <button class="btn btn-outline-primary" (click)="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- Suppliers Grid -->
+  <section class="suppliers-grid-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Verified Suppliers</h2>
+        <p>{{ filteredSuppliers.length }} suppliers found</p>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading suppliers...</p>
+      </div>
+
+      <!-- Suppliers Grid -->
+      <div *ngIf="!isLoading" class="suppliers-grid">
+        <div class="supplier-card" *ngFor="let supplier of filteredSuppliers">
+          <div class="supplier-header">
+            <div class="supplier-logo">
+              <img [src]="supplier.logo || '/assets/images/default-supplier.png'" [alt]="supplier.name" />
+            </div>
+            <div class="supplier-badges">
+              <span *ngIf="supplier.isVerified" class="badge badge-success">Verified</span>
+              <span *ngIf="supplier.isPremium" class="badge badge-warning">Premium</span>
+            </div>
+          </div>
+
+          <div class="supplier-info">
+            <h3 class="supplier-name">{{ supplier.name }}</h3>
+            <p class="supplier-description">{{ supplier.description }}</p>
+            
+            <div class="supplier-location">
+              <i class="bi bi-geo-alt"></i>
+              <span>{{ supplier.city }}, {{ supplier.country }}</span>
+            </div>
+
+            <div class="supplier-rating">
+              <div class="stars">
+                <i *ngFor="let star of [1,2,3,4,5]" 
+                   [class]="star <= supplier.rating ? 'bi bi-star-fill' : 'bi bi-star'"
+                   [class.text-warning]="star <= supplier.rating"></i>
+              </div>
+              <span class="rating-text">({{ supplier.reviewCount }} reviews)</span>
+            </div>
+
+            <div class="supplier-stats">
+              <div class="stat-item">
+                <span class="stat-number">{{ supplier.productCount }}</span>
+                <span class="stat-label">Products</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">{{ supplier.yearsInBusiness }}</span>
+                <span class="stat-label">Years</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">{{ supplier.responseTime }}</span>
+                <span class="stat-label">Response</span>
+              </div>
+            </div>
+
+            <div class="supplier-specialties">
+              <h5>Specialties:</h5>
+              <div class="specialty-tags">
+                <span *ngFor="let specialty of supplier.specialties" class="specialty-tag">
+                  {{ specialty }}
+                </span>
+              </div>
+            </div>
+
+            <div class="supplier-categories">
+              <h5>Categories:</h5>
+              <div class="category-tags">
+                <span *ngFor="let category of supplier.categories" class="category-tag">
+                  {{ category }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="supplier-actions">
+            <button class="btn btn-primary" (click)="viewSupplier(supplier)">
+              <i class="bi bi-eye"></i>
+              View Profile
+            </button>
+            <button class="btn btn-outline-primary" (click)="contactSupplier(supplier)">
+              <i class="bi bi-envelope"></i>
+              Contact
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && filteredSuppliers.length === 0" class="empty-state">
+        <i class="bi bi-search"></i>
+        <h3>No suppliers found</h3>
+        <p>Try adjusting your search criteria or filters</p>
+        <button class="btn btn-primary" (click)="clearFilters()">
+          Clear Filters
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Our Suppliers -->
+  <section class="why-choose-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Choose Our Verified Suppliers?</h2>
+        <p>Quality, reliability, and trust - guaranteed</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h4>Verified & Trusted</h4>
+            <p>All suppliers undergo rigorous verification process including business registration, quality certifications, and customer reviews.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-award"></i>
+            </div>
+            <h4>Quality Assured</h4>
+            <p>We ensure all suppliers meet our high quality standards with regular audits and customer feedback monitoring.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-headset"></i>
+            </div>
+            <h4>24/7 Support</h4>
+            <p>Our dedicated support team is always available to help resolve any issues and ensure smooth transactions.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-globe"></i>
+            </div>
+            <h4>Global Network</h4>
+            <p>Connect with suppliers from over 100 countries, giving you access to diverse fabrics and competitive pricing.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-lightning"></i>
+            </div>
+            <h4>Fast Response</h4>
+            <p>Most suppliers respond within 24 hours, ensuring quick communication and faster order processing.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-currency-dollar"></i>
+            </div>
+            <h4>Competitive Pricing</h4>
+            <p>Access to wholesale prices and bulk discounts from verified suppliers, helping you maximize your profit margins.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Find Your Perfect Supplier?</h2>
+        <p>Join thousands of businesses who trust FabHub for their fabric sourcing needs</p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary btn-lg" routerLink="/register">
+            Get Started
+          </button>
+          <button class="btn btn-outline-primary btn-lg" routerLink="/contact">
+            Contact Us
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

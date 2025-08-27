@@ -1,0 +1,72 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Premium Cotton Fabric",
+      "description": "High quality cotton fabric perfect for clothing",
+      "price": 25.99,
+      "category": "cotton",
+      "images": ["cotton1.jpg", "cotton2.jpg"],
+      "stock": 100,
+      "rating": 4.5,
+      "reviews": 25,
+      "vendor": {
+        "id": "vendor-1",
+        "name": "Fabric World"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Silk Chiffon",
+      "description": "Luxurious silk chiffon for elegant garments",
+      "price": 45.99,
+      "category": "silk",
+      "images": ["silk1.jpg", "silk2.jpg"],
+      "stock": 50,
+      "rating": 4.8,
+      "reviews": 15,
+      "vendor": {
+        "id": "vendor-2",
+        "name": "Silk Suppliers"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Denim Fabric",
+      "description": "Durable denim fabric for jeans and jackets",
+      "price": 18.99,
+      "category": "denim",
+      "images": ["denim1.jpg"],
+      "stock": 75,
+      "rating": 4.2,
+      "reviews": 30,
+      "vendor": {
+        "id": "vendor-3",
+        "name": "Denim Co"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Cotton",
+      "slug": "cotton",
+      "description": "Cotton fabrics",
+      "parentId": null
+    },
+    {
+      "id": "2",
+      "name": "Silk",
+      "slug": "silk",
+      "description": "Silk fabrics",
+      "parentId": null
+    },
+    {
+      "id": "3",
+      "name": "Denim",
+      "slug": "denim",
+      "description": "Denim fabrics",
+      "parentId": null
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { Sidebar } from '../sidebar/sidebar';
 
 @Component({
   selector: 'app-vendor-layout',
+  standalone: true,
   imports: [RouterOutlet, Sidebar],
   templateUrl: './vendor-layout.html',
   styleUrl: './vendor-layout.css'

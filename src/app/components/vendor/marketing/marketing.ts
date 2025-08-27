@@ -4,6 +4,7 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-marketing',
+  standalone: true,
   imports: [RouterLink, Sidebar],
   templateUrl: './marketing.html',
   styleUrl: './marketing.css'

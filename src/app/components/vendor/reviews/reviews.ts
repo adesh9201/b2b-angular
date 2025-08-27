@@ -4,6 +4,7 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-reviews',
+  standalone: true,
   imports: [RouterLink, Sidebar],
   templateUrl: './reviews.html',
   styleUrl: './reviews.css'

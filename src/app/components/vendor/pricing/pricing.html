@@ -6,11 +6,54 @@
     </ol>
   </nav>
 
-  <h1 id="page-title" class="h3 fw-bold mb-4">Pricing</h1>
+  <h1 id="page-title" class="h3 fw-bold mb-3">Pricing</h1>
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-6">
+          <label for="priceSearch" class="form-label">Search Product</label>
+          <input id="priceSearch" type="text" class="form-control" placeholder="Name or SKU" />
+        </div>
+        <div class="col-md-3">
+          <label for="discountFilter" class="form-label">Discounted</label>
+          <select id="discountFilter" class="form-select">
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="card shadow-sm">
-    <div class="card-body">
-      <p class="text-muted mb-0">Configure product pricing and discounts.</p>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Base Price</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Effective Price</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cotton Poplin Fabric</td>
+            <td>$10.00</td>
+            <td>10%</td>
+            <td>$9.00</td>
+            <td class="text-end">
+              <a class="btn btn-sm btn-outline-secondary" href="#" role="button">Edit</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" class="text-center text-muted">Data will load here.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

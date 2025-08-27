@@ -6,11 +6,60 @@
     </ol>
   </nav>
 
-  <h1 id="page-title" class="h3 fw-bold mb-4">Account Settings</h1>
+  <h1 id="page-title" class="h3 fw-bold mb-3">Account Settings</h1>
 
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <p class="text-muted mb-0">Update your profile and notification preferences.</p>
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h6 mb-0">Profile</h2>
+        </div>
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-12">
+              <label for="companyName" class="form-label">Company Name</label>
+              <input id="companyName" type="text" class="form-control" />
+            </div>
+            <div class="col-12">
+              <label for="contactEmail" class="form-label">Email</label>
+              <input id="contactEmail" type="email" class="form-control" />
+            </div>
+            <div class="col-12">
+              <label for="phoneNumber" class="form-label">Phone</label>
+              <input id="phoneNumber" type="tel" class="form-control" />
+            </div>
+            <div class="col-12">
+              <label for="address" class="form-label">Address</label>
+              <textarea id="address" rows="3" class="form-control"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h6 mb-0">Notifications</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-check mb-2">
+            <input id="notifOrders" class="form-check-input" type="checkbox" checked />
+            <label for="notifOrders" class="form-check-label">Email notifications for new orders</label>
+          </div>
+          <div class="form-check mb-2">
+            <input id="notifStock" class="form-check-input" type="checkbox" checked />
+            <label for="notifStock" class="form-check-label">Low stock alerts</label>
+          </div>
+          <div class="form-check mb-3">
+            <input id="notifMarketing" class="form-check-input" type="checkbox" />
+            <label for="notifMarketing" class="form-check-label">Marketing emails and promotions</label>
+          </div>
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -6,11 +6,58 @@
     </ol>
   </nav>
 
-  <h1 id="page-title" class="h3 fw-bold mb-4">Claims</h1>
+  <h1 id="page-title" class="h3 fw-bold mb-3">Claims</h1>
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+      <div class="row g-2">
+        <div class="col-md-4">
+          <label for="claimSearch" class="form-label">Search</label>
+          <input id="claimSearch" type="text" class="form-control" placeholder="Claim ID or Customer" />
+        </div>
+        <div class="col-md-4">
+          <label for="claimStatus" class="form-label">Status</label>
+          <select id="claimStatus" class="form-select">
+            <option value="">All</option>
+            <option value="open">Open</option>
+            <option value="in_review">In Review</option>
+            <option value="resolved">Resolved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="card shadow-sm">
-    <div class="card-body">
-      <p class="text-muted mb-0">Manage customer claims and returns.</p>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Claim ID</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Status</th>
+            <th scope="col">Created</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CLM-001</td>
+            <td>#1001</td>
+            <td>Jane Cooper</td>
+            <td>Damaged product</td>
+            <td><span class="badge text-bg-warning">In Review</span></td>
+            <td>2025-08-01</td>
+            <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="#">View</a></td>
+          </tr>
+          <tr>
+            <td colspan="7" class="text-center text-muted">Data will load here.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-reviews',
   standalone: true,
-  imports: [RouterLink, Sidebar],
+  imports: [RouterLink],
   templateUrl: './reviews.html',
   styleUrl: './reviews.css'
 })

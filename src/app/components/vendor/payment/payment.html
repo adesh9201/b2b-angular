@@ -6,11 +6,60 @@
     </ol>
   </nav>
 
-  <h1 id="page-title" class="h3 fw-bold mb-4">Payments</h1>
+  <h1 id="page-title" class="h3 fw-bold mb-3">Payments</h1>
+
+  <div class="row g-3 mb-3">
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="text-muted">Balance</div>
+          <div class="fs-4 fw-semibold">$12,340.50</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="text-muted">Next Payout</div>
+          <div class="fs-4 fw-semibold">Aug 31, 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <div class="text-muted">Pending</div>
+          <div class="fs-4 fw-semibold">$1,230.00</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="card shadow-sm">
-    <div class="card-body">
-      <p class="text-muted mb-0">Review payouts and transactions.</p>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Payout ID</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Status</th>
+            <th scope="col">Date</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>PY-7741</td>
+            <td>$1,000.00</td>
+            <td><span class="badge text-bg-success">Paid</span></td>
+            <td>2025-08-01</td>
+            <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="#">Invoice</a></td>
+          </tr>
+          <tr>
+            <td colspan="5" class="text-center text-muted">Data will load here.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

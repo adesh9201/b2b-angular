@@ -6,11 +6,62 @@
     </ol>
   </nav>
 
-  <h1 id="page-title" class="h3 fw-bold mb-4">Support</h1>
+  <h1 id="page-title" class="h3 fw-bold mb-3">Support</h1>
 
-  <div class="card shadow-sm">
-    <div class="card-body">
-      <p class="text-muted mb-0">Get help and manage support tickets.</p>
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h6 mb-0">Open Tickets</h2>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Subject</th>
+                  <th>Status</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>T-1021</td>
+                  <td>Issue with payout</td>
+                  <td><span class="badge text-bg-warning">In Progress</span></td>
+                  <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="#">View</a></td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-center text-muted">Data will load here.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white">
+          <h2 class="h6 mb-0">New Ticket</h2>
+        </div>
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-12">
+              <label for="ticketSubject" class="form-label">Subject</label>
+              <input id="ticketSubject" type="text" class="form-control" />
+            </div>
+            <div class="col-12">
+              <label for="ticketDesc" class="form-label">Description</label>
+              <textarea id="ticketDesc" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

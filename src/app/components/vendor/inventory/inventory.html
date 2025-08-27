@@ -6,11 +6,68 @@
     </ol>
   </nav>
 
-  <h1 id="page-title" class="h3 fw-bold mb-4">Inventory</h1>
+  <h1 id="page-title" class="h3 fw-bold mb-3">Inventory</h1>
+
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+      <div class="row g-2 align-items-end">
+        <div class="col-md-4">
+          <label for="invSearch" class="form-label">Search</label>
+          <input id="invSearch" type="text" class="form-control" placeholder="SKU or Product name" />
+        </div>
+        <div class="col-md-4">
+          <label for="categoryFilter" class="form-label">Category</label>
+          <select id="categoryFilter" class="form-select">
+            <option value="">All</option>
+            <option value="cotton">Cotton</option>
+            <option value="silk">Silk</option>
+            <option value="wool">Wool</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="stockStatus" class="form-label">Stock Status</label>
+          <select id="stockStatus" class="form-select">
+            <option value="">All</option>
+            <option value="low">Low</option>
+            <option value="in">In Stock</option>
+            <option value="out">Out of Stock</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="card shadow-sm">
-    <div class="card-body">
-      <p class="text-muted mb-0">View and update stock levels.</p>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">SKU</th>
+            <th scope="col">Product</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Reserved</th>
+            <th scope="col">Reorder Level</th>
+            <th scope="col">Status</th>
+            <th scope="col" class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SKU-001</td>
+            <td>Cotton Poplin Fabric</td>
+            <td>124</td>
+            <td>12</td>
+            <td>50</td>
+            <td><span class="badge text-bg-success">In Stock</span></td>
+            <td class="text-end">
+              <a class="btn btn-sm btn-outline-secondary" href="#" role="button">Adjust</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="7" class="text-center text-muted">Data will load here.</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>

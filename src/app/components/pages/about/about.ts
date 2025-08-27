@@ -11,7 +11,7 @@ import { LoggingService } from '../../core/services/logging.service';
   templateUrl: './about.html',
   styleUrls: ['./about.css']
 })
-export class AboutComponent implements OnInit {
+export class About implements OnInit {
   aboutData: any = {};
   teamMembers: any[] = [];
   statistics: any[] = [];

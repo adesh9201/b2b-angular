@@ -1,63 +1,124 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Claims</li>
-    </ol>
-  </nav>
+<div class="claims-container">
+  <div class="page-header">
+    <h1>Claims Management</h1>
+    <p>Handle customer claims and refund requests</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Claims</h1>
-
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <div class="row g-2">
-        <div class="col-md-4">
-          <label for="claimSearch" class="form-label">Search</label>
-          <input id="claimSearch" type="text" class="form-control" placeholder="Claim ID or Customer" />
+  <div class="claims-stats">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-exclamation-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>5</h3>
+            <p>Pending Claims</p>
+          </div>
         </div>
-        <div class="col-md-4">
-          <label for="claimStatus" class="form-label">Status</label>
-          <select id="claimStatus" class="form-select">
-            <option value="">All</option>
-            <option value="open">Open</option>
-            <option value="in_review">In Review</option>
-            <option value="resolved">Resolved</option>
-            <option value="rejected">Rejected</option>
-          </select>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-check-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>12</h3>
+            <p>Approved</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-x-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>3</h3>
+            <p>Rejected</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-currency-rupee"></i>
+          </div>
+          <div class="stat-content">
+            <h3>₹25,000</h3>
+            <p>Total Claims</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card shadow-sm">
+  <div class="claims-filters">
+    <div class="row">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Search claims...">
+      </div>
+      <div class="col-md-3">
+        <select class="form-control">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <input type="date" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-outline-secondary w-100">Filter</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="claims-table">
     <div class="table-responsive">
-      <table class="table table-hover align-middle mb-0">
-        <thead class="table-light">
+      <table class="table">
+        <thead>
           <tr>
-            <th scope="col">Claim ID</th>
-            <th scope="col">Order ID</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Reason</th>
-            <th scope="col">Status</th>
-            <th scope="col">Created</th>
-            <th scope="col" class="text-end">Actions</th>
+            <th>Claim #</th>
+            <th>Order #</th>
+            <th>Customer</th>
+            <th>Reason</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>CLM-001</td>
-            <td>#1001</td>
-            <td>Jane Cooper</td>
-            <td>Damaged product</td>
-            <td><span class="badge text-bg-warning">In Review</span></td>
-            <td>2025-08-01</td>
-            <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="#">View</a></td>
-          </tr>
-          <tr>
-            <td colspan="7" class="text-center text-muted">Data will load here.</td>
+          <tr *ngFor="let claim of claims">
+            <td>{{ claim.claimNumber }}</td>
+            <td>{{ claim.orderNumber }}</td>
+            <td>{{ claim.customer }}</td>
+            <td>{{ claim.reason }}</td>
+            <td>₹{{ claim.amount }}</td>
+            <td>
+              <span class="badge" [class]="'badge-' + (claim.status === 'pending' ? 'warning' : claim.status === 'approved' ? 'success' : 'danger')">
+                {{ claim.status | titlecase }}
+              </span>
+            </td>
+            <td>{{ claim.date }}</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-sm btn-outline-primary" *ngIf="claim.status === 'pending'">
+                  <i class="bi bi-check"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" *ngIf="claim.status === 'pending'">
+                  <i class="bi bi-x"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-info">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-</section>
+</div>

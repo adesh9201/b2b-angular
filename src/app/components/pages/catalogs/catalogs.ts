@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { CatalogService } from '../../core/services/catalog.service';
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './catalogs.html',
   styleUrls: ['./catalogs.css']
 })
-export class CatalogsComponent implements OnInit, OnDestroy {
+export class Catalogs implements OnInit, OnDestroy {
   catalogs: any[] = [];
   filteredCatalogs: any[] = [];
   categories: any[] = [];
@@ -30,7 +30,8 @@ export class CatalogsComponent implements OnInit, OnDestroy {
   constructor(
     private catalogService: CatalogService,
     private loggingService: LoggingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

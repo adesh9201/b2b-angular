@@ -11,7 +11,7 @@ import { LoggingService } from '../../core/services/logging.service';
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class Dashboard implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(private loggingService: LoggingService) {}

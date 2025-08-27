@@ -13,7 +13,7 @@ import { LoggingService } from '../../../core/services/logging.service';
   templateUrl: './vendor-layout.html',
   styleUrls: ['./vendor-layout.css']
 })
-export class VendorLayoutComponent implements OnInit, OnDestroy {
+export class VendorLayout implements OnInit, OnDestroy {
   sidebarCollapsed = false;
   currentUser: User | null = null;
   currentPageTitle = '';

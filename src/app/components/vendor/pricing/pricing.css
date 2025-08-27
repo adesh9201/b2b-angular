@@ -1,0 +1,139 @@
+.pricing-container {
+  padding: var(--space-6);
+}
+
+.page-header {
+  margin-bottom: var(--space-6);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.page-header p {
+  color: var(--text-secondary);
+}
+
+.pricing-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.pricing-overview {
+  margin-bottom: var(--space-6);
+}
+
+.overview-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-sm);
+}
+
+.overview-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+}
+
+.overview-content h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.overview-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.pricing-rules h3 {
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+.rules-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+.rule-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.rule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.rule-header h5 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.rule-details {
+  margin-bottom: var(--space-3);
+}
+
+.rule-details p {
+  margin: 0 0 var(--space-1) 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.rule-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.badge {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.badge-success {
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.badge-secondary {
+  background-color: var(--color-secondary-light);
+  color: var(--color-secondary);
+}
+
+@media (max-width: 768px) {
+  .pricing-actions {
+    flex-direction: column;
+  }
+  
+  .pricing-overview .row {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .rules-list {
+    grid-template-columns: 1fr;
+  }
+}

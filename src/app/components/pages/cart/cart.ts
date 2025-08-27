@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './cart.html',
   styleUrls: ['./cart.css']
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class Cart implements OnInit, OnDestroy {
   cartItems: CartItem[] = [];
   promoCode = '';
   appliedPromo: any = null;

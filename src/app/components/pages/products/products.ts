@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './products.html',
   styleUrls: ['./products.css']
 })
-export class ProductsComponent implements OnInit, OnDestroy {
+export class Products implements OnInit, OnDestroy {
   products: Product[] = [];
   categories: any[] = [];
   vendors: any[] = [];

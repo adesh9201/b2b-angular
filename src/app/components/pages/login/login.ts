@@ -276,7 +276,7 @@ import { ToastrService } from 'ngx-toastr';
     }
   `]
 })
-export class LoginComponent implements OnInit {
+export class Login implements OnInit {
   loginForm!: FormGroup;
   showPassword = false;
   isLoading = false;

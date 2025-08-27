@@ -1,67 +1,44 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Support</li>
-    </ol>
-  </nav>
+<div class="support-container">
+  <div class="page-header">
+    <h1>Support Center</h1>
+    <p>Get help and manage support tickets</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Support</h1>
+  <div class="support-actions">
+    <button class="btn btn-primary">
+      <i class="bi bi-plus"></i>
+      New Ticket
+    </button>
+    <button class="btn btn-outline-primary">
+      <i class="bi bi-book"></i>
+      Knowledge Base
+    </button>
+  </div>
 
-  <div class="row g-3">
-    <div class="col-lg-6">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-white">
-          <h2 class="h6 mb-0">Open Tickets</h2>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-sm align-middle">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Subject</th>
-                  <th>Status</th>
-                  <th class="text-end">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>T-1021</td>
-                  <td>Issue with payout</td>
-                  <td><span class="badge text-bg-warning">In Progress</span></td>
-                  <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="#">View</a></td>
-                </tr>
-                <tr>
-                  <td colspan="4" class="text-center text-muted">Data will load here.</td>
-                </tr>
-              </tbody>
-            </table>
+  <div class="support-tickets">
+    <h3>Support Tickets</h3>
+    <div class="tickets-list">
+      <div class="ticket-card" *ngFor="let ticket of tickets">
+        <div class="ticket-header">
+          <div class="ticket-info">
+            <h6>{{ ticket.ticketNumber }}</h6>
+            <p>{{ ticket.subject }}</p>
+          </div>
+          <div class="ticket-status">
+            <span class="badge" [class]="'badge-' + (ticket.status === 'open' ? 'warning' : 'success')">
+              {{ ticket.status | titlecase }}
+            </span>
+            <span class="badge badge-info">{{ ticket.priority | titlecase }}</span>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-white">
-          <h2 class="h6 mb-0">New Ticket</h2>
+        <div class="ticket-meta">
+          <small>Created: {{ ticket.date }}</small>
         </div>
-        <div class="card-body">
-          <div class="row g-2">
-            <div class="col-12">
-              <label for="ticketSubject" class="form-label">Subject</label>
-              <input id="ticketSubject" type="text" class="form-control" />
-            </div>
-            <div class="col-12">
-              <label for="ticketDesc" class="form-label">Description</label>
-              <textarea id="ticketDesc" rows="4" class="form-control"></textarea>
-            </div>
-            <div class="col-12">
-              <button class="btn btn-primary">Submit</button>
-            </div>
-          </div>
+        <div class="ticket-actions">
+          <button class="btn btn-sm btn-outline-primary">View</button>
+          <button class="btn btn-sm btn-outline-secondary">Reply</button>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>

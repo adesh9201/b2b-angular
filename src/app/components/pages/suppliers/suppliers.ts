@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { SupplierService } from '../../core/services/supplier.service';
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './suppliers.html',
   styleUrls: ['./suppliers.css']
 })
-export class SuppliersComponent implements OnInit, OnDestroy {
+export class Suppliers implements OnInit, OnDestroy {
   suppliers: any[] = [];
   filteredSuppliers: any[] = [];
   categories: any[] = [];
@@ -31,7 +31,8 @@ export class SuppliersComponent implements OnInit, OnDestroy {
   constructor(
     private supplierService: SupplierService,
     private loggingService: LoggingService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

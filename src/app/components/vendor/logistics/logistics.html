@@ -1,60 +1,93 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Logistics</li>
-    </ol>
-  </nav>
+<div class="logistics-container">
+  <div class="page-header">
+    <h1>Logistics Management</h1>
+    <p>Track and manage your shipments and deliveries</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Logistics</h1>
-
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <div class="row g-2 align-items-end">
-        <div class="col-md-6">
-          <label for="shipmentSearch" class="form-label">Search</label>
-          <input id="shipmentSearch" type="text" class="form-control" placeholder="Shipment ID or order" />
+  <div class="logistics-stats">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-truck"></i>
+          </div>
+          <div class="stat-content">
+            <h3>25</h3>
+            <p>Active Shipments</p>
+          </div>
         </div>
-        <div class="col-md-3">
-          <label for="carrierFilter" class="form-label">Carrier</label>
-          <select id="carrierFilter" class="form-select">
-            <option value="">All</option>
-            <option>DHL</option>
-            <option>FedEx</option>
-            <option>UPS</option>
-          </select>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-check-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>150</h3>
+            <p>Delivered</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-clock"></i>
+          </div>
+          <div class="stat-content">
+            <h3>5</h3>
+            <p>Delayed</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-percent"></i>
+          </div>
+          <div class="stat-content">
+            <h3>96%</h3>
+            <p>On-Time Rate</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card shadow-sm">
+  <div class="shipments-table">
     <div class="table-responsive">
-      <table class="table table-hover align-middle mb-0">
-        <thead class="table-light">
+      <table class="table">
+        <thead>
           <tr>
-            <th scope="col">Shipment</th>
-            <th scope="col">Order</th>
-            <th scope="col">Carrier</th>
-            <th scope="col">Status</th>
-            <th scope="col">ETA</th>
-            <th scope="col" class="text-end">Actions</th>
+            <th>Tracking #</th>
+            <th>Order #</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Carrier</th>
+            <th>ETA</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>SH-9901</td>
-            <td>#1001</td>
-            <td>FedEx</td>
-            <td><span class="badge text-bg-info">In Transit</span></td>
-            <td>Aug 29, 2025</td>
-            <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="#">Track</a></td>
-          </tr>
-          <tr>
-            <td colspan="6" class="text-center text-muted">Data will load here.</td>
+          <tr *ngFor="let shipment of shipments">
+            <td>{{ shipment.trackingNumber }}</td>
+            <td>{{ shipment.orderNumber }}</td>
+            <td>{{ shipment.customer }}</td>
+            <td>
+              <span class="badge" [class]="'badge-' + (shipment.status === 'delivered' ? 'success' : shipment.status === 'in-transit' ? 'info' : 'warning')">
+                {{ shipment.status | titlecase }}
+              </span>
+            </td>
+            <td>{{ shipment.carrier }}</td>
+            <td>{{ shipment.estimatedDelivery }}</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-sm btn-outline-primary">Track</button>
+                <button class="btn btn-sm btn-outline-info">Details</button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-</section>
+</div>

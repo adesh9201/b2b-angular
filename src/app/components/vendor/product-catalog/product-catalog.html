@@ -1,63 +1,73 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Product Catalog</li>
-    </ol>
-  </nav>
+<div class="product-catalog-container">
+  <div class="page-header">
+    <h1>Product Catalog</h1>
+    <p>Manage your product catalog and listings</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Product Catalog</h1>
+  <div class="catalog-actions">
+    <button class="btn btn-primary">
+      <i class="bi bi-plus"></i>
+      Add Product
+    </button>
+    <button class="btn btn-outline-primary">
+      <i class="bi bi-upload"></i>
+      Bulk Import
+    </button>
+    <button class="btn btn-outline-secondary">
+      <i class="bi bi-download"></i>
+      Export Catalog
+    </button>
+  </div>
 
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <div class="row g-2 align-items-end">
-        <div class="col-md-4">
-          <label for="prodSearch" class="form-label">Search</label>
-          <input id="prodSearch" type="text" class="form-control" placeholder="Name or SKU" />
-        </div>
-        <div class="col-md-4">
-          <label for="prodCategory" class="form-label">Category</label>
-          <select id="prodCategory" class="form-select">
-            <option value="">All</option>
-            <option value="cotton">Cotton</option>
-            <option value="silk">Silk</option>
-            <option value="wool">Wool</option>
-          </select>
-        </div>
-        <div class="col-md-4 text-md-end">
-          <button class="btn btn-primary">Add Product</button>
-        </div>
+  <div class="catalog-filters">
+    <div class="row">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Search products...">
+      </div>
+      <div class="col-md-3">
+        <select class="form-control">
+          <option value="">All Categories</option>
+          <option value="cotton">Cotton</option>
+          <option value="silk">Silk</option>
+          <option value="wool">Wool</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-control">
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-outline-secondary w-100">Filter</button>
       </div>
     </div>
   </div>
 
-  <div class="card shadow-sm">
-    <div class="table-responsive">
-      <table class="table table-hover align-middle mb-0">
-        <thead class="table-light">
-          <tr>
-            <th scope="col">SKU</th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Status</th>
-            <th scope="col" class="text-end">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>SKU-001</td>
-            <td>Cotton Poplin Fabric</td>
-            <td>$10.00</td>
-            <td><span class="badge text-bg-success">Active</span></td>
-            <td class="text-end">
-              <a class="btn btn-sm btn-outline-secondary" href="#">Edit</a>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="5" class="text-center text-muted">Data will load here.</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="products-grid">
+    <div class="product-card" *ngFor="let product of products">
+      <div class="product-image">
+        <img [src]="product.image || '/assets/images/product-placeholder.jpg'" [alt]="product.name">
+        <div class="product-status">
+          <span class="badge" [class]="'badge-' + (product.status === 'active' ? 'success' : 'secondary')">
+            {{ product.status | titlecase }}
+          </span>
+        </div>
+      </div>
+      <div class="product-info">
+        <h5>{{ product.name }}</h5>
+        <p class="product-sku">SKU: {{ product.sku }}</p>
+        <p class="product-category">{{ product.category }}</p>
+        <div class="product-price">₹{{ product.price }}</div>
+        <div class="product-stock">Stock: {{ product.stock }}</div>
+      </div>
+      <div class="product-actions">
+        <button class="btn btn-sm btn-outline-primary">Edit</button>
+        <button class="btn btn-sm btn-outline-info">View</button>
+        <button class="btn btn-sm btn-outline-danger">Delete</button>
+      </div>
     </div>
   </div>
-</section>
+</div>

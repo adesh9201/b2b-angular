@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './checkout.html',
   styleUrls: ['./checkout.css']
 })
-export class CheckoutComponent implements OnInit, OnDestroy {
+export class Checkout implements OnInit, OnDestroy {
   checkoutForm!: FormGroup;
   cartItems: CartItem[] = [];
   isLoading = false;

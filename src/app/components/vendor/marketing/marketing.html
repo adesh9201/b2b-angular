@@ -1,75 +1,46 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Marketing</li>
-    </ol>
-  </nav>
+<div class="marketing-container">
+  <div class="page-header">
+    <h1>Marketing Campaigns</h1>
+    <p>Manage your marketing campaigns and promotions</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Marketing</h1>
+  <div class="marketing-actions">
+    <button class="btn btn-primary">
+      <i class="bi bi-plus"></i>
+      Create Campaign
+    </button>
+    <button class="btn btn-outline-primary">
+      <i class="bi bi-megaphone"></i>
+      Promotions
+    </button>
+  </div>
 
-  <div class="row g-3">
-    <div class="col-lg-6">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-white">
-          <h2 class="h6 mb-0">Active Campaigns</h2>
+  <div class="campaigns-grid">
+    <div class="campaign-card" *ngFor="let campaign of campaigns">
+      <div class="campaign-header">
+        <h5>{{ campaign.name }}</h5>
+        <span class="badge" [class]="'badge-' + (campaign.status === 'active' ? 'success' : 'secondary')">
+          {{ campaign.status | titlecase }}
+        </span>
+      </div>
+      <div class="campaign-metrics">
+        <div class="metric">
+          <span class="metric-value">{{ campaign.reach }}</span>
+          <span class="metric-label">Reach</span>
         </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-sm align-middle">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Status</th>
-                  <th>Budget</th>
-                  <th class="text-end">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Summer Sale</td>
-                  <td><span class="badge text-bg-success">Running</span></td>
-                  <td>$2,000</td>
-                  <td class="text-end"><a class="btn btn-sm btn-outline-secondary" href="#">Edit</a></td>
-                </tr>
-                <tr>
-                  <td colspan="4" class="text-center text-muted">Data will load here.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="metric">
+          <span class="metric-value">{{ campaign.clicks }}</span>
+          <span class="metric-label">Clicks</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">{{ campaign.conversions }}</span>
+          <span class="metric-label">Conversions</span>
         </div>
       </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-white">
-          <h2 class="h6 mb-0">Create Campaign</h2>
-        </div>
-        <div class="card-body">
-          <div class="row g-2">
-            <div class="col-12">
-              <label for="campaignName" class="form-label">Campaign Name</label>
-              <input id="campaignName" type="text" class="form-control" />
-            </div>
-            <div class="col-6">
-              <label for="campaignBudget" class="form-label">Budget</label>
-              <input id="campaignBudget" type="number" class="form-control" />
-            </div>
-            <div class="col-6">
-              <label for="campaignChannel" class="form-label">Channel</label>
-              <select id="campaignChannel" class="form-select">
-                <option>Email</option>
-                <option>Social</option>
-                <option>Search</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <button class="btn btn-primary">Create</button>
-            </div>
-          </div>
-        </div>
+      <div class="campaign-actions">
+        <button class="btn btn-sm btn-outline-primary">Edit</button>
+        <button class="btn btn-sm btn-outline-danger">Delete</button>
       </div>
     </div>
   </div>
-</section>
+</div>

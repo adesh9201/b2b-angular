@@ -331,7 +331,7 @@ import { ToastrService } from 'ngx-toastr';
     }
   `]
 })
-export class RegisterComponent implements OnInit {
+export class Register implements OnInit {
   registerForm!: FormGroup;
   showPassword = false;
   isLoading = false;

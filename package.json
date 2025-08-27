@@ -18,7 +18,7 @@
     "lint": "ng lint",
     "analyze": "ng build --configuration production --stats-json && npx webpack-bundle-analyzer dist/b2b-marketplace/stats.json",
     "precommit": "npm run lint && npm run test:ci",
-    "postinstall": "ngcc"
+    "postinstall": "ng build --configuration development"
   },
   "prettier": {
     "overrides": [

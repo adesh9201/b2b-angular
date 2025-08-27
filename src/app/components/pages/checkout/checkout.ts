@@ -7,6 +7,7 @@ import { CartItem, OrderSummary } from '../../core/models/cart.model';
 
 @Component({
   selector: 'app-checkout',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css'

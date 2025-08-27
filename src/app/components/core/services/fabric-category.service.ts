@@ -1,6 +1,7 @@
 // src/app/core/services/qualityMaster.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { FabricCategoryModel } from '../models/fabric-category.model';
 
@@ -8,7 +9,7 @@ import { FabricCategoryModel } from '../models/fabric-category.model';
   providedIn: 'root'
 })
 export class FabricCategoryService {
-  private apiUrl = 'http://localhost:5008/api/QualityMaster'; // apna backend url daalna
+  private apiUrl = `${environment.apiBaseUrl}/api/QualityMaster`;
 
   constructor(private http: HttpClient) {}
 

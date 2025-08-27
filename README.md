@@ -26,15 +26,33 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
-## Building
+## Building (production)
 
-To build the project run:
+Build an optimized production bundle:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Artifacts are output to `dist/b2b-marketplace`. The build uses file replacements for environments:
+
+- Development: `src/environments/environment.ts`
+- Production: `src/environments/environment.prod.ts`
+
+Set your API base via `environment.apiBaseUrl`.
+
+## Run with Docker (production)
+
+Build and run the Docker image with Nginx serving the app:
+
+```bash
+docker build -t b2b-marketplace:prod .
+docker run -p 8080:80 b2b-marketplace:prod
+```
+
+Open `http://localhost:8080`.
+
+To proxy API requests, edit `nginx.conf` and configure the `/api/` block to point to your backend, or serve the frontend behind your existing gateway and set `environment.prod.ts` `apiBaseUrl` accordingly.
 
 ## Running unit tests
 

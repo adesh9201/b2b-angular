@@ -1,6 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { SupplierRegister, SendOtpRequest, VerifyOtpRequest, SupplierLogin, Feature, Supplier } from '../models/supplier.model';
 
@@ -8,7 +9,7 @@ import { SupplierRegister, SendOtpRequest, VerifyOtpRequest, SupplierLogin, Feat
   providedIn: 'root'
 })
 export class SupplierService {
-  private apiUrl = 'http://localhost:5008/api/suppliers';
+  private apiUrl = `${environment.apiBaseUrl}/api/suppliers`;
 
 
     private features: Feature[] = [

@@ -1,0 +1,11 @@
+node_modules
+.git
+.gitignore
+dist
+coverage
+.editorconfig
+.vscode
+Dockerfile
+README.md
+**/*.log
+

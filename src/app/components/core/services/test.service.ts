@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 
 // ✅ Define the interface for ImageColorDetail
@@ -15,7 +16,7 @@ export interface ImageColorDetail {
   providedIn: 'root'
 })
 export class TestService {
-  private apiUrl = 'http://localhost:5008/api/ImageColorDetails'; // Adjust to match backend
+  private apiUrl = `${environment.apiBaseUrl}/api/ImageColorDetails`;
 
   constructor(private http: HttpClient) {}
 

@@ -96,6 +96,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
+import { CartService } from '../../core/services/cart.service';
 import { Product } from '../../core/models/product.model';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -115,8 +116,9 @@ import { ActivatedRoute } from '@angular/router';
 
 export class Products implements OnInit {
   selectedProduct: Product | null = null;
+  addedMessage = '';
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {}
+  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -126,5 +128,13 @@ export class Products implements OnInit {
         this.selectedProduct = this.productService.getProductById(+productId);
       }
     });
+  }
+
+  addToCart() {
+    if (this.selectedProduct) {
+      this.cartService.addToCart(this.selectedProduct, 1);
+      this.addedMessage = 'Added to cart!';
+      setTimeout(() => (this.addedMessage = ''), 1500);
+    }
   }
 }

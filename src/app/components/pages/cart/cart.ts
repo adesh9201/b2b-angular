@@ -3,7 +3,7 @@ import { CartService } from '../../core/services/cart.service';
 import { CartItem, OrderSummary } from '../../core/models/cart.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +16,7 @@ export class Cart implements OnInit {
   orderSummary!: OrderSummary;
   promoMessage = '';
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartService.getCartItems().subscribe(items => {
@@ -65,6 +65,6 @@ export class Cart implements OnInit {
   }
 
   openCheckout() {
-    alert('Proceeding to checkout...');
+    this.router.navigateByUrl('/checkout');
   }
 }

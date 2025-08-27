@@ -78,6 +78,11 @@
     outline: none;
 }
 
+/* Utility class moved from inline style */
+.load-more-btn {
+  letter-spacing: 0.5px;
+}
+
 .btn-outline-primary:focus-visible {
     outline: 3px solid rgba(0, 150, 136, 0.3);
     outline-offset: 3px;

@@ -7,7 +7,7 @@
     </div>
 
     <!-- Products Grid -->
-    <div class="row g-3">
+    <div class="row g-3" role="list">
       <div
         class="col-lg-2 col-md-4 col-sm-6 col-6"
         *ngFor="let product of featuredProducts"
@@ -15,13 +15,14 @@
       >
         <!-- Entire card clickable -->
         <a
-          [routerLink]="'/catalogs'"
+          [routerLink]="['/products', product.id]"
           class="card product-card h-100 text-decoration-none"
         >
           <div class="product-image-wrapper position-relative overflow-hidden rounded-top">
             <img
               [src]="product.imageUrl"
-              [alt]="product.name"
+              alt="{{ product.name || 'Fabric image' }}"
+              title="{{ product.name || 'Fabric image' }}"
               class="img-fluid w-100 product-image"
             />
           </div>
@@ -44,8 +45,7 @@
     <div class="text-center mt-5">
       <a
         routerLink="/catalogs"
-        class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill shadow-sm fw-semibold text-uppercase transition-all"
-        style="letter-spacing: 0.5px;"
+        class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill shadow-sm fw-semibold text-uppercase transition-all load-more-btn"
         aria-label="Load more fabric products from catalog"
       >
         <i class="bi bi-box-seam me-2"></i> Load More Fabrics

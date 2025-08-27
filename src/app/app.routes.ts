@@ -10,6 +10,7 @@ import { Suppliers } from './components/pages/suppliers/suppliers';
 import { Login } from './components/pages/login/login';
 import { Register } from './components/pages/register/register';
 import { Test } from './components/pages/test/test';
+import { Checkout } from './components/pages/checkout/checkout';
 
 // Vendor Pages
 import { Dashboard } from './components/vendor/dashboard/dashboard';
@@ -34,6 +35,7 @@ export const routes: Routes = [
   { path: 'products', component: Products },
   { path: 'products/:id', component: Products },
   { path: 'cart', component: Cart },
+  { path: 'checkout', component: Checkout },
   { path: 'about', component: About },
   { path: 'suppliers', component: Suppliers },
   { path: 'login', component: Login },

@@ -1,0 +1,13 @@
+.card-lift {
+  border-radius: 12px;
+}
+
+label.form-label {
+  font-weight: 500;
+}
+
+input.form-control {
+  padding: 10px 12px;
+}
+
+

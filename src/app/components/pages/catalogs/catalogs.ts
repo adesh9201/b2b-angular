@@ -1,87 +1,168 @@
-// src/app/home/home.ts
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProductService } from '../../core/services/product.service';
-import { Product } from '../../core/models/product.model';
-import { Filter } from '../../shared/filter/filter';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CartService } from '../../core/services/cart.service';
+import { FormsModule } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
+import { CatalogService } from '../../core/services/catalog.service';
+import { LoggingService } from '../../core/services/logging.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-catalogs',
   standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './catalogs.html',
-  styleUrls: ['./catalogs.css'],
-  imports: [CommonModule, FormsModule, Filter, RouterModule],
-  providers: [CurrencyPipe]
+  styleUrls: ['./catalogs.css']
 })
-export class Catalogs {
-  featuredProducts: Product[] = [];
-  productChunks: Product[][] = [];
-  selectedProduct: Product | null = null;   // <-- Quick View के लिए selected product
-  showToast = false;
-  toastMessage = '';
-  sortBy: string = 'newest';
+export class CatalogsComponent implements OnInit, OnDestroy {
+  catalogs: any[] = [];
+  filteredCatalogs: any[] = [];
+  categories: any[] = [];
+  vendors: any[] = [];
+  isLoading = false;
+  searchTerm = '';
+  selectedCategory = '';
+  selectedVendor = '';
+  sortBy = 'name';
+  viewMode: 'grid' | 'list' = 'grid';
+  private destroy$ = new Subject<void>();
 
   constructor(
-    private productService: ProductService,
-    private cartService: CartService,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.featuredProducts = this.productService.getFeaturedProducts();
-    this.chunkProducts();
+    private catalogService: CatalogService,
+    private loggingService: LoggingService,
+    private toastr: ToastrService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadCatalogs();
+    this.loadCategories();
+    this.loadVendors();
+    this.loggingService.info('Catalogs page loaded');
   }
 
-  private chunkProducts(): void {
-    const chunkSize = 6;
-    for (let i = 0; i < this.featuredProducts.length; i += chunkSize) {
-      this.productChunks.push(this.featuredProducts.slice(i, i + chunkSize));
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private loadCatalogs(): void {
+    this.isLoading = true;
+    this.catalogService.getCatalogs().subscribe({
+      next: (catalogs) => {
+        this.catalogs = catalogs;
+        this.filteredCatalogs = [...catalogs];
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.loggingService.error('Failed to load catalogs', error);
+        this.toastr.error('Failed to load catalogs', 'Error');
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private loadCategories(): void {
+    this.catalogService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        this.loggingService.error('Failed to load categories', error);
+      }
+    });
+  }
+
+  private loadVendors(): void {
+    this.catalogService.getVendors().subscribe({
+      next: (vendors) => {
+        this.vendors = vendors;
+      },
+      error: (error) => {
+        this.loggingService.error('Failed to load vendors', error);
+      }
+    });
+  }
+
+  onSearchChange(): void {
+    this.applyFilters();
+  }
+
+  onCategoryChange(): void {
+    this.applyFilters();
+  }
+
+  onVendorChange(): void {
+    this.applyFilters();
+  }
+
+  onSortChange(): void {
+    this.applyFilters();
+  }
+
+  setViewMode(mode: 'grid' | 'list'): void {
+    this.viewMode = mode;
+  }
+
+  private applyFilters(): void {
+    let filtered = [...this.catalogs];
+
+    // Search filter
+    if (this.searchTerm) {
+      filtered = filtered.filter(catalog =>
+        catalog.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        catalog.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        catalog.vendor.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     }
-  }
 
-  onFiltersApplied(filtered: Product[]) {
-    this.featuredProducts = filtered;
-    this.applySort();
-  }
-
-  addToCart(product: Product) {
-    this.cartService.addToCart(product);
-    this.toastMessage = `${product.name} added to cart!`;
-    this.showToast = true;
-    this.cdr.detectChanges();
-
-    setTimeout(() => {
-      this.showToast = false;
-      this.cdr.detectChanges();
-    }, 2000);
-  }
-
-  openQuickView(product: Product) {
-    this.selectedProduct = product;   // <-- Modal के लिए product set
-  }
-
-  onSortChange() {
-    this.applySort();
-  }
-
-  private applySort() {
-    switch (this.sortBy) {
-      case 'priceLowHigh':
-        this.featuredProducts = [...this.featuredProducts].sort((a, b) => a.price - b.price);
-        break;
-      case 'priceHighLow':
-        this.featuredProducts = [...this.featuredProducts].sort((a, b) => b.price - a.price);
-        break;
-      case 'rating':
-        this.featuredProducts = [...this.featuredProducts].sort((a, b) => (b.rating || 0) - (a.rating || 0));
-        break;
-      case 'popularity':
-        this.featuredProducts = [...this.featuredProducts].sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
-        break;
-      default:
-        this.featuredProducts = [...this.productService.getFeaturedProducts()];
-        break;
+    // Category filter
+    if (this.selectedCategory) {
+      filtered = filtered.filter(catalog =>
+        catalog.categories.includes(this.selectedCategory)
+      );
     }
+
+    // Vendor filter
+    if (this.selectedVendor) {
+      filtered = filtered.filter(catalog =>
+        catalog.vendor.id === this.selectedVendor
+      );
+    }
+
+    // Sort
+    filtered.sort((a, b) => {
+      switch (this.sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'vendor':
+          return a.vendor.name.localeCompare(b.vendor.name);
+        case 'products':
+          return b.productCount - a.productCount;
+        case 'date':
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        default:
+          return 0;
+      }
+    });
+
+    this.filteredCatalogs = filtered;
+  }
+
+  clearFilters(): void {
+    this.searchTerm = '';
+    this.selectedCategory = '';
+    this.selectedVendor = '';
+    this.sortBy = 'name';
+    this.applyFilters();
+  }
+
+  viewCatalog(catalog: any): void {
+    this.router.navigate(['/catalogs', catalog.id]);
+    this.loggingService.info('Viewing catalog', { catalogId: catalog.id });
+  }
+
+  downloadCatalog(catalog: any): void {
+    this.toastr.info('Download feature coming soon!', 'Feature Coming Soon');
+    this.loggingService.info('Downloading catalog', { catalogId: catalog.id });
   }
 }

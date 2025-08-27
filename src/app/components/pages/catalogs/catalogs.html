@@ -22,10 +22,10 @@
       <div class="col-lg-9 col-md-8">
 
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-          <div class="fw-bold fs-5" id="catalogCount" style="color:#0a2342;">All Fabrics</div>
+          <div class="fw-bold fs-5 text-primary-900" id="catalogCount">All Fabrics</div>
           <div class="d-flex align-items-center gap-2">
             <label for="sortBy" class="form-label mb-0 fw-semibold">Sort by:</label>
-            <select class="form-select" id="sortBy" style="min-width:160px;">
+            <select class="form-select minw-160" id="sortBy" [(ngModel)]="sortBy" (change)="onSortChange()" title="Sort products">
               <option value="newest">Newest</option>
               <option value="priceLowHigh">Price: Low to High</option>
               <option value="priceHighLow">Price: High to Low</option>
@@ -43,7 +43,7 @@
               <!-- Product Image (clickable) -->
               <a [routerLink]="['/products', product.id]">
                 <div class="img-hover-zoom rounded-4 overflow-hidden mb-3 position-relative">
-                  <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid featured-img">
+                  <img [src]="product.imageUrl" alt="{{ product.name }}" title="{{ product.name }}" class="img-fluid featured-img">
                   <!-- Floating Add to Cart Button -->
                   <button class="btn-overlay-cart"
                     (click)="addToCart(product); $event.stopPropagation(); $event.preventDefault();">
@@ -70,9 +70,16 @@
                 <button class="btn btn-primary flex-fill shadow-sm" [routerLink]="['/products', product.id]">
                   <i class="bi bi-cart-fill me-1"></i> Buy Now
                 </button>
-                <button class="btn btn-outline-secondary flex-fill" [routerLink]="['/products', product.id]">
+                <!-- <button class="btn btn-outline-secondary flex-fill" [routerLink]="['/products', product.id]">
                   Quick Details
-                </button>
+                </button> -->
+                <button class="btn btn-outline-secondary flex-fill"
+  data-bs-toggle="modal"
+  data-bs-target="#quickViewModal"
+  (click)="openQuickView(product)">
+  Quick Details
+</button>
+
               </div>
 
 
@@ -92,6 +99,58 @@
 
 
 
+  <!-- QUICK VIEW MODAL -->
+<div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">{{ selectedProduct?.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <!-- Left Image -->
+          <div class="col-md-6">
+            <img [src]="selectedProduct?.imageUrl" alt="{{ selectedProduct?.name }}"
+              class="img-fluid rounded-3 shadow-sm w-100">
+          </div>
+
+          <!-- Right Details -->
+          <div class="col-md-6">
+            <p class="text-muted">{{ selectedProduct?.description }}</p>
+
+            <h4 class="text-primary">
+              {{ selectedProduct?.price | currency:'INR' }}
+              <small class="text-muted fs-6">/ {{ selectedProduct?.unit }}</small>
+            </h4>
+
+            <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
+            <p><strong>Supplier:</strong> {{ selectedProduct?.supplier }}</p>
+            <p><strong>Material:</strong> {{ selectedProduct?.material }}</p>
+            <p><strong>Weight:</strong> {{ selectedProduct?.weight }}</p>
+            <p><strong>Width:</strong> {{ selectedProduct?.width }}</p>
+            <!-- <p><strong>Colors:</strong> {{ selectedProduct?.colors.join(', ') }}</p>
+            <p><strong>Attributes:</strong> {{ selectedProduct?.attributes.join(', ') }}</p> -->
+            <p><strong>Stock:</strong> {{ selectedProduct?.stock }} available</p>
+            <p><strong>Rating:</strong> ⭐ {{ selectedProduct?.rating }} ({{ selectedProduct?.reviews }} reviews)</p>
+
+            <div class="mt-3 d-flex gap-2">
+              <button class="btn btn-primary flex-fill"
+                (click)="addToCart(selectedProduct!);"
+                data-bs-dismiss="modal">
+                <i class="bi bi-cart-plus me-1"></i> Add to Cart
+              </button>
+              <a [routerLink]="['/products', selectedProduct?.id]" class="btn btn-outline-secondary flex-fill" data-bs-dismiss="modal">
+                View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

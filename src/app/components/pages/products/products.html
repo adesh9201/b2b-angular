@@ -38,9 +38,9 @@
         <!-- Rating bars -->
         <div *ngIf="selectedProduct.rating" class="rating-bars mt-2">
           <div *ngFor="let rate of [5,4,3,2,1]" class="d-flex align-items-center mb-1">
-            <span class="me-2" style="width: 15px">{{ rate }}</span>
-            <div class="progress flex-grow-1 me-2" style="height: 6px">
-              <div class="progress-bar bg-warning" role="progressbar" [style.width.%]="20 * rate"></div>
+            <span class="me-2 rating-label">{{ rate }}</span>
+            <div class="progress flex-grow-1 me-2 rating-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" [attr.aria-valuenow]="20 * rate" [attr.aria-label]="'Rating '+rate+' out of 5'" [attr.title]="'Rating '+rate+' out of 5'">
+              <div class="progress-bar bg-warning" [style.width.%]="20 * rate"></div>
             </div>
             <small class="text-muted">{{ 20 * rate }}%</small>
           </div>
@@ -49,9 +49,9 @@
 
       <!-- Price & Discount -->
       <div class="mb-4">
-        <span class="fs-3 fw-bold text-primary">{{ selectedProduct.price | currency:'USD' }}</span>
+        <span class="fs-3 fw-bold text-primary">{{ selectedProduct.price | currency:'INR' }}</span>
         <span class="text-muted text-decoration-line-through ms-2" *ngIf="selectedProduct.originalPrice">
-          {{ selectedProduct.originalPrice | currency:'USD' }}
+          {{ selectedProduct.originalPrice | currency:'INR' }}
         </span>
         <span class="badge bg-success ms-2" *ngIf="selectedProduct.discount">
           {{ selectedProduct.discount }}% OFF
@@ -60,8 +60,8 @@
 
       <!-- Options -->
       <div class="mb-3">
-        <label class="form-label fw-bold">Length (in yards)</label>
-        <select class="form-select">
+        <label class="form-label fw-bold" for="lengthSelect">Length (in yards)</label>
+        <select id="lengthSelect" class="form-select">
           <option>Select Length</option>
           <option>1</option>
           <option>2</option>
@@ -70,8 +70,8 @@
       </div>
 
       <div class="mb-4">
-        <label class="form-label fw-bold">Quantity</label>
-        <select class="form-select">
+        <label class="form-label fw-bold" for="quantitySelect">Quantity</label>
+        <select id="quantitySelect" class="form-select">
           <option>Select Quantity</option>
           <option>1</option>
           <option>2</option>
@@ -80,11 +80,12 @@
       </div>
 
       <!-- Action Buttons -->
-      <div class="d-grid gap-2 mb-4">
-        <button class="btn btn-primary btn-lg">Add to Cart</button>
+      <div class="d-grid gap-2 mb-2">
+        <button class="btn btn-primary btn-lg" (click)="addToCart()">Add to Cart</button>
         <button class="btn btn-outline-secondary btn-lg" [routerLink]="['/cart']">Buy Now</button>
 
       </div>
+      <div *ngIf="addedMessage" class="alert alert-success py-2">{{ addedMessage }}</div>
 
       <!-- Product Details -->
       <div class="product-specs">

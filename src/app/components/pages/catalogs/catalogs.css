@@ -1,3 +1,5 @@
+.text-primary-900 { color: #0a2342; }
+.minw-160 { min-width: 160px; }
 /* === Product Card === */
 .product-card {
   background: var(--card-bg);
@@ -67,6 +69,7 @@
   opacity: 0;
   pointer-events: none;
   transition: var(--transition);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 .img-hover-zoom:hover .btn-overlay-cart {

@@ -1,3 +1,11 @@
+/* Accessibility fixes for rating bars */
+.rating-label {
+  width: 15px;
+}
+
+.rating-progress {
+  height: 6px;
+}
 .main-img {
   width: 100%;
   height: auto;

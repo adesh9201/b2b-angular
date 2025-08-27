@@ -1,5 +1,3 @@
-src/app/pages/suppliers/suppliers.html
-
 <!-- Page Header -->
 <section class="py-5 mt-3">
   <div class="container">
@@ -11,7 +9,7 @@ src/app/pages/suppliers/suppliers.html
       <div class="col-md-6 text-md-end">
         <div class="d-flex justify-content-md-end gap-2">
           <!-- State Filter -->
-          <select class="form-select" style="width:auto;" [(ngModel)]="selectedState" (change)="onFilterChange()">
+          <select class="form-select w-auto" title="Filter by state" [(ngModel)]="selectedState" (change)="onFilterChange()">
             <option value="">All States</option>
             <option *ngFor="let state of states" [value]="state">{{ state }}</option>
           </select>

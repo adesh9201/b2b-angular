@@ -18,7 +18,7 @@
 
 //   constructor() {
 //     // Example default data
-//     this.cartItemsSubject.next([     
+//     this.cartItemsSubject.next([
 // // Item Added Here
 //       ]);
 //   }
@@ -172,6 +172,11 @@ export class CartService {
     const items = this.cartItemsSubject.getValue().filter(item => item.id !== itemId);
     this.cartItemsSubject.next(items);
     this.saveCart(); // persist
+  }
+
+  clearCart() {
+    this.cartItemsSubject.next([]);
+    this.saveCart();
   }
 
   applyPromoCode(code: string): boolean {

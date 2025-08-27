@@ -1,68 +1,37 @@
 import { Routes } from '@angular/router';
 
-// Pages
-import { Home } from './components/pages/home/home';
-import { Catalogs } from './components/pages/catalogs/catalogs';
-import { Products } from './components/pages/products/products';
-import { Cart } from './components/pages/cart/cart';
-import { About } from './components/pages/about/about';
-import { Suppliers } from './components/pages/suppliers/suppliers';
-import { Login } from './components/pages/login/login';
-import { Register } from './components/pages/register/register';
-import { Test } from './components/pages/test/test';
-import { Checkout } from './components/pages/checkout/checkout';
-
-// Vendor Pages
-import { Dashboard } from './components/vendor/dashboard/dashboard';
-import { Order } from './components/vendor/order/order';
-import { Inventory } from './components/vendor/inventory/inventory';
-import { Pricing } from './components/vendor/pricing/pricing';
-import { Claims } from './components/vendor/claims/claims';
-import { Payment } from './components/vendor/payment/payment';
-import { Analytics } from './components/vendor/analytics/analytics';
-import { Marketing } from './components/vendor/marketing/marketing';
-import { Reviews } from './components/vendor/reviews/reviews';
-import { Support } from './components/vendor/support/support';
-import { AccountSetting } from './components/vendor/account-setting/account-setting';
-import { Logistics } from './components/vendor/logistics/logistics';
-import { ProductCatalog } from './components/vendor/product-catalog/product-catalog';
-
 
 export const routes: Routes = [
-  // Pages
-  { path: '', component: Home },
-  { path: 'catalogs', component: Catalogs },
-  { path: 'products', component: Products },
-  { path: 'products/:id', component: Products },
-  { path: 'cart', component: Cart },
-  { path: 'checkout', component: Checkout },
-  { path: 'about', component: About },
-  { path: 'suppliers', component: Suppliers },
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
+  // Pages (lazy-loaded standalone components)
+  { path: '', loadComponent: () => import('./components/pages/home/home').then(m => m.Home) },
+  { path: 'catalogs', loadComponent: () => import('./components/pages/catalogs/catalogs').then(m => m.Catalogs) },
+  { path: 'products', loadComponent: () => import('./components/pages/products/products').then(m => m.Products) },
+  { path: 'products/:id', loadComponent: () => import('./components/pages/products/products').then(m => m.Products) },
+  { path: 'cart', loadComponent: () => import('./components/pages/cart/cart').then(m => m.Cart) },
+  { path: 'checkout', loadComponent: () => import('./components/pages/checkout/checkout').then(m => m.Checkout) },
+  { path: 'about', loadComponent: () => import('./components/pages/about/about').then(m => m.About) },
+  { path: 'suppliers', loadComponent: () => import('./components/pages/suppliers/suppliers').then(m => m.Suppliers) },
+  { path: 'login', loadComponent: () => import('./components/pages/login/login').then(m => m.Login) },
+  { path: 'register', loadComponent: () => import('./components/pages/register/register').then(m => m.Register) },
 
+  // Vendor Pages (lazy-loaded)
+  { path: 'dashboard', loadComponent: () => import('./components/vendor/dashboard/dashboard').then(m => m.Dashboard) },
+  { path: 'order', loadComponent: () => import('./components/vendor/order/order').then(m => m.Order) },
+  { path: 'inventory', loadComponent: () => import('./components/vendor/inventory/inventory').then(m => m.Inventory) },
+  { path: 'pricing', loadComponent: () => import('./components/vendor/pricing/pricing').then(m => m.Pricing) },
+  { path: 'claims', loadComponent: () => import('./components/vendor/claims/claims').then(m => m.Claims) },
+  { path: 'payment', loadComponent: () => import('./components/vendor/payment/payment').then(m => m.Payment) },
+  { path: 'analytics', loadComponent: () => import('./components/vendor/analytics/analytics').then(m => m.Analytics) },
+  { path: 'marketing', loadComponent: () => import('./components/vendor/marketing/marketing').then(m => m.Marketing) },
+  { path: 'reviews', loadComponent: () => import('./components/vendor/reviews/reviews').then(m => m.Reviews) },
+  { path: 'support', loadComponent: () => import('./components/vendor/support/support').then(m => m.Support) },
+  { path: 'accountsetting', loadComponent: () => import('./components/vendor/account-setting/account-setting').then(m => m.AccountSetting) },
+  { path: 'logistics', loadComponent: () => import('./components/vendor/logistics/logistics').then(m => m.Logistics) },
+  { path: 'productcatalog', loadComponent: () => import('./components/vendor/product-catalog/product-catalog').then(m => m.ProductCatalog) },
 
-// Vendor Pages
-  { path: 'dashboard', component: Dashboard },
-  { path: 'order', component: Order },
-  { path: 'inventory', component: Inventory },
-  { path: 'pricing', component: Pricing },
-  { path: 'claims', component: Claims },
-  { path: 'payment', component: Payment },
-  { path: 'analytics', component: Analytics },
-  { path: 'marketing', component: Marketing },
-  { path: 'reviews', component: Reviews },
-  { path: 'support', component: Support },
-  { path: 'accountsetting', component: AccountSetting },
-  { path: 'logistics', component: Logistics },
-  { path: 'productcatalog', component: ProductCatalog },
+  // Test
+  { path: 'test', loadComponent: () => import('./components/pages/test/test').then(m => m.Test) },
 
-
-  //test
-
-  { path: 'test', component: Test },
-
-
-  // wildcard
+  // Wildcard
   { path: '**', redirectTo: '' },
 ];

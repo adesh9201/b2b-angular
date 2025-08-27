@@ -1,62 +1,84 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Reviews</li>
-    </ol>
-  </nav>
+<div class="reviews-container">
+  <div class="page-header">
+    <h1>Customer Reviews</h1>
+    <p>Manage and respond to customer reviews</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Reviews</h1>
-
-  <div class="card shadow-sm mb-3">
-    <div class="card-body">
-      <div class="row g-2 align-items-end">
-        <div class="col-md-6">
-          <label for="reviewSearch" class="form-label">Search</label>
-          <input id="reviewSearch" type="text" class="form-control" placeholder="Product or reviewer" />
+  <div class="reviews-stats">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div class="stat-content">
+            <h3>4.8</h3>
+            <p>Average Rating</p>
+          </div>
         </div>
-        <div class="col-md-3">
-          <label for="ratingFilter" class="form-label">Minimum Rating</label>
-          <select id="ratingFilter" class="form-select">
-            <option value="">All</option>
-            <option value="5">5</option>
-            <option value="4">4+</option>
-            <option value="3">3+</option>
-          </select>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-chat-dots"></i>
+          </div>
+          <div class="stat-content">
+            <h3>125</h3>
+            <p>Total Reviews</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-check-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>98</h3>
+            <p>Positive Reviews</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="bi bi-exclamation-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>5</h3>
+            <p>Pending Response</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card shadow-sm">
-    <div class="table-responsive">
-      <table class="table table-hover align-middle mb-0">
-        <thead class="table-light">
-          <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Reviewer</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Comment</th>
-            <th scope="col">Date</th>
-            <th scope="col" class="text-end">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cotton Poplin</td>
-            <td>John Doe</td>
-            <td>
-              <span class="text-warning">★★★★★</span>
-            </td>
-            <td>Excellent quality and fast shipping.</td>
-            <td>2025-08-02</td>
-            <td class="text-end"><a class="btn btn-sm btn-outline-secondary" href="#">Reply</a></td>
-          </tr>
-          <tr>
-            <td colspan="6" class="text-center text-muted">Data will load here.</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="reviews-list">
+    <div class="review-card" *ngFor="let review of reviews">
+      <div class="review-header">
+        <div class="review-info">
+          <h6>{{ review.customer }}</h6>
+          <p>{{ review.product }}</p>
+        </div>
+        <div class="review-rating">
+          <div class="stars">
+            <i *ngFor="let star of [1,2,3,4,5]" 
+               class="bi" 
+               [class.bi-star-fill]="star <= review.rating"
+               [class.bi-star]="star > review.rating">
+            </i>
+          </div>
+          <span class="rating-text">{{ review.rating }}/5</span>
+        </div>
+      </div>
+      <div class="review-content">
+        <p>{{ review.comment }}</p>
+        <small class="review-date">{{ review.date }}</small>
+      </div>
+      <div class="review-actions">
+        <button class="btn btn-sm btn-outline-primary">Reply</button>
+        <button class="btn btn-sm btn-outline-secondary">Flag</button>
+      </div>
     </div>
   </div>
-</section>
+</div>

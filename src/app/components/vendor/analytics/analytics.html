@@ -1,38 +1,89 @@
-<section class="py-4" aria-labelledby="page-title">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="/vendor/dashboard" class="nav-link p-0">Dashboard</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Analytics</li>
-    </ol>
-  </nav>
+<div class="analytics-container">
+  <div class="page-header">
+    <h1>Analytics Dashboard</h1>
+    <p>Track your business performance and insights</p>
+  </div>
 
-  <h1 id="page-title" class="h3 fw-bold mb-3">Analytics</h1>
-
-  <div class="row g-3">
-    <div class="col-lg-8">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-white">
-          <h2 class="h6 mb-0">Sales Overview</h2>
-        </div>
-        <div class="card-body">
-          <div class="text-muted">Chart placeholder</div>
-          <div class="ratio ratio-16x9 bg-light rounded"></div>
+  <div class="analytics-overview">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="bi bi-currency-rupee"></i>
+          </div>
+          <div class="metric-content">
+            <h3>₹{{ analytics.totalRevenue | number }}</h3>
+            <p>Total Revenue</p>
+            <span class="metric-change positive">+12.5%</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-header bg-white">
-          <h2 class="h6 mb-0">Top Products</h2>
+      <div class="col-md-3">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="bi bi-cart"></i>
+          </div>
+          <div class="metric-content">
+            <h3>{{ analytics.totalOrders }}</h3>
+            <p>Total Orders</p>
+            <span class="metric-change positive">+8.2%</span>
+          </div>
         </div>
-        <div class="card-body">
-          <ul class="list-unstyled mb-0">
-            <li class="d-flex justify-content-between py-2 border-bottom"><span>Cotton Poplin</span><span class="text-muted">1,240</span></li>
-            <li class="d-flex justify-content-between py-2 border-bottom"><span>Silk Blend</span><span class="text-muted">980</span></li>
-            <li class="d-flex justify-content-between py-2"><span>Wool Twill</span><span class="text-muted">730</span></li>
-          </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <div class="metric-content">
+            <h3>₹{{ analytics.avgOrderValue | number }}</h3>
+            <p>Avg Order Value</p>
+            <span class="metric-change positive">+5.1%</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="metric-content">
+            <h3>45</h3>
+            <p>Active Customers</p>
+            <span class="metric-change positive">+15.3%</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+
+  <div class="analytics-charts">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="chart-card">
+          <h4>Revenue Trend</h4>
+          <div class="chart-placeholder">
+            <i class="bi bi-bar-chart"></i>
+            <p>Revenue chart will be displayed here</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="chart-card">
+          <h4>Top Products</h4>
+          <div class="top-products">
+            <div class="product-item" *ngFor="let product of analytics.topProducts">
+              <div class="product-info">
+                <h6>{{ product.name }}</h6>
+                <p>{{ product.sales }} sales</p>
+              </div>
+              <div class="product-bar">
+                <div class="bar-fill" [style.width.%]="(product.sales / 50) * 100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,327 +1,276 @@
-
-<div *ngIf="showToast" class="toast-notif show">
-  <span class="icon">
-    <i class="fas fa-check-circle"></i>
-  </span>
-  <span class="message">{{ toastMessage }}</span>
-  <span class="close-btn" (click)="showToast = false">&times;</span>
-</div>
-
-
-<!-- Top Filter Bar (Horizontal Layout + Sort + Title) -->
-<section class="py-4 bg-light featured-products-section mt-5">
-  <div class="container-fluid">
-    <div class="row">
-
-      <!-- Filters Sidebar -->
-      <aside class="col-lg-3 col-md-4 mb-4 d-none d-md-block">
-        <app-filter (filtersApplied)="onFiltersApplied($event)"></app-filter>
-      </aside>
-
-      <!-- Products Grid -->
-      <div class="col-lg-9 col-md-8">
-
-        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-          <div class="fw-bold fs-5 text-primary-900" id="catalogCount">All Fabrics</div>
-          <div class="d-flex align-items-center gap-2">
-            <label for="sortBy" class="form-label mb-0 fw-semibold">Sort by:</label>
-            <select class="form-select minw-160" id="sortBy" [(ngModel)]="sortBy" (change)="onSortChange()" title="Sort products">
-              <option value="newest">Newest</option>
-              <option value="priceLowHigh">Price: Low to High</option>
-              <option value="priceHighLow">Price: High to Low</option>
-              <option value="popularity">Popularity</option>
-              <option value="rating">Rating</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Products Grid -->
-        <div class="row g-3">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-6" *ngFor="let product of featuredProducts">
-            <div class="product-card bg-white rounded-4 h-100 p-3 text-center shadow-sm">
-
-              <!-- Product Image (clickable) -->
-              <a [routerLink]="['/products', product.id]">
-                <div class="img-hover-zoom rounded-4 overflow-hidden mb-3 position-relative">
-                  <img [src]="product.imageUrl" alt="{{ product.name }}" title="{{ product.name }}" class="img-fluid featured-img">
-                  <!-- Floating Add to Cart Button -->
-                  <button class="btn-overlay-cart"
-                    (click)="addToCart(product); $event.stopPropagation(); $event.preventDefault();">
-                    <i class="bi bi-cart-plus me-1"></i> Add to Cart
-                  </button>
-
-                </div>
-              </a>
-
-              <!-- Product Info -->
-              <a [routerLink]="['/products', product.id]" class="text-decoration-none">
-                <h6 class="mb-1">{{ product.name }}</h6>
-              </a>
-              <p class="text-muted small mb-2">{{ product.description }}</p>
-
-              <!-- Price -->
-              <div class="price mb-3">
-                {{ product.price | currency:'INR' }}
-                <span class="text-muted fs-6">/ {{ product.unit }}</span>
-              </div>
-
-              <!-- Buttons -->
-              <div class="d-flex justify-content-center gap-3 mt-auto">
-                <button class="btn btn-primary flex-fill shadow-sm" [routerLink]="['/products', product.id]">
-                  <i class="bi bi-cart-fill me-1"></i> Buy Now
-                </button>
-                <!-- <button class="btn btn-outline-secondary flex-fill" [routerLink]="['/products', product.id]">
-                  Quick Details
-                </button> -->
-                <button class="btn btn-outline-secondary flex-fill"
-  data-bs-toggle="modal"
-  data-bs-target="#quickViewModal"
-  (click)="openQuickView(product)">
-  Quick Details
-</button>
-
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-
+<div class="catalogs-container">
+  <!-- Hero Section -->
+  <section class="catalogs-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Product Catalogs</h1>
+        <p class="hero-subtitle">Browse comprehensive catalogs from verified fabric suppliers</p>
       </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-
-
-
-
-
-
-  <!-- QUICK VIEW MODAL -->
-<div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content rounded-4 shadow">
-      <div class="modal-header border-0">
-        <h5 class="modal-title fw-bold">{{ selectedProduct?.name }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body">
+  <!-- Filters Section -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-card">
         <div class="row">
-          <!-- Left Image -->
-          <div class="col-md-6">
-            <img [src]="selectedProduct?.imageUrl" alt="{{ selectedProduct?.name }}"
-              class="img-fluid rounded-3 shadow-sm w-100">
-          </div>
-
-          <!-- Right Details -->
-          <div class="col-md-6">
-            <p class="text-muted">{{ selectedProduct?.description }}</p>
-
-            <h4 class="text-primary">
-              {{ selectedProduct?.price | currency:'INR' }}
-              <small class="text-muted fs-6">/ {{ selectedProduct?.unit }}</small>
-            </h4>
-
-            <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
-            <p><strong>Supplier:</strong> {{ selectedProduct?.supplier }}</p>
-            <p><strong>Material:</strong> {{ selectedProduct?.material }}</p>
-            <p><strong>Weight:</strong> {{ selectedProduct?.weight }}</p>
-            <p><strong>Width:</strong> {{ selectedProduct?.width }}</p>
-            <!-- <p><strong>Colors:</strong> {{ selectedProduct?.colors.join(', ') }}</p>
-            <p><strong>Attributes:</strong> {{ selectedProduct?.attributes.join(', ') }}</p> -->
-            <p><strong>Stock:</strong> {{ selectedProduct?.stock }} available</p>
-            <p><strong>Rating:</strong> ⭐ {{ selectedProduct?.rating }} ({{ selectedProduct?.reviews }} reviews)</p>
-
-            <div class="mt-3 d-flex gap-2">
-              <button class="btn btn-primary flex-fill"
-                (click)="addToCart(selectedProduct!);"
-                data-bs-dismiss="modal">
-                <i class="bi bi-cart-plus me-1"></i> Add to Cart
-              </button>
-              <a [routerLink]="['/products', selectedProduct?.id]" class="btn btn-outline-secondary flex-fill" data-bs-dismiss="modal">
-                View Details
-              </a>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Search Catalogs</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="searchTerm"
+                (input)="onSearchChange()"
+                placeholder="Search catalogs..."
+              />
             </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Category</label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedCategory"
+                (change)="onCategoryChange()"
+              >
+                <option value="">All Categories</option>
+                <option *ngFor="let category of categories" [value]="category.id">
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Vendor</label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedVendor"
+                (change)="onVendorChange()"
+              >
+                <option value="">All Vendors</option>
+                <option *ngFor="let vendor of vendors" [value]="vendor.id">
+                  {{ vendor.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="filter-group">
+              <label class="form-label">Sort By</label>
+              <select
+                class="form-control"
+                [(ngModel)]="sortBy"
+                (change)="onSortChange()"
+              >
+                <option value="name">Name</option>
+                <option value="vendor">Vendor</option>
+                <option value="products">Product Count</option>
+                <option value="date">Date Added</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-outline-primary" (click)="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalogs Section -->
+  <section class="catalogs-section">
+    <div class="container">
+      <div class="catalogs-header">
+        <div class="catalogs-info">
+          <h2>Available Catalogs</h2>
+          <p>{{ filteredCatalogs.length }} catalogs found</p>
+        </div>
+        
+        <div class="view-controls">
+          <button
+            class="btn btn-sm"
+            [class.btn-primary]="viewMode === 'grid'"
+            [class.btn-outline-primary]="viewMode !== 'grid'"
+            (click)="setViewMode('grid')"
+          >
+            <i class="bi bi-grid-3x3-gap"></i>
+          </button>
+          <button
+            class="btn btn-sm"
+            [class.btn-primary]="viewMode === 'list'"
+            [class.btn-outline-primary]="viewMode !== 'list'"
+            (click)="setViewMode('list')"
+          >
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading catalogs...</p>
+      </div>
+
+      <!-- Catalogs Grid/List -->
+      <div *ngIf="!isLoading" class="catalogs-content">
+        <div [class]="viewMode === 'grid' ? 'catalogs-grid' : 'catalogs-list'">
+          <div
+            *ngFor="let catalog of filteredCatalogs"
+            class="catalog-card"
+            [class.list-view]="viewMode === 'list'"
+          >
+            <div class="catalog-image">
+              <img [src]="catalog.coverImage || '/assets/images/catalog-placeholder.jpg'" [alt]="catalog.name" />
+              <div class="catalog-badges">
+                <span *ngIf="catalog.isNew" class="badge badge-primary">New</span>
+                <span *ngIf="catalog.isFeatured" class="badge badge-success">Featured</span>
+                <span *ngIf="catalog.isDigital" class="badge badge-info">Digital</span>
+              </div>
+            </div>
+
+            <div class="catalog-info">
+              <div class="catalog-vendor">
+                <img [src]="catalog.vendor.logo || '/assets/images/default-vendor.png'" [alt]="catalog.vendor.name" />
+                <span>{{ catalog.vendor.name }}</span>
+              </div>
+              
+              <h3 class="catalog-name">{{ catalog.name }}</h3>
+              <p class="catalog-description">{{ catalog.description }}</p>
+              
+              <div class="catalog-meta">
+                <div class="meta-item">
+                  <i class="bi bi-box-seam"></i>
+                  <span>{{ catalog.productCount }} products</span>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-calendar"></i>
+                  <span>{{ catalog.updatedAt | date:'MMM yyyy' }}</span>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-file-earmark-pdf"></i>
+                  <span>{{ catalog.pageCount }} pages</span>
+                </div>
+              </div>
+
+              <div class="catalog-categories">
+                <span *ngFor="let category of catalog.categories" class="category-tag">
+                  {{ category }}
+                </span>
+              </div>
+            </div>
+
+            <div class="catalog-actions">
+              <button class="btn btn-primary" (click)="viewCatalog(catalog)">
+                <i class="bi bi-eye"></i>
+                View Catalog
+              </button>
+              <button class="btn btn-outline-primary" (click)="downloadCatalog(catalog)">
+                <i class="bi bi-download"></i>
+                Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="filteredCatalogs.length === 0" class="empty-state">
+          <i class="bi bi-folder-x"></i>
+          <h3>No catalogs found</h3>
+          <p>Try adjusting your search criteria or filters</p>
+          <button class="btn btn-primary" (click)="clearFilters()">
+            Clear Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why Use Our Catalogs?</h2>
+        <p>Comprehensive product information at your fingertips</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="bi bi-search"></i>
+            </div>
+            <h4>Easy Search</h4>
+            <p>Quickly find specific products and categories with our advanced search and filtering options.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="bi bi-phone"></i>
+            </div>
+            <h4>Mobile Friendly</h4>
+            <p>Access catalogs on any device with our responsive design and mobile-optimized interface.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="bi bi-download"></i>
+            </div>
+            <h4>Download & Share</h4>
+            <p>Download PDF versions of catalogs for offline viewing and easy sharing with your team.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="bi bi-clock"></i>
+            </div>
+            <h4>Always Updated</h4>
+            <p>Get access to the latest product information with regularly updated catalogs from suppliers.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h4>Verified Content</h4>
+            <p>All catalogs are verified and maintained by trusted suppliers with accurate product information.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="bi bi-heart"></i>
+            </div>
+            <h4>Save Favorites</h4>
+            <p>Bookmark your favorite catalogs for quick access and stay updated on new products.</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Can't Find What You're Looking For?</h2>
+        <p>Contact our team to request specific catalogs or get personalized recommendations</p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary btn-lg" routerLink="/contact">
+            Request Catalog
+          </button>
+          <button class="btn btn-outline-primary btn-lg" routerLink="/suppliers">
+            Browse Suppliers
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <section class="py-5 bg-light featured-products-section"> -->
-<!-- <div class="container-fluid"> -->
-<!-- Title Section -->
-<!-- <div class="text-center mb-5">
-      <h2 class="fw-bold display-5 text-primary">Featured Fabrics</h2>
-      <p class="lead text-muted">Explore our premium selection of high-quality fabrics.</p>
-    </div> -->
-
-<!-- Products Grid -->
-<!-- <div class="row g-4">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-6" *ngFor="let product of featuredProducts">
-        <div class="card border-0 shadow-sm h-100 product-card transition hover-shadow">
-          <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
-            <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid w-100 product-image"
-              style="height: 250px; object-fit: cover;">
-          </div>
-          <div class="card-body text-center px-3 py-4">
-            <h5 class="fw-semibold text-dark mb-2">{{ product.name }}</h5>
-            <div class="mb-0">
-              <span class="fw-bold text-success me-1">{{ product.price | currency:'INR' }}</span>
-              <small class="text-muted text-decoration-line-through">{{ product.originalPrice | currency:'INR'
-                }}</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-<!-- Load More Button -->
-<!-- <div class="text-center mt-5">
-      <a routerLink="/catalog" class="btn btn-outline-primary btn-lg px-5 rounded-pill shadow-sm">Load More Fabrics</a>
-    </div> -->
-<!-- </div> -->
-<!-- </section> -->
-
-<!-- <style>
-  .product-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  }
-
-  .product-image-wrapper {
-    overflow: hidden;
-  }
-
-  .product-image {
-    transition: transform 0.4s ease;
-  }
-
-  .product-image-wrapper:hover .product-image {
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 576px) {
-    .product-image {
-      height: 200px !important;
-    }
-  }
-</style> -->
-
-
-<!-- <section class="py-4 bg-light featured-products-section"> -->
-<!-- <div class="container-fluid"> -->
-<!-- Title Section -->
-<!-- <div class="text-center mb-4">
-      <h4 class="fw-bold text-primary">Featured Fabrics</h4>
-      <p class="text-muted small">Explore our premium selection of high-quality fabrics.</p>
-    </div> -->
-
-<!-- Products Grid -->
-<!-- <div class="row g-3">
-      <div class="col-lg-2 col-md-4 col-sm-6 col-6" *ngFor="let product of featuredProducts">
-        <div class="card border-0 shadow-sm h-100 product-card">
-          <div class="position-relative overflow-hidden rounded-top product-image-wrapper">
-            <img [src]="product.imageUrl" [alt]="product.name" class="img-fluid w-100 product-image"
-              style="height: 150px; object-fit: cover;">
-          </div>
-          <div class="card-body text-center px-2 py-3">
-            <h6 class="fw-semibold text-dark mb-1 product-title">{{ product.name }}</h6>
-            <div>
-              <span class="fw-bold text-success me-1 small">{{ product.price | currency:'INR' }}</span>
-              <small class="text-muted text-decoration-line-through small">{{ product.originalPrice | currency:'INR'
-                }}</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
-<!-- Load More Button -->
-<!-- <div class="text-center mt-4">
-      <a routerLink="/catalog" class="btn btn-outline-primary btn-sm px-4 rounded-pill shadow-sm">Load More Fabrics</a>
-    </div> -->
-<!-- </div> -->
-
-<!-- </section> -->
-
-<!-- <style>
-  .product-card {
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
-  }
-
-  .product-image-wrapper {
-    overflow: hidden;
-    border-radius: 8px 8px 0 0;
-  }
-
-  .product-image {
-    transition: transform 0.4s ease;
-  }
-
-  .product-image-wrapper:hover .product-image {
-    transform: scale(1.05);
-  }
-
-  .product-title {
-    font-size: 0.9rem;
-  }
-
-  .small {
-    font-size: 0.75rem;
-  }
-
-  @media (max-width: 576px) {
-    .product-image {
-      height: 120px !important;
-    }
-
-    .product-title {
-      font-size: 0.8rem;
-    }
-  }
-</style> -->

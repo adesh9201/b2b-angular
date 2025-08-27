@@ -1,245 +1,255 @@
-<!-- Page Header -->
-<section class="py-5 mt-5">
-  <div class="container">
-    <nav aria-label="breadcrumb"></nav>
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <h1 class="fw-bold mb-3 header-title">{{ aboutData.header.title }}</h1>
-        <p class="lead text-muted-custom">{{ aboutData.header.subtitle }}</p>
-      </div>
-      <div class="col-lg-6">
-        <img [src]="aboutData.header.imageUrl" [alt]="aboutData.header.imageAlt" class="img-fluid rounded shadow" />
+<div class="about-container">
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>About FabHub</h1>
+        <p class="hero-subtitle">Connecting the world's fabric industry through innovative B2B marketplace solutions</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Our Story -->
-<section class="py-5" id="our-story">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 mx-auto text-center">
-        <h2 class="fw-bold mb-4 header-title">{{ aboutData.story.title }}</h2>
-        <p class="lead text-muted-custom mb-5">{{ aboutData.story.subtitle }}</p>
-        <div class="row g-4">
-          <div class="col-md-4" *ngFor="let feature of aboutData.story.features">
-            <div class="text-center">
-              <div [ngClass]="feature.bgClass + ' p-3 rounded-circle d-inline-block mb-3 icon-bg'">
-                <i [class]="feature.icon + ' fa-2x icon-color'"></i>
+  <!-- Company Story -->
+  <section class="company-story">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="story-content">
+            <h2>Our Story</h2>
+            <p class="lead">Founded in 2020, FabHub emerged from a simple vision: to revolutionize how the global fabric industry connects, trades, and grows together.</p>
+            <p>We recognized the challenges faced by fabric manufacturers, wholesalers, and retailers in finding reliable partners, managing complex supply chains, and accessing global markets. Our platform was built to solve these pain points through technology, transparency, and trust.</p>
+            <p>Today, FabHub serves as the premier B2B marketplace for the fabric industry, connecting thousands of businesses across continents and facilitating millions of dollars in trade annually.</p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="story-image">
+            <img src="/assets/images/about-story.jpg" alt="Our Story" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mission-vision">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="mission-card">
+            <div class="card-icon">
+              <i class="bi bi-bullseye"></i>
+            </div>
+            <h3>Our Mission</h3>
+            <p>To empower fabric businesses worldwide by providing a seamless, transparent, and efficient B2B marketplace that fosters growth, innovation, and sustainable partnerships in the global textile industry.</p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="vision-card">
+            <div class="card-icon">
+              <i class="bi bi-eye"></i>
+            </div>
+            <h3>Our Vision</h3>
+            <p>To become the world's leading B2B fabric marketplace, where every fabric business can discover new opportunities, build lasting partnerships, and thrive in an increasingly connected global economy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="statistics-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>FabHub by the Numbers</h2>
+        <p>Our impact on the global fabric industry</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-number">10,000+</div>
+            <div class="stat-label">Active Vendors</div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-number">50,000+</div>
+            <div class="stat-label">Products Listed</div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Countries Served</div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-number">$500M+</div>
+            <div class="stat-label">Annual Trade Volume</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Core Values</h2>
+        <p>The principles that guide everything we do</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h4>Trust & Transparency</h4>
+            <p>We believe in building trust through complete transparency in all our transactions and communications.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="bi bi-people"></i>
+            </div>
+            <h4>Community First</h4>
+            <p>Our success is measured by the success of our community members and their ability to grow their businesses.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="bi bi-lightbulb"></i>
+            </div>
+            <h4>Innovation</h4>
+            <p>We continuously innovate to provide cutting-edge solutions that address the evolving needs of the fabric industry.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="bi bi-globe"></i>
+            </div>
+            <h4>Global Reach</h4>
+            <p>We connect businesses across borders, enabling global trade and cultural exchange in the fabric industry.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="bi bi-heart"></i>
+            </div>
+            <h4>Sustainability</h4>
+            <p>We promote sustainable practices and support eco-friendly fabric solutions for a better future.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="value-card">
+            <div class="value-icon">
+              <i class="bi bi-award"></i>
+            </div>
+            <h4>Quality</h4>
+            <p>We maintain the highest standards of quality in everything we do, from platform features to customer service.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Meet Our Team</h2>
+        <p>The passionate individuals behind FabHub's success</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6" *ngFor="let member of teamMembers">
+          <div class="team-card">
+            <div class="team-image">
+              <img [src]="member.image || '/assets/images/default-avatar.png'" [alt]="member.name" />
+            </div>
+            <div class="team-info">
+              <h4>{{ member.name }}</h4>
+              <p class="team-role">{{ member.position }}</p>
+              <p class="team-bio">{{ member.bio }}</p>
+              <div class="team-social">
+                <a *ngIf="member.linkedin" [href]="member.linkedin" target="_blank">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+                <a *ngIf="member.twitter" [href]="member.twitter" target="_blank">
+                  <i class="bi bi-twitter"></i>
+                </a>
+                <a *ngIf="member.email" [href]="'mailto:' + member.email">
+                  <i class="bi bi-envelope"></i>
+                </a>
               </div>
-              <h5 class="feature-title">{{ feature.title }}</h5>
-              <p class="text-muted-custom">{{ feature.description }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Mission & Vision -->
-<section class="py-5 bg-section-light" id="our-mission">
-  <div class="container">
-    <div class="row g-5">
-      <!-- Mission -->
-      <div class="col-lg-6">
-        <div class="card card-lift animate-on-scroll">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-4">
-              <div [ngClass]="aboutData.missionVision.mission.bgClass + ' p-3 rounded me-3 icon-bg'">
-                <i [class]="aboutData.missionVision.mission.icon + ' fa-2x icon-color'"></i>
-              </div>
-              <h3 class="mb-0 section-title">{{ aboutData.missionVision.mission.title }}</h3>
-            </div>
-            <p class="lead section-text mb-4">{{ aboutData.missionVision.mission.description }}</p>
-            <ul class="list-unstyled">
-              <li *ngFor="let point of aboutData.missionVision.mission.points" class="mb-2 list-icon-success">
-                <i class="fas fa-check me-2"></i>{{ point }}
-              </li>
-            </ul>
+  <!-- Technology -->
+  <section class="technology-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="tech-image">
+            <img src="/assets/images/technology.jpg" alt="Our Technology" />
           </div>
         </div>
-      </div>
-
-      <!-- Vision -->
-      <div class="col-lg-6">
-        <div class="card card-lift animate-on-scroll">
-          <div class="card-body p-4">
-            <div class="d-flex align-items-center mb-4">
-              <div [ngClass]="aboutData.missionVision.vision.bgClass + ' p-3 rounded me-3 icon-bg'">
-                <i [class]="aboutData.missionVision.vision.icon + ' fa-2x icon-color'"></i>
+        <div class="col-lg-6">
+          <div class="tech-content">
+            <h2>Powered by Innovation</h2>
+            <p class="lead">Our platform is built on cutting-edge technology that ensures security, scalability, and seamless user experience.</p>
+            <div class="tech-features">
+              <div class="tech-feature">
+                <i class="bi bi-shield-lock"></i>
+                <div>
+                  <h5>Enterprise Security</h5>
+                  <p>Bank-level encryption and security protocols protect all transactions and data.</p>
+                </div>
               </div>
-              <h3 class="mb-0 section-title">{{ aboutData.missionVision.vision.title }}</h3>
-            </div>
-            <p class="lead section-text mb-4">{{ aboutData.missionVision.vision.description }}</p>
-            <ul class="list-unstyled">
-              <li *ngFor="let point of aboutData.missionVision.vision.points" class="mb-2 list-icon-warning">
-                <i class="fas fa-star me-2"></i>{{ point }}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Stats -->
-<section class="py-5">
-  <div class="container">
-    <div class="row text-center g-4">
-      <div class="col-lg-3 col-md-6" *ngFor="let stat of aboutData?.stats">
-        <div class="p-4">
-          <h2 class="fw-bold mb-2" [ngClass]="stat.colorClass + ' stat-number'">{{ stat.number }}</h2>
-          <p class="text-muted-custom">{{ stat.description }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Team -->
-<section class="py-5 bg-section-light" id="team">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center mb-5">
-        <h2 class="fw-bold header-title">{{ aboutData.team.title }}</h2>
-        <p class="lead text-muted-custom">{{ aboutData.team.subtitle }}</p>
-      </div>
-    </div>
-    <div class="row g-4">
-      <div class="col-lg-3 col-md-6" *ngFor="let member of aboutData.team.members">
-        <div class="card card-lift animate-on-scroll text-center">
-          <div class="card-body p-4">
-            <img [src]="member.imageUrl" [alt]="member.name" class="rounded-circle mb-3 team-img" />
-            <h5 class="mb-1">{{ member.name }}</h5>
-            <p class="role-text mb-2">{{ member.role }}</p>
-            <p class="text-muted-custom small">{{ member.description }}</p>
-            <div class="social-links">
-              <a *ngFor="let link of member.socialLinks" [href]="link.url" class="social-link" target="_blank" rel="noopener noreferrer">
-                <i [class]="link.iconClass"></i>
-              </a>
+              <div class="tech-feature">
+                <i class="bi bi-lightning"></i>
+                <div>
+                  <h5>High Performance</h5>
+                  <p>Optimized for speed with global CDN and advanced caching technologies.</p>
+                </div>
+              </div>
+              <div class="tech-feature">
+                <i class="bi bi-phone"></i>
+                <div>
+                  <h5>Mobile First</h5>
+                  <p>Responsive design ensures seamless experience across all devices.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Contact Section -->
-<section class="py-5" id="contact">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center mb-5">
-        <h2 class="fw-bold header-title">{{ aboutData.contact.title }}</h2>
-        <p class="lead text-muted-custom">{{ aboutData.contact.subtitle }}</p>
-      </div>
-    </div>
-    <div class="row g-5">
-      <div class="col-lg-6">
-        <div class="card card-lift animate-on-scroll">
-          <div class="card-body p-4">
-            <h4 class="mb-4 section-title">Contact Information</h4>
-            <div *ngFor="let item of aboutData.contact.infoItems" class="d-flex mb-3">
-              <div class="flex-shrink-0">
-                <div [ngClass]="item.bgClass + ' p-2 rounded icon-bg'">
-                  <i [class]="item.icon + ' icon-color'"></i>
-                </div>
-              </div>
-              <div class="flex-grow-1 ms-3">
-                <h6 class="mb-1 feature-title">{{ item.title }}</h6>
-                <p class="text-muted-custom mb-0">{{ item.details }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact Form -->
-      <div class="col-lg-6">
-        <div class="card card-lift animate-on-scroll">
-          <div class="card-body p-4">
-            <h4 class="mb-4 section-title">Send us a Message</h4>
-            <form id="contactForm" (ngSubmit)="onSubmit()" #contactForm="ngForm" novalidate>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="contactName" class="form-label">Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="contactName"
-                      required
-                      name="name"
-                      [(ngModel)]="contactFormData.name"
-                      #name="ngModel"
-                    />
-                    <div *ngIf="name.invalid && name.touched" class="text-danger small">
-                      Name is required.
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="contactEmail" class="form-label">Email</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="contactEmail"
-                      required
-                      email
-                      name="email"
-                      [(ngModel)]="contactFormData.email"
-                      #email="ngModel"
-                    />
-                    <div *ngIf="email.invalid && email.touched" class="text-danger small">
-                      Valid email is required.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="contactSubject" class="form-label">Subject</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="contactSubject"
-                  required
-                  name="subject"
-                  [(ngModel)]="contactFormData.subject"
-                  #subject="ngModel"
-                />
-                <div *ngIf="subject.invalid && subject.touched" class="text-danger small">
-                  Subject is required.
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="contactMessage" class="form-label">Message</label>
-                <textarea
-                  class="form-control"
-                  id="contactMessage"
-                  rows="4"
-                  required
-                  name="message"
-                  [(ngModel)]="contactFormData.message"
-                  #message="ngModel"
-                ></textarea>
-                <div *ngIf="message.invalid && message.touched" class="text-danger small">
-                  Message is required.
-                </div>
-              </div>
-              <button
-                type="submit"
-                class="btn btn-primary ripple"
-                [disabled]="contactForm.invalid"
-              >
-                <i class="fas fa-paper-plane me-2"></i>Send Message
-              </button>
-            </form>
-          </div>
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Join the FabHub Community?</h2>
+        <p>Whether you're a fabric manufacturer, wholesaler, or retailer, FabHub provides the tools and connections you need to grow your business.</p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary btn-lg" routerLink="/register">
+            Get Started Today
+          </button>
+          <button class="btn btn-outline-primary btn-lg" routerLink="/contact">
+            Contact Us
+          </button>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

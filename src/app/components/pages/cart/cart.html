@@ -1,145 +1,204 @@
-<!-- Page Header -->
-<section class="bg-surface mt-header">
+<div class="cart-container">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-6">
-        <h1 class="fw-bold mb-2">Shopping Cart</h1>
-        <p class="text-muted mb-0">Review your selected fabrics</p>
-      </div>
-      <div class="col-md-6 text-md-end">
-        <a routerLink="/catalog" class="btn btn-outline ripple">
-          <i class="fas fa-arrow-left me-1"></i>Continue Shopping
-        </a>
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active">Shopping Cart</li>
+      </ol>
+    </nav>
+
+    <div class="cart-header">
+      <h1>Shopping Cart</h1>
+      <p *ngIf="cartItems.length > 0" class="cart-count">{{ getTotalItems() }} items in your cart</p>
+    </div>
+
+    <!-- Empty Cart -->
+    <div *ngIf="cartItems.length === 0" class="empty-cart" data-cy="empty-cart">
+      <div class="empty-cart-content">
+        <i class="bi bi-cart-x"></i>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added any items to your cart yet.</p>
+        <button class="btn btn-primary" routerLink="/products">
+          <i class="bi bi-arrow-left"></i>
+          Continue Shopping
+        </button>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Cart Content -->
-<section class="py-5" *ngIf="cartItems.length > 0; else emptyCart">
-  <div class="container">
-    <div class="row g-4">
-      
-      <!-- Cart Items -->
-      <div class="col-lg-8">
-        <div class="card shadow-sm card-lift">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i>Cart Items</h5>
-          </div>
-          <div class="card-body p-0">
-            <div *ngFor="let item of cartItems" class="d-flex p-3 border-bottom align-items-center">
-              <img [src]="item.image" alt="{{item.name}}" class="me-3 cart-img">
-              <div class="flex-grow-1">
-                <h6 class="mb-1">{{item.name}}</h6>
-                <p class="text-muted mb-1">{{item.price | currency}}</p>
-                <div class="d-flex align-items-center">
-                  <button class="btn btn-sm btn-outline-primary qty-btn me-1"
-                          (click)="decreaseQuantity(item)">
-                    <i class="fas fa-minus"></i>
+    <!-- Cart Items -->
+    <div *ngIf="cartItems.length > 0" class="cart-content">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="cart-items">
+            <div class="cart-item" *ngFor="let item of cartItems; trackBy: trackByItemId" data-cy="cart-item">
+              <div class="item-image">
+                <img [src]="item.product.images[0] || '/assets/images/placeholder.jpg'" [alt]="item.product.name" />
+              </div>
+              
+              <div class="item-details">
+                <h3 class="item-name">
+                  <a [routerLink]="['/products', item.product.id]">{{ item.product.name }}</a>
+                </h3>
+                <p class="item-category">{{ item.product.category }}</p>
+                <p class="item-vendor">by {{ item.product.vendor.name }}</p>
+                
+                <div class="item-specifications">
+                  <div class="spec-item" *ngIf="item.selectedColor">
+                    <span class="spec-label">Color:</span>
+                    <span class="spec-value">{{ item.selectedColor }}</span>
+                  </div>
+                  <div class="spec-item" *ngIf="item.selectedSize">
+                    <span class="spec-label">Size:</span>
+                    <span class="spec-value">{{ item.selectedSize }}</span>
+                  </div>
+                  <div class="spec-item" *ngIf="item.selectedQuantity">
+                    <span class="spec-label">Quantity:</span>
+                    <span class="spec-value">{{ item.selectedQuantity }} yards</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item-quantity">
+                <label class="form-label">Quantity</label>
+                <div class="quantity-controls">
+                  <button 
+                    class="btn btn-sm btn-outline-primary"
+                    (click)="decreaseQuantity(item)"
+                    [disabled]="item.quantity <= 1"
+                  >
+                    <i class="bi bi-dash"></i>
                   </button>
-                  <input type="number" min="1" class="form-control form-control-sm text-center me-1"
-                         [(ngModel)]="item.quantity"
-                         (change)="updateQuantity(item, item.quantity)">
-                  <button class="btn btn-sm btn-outline-primary qty-btn me-2"
-                          (click)="increaseQuantity(item)">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                  <button class="btn btn-sm btn-outline-danger" (click)="removeItem(item)">
-                    <i class="fas fa-trash"></i>
+                  <input
+                    type="number"
+                    class="form-control quantity-input"
+                    [value]="item.quantity"
+                    (change)="updateQuantity(item, $event)"
+                    min="1"
+                    [max]="item.product.stock"
+                    data-cy="quantity-input"
+                  />
+                  <button 
+                    class="btn btn-sm btn-outline-primary"
+                    (click)="increaseQuantity(item)"
+                    [disabled]="item.quantity >= item.product.stock"
+                  >
+                    <i class="bi bi-plus"></i>
                   </button>
                 </div>
+                <small class="text-muted">Max: {{ item.product.stock }} available</small>
+              </div>
+
+              <div class="item-price">
+                <div class="price-per-unit">${{ item.product.price }} each</div>
+                <div class="price-total">${{ getItemTotal(item) }}</div>
+              </div>
+
+              <div class="item-actions">
+                <button 
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="removeItem(item)"
+                  data-cy="remove-item"
+                >
+                  <i class="bi bi-trash"></i>
+                  Remove
+                </button>
+                <button 
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="moveToWishlist(item)"
+                >
+                  <i class="bi bi-heart"></i>
+                  Save for Later
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cart Actions -->
+          <div class="cart-actions">
+            <button class="btn btn-outline-primary" routerLink="/products">
+              <i class="bi bi-arrow-left"></i>
+              Continue Shopping
+            </button>
+            <button class="btn btn-outline-danger" (click)="clearCart()">
+              <i class="bi bi-trash"></i>
+              Clear Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-lg-4">
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            
+            <div class="summary-line">
+              <span>Subtotal ({{ getTotalItems() }} items)</span>
+              <span>${{ getSubtotal() }}</span>
+            </div>
+            
+            <div class="summary-line">
+              <span>Shipping</span>
+              <span *ngIf="getShippingCost() > 0">${{ getShippingCost() }}</span>
+              <span *ngIf="getShippingCost() === 0" class="text-success">FREE</span>
+            </div>
+            
+            <div class="summary-line">
+              <span>Tax</span>
+              <span>${{ getTaxAmount() }}</span>
+            </div>
+            
+            <div class="summary-line total">
+              <span>Total</span>
+              <span data-cy="cart-total">${{ getTotal() }}</span>
+            </div>
+
+            <div class="promo-code">
+              <label class="form-label">Promo Code</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter promo code"
+                  [(ngModel)]="promoCode"
+                />
+                <button class="btn btn-outline-primary" (click)="applyPromoCode()">
+                  Apply
+                </button>
+              </div>
+              <div *ngIf="appliedPromo" class="promo-applied">
+                <i class="bi bi-check-circle text-success"></i>
+                <span>{{ appliedPromo.code }} applied - ${{ appliedPromo.discount }} off</span>
+                <button class="btn btn-sm btn-link" (click)="removePromoCode()">Remove</button>
+              </div>
+            </div>
+
+            <button 
+              class="btn btn-primary btn-lg w-100"
+              (click)="proceedToCheckout()"
+              data-cy="checkout-button"
+            >
+              <i class="bi bi-credit-card"></i>
+              Proceed to Checkout
+            </button>
+
+            <div class="security-badges">
+              <div class="security-item">
+                <i class="bi bi-shield-check"></i>
+                <span>Secure Checkout</span>
+              </div>
+              <div class="security-item">
+                <i class="bi bi-truck"></i>
+                <span>Free Shipping on Orders $100+</span>
+              </div>
+              <div class="security-item">
+                <i class="bi bi-arrow-clockwise"></i>
+                <span>30-Day Returns</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Order Summary -->
-      <div class="col-lg-4">
-        <div class="card shadow-sm card-lift">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="fas fa-receipt me-2"></i>Order Summary</h5>
-          </div>
-          <div class="card-body">
-            <p class="d-flex justify-content-between">
-              <span>Subtotal:</span> <strong>{{orderSummary.subtotal | currency}}</strong>
-            </p>
-            <p class="d-flex justify-content-between">
-              <span>Shipping:</span> <strong>{{orderSummary.shipping | currency}}</strong>
-            </p>
-            <p class="d-flex justify-content-between">
-              <span>Discount:</span> <strong>-{{orderSummary.discount | currency}}</strong>
-            </p>
-            <hr>
-            <p class="d-flex justify-content-between fw-bold">
-              <span>Total:</span> <span>{{orderSummary.total | currency}}</span>
-            </p>
-          </div>
-        </div>
-
-        <!-- Shipping Options -->
-        <div class="card shadow-sm mt-4 card-lift">
-          <div class="card-header">
-            <h6 class="mb-0"><i class="fas fa-truck me-2"></i>Shipping Options</h6>
-          </div>
-          <div class="card-body">
-            <div class="form-check mb-2">
-              <input class="form-check-input" type="radio" name="shipping" value="standard" checked
-                     (change)="selectShipping('standard')">
-              <label class="form-check-label">
-                Standard Shipping <span class="text-muted">$15.00</span>
-              </label>
-            </div>
-            <div class="form-check mb-2">
-              <input class="form-check-input" type="radio" name="shipping" value="express"
-                     (change)="selectShipping('express')">
-              <label class="form-check-label">
-                Express Shipping <span class="text-muted">$25.00</span>
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="shipping" value="overnight"
-                     (change)="selectShipping('overnight')">
-              <label class="form-check-label">
-                Overnight Shipping <span class="text-muted">$45.00</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- Promo Code -->
-        <div class="card shadow-sm mt-4 card-lift">
-          <div class="card-header">
-            <h6 class="mb-0"><i class="fas fa-tag me-2"></i>Promo Code</h6>
-          </div>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" #promoCode placeholder="Enter promo code">
-              <button class="btn btn-outline ripple" (click)="applyPromoCode(promoCode.value)">Apply</button>
-            </div>
-            <div class="mt-2">{{promoMessage}}</div>
-          </div>
-        </div>
-
-        <button class="btn btn-primary w-100 mt-3 ripple" (click)="openCheckout()">
-          <i class="fas fa-lock me-1"></i>Place Order
-        </button>
-      </div>
-
     </div>
   </div>
-</section>
-
-<!-- Empty Cart State -->
-<ng-template #emptyCart>
-  <div class="text-center py-5">
-    <div class="container">
-      <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
-      <h3 class="text-muted mb-3">Your cart is empty</h3>
-      <p class="text-muted mb-4">Looks like you haven't added any fabrics to your cart yet.</p>
-      <a routerLink="/catalog" class="btn btn-primary btn-lg ripple">
-        <i class="fas fa-shopping-bag me-2"></i>Start Shopping
-      </a>
-    </div>
-  </div>
-</ng-template>
+</div>

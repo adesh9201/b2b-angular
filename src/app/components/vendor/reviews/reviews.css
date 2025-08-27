@@ -1,0 +1,142 @@
+.reviews-container {
+  padding: var(--space-6);
+}
+
+.page-header {
+  margin-bottom: var(--space-6);
+}
+
+.page-header h1 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-2);
+  color: var(--text-primary);
+}
+
+.page-header p {
+  color: var(--text-secondary);
+}
+
+.reviews-stats {
+  margin-bottom: var(--space-6);
+}
+
+.stat-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+}
+
+.stat-content h3 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.stat-content p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.review-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-3);
+}
+
+.review-info h6 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.review-info p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.review-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.stars {
+  display: flex;
+  gap: var(--space-1);
+  color: #ffc107;
+}
+
+.rating-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+}
+
+.review-content {
+  margin-bottom: var(--space-3);
+}
+
+.review-content p {
+  margin: 0 0 var(--space-2) 0;
+  color: var(--text-primary);
+  line-height: var(--line-height-relaxed);
+}
+
+.review-date {
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.review-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .reviews-stats .row {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .review-header {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .review-rating {
+    align-items: flex-start;
+  }
+}

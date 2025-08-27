@@ -1,118 +1,295 @@
-<div *ngIf="selectedProduct" class="container py-5 mt-5">
-  <div class="row gx-5 gy-4">
-
-    <!-- Left Column: Product Images -->
-    <div class="col-lg-7">
-      <div class="position-relative">
-        <img [src]="selectedProduct.imageUrl" alt="{{ selectedProduct.name }}"
-             class="img-fluid rounded shadow-sm main-img mb-3" />
-
-        <!-- Optional: Zoom icon overlay -->
-        <span class="zoom-icon"><i class="bi bi-zoom-in"></i></span>
-      </div>
-
-      <!-- Color Swatches -->
-      <div class="d-flex gap-2 mt-2 flex-wrap">
-        <div *ngFor="let color of selectedProduct.colors"
-             class="color-swatch rounded-circle shadow-sm"
-             [style.backgroundColor]="color.toLowerCase()"
-             [title]="color">
-        </div>
-      </div>
+<div class="products-container">
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb-nav">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item active">Products</li>
+      </ol>
     </div>
+  </nav>
 
-    <!-- Right Column: Product Details -->
-    <div class="col-lg-5">
-      <h1 class="fw-bold display-6 mb-2">{{ selectedProduct.name }}</h1>
-      <p class="text-muted mb-3">Brand: {{ selectedProduct.supplier }}</p>
+  <div class="container">
+    <div class="row">
+      <!-- Sidebar Filters -->
+      <div class="col-lg-3 col-md-4">
+        <div class="filters-sidebar">
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button class="btn btn-sm btn-outline-primary" (click)="clearFilters()">Clear All</button>
+          </div>
 
-      <!-- Ratings -->
-      <div class="mb-3">
-        <div class="d-flex align-items-center mb-1">
-          <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
-            <i class="bi" [ngClass]="i < selectedProduct.rating ? 'bi-star-fill text-warning' : 'bi-star text-muted'"></i>
-          </ng-container>
-          <span class="ms-2 text-muted">({{ selectedProduct.reviews }} reviews)</span>
-        </div>
+          <!-- Search -->
+          <div class="filter-section">
+            <label class="form-label">Search Products</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchTerm"
+              placeholder="Search products..."
+              (input)="onSearchChange()"
+            />
+          </div>
 
-        <!-- Rating bars -->
-        <div *ngIf="selectedProduct.rating" class="rating-bars mt-2">
-          <div *ngFor="let rate of [5,4,3,2,1]" class="d-flex align-items-center mb-1">
-            <span class="me-2 rating-label">{{ rate }}</span>
-            <div class="progress flex-grow-1 me-2 rating-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" [attr.aria-valuenow]="20 * rate" [attr.aria-label]="'Rating '+rate+' out of 5'" [attr.title]="'Rating '+rate+' out of 5'">
-              <div class="progress-bar bg-warning" [style.width.%]="20 * rate"></div>
+          <!-- Category Filter -->
+          <div class="filter-section">
+            <label class="form-label">Category</label>
+            <div class="category-list">
+              <label *ngFor="let category of categories" class="category-item">
+                <input
+                  type="checkbox"
+                  [value]="category.id"
+                  [checked]="selectedCategories.includes(category.id)"
+                  (change)="onCategoryChange(category.id, $event)"
+                />
+                <span>{{ category.name }}</span>
+                <span class="category-count">({{ category.count }})</span>
+              </label>
             </div>
-            <small class="text-muted">{{ 20 * rate }}%</small>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-section">
+            <label class="form-label">Price Range</label>
+            <div class="price-range">
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="priceRange.min"
+                placeholder="Min"
+                (input)="onPriceChange()"
+              />
+              <span class="price-separator">to</span>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="priceRange.max"
+                placeholder="Max"
+                (input)="onPriceChange()"
+              />
+            </div>
+          </div>
+
+          <!-- Rating Filter -->
+          <div class="filter-section">
+            <label class="form-label">Minimum Rating</label>
+            <div class="rating-filter">
+              <label *ngFor="let rating of [4, 3, 2, 1]" class="rating-item">
+                <input
+                  type="radio"
+                  name="rating"
+                  [value]="rating"
+                  [checked]="selectedRating === rating"
+                  (change)="onRatingChange(rating)"
+                />
+                <div class="rating-stars">
+                  <i *ngFor="let star of [1,2,3,4,5]" 
+                     [class]="star <= rating ? 'bi bi-star-fill' : 'bi bi-star'"
+                     [class.text-warning]="star <= rating"></i>
+                </div>
+                <span>& Up</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Vendor Filter -->
+          <div class="filter-section">
+            <label class="form-label">Vendor</label>
+            <div class="vendor-list">
+              <label *ngFor="let vendor of vendors" class="vendor-item">
+                <input
+                  type="checkbox"
+                  [value]="vendor.id"
+                  [checked]="selectedVendors.includes(vendor.id)"
+                  (change)="onVendorChange(vendor.id, $event)"
+                />
+                <span>{{ vendor.name }}</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Price & Discount -->
-      <div class="mb-4">
-        <span class="fs-3 fw-bold text-primary">{{ selectedProduct.price | currency:'INR' }}</span>
-        <span class="text-muted text-decoration-line-through ms-2" *ngIf="selectedProduct.originalPrice">
-          {{ selectedProduct.originalPrice | currency:'INR' }}
-        </span>
-        <span class="badge bg-success ms-2" *ngIf="selectedProduct.discount">
-          {{ selectedProduct.discount }}% OFF
-        </span>
-      </div>
+      <!-- Products Grid -->
+      <div class="col-lg-9 col-md-8">
+        <div class="products-header">
+          <div class="products-info">
+            <h1>Products</h1>
+            <p class="products-count">{{ totalProducts }} products found</p>
+          </div>
+          
+          <div class="products-controls">
+            <div class="sort-controls">
+              <label class="form-label">Sort by:</label>
+              <select class="form-control" [(ngModel)]="sortBy" (change)="onSortChange()">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+                <option value="rating">Rating</option>
+                <option value="date">Date Added</option>
+              </select>
+            </div>
+            
+            <div class="view-controls">
+              <button
+                class="btn btn-sm"
+                [class.btn-primary]="viewMode === 'grid'"
+                [class.btn-outline-primary]="viewMode !== 'grid'"
+                (click)="setViewMode('grid')"
+              >
+                <i class="bi bi-grid-3x3-gap"></i>
+              </button>
+              <button
+                class="btn btn-sm"
+                [class.btn-primary]="viewMode === 'list'"
+                [class.btn-outline-primary]="viewMode !== 'list'"
+                (click)="setViewMode('list')"
+              >
+                <i class="bi bi-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <!-- Options -->
-      <div class="mb-3">
-        <label class="form-label fw-bold" for="lengthSelect">Length (in yards)</label>
-        <select id="lengthSelect" class="form-select">
-          <option>Select Length</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
-      </div>
+        <!-- Loading State -->
+        <div *ngIf="isLoading" class="loading-state">
+          <div class="spinner"></div>
+          <p>Loading products...</p>
+        </div>
 
-      <div class="mb-4">
-        <label class="form-label fw-bold" for="quantitySelect">Quantity</label>
-        <select id="quantitySelect" class="form-select">
-          <option>Select Quantity</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
-      </div>
+        <!-- Products Grid/List -->
+        <div *ngIf="!isLoading" class="products-content">
+          <div [class]="viewMode === 'grid' ? 'products-grid' : 'products-list'">
+            <div
+              *ngFor="let product of products"
+              class="product-card"
+              [class.list-view]="viewMode === 'list'"
+              data-cy="product-card"
+            >
+              <div class="product-image">
+                <img
+                  [src]="product.images[0] || '/assets/images/placeholder.jpg'"
+                  [alt]="product.name"
+                  (error)="onImageError($event)"
+                />
+                <div class="product-badges">
+                  <span *ngIf="product.isNew" class="badge badge-primary">New</span>
+                  <span *ngIf="product.isFeatured" class="badge badge-success">Featured</span>
+                  <span *ngIf="product.discount" class="badge badge-danger">{{ product.discount }}% Off</span>
+                </div>
+                <div class="product-actions">
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    (click)="toggleWishlist(product)"
+                    [class.active]="isInWishlist(product.id)"
+                  >
+                    <i class="bi bi-heart"></i>
+                  </button>
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    (click)="quickView(product)"
+                  >
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </div>
 
-      <!-- Action Buttons -->
-      <div class="d-grid gap-2 mb-2">
-        <button class="btn btn-primary btn-lg" (click)="addToCart()">Add to Cart</button>
-        <button class="btn btn-outline-secondary btn-lg" [routerLink]="['/cart']">Buy Now</button>
+              <div class="product-info">
+                <div class="product-category">{{ product.category }}</div>
+                <h3 class="product-name" data-cy="product-name">
+                  <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+                </h3>
+                <p class="product-description">{{ product.description }}</p>
+                
+                <div class="product-rating">
+                  <div class="stars">
+                    <i *ngFor="let star of [1,2,3,4,5]" 
+                       [class]="star <= product.rating ? 'bi bi-star-fill' : 'bi bi-star'"
+                       [class.text-warning]="star <= product.rating"></i>
+                  </div>
+                  <span class="rating-text">({{ product.reviews }})</span>
+                </div>
 
-      </div>
-      <div *ngIf="addedMessage" class="alert alert-success py-2">{{ addedMessage }}</div>
+                <div class="product-vendor">
+                  <span>by <strong>{{ product.vendor.name }}</strong></span>
+                </div>
 
-      <!-- Product Details -->
-      <div class="product-specs">
-        <h5 class="fw-bold">Material Composition</h5>
-        <p>{{ selectedProduct.material }}</p>
+                <div class="product-price">
+                  <span class="current-price" data-cy="product-price">${{ product.price }}</span>
+                  <span *ngIf="product.originalPrice" class="original-price">${{ product.originalPrice }}</span>
+                </div>
 
-        <h5 class="fw-bold">Weight</h5>
-        <p>{{ selectedProduct.weight }}</p>
+                <div class="product-stock">
+                  <span *ngIf="product.stock > 0" class="in-stock">
+                    <i class="bi bi-check-circle"></i> In Stock ({{ product.stock }})
+                  </span>
+                  <span *ngIf="product.stock === 0" class="out-of-stock">
+                    <i class="bi bi-x-circle"></i> Out of Stock
+                  </span>
+                </div>
 
-        <h5 class="fw-bold">Width</h5>
-        <p>{{ selectedProduct.width }}</p>
+                <div class="product-actions-bottom">
+                  <button
+                    class="btn btn-primary"
+                    [disabled]="product.stock === 0"
+                    (click)="addToCart(product)"
+                    data-cy="add-to-cart"
+                  >
+                    <i class="bi bi-cart-plus"></i>
+                    Add to Cart
+                  </button>
+                  <button
+                    class="btn btn-outline-primary"
+                    [routerLink]="['/products', product.id]"
+                  >
+                    View Details
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <h5 class="fw-bold">Category</h5>
-        <p>{{ selectedProduct.category }}</p>
+          <!-- Empty State -->
+          <div *ngIf="products.length === 0" class="empty-state">
+            <i class="bi bi-search"></i>
+            <h3>No products found</h3>
+            <p>Try adjusting your filters or search terms</p>
+            <button class="btn btn-primary" (click)="clearFilters()">Clear Filters</button>
+          </div>
+        </div>
 
-        <h5 class="fw-bold">Attributes</h5>
-        <ul>
-          <li *ngFor="let attr of selectedProduct.attributes">{{ attr }}</li>
-        </ul>
-
-        <h5 class="fw-bold">Stock</h5>
-        <p>{{ selectedProduct.stock }} {{ selectedProduct.unit }}</p>
+        <!-- Pagination -->
+        <div *ngIf="!isLoading && products.length > 0" class="pagination-wrapper">
+          <nav class="pagination-nav">
+            <button
+              class="btn btn-outline-primary"
+              [disabled]="currentPage === 1"
+              (click)="goToPage(currentPage - 1)"
+            >
+              Previous
+            </button>
+            
+            <div class="pagination-pages">
+              <button
+                *ngFor="let page of getPageNumbers()"
+                class="btn"
+                [class.btn-primary]="page === currentPage"
+                [class.btn-outline-primary]="page !== currentPage"
+                (click)="goToPage(page)"
+              >
+                {{ page }}
+              </button>
+            </div>
+            
+            <button
+              class="btn btn-outline-primary"
+              [disabled]="currentPage === totalPages"
+              (click)="goToPage(currentPage + 1)"
+            >
+              Next
+            </button>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="!selectedProduct" class="container py-5 text-center">
-  <h3 class="text-danger">Product not found!</h3>
 </div>

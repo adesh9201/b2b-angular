@@ -1,22 +1,95 @@
-
-
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
-  originalPrice: number;
+  originalPrice?: number;
   category: string;
-  supplier: string;
+  subcategory?: string;
+  images: string[];
   stock: number;
-  unit: string;
-  imageUrl: string;
   rating: number;
   reviews: number;
-  colors: string[];
-  material: string;
-  weight: string;
-  width: string;
-  attributes: string[];
-  discount: number;
+  isNew?: boolean;
+  isFeatured?: boolean;
+  discount?: number;
+  vendor: Vendor;
+  specifications?: ProductSpecification[];
+  variants?: ProductVariant[];
+  tags?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Vendor {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  logo?: string;
+  rating: number;
+  reviews: number;
+  isVerified: boolean;
+  location?: string;
+  website?: string;
+  description?: string;
+}
+
+export interface ProductSpecification {
+  name: string;
+  value: string;
+  unit?: string;
+}
+
+export interface ProductVariant {
+  id: string;
+  name: string;
+  type: 'color' | 'size' | 'material' | 'pattern';
+  options: VariantOption[];
+}
+
+export interface VariantOption {
+  id: string;
+  name: string;
+  value: string;
+  priceModifier?: number;
+  stock?: number;
+  image?: string;
+}
+
+export interface ProductFilter {
+  search?: string;
+  categories?: string[];
+  vendors?: string[];
+  minPrice?: number;
+  maxPrice?: number;
+  minRating?: number;
+  sortBy?: 'name' | 'price' | 'rating' | 'date';
+  sortOrder?: 'asc' | 'desc';
+  page?: number;
+  limit?: number;
+}
+
+export interface ProductResponse {
+  success: boolean;
+  data: Product[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  image?: string;
+  parentId?: string;
+  children?: Category[];
+  count?: number;
+  isActive: boolean;
+  sortOrder: number;
 }

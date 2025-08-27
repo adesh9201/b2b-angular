@@ -1,54 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SupplierService } from '../../core/services/supplier.service';
-import { Supplier } from '../../core/models/supplier.model';
-import { Sidebar } from '../shared/sidebar/sidebar';
+import { RouterModule } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { LoggingService } from '../../core/services/logging.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, Sidebar],
+  imports: [CommonModule, RouterModule],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
-export class Dashboard implements OnInit {
-  supplierData: Supplier | null = null;
-  loading: boolean = true; // 🔄 loader handle karne ke liye
+export class DashboardComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
 
-  constructor(private router: Router, private supplierService: SupplierService) {}
+  constructor(private loggingService: LoggingService) {}
 
   ngOnInit(): void {
-    const data = localStorage.getItem('supplierData');
-
-    if (!data) {
-      // ❌ Agar user login nahi hai → Login page pe bhej do
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    const parsed = JSON.parse(data);
-
-    // ✅ supplierId localStorage se uthao
-    const supplierId = parsed.supplierId;
-    if (supplierId) {
-      this.supplierService.getSupplierById(supplierId).subscribe({
-        next: (res: Supplier) => {
-          this.supplierData = res;
-          this.loading = false;
-        },
-        error: () => {
-          localStorage.removeItem('supplierData');
-          this.router.navigate(['/login']);
-        }
-      });
-    } else {
-      this.router.navigate(['/login']);
-    }
+    this.loggingService.info('Vendor dashboard loaded');
   }
 
-  logout() {
-    localStorage.removeItem('supplierData');
-    this.router.navigate(['/login']);
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

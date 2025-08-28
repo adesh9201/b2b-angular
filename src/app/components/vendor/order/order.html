@@ -1,416 +1,257 @@
+<div class="vendor-layout">
+  <app-sidebar></app-sidebar>
+  
+  <div class="main-content">
+    <div class="container-fluid">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2 class="mb-1">Order Management</h2>
+          <p class="text-muted mb-0">Track and manage customer orders</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary" (click)="loadOrders()">
+            <i class="fas fa-sync-alt me-2"></i>Refresh
+          </button>
+        </div>
+      </div>
 
+      <!-- Filters and Search -->
+      <div class="row mb-4">
+        <div class="col-md-4">
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Search orders by ID or customer name..."
+            [(ngModel)]="searchQuery"
+          >
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="selectedStatus">
+            <option value="">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="refunded">Refunded</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <div class="d-flex gap-2">
+            <span class="badge bg-primary">{{ getFilteredOrders().length }} Orders</span>
+            <span class="badge bg-warning">{{ getFilteredOrders().filter(o => o.status === 'pending').length }} Pending</span>
+            <span class="badge bg-success">{{ getFilteredOrders().filter(o => o.status === 'shipped').length }} Shipped</span>
+          </div>
+        </div>
+      </div>
 
-<div class="container-fluid mt-5">
-  <div class="row flex-nowrap">
-    <div class="col-auto col-lg-2 px-0 bg-light border-end min-vh-100">
-      <app-sidebar></app-sidebar> <!-- ✅ Sidebar Component yahan aa jayega -->
-    </div>
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading orders...</p>
+      </div>
 
-<!-- sidebar -->
-
-
-            <div class="col px-4">
-                <section class="bg-light py-5">
-                    <div class="container-fluid">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a routerLink="/home" class="nav-link">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                            </ol>
-                        </nav>
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h1 class="fw-bold mb-2">Seller Dashboard</h1>
-                                <p class="text-muted mb-0">Manage your products and track your business</p>
-                            </div>
-                            <div class="col-md-6 text-md-end">
-                                <button class="btn btn-primary ripple" data-bs-toggle="modal"
-                                    data-bs-target="#addProductModal">
-                                    <i class="fas fa-plus me-2"></i>Add New Product
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Dashboard Content -->
-                <section class="py-5">
-                    <div class="container">
-                        <!-- Stats Cards -->
-                        <div class="row g-4 mb-5">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card border-0 shadow-sm text-center p-3 card-lift animate-on-scroll"
-                                    style="background:linear-gradient(135deg,#7b2ff2 0%,#f357a8 100%);color:#fff;">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center">
-                                            <div class="bg-white bg-opacity-10 p-3 rounded mb-2">
-                                                <i class="fas fa-box fa-2x"></i>
-                                            </div>
-                                            <div class="animated-counter font-poppins fs-2" data-count="0"
-                                                id="dashboardTotalProducts">0</div>
-                                            <div class="fw-bold">Total Products</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card border-0 shadow-sm text-center p-3 card-lift animate-on-scroll"
-                                    style="background:linear-gradient(135deg,#7b2ff2 0%,#f357a8 100%);color:#fff;">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center">
-                                            <div class="bg-white bg-opacity-10 p-3 rounded mb-2">
-                                                <i class="fas fa-shopping-cart fa-2x"></i>
-                                            </div>
-                                            <div class="animated-counter font-poppins fs-2" data-count="0"
-                                                id="dashboardTotalOrders">0</div>
-                                            <div class="fw-bold">Total Orders</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card border-0 shadow-sm text-center p-3 card-lift animate-on-scroll"
-                                    style="background:linear-gradient(135deg,#7b2ff2 0%,#f357a8 100%);color:#fff;">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center">
-                                            <div class="bg-white bg-opacity-10 p-3 rounded mb-2">
-                                                <i class="fas fa-dollar-sign fa-2x"></i>
-                                            </div>
-                                            <div class="animated-counter font-poppins fs-2" data-count="0"
-                                                id="dashboardTotalRevenue">0</div>
-                                            <div class="fw-bold">Revenue</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card border-0 shadow-sm text-center p-3 card-lift animate-on-scroll"
-                                    style="background:linear-gradient(135deg,#7b2ff2 0%,#f357a8 100%);color:#fff;">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center">
-                                            <div class="bg-white bg-opacity-10 p-3 rounded mb-2">
-                                                <i class="fas fa-star fa-2x"></i>
-                                            </div>
-                                            <div class="animated-counter font-poppins fs-2" data-count="0"
-                                                id="dashboardAvgRating">0.0</div>
-                                            <div class="fw-bold">Rating</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dashboard Tabs -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card border-0 shadow-sm animate-on-scroll">
-                                    <div class="card-header bg-white">
-                                        <ul class="nav nav-tabs card-header-tabs" id="dashboardTabs" role="tablist">
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link active" id="products-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#products" type="button" role="tab">
-                                                    <i class="fas fa-box me-2"></i>Products
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="orders-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#orders" type="button" role="tab">
-                                                    <i class="fas fa-shopping-cart me-2"></i>Orders
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="analytics-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#analytics" type="button" role="tab">
-                                                    <i class="fas fa-chart-line me-2"></i>Analytics
-                                                </button>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <button class="nav-link" id="settings-tab" data-bs-toggle="tab"
-                                                    data-bs-target="#settings" type="button" role="tab">
-                                                    <i class="fas fa-cog me-2"></i>Settings
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="tab-content" id="dashboardTabContent">
-                                            <!-- Products Tab -->
-                                            <div class="tab-pane fade show active" id="products" role="tabpanel">
-                                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                                    <h5 class="mb-0">My Products</h5>
-                                                    <div class="d-flex gap-2">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Search products..." id="productSearch">
-                                                        <select class="form-select" id="productFilter" title="Filter products by category">
-                                                            <option value="">All Categories</option>
-                                                            <option value="Cotton">Cotton</option>
-                                                            <option value="Silk">Silk</option>
-                                                            <option value="Wool">Wool</option>
-                                                            <option value="Synthetic">Synthetic</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Product</th>
-                                                                <th>Category</th>
-                                                                <th>Price</th>
-                                                                <th>Stock</th>
-                                                                <th>Status</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="productsTableBody">
-                                                            <!-- Products will be loaded here -->
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-
-                                            <!-- Orders Tab -->
-                                            <div class="tab-pane fade" id="orders" role="tabpanel">
-                                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                                    <h5 class="mb-0">Recent Orders</h5>
-                                                    <select class="form-select" style="width: auto;" id="orderFilter" title="Filter orders by status">
-                                                        <option value="">All Orders</option>
-                                                        <option value="pending">Pending</option>
-                                                        <option value="processing">Processing</option>
-                                                        <option value="shipped">Shipped</option>
-                                                        <option value="delivered">Delivered</option>
-                                                    </select>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Order ID</th>
-                                                                <th>Customer</th>
-                                                                <th>Products</th>
-                                                                <th>Total</th>
-                                                                <th>Status</th>
-                                                                <th>Date</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="ordersTableBody">
-                                                            <!-- Orders will be loaded here -->
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-
-                                            <!-- Analytics Tab -->
-                                            <div class="tab-pane fade" id="analytics" role="tabpanel">
-                                                <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="card border-0 shadow-sm animate-on-scroll">
-                                                            <div class="card-header bg-white">
-                                                                <h6 class="mb-0">Sales Overview</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <canvas id="salesChart" height="300"></canvas>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="card border-0 shadow-sm animate-on-scroll">
-                                                            <div class="card-header bg-white">
-                                                                <h6 class="mb-0">Top Products</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div id="topProducts">
-                                                                    <!-- Top products will be loaded here -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Settings Tab -->
-                                            <div class="tab-pane fade" id="settings" role="tabpanel">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="card border-0 shadow-sm animate-on-scroll">
-                                                            <div class="card-header bg-white">
-                                                                <h6 class="mb-0">Profile Settings</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <form id="profileForm">
-                                                                    <div class="mb-3">
-                                                                        <label for="companyName"
-                                                                            class="form-label">Company Name</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="companyName" value="TextileCorp">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="contactEmail"
-                                                                            class="form-label">Contact Email</label>
-                                                                        <input type="email" class="form-control"
-                                                                            id="contactEmail"
-                                                                            value="contact@textilecorp.com">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="phoneNumber"
-                                                                            class="form-label">Phone Number</label>
-                                                                        <input type="tel" class="form-control"
-                                                                            id="phoneNumber" value="+1 (555) 123-4567">
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="address"
-                                                                            class="form-label">Address</label>
-                                                                        <textarea class="form-control" id="address"
-                                                                            rows="3">123 Fabric Street, New York, NY 10001</textarea>
-                                                                    </div>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary ripple">Update
-                                                                        Profile</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="card border-0 shadow-sm animate-on-scroll">
-                                                            <div class="card-header bg-white">
-                                                                <h6 class="mb-0">Notification Settings</h6>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="emailNotifications" checked>
-                                                                    <label class="form-check-label"
-                                                                        for="emailNotifications">
-                                                                        Email notifications for new orders
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="stockAlerts" checked>
-                                                                    <label class="form-check-label" for="stockAlerts">
-                                                                        Low stock alerts
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-check mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="marketingEmails">
-                                                                    <label class="form-check-label"
-                                                                        for="marketingEmails">
-                                                                        Marketing emails and promotions
-                                                                    </label>
-                                                                </div>
-                                                                <button class="btn btn-primary ripple">Save
-                                                                    Settings</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Add Product Modal -->
-                <div class="modal fade" id="addProductModal" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content dark-mode-bg">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Add New Product</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addProductForm">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="productName" class="form-label">Product Name</label>
-                                                <input type="text" class="form-control" id="productName" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="productCategory" class="form-label">Category</label>
-                                                <select class="form-select" id="productCategory" required>
-                                                    <option value="">Select category</option>
-                                                    <option value="Cotton">Cotton</option>
-                                                    <option value="Silk">Silk</option>
-                                                    <option value="Wool">Wool</option>
-                                                    <option value="Synthetic">Synthetic</option>
-                                                    <option value="Linen">Linen</option>
-                                                    <option value="Velvet">Velvet</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="productPrice" class="form-label">Price ($)</label>
-                                                <input type="number" class="form-control" id="productPrice" step="0.01"
-                                                    required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="productStock" class="form-label">Stock Quantity</label>
-                                                <input type="number" class="form-control" id="productStock" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="productMaterial" class="form-label">Material</label>
-                                                <input type="text" class="form-control" id="productMaterial" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="productWeight" class="form-label">Weight (GSM)</label>
-                                                <input type="text" class="form-control" id="productWeight" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="productWidth" class="form-label">Width</label>
-                                                <input type="text" class="form-control" id="productWidth" required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="productImage" class="form-label">Product Image URL</label>
-                                                <input type="url" class="form-control" id="productImage" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="productDescription" class="form-label">Description</label>
-                                        <textarea class="form-control" id="productDescription" rows="3"
-                                            required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="productColors" class="form-label">Available Colors
-                                            (comma-separated)</label>
-                                        <input type="text" class="form-control" id="productColors"
-                                            placeholder="White, Blue, Red, Green">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary ripple"
-                                    data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary ripple" onclick="addProduct()">Add
-                                    Product</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Order Detail Modal -->
-                <div class="modal fade" id="orderDetailModal" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content dark-mode-bg">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Order Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" id="orderDetailBody">
-                                <!-- Order details will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Orders Table -->
+      <div *ngIf="!isLoading" class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Recent Orders</h5>
             </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer</th>
+                      <th>Items</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let order of getFilteredOrders()">
+                      <td>
+                        <strong>#{{ order.id }}</strong>
+                      </td>
+                      <td>
+                        <div>
+                          <div class="fw-bold">{{ order.shippingAddress.fullName }}</div>
+                          <small class="text-muted">{{ order.shippingAddress.phone }}</small>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <div>{{ calculateTotalItems(order) }} items</div>
+                          <small class="text-muted">{{ order.items[0]?.productName }}{{ order.items.length > 1 ? ' +' + (order.items.length - 1) + ' more' : '' }}</small>
+                        </div>
+                      </td>
+                      <td>
+                        <strong>{{ order.totalAmount | currencyFormat }}</strong>
+                      </td>
+                      <td>
+                        <span class="badge" [class]="getStatusBadgeClass(order.status)">
+                          {{ getStatusText(order.status) }}
+                        </span>
+                      </td>
+                      <td>
+                        <div>{{ formatDate(order.createdAt) }}</div>
+                      </td>
+                      <td>
+                        <div class="btn-group" role="group">
+                          <button class="btn btn-sm btn-outline-primary" (click)="openOrderModal(order)">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                          <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                              <i class="fas fa-cog"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#" (click)="updateOrderStatus(order.id, 'confirmed'); $event.preventDefault()">
+                                <i class="fas fa-check me-2"></i>Confirm Order
+                              </a></li>
+                              <li><a class="dropdown-item" href="#" (click)="updateOrderStatus(order.id, 'processing'); $event.preventDefault()">
+                                <i class="fas fa-cogs me-2"></i>Start Processing
+                              </a></li>
+                              <li><a class="dropdown-item" href="#" (click)="updateOrderStatus(order.id, 'shipped'); $event.preventDefault()">
+                                <i class="fas fa-shipping-fast me-2"></i>Mark Shipped
+                              </a></li>
+                              <li><a class="dropdown-item" href="#" (click)="updateOrderStatus(order.id, 'delivered'); $event.preventDefault()">
+                                <i class="fas fa-check-circle me-2"></i>Mark Delivered
+                              </a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item text-danger" href="#" (click)="updateOrderStatus(order.id, 'cancelled'); $event.preventDefault()">
+                                <i class="fas fa-times me-2"></i>Cancel Order
+                              </a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && getFilteredOrders().length === 0" class="text-center py-5">
+        <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+        <h5>No orders found</h5>
+        <p class="text-muted">Orders will appear here when customers place them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal fade" [class.show]="showOrderModal" [style.display]="showOrderModal ? 'block' : 'none'">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Order Details #{{ selectedOrder?.id }}</h5>
+        <button type="button" class="btn-close" (click)="closeOrderModal()"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedOrder">
+        <div class="row">
+          <div class="col-md-6">
+            <h6>Customer Information</h6>
+            <div class="card">
+              <div class="card-body">
+                <p><strong>Name:</strong> {{ selectedOrder.shippingAddress.fullName }}</p>
+                <p><strong>Phone:</strong> {{ selectedOrder.shippingAddress.phone }}</p>
+                <p><strong>Address:</strong></p>
+                <p class="ms-3">
+                  {{ selectedOrder.shippingAddress.address }}<br>
+                  {{ selectedOrder.shippingAddress.city }}, {{ selectedOrder.shippingAddress.state }} {{ selectedOrder.shippingAddress.zipCode }}<br>
+                  {{ selectedOrder.shippingAddress.country }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h6>Order Information</h6>
+            <div class="card">
+              <div class="card-body">
+                <p><strong>Order Date:</strong> {{ formatDate(selectedOrder.createdAt) }}</p>
+                <p><strong>Status:</strong> 
+                  <span class="badge" [class]="getStatusBadgeClass(selectedOrder.status)">
+                    {{ getStatusText(selectedOrder.status) }}
+                  </span>
+                </p>
+                <p><strong>Payment Method:</strong> {{ selectedOrder.paymentMethod }}</p>
+                <p><strong>Payment Status:</strong> 
+                  <span class="badge" [class]="selectedOrder.paymentStatus === 'paid' ? 'bg-success' : 'bg-warning'">
+                    {{ selectedOrder.paymentStatus }}
+                  </span>
+                </p>
+                <p><strong>Shipping Method:</strong> {{ selectedOrder.shippingMethod }}</p>
+                <p *ngIf="selectedOrder.trackingNumber"><strong>Tracking:</strong> {{ selectedOrder.trackingNumber }}</p>
+              </div>
+            </div>
+          </div>
         </div>
 
+        <div class="mt-4">
+          <h6>Order Items</h6>
+          <div class="table-responsive">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of selectedOrder.items">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img [src]="item.productImage" [alt]="item.productName" class="product-thumb me-2">
+                      <span>{{ item.productName }}</span>
+                    </div>
+                  </td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.unitPrice | currencyFormat }}</td>
+                  <td>{{ item.totalPrice | currencyFormat }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                  <td><strong>{{ selectedOrder.totalAmount | currencyFormat }}</strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="mt-4" *ngIf="selectedOrder.notes">
+          <h6>Notes</h6>
+          <div class="card">
+            <div class="card-body">
+              <p class="mb-0">{{ selectedOrder.notes }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeOrderModal()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="closeOrderModal()">Update Status</button>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop fade show" *ngIf="showOrderModal"></div>

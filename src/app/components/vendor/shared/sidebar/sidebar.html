@@ -1,54 +1,121 @@
-<div class="d-flex flex-column align-items-center align-items-lg-start py-3 px-2">
-  <a routerLink="/dashboard" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-house-door-fill fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Dashboard</span>
-  </a>
-  <a routerLink="/order" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-box fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Orders</span>
-  </a>
-  <a routerLink="/productcatalog" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-list-task fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Product Catalog</span>
-  </a>
-  <a routerLink="/inventory" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-building fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Inventory</span>
-  </a>
-  <a routerLink="/pricing" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-currency-dollar fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Pricing</span>
-  </a>
-  <a routerLink="/claims" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-shield-check fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Claims</span>
-  </a>
-  <a routerLink="/payment" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-credit-card fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Payments</span>
-  </a>
-  <a routerLink="/logistics" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-truck fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Logistics</span>
-  </a>
-  <a routerLink="/analytics" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-bar-chart-line fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Analytics</span>
-  </a>
-  <a routerLink="/marketing" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-megaphone fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Marketing</span>
-  </a>
-  <a routerLink="/reviews" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-star fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Reviews</span>
-  </a>
-  <a routerLink="/support" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-question-circle fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Support</span>
-  </a>
-  <a routerLink="/accountsetting" routerLinkActive="active" class="nav-link d-flex align-items-center text-dark mb-3">
-    <i class="bi bi-gear fs-5"></i>
-    <span class="d-none d-lg-inline ms-2">Account Settings</span>
-  </a>
+<div class="vendor-sidebar" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <div class="d-flex align-items-center justify-content-between">
+      <h5 class="mb-0 fw-bold" *ngIf="!isCollapsed">Vendor Panel</h5>
+      <button class="btn btn-sm btn-outline-secondary" (click)="toggleSidebar()">
+        <i class="fas" [class.fa-chevron-left]="!isCollapsed" [class.fa-chevron-right]="isCollapsed"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="sidebar-user-info" *ngIf="!isCollapsed && currentUser">
+    <div class="user-avatar">
+      <i class="fas fa-user-circle fa-2x"></i>
+    </div>
+    <div class="user-details">
+      <h6 class="mb-0">{{ currentUser.firstName }} {{ currentUser.lastName }}</h6>
+      <small class="text-muted">{{ currentUser.email }}</small>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="fas fa-tachometer-alt me-2"></i>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/productcatalog" routerLinkActive="active">
+          <i class="fas fa-box me-2"></i>
+          <span *ngIf="!isCollapsed">Products</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/order" routerLinkActive="active">
+          <i class="fas fa-shopping-cart me-2"></i>
+          <span *ngIf="!isCollapsed">Orders</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/inventory" routerLinkActive="active">
+          <i class="fas fa-warehouse me-2"></i>
+          <span *ngIf="!isCollapsed">Inventory</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/analytics" routerLinkActive="active">
+          <i class="fas fa-chart-bar me-2"></i>
+          <span *ngIf="!isCollapsed">Analytics</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/marketing" routerLinkActive="active">
+          <i class="fas fa-bullhorn me-2"></i>
+          <span *ngIf="!isCollapsed">Marketing</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/pricing" routerLinkActive="active">
+          <i class="fas fa-tags me-2"></i>
+          <span *ngIf="!isCollapsed">Pricing</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/reviews" routerLinkActive="active">
+          <i class="fas fa-star me-2"></i>
+          <span *ngIf="!isCollapsed">Reviews</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/logistics" routerLinkActive="active">
+          <i class="fas fa-truck me-2"></i>
+          <span *ngIf="!isCollapsed">Logistics</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/payment" routerLinkActive="active">
+          <i class="fas fa-credit-card me-2"></i>
+          <span *ngIf="!isCollapsed">Payments</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/claims" routerLinkActive="active">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          <span *ngIf="!isCollapsed">Claims</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/support" routerLinkActive="active">
+          <i class="fas fa-headset me-2"></i>
+          <span *ngIf="!isCollapsed">Support</span>
+        </a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/accountsetting" routerLinkActive="active">
+          <i class="fas fa-cog me-2"></i>
+          <span *ngIf="!isCollapsed">Settings</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer" *ngIf="!isCollapsed">
+    <button class="btn btn-outline-danger w-100" (click)="logout()">
+      <i class="fas fa-sign-out-alt me-2"></i>Logout
+    </button>
+  </div>
 </div>

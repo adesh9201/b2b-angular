@@ -1,67 +1,208 @@
-<!-- 🔔 Toast Notification -->
-<div *ngIf="showToast" class="toast-notif show" [ngClass]="{'error': isError}">
-  <span class="icon">
-    <i class="fas" [ngClass]="isError ? 'fa-times-circle' : 'fa-check-circle'"></i>
-  </span>
-  <span class="message">{{ toastMessage }}</span>
-  <span class="close-btn" (click)="showToast = false">&times;</span>
-</div>
+<div class="register-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="register-card">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold">Create Account</h2>
+            <p class="text-muted">Join FabHub and start your journey</p>
+          </div>
 
-<div class="registration-container">
-  <h2>Supplier Registration</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
-    <div class="row g-3">
-      <div
-        class="col-md-6"
-        *ngFor="let field of ['name','address','pincode','state','city','gstin','pan','emailId','phone','contact_Person']"
-      >
-        <label class="form-label" [for]="field">{{ field | titlecase }}</label>
-        <input
-          class="form-control"
-          [formControlName]="field"
-          [id]="field"
-          [type]="field === 'emailId' ? 'email' : 'text'"
-          placeholder="Enter {{ field | titlecase }}"
-        />
-        <div
-          class="text-danger mt-1"
-          *ngIf="registerForm.get(field)?.invalid && registerForm.get(field)?.touched"
-        >
-          {{ field | titlecase }} is required
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Role Selection -->
+            <div class="mb-4">
+              <label class="form-label">Account Type</label>
+              <div class="d-flex gap-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="role" id="customerRole" 
+                    [checked]="selectedRole === 'customer'" (change)="onRoleChange('customer')">
+                  <label class="form-check-label" for="customerRole">
+                    <i class="fas fa-user me-2"></i>Customer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="role" id="vendorRole" 
+                    [checked]="selectedRole === 'vendor'" (change)="onRoleChange('vendor')">
+                  <label class="form-check-label" for="vendorRole">
+                    <i class="fas fa-store me-2"></i>Vendor
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- First Name -->
+              <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  formControlName="firstName"
+                  [class.is-invalid]="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                  placeholder="Enter first name"
+                />
+                <div class="invalid-feedback" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+                  {{ getErrorMessage('firstName') }}
+                </div>
+              </div>
+
+              <!-- Last Name -->
+              <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  formControlName="lastName"
+                  [class.is-invalid]="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+                  placeholder="Enter last name"
+                />
+                <div class="invalid-feedback" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+                  {{ getErrorMessage('lastName') }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+                placeholder="Enter your email"
+              />
+              <div class="invalid-feedback" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                {{ getErrorMessage('email') }}
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                formControlName="phone"
+                [class.is-invalid]="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched"
+                placeholder="Enter phone number"
+              />
+              <div class="invalid-feedback" *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
+                {{ getErrorMessage('phone') }}
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Password -->
+              <div class="col-md-6 mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  formControlName="password"
+                  [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                  placeholder="Enter password"
+                />
+                <div class="invalid-feedback" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                  {{ getErrorMessage('password') }}
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="col-md-6 mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  [class.is-invalid]="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched"
+                  placeholder="Confirm password"
+                />
+                <div class="invalid-feedback" *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched">
+                  {{ getPasswordMismatchError() }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="mb-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="agreeToTerms"
+                  formControlName="agreeToTerms"
+                  [class.is-invalid]="registerForm.get('agreeToTerms')?.invalid && registerForm.get('agreeToTerms')?.touched"
+                />
+                <label class="form-check-label" for="agreeToTerms">
+                  I agree to the <a href="#" class="text-decoration-none">Terms and Conditions</a> and 
+                  <a href="#" class="text-decoration-none">Privacy Policy</a>
+                </label>
+                <div class="invalid-feedback" *ngIf="registerForm.get('agreeToTerms')?.invalid && registerForm.get('agreeToTerms')?.touched">
+                  {{ getErrorMessage('agreeToTerms') }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mb-3"
+              [disabled]="registerForm.invalid || isLoading"
+            >
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ isLoading ? 'Creating Account...' : 'Create Account' }}
+            </button>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+
+            <!-- Divider -->
+            <div class="text-center my-3">
+              <span class="text-muted">or</span>
+            </div>
+
+            <!-- Social Registration Buttons -->
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-outline-secondary">
+                <i class="fab fa-google me-2"></i>Continue with Google
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                <i class="fab fa-facebook me-2"></i>Continue with Facebook
+              </button>
+            </div>
+
+            <!-- Sign In Link -->
+            <div class="text-center mt-4">
+              <p class="mb-0">
+                Already have an account? 
+                <a routerLink="/login" class="text-decoration-none fw-bold">Sign in</a>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-    <button
-      class="btn btn-primary mt-4 w-100"
-      type="submit"
-      [disabled]="otpSent"
-    >
-      Register
-    </button>
-  </form>
-
-  <!-- OTP Section -->
-  <div *ngIf="otpSent && !otpVerified" class="otp-section mt-4">
-    <label for="otpCode">Enter OTP</label>
-    <input
-      type="text"
-      id="otpCode"
-      class="form-control mb-2"
-      [(ngModel)]="otpCode"
-      placeholder="Enter OTP"
-    />
-    <button class="btn btn-success w-100" (click)="verifyOtp()">Verify OTP</button>
   </div>
 
-  <!-- OTP Verified -->
-  <div *ngIf="otpVerified" class="alert alert-success mt-3">
-    OTP Verified! You can now login.
-  </div>
-
-  <!-- Navigation to Login -->
-  <div class="login-nav mt-4 text-center">
-    <span>Already have an account? </span>
-    <a routerLink="/login" class="text-primary fw-semibold">Go to Login</a>
+  <!-- Toast Notification -->
+  <div *ngIf="showToast" class="toast-container position-fixed top-0 end-0 p-3">
+    <div class="toast show" [class.bg-danger]="isError" [class.bg-success]="!isError" role="alert">
+      <div class="toast-header">
+        <strong class="me-auto">{{ isError ? 'Error' : 'Success' }}</strong>
+        <button type="button" class="btn-close" (click)="showToast = false"></button>
+      </div>
+      <div class="toast-body text-white">
+        {{ toastMessage }}
+      </div>
+    </div>
   </div>
 </div>

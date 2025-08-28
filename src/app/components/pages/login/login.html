@@ -1,53 +1,110 @@
-<!-- 🔔 Toast Notification -->
-<div *ngIf="showToast" class="toast-notif show" [ngClass]="{'error': isError}">
-  <span class="icon">
-    <i class="fas" [ngClass]="isError ? 'fa-times-circle' : 'fa-check-circle'"></i>
-  </span>
-  <span class="message">{{ toastMessage }}</span>
-  <span class="close-btn" (click)="showToast = false">&times;</span>
-</div>
-
 <div class="login-container">
-  <h2>Supplier Login</h2>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="login-card">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold">Welcome Back</h2>
+            <p class="text-muted">Sign in to your account</p>
+          </div>
 
-  <div class="form-group mb-3">
-    <label for="contact">Email or Phone</label>
-    <input
-      type="text"
-      id="contact"
-      class="form-control"
-      [(ngModel)]="contact"
-      placeholder="Enter your email or phone"
-      required
-    />
-  </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                placeholder="Enter your email"
+              />
+              <div class="invalid-feedback" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                {{ getErrorMessage('email') }}
+              </div>
+            </div>
 
-  <button
-    class="btn btn-primary mb-3"
-    (click)="sendOtp()"
-    [disabled]="otpSent"
-  >
-    Send OTP
-  </button>
+            <!-- Password Field -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                placeholder="Enter your password"
+              />
+              <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                {{ getErrorMessage('password') }}
+              </div>
+            </div>
 
-  <div *ngIf="otpSent" class="otp-section">
-    <div class="form-group">
-      <label for="otp">Enter OTP</label>
-      <input
-        type="text"
-        id="otp"
-        class="form-control"
-        [(ngModel)]="otp"
-        placeholder="Enter the OTP"
-        required
-      />
+            <!-- Remember Me & Forgot Password -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">
+                  Remember me
+                </label>
+              </div>
+              <a href="#" class="text-decoration-none">Forgot password?</a>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mb-3"
+              [disabled]="loginForm.invalid || isLoading"
+            >
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ isLoading ? 'Signing in...' : 'Sign In' }}
+            </button>
+
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+
+            <!-- Divider -->
+            <div class="text-center my-3">
+              <span class="text-muted">or</span>
+            </div>
+
+            <!-- Social Login Buttons -->
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-outline-secondary">
+                <i class="fab fa-google me-2"></i>Continue with Google
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                <i class="fab fa-facebook me-2"></i>Continue with Facebook
+              </button>
+            </div>
+
+            <!-- Sign Up Link -->
+            <div class="text-center mt-4">
+              <p class="mb-0">
+                Don't have an account? 
+                <a routerLink="/register" class="text-decoration-none fw-bold">Sign up</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-success" (click)="verifyOtp()">Login</button>
   </div>
 
-  <!-- Navigation to Registration -->
-  <div class="register-nav mt-4 text-center">
-    <span>Don't have an account? </span>
-    <a routerLink="/register" class="text-primary fw-semibold">Go to Registration</a>
+  <!-- Toast Notification -->
+  <div *ngIf="showToast" class="toast-container position-fixed top-0 end-0 p-3">
+    <div class="toast show" [class.bg-danger]="isError" [class.bg-success]="!isError" role="alert">
+      <div class="toast-header">
+        <strong class="me-auto">{{ isError ? 'Error' : 'Success' }}</strong>
+        <button type="button" class="btn-close" (click)="showToast = false"></button>
+      </div>
+      <div class="toast-body text-white">
+        {{ toastMessage }}
+      </div>
+    </div>
   </div>
 </div>

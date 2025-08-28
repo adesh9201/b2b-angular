@@ -1,540 +1,240 @@
 
 // src/app/services/product.service.ts
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { 
+  Product, 
+  ProductFilter, 
+  ProductSearchRequest, 
+  ProductSearchResponse,
+  CreateProductRequest,
+  UpdateProductRequest
+} from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private products: Product[] = [
-    // Cotton Fabric Products (4 items)
-    {
-      id: 1,
-      name: "Premium Cotton Fabric",
-      description: "High-quality 100% cotton fabric perfect for clothing and home textiles.",
-      price: 12.99,
-      originalPrice: 15.99,
-      category: "Cotton Fabric",
-      supplier: "TexFab India",
-      stock: 150,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 124,
-      colors: ["White", "Blue", "Red"],
-      material: "Cotton",
-      weight: "200 GSM",
-      width: "60 inches",
-      attributes: ["Breathable", "Soft", "Durable"],
-      discount: 10
-    },
-    {
-      id: 2,
-      name: "Organic Cotton Fabric",
-      description: "GOTS certified organic cotton fabric for eco-friendly clothing.",
-      price: 15.99,
-      originalPrice: 19.99,
-      category: "Cotton Fabric",
-      supplier: "Organic Looms",
-      stock: 85,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
-      rating: 4.5,
-      reviews: 92,
-      colors: ["White", "Green", "Beige"],
-      material: "Cotton",
-      weight: "180 GSM",
-      width: "58 inches",
-      attributes: ["Organic", "Eco-friendly", "Hypoallergenic"],
-      discount: 20
-    },
-    {
-      id: 3,
-      name: "Cotton Poplin Fabric",
-      description: "Smooth and crisp cotton poplin for shirts and dresses.",
-      price: 14.50,
-      originalPrice: 17.99,
-      category: "Cotton Fabric",
-      supplier: "Global Fabrics",
-      stock: 120,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80",
-      rating: 4.6,
-      reviews: 78,
-      colors: ["White", "Blue", "Pink"],
-      material: "Cotton",
-      weight: "140 GSM",
-      width: "44 inches",
-      attributes: ["Smooth", "Crisp", "Lightweight"],
-      discount: 30
-    },
-    {
-      id: 4,
-      name: "Cotton Jersey Fabric",
-      description: "Soft stretchy cotton jersey for comfortable apparel.",
-      price: 11.99,
-      originalPrice: 14.99,
-      category: "Cotton Fabric",
-      supplier: "WeaveWorld",
-      stock: 95,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=400&q=80",
-      rating: 4.3,
-      reviews: 65,
-      colors: ["Black", "Navy Blue", "Gray"],
-      material: "Cotton Lycra",
-      weight: "180 GSM",
-      width: "60 inches",
-      attributes: ["Stretchy", "Soft", "Comfortable"],
-      discount: 40
-    },
+  private readonly API_URL = 'https://api.fabhub.com'; // Placeholder API
 
-    // Silk Fabric Products (3 items)
-    {
-      id: 5,
-      name: "Pure Silk Fabric",
-      description: "Luxurious pure silk fabric with natural sheen.",
-      price: 45.99,
-      originalPrice: 59.99,
-      category: "Silk Fabric",
-      supplier: "SilkMart",
-      stock: 42,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
-      rating: 4.9,
-      reviews: 215,
-      colors: ["White", "Black", "Navy Blue"],
-      material: "Silk",
-      weight: "16 momme",
-      width: "45 inches",
-      attributes: ["Luxurious", "Breathable", "Hypoallergenic"],
-      discount: 50
-    },
-    {
-      id: 6,
-      name: "Silk Satin Fabric",
-      description: "Lustrous silk satin with a smooth finish.",
-      price: 52.50,
-      originalPrice: 65.00,
-      category: "Silk Fabric",
-      supplier: "Elegant Textiles",
-      stock: 35,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 178,
-      colors: ["White", "Red", "Purple"],
-      material: "Silk",
-      weight: "19 momme",
-      width: "54 inches",
-      attributes: ["Lustrous", "Smooth", "Elegant"],
-      discount: 60
-    },
-    {
-      id: 7,
-      name: "Dupioni Silk Fabric",
-      description: "Textured dupioni silk with slubbed appearance.",
-      price: 38.99,
-      originalPrice: 48.99,
-      category: "Silk Fabric",
-      supplier: "SilkMart",
-      stock: 28,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=400&q=80",
-      rating: 4.7,
-      reviews: 142,
-      colors: ["Gold", "Olive", "Rust"],
-      material: "Silk",
-      weight: "22 momme",
-      width: "45 inches",
-      attributes: ["Textured", "Slubbed", "Rich"],
-      discount: 70
-    },
+  constructor(private http: HttpClient) {}
 
-    // Linen Fabric Products (2 items)
-    {
-      id: 8,
-      name: "European Linen Fabric",
-      description: "Premium European linen fabric with natural texture.",
-      price: 22.50,
-      originalPrice: 28.00,
-      category: "Linen Fabric",
-      supplier: "Elegant Textiles",
-      stock: 67,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.7,
-      reviews: 178,
-      colors: ["White", "Olive", "Natural"],
-      material: "Linen",
-      weight: "250 GSM",
-      width: "55 inches",
-      attributes: ["Breathable", "Strong", "Absorbent"],
-      discount: 80
-    },
-    {
-      id: 9,
-      name: "Linen Blend Fabric",
-      description: "Linen-cotton blend for softer texture.",
-      price: 18.99,
-      originalPrice: 23.50,
-      category: "Linen Fabric",
-      supplier: "Global Fabrics",
-      stock: 89,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=400&q=80",
-      rating: 4.5,
-      reviews: 112,
-      colors: ["Beige", "Cream", "Dusty Pink"],
-      material: "Linen",
-      weight: "220 GSM",
-      width: "58 inches",
-      attributes: ["Soft", "Breathable", "Wrinkle-resistant"],
-      discount: 90
-    },
-
-    // Denim Fabric Products (2 items)
-    {
-      id: 10,
-      name: "Stretch Denim Fabric",
-      description: "Comfortable stretch denim for modern apparel.",
-      price: 18.75,
-      originalPrice: 24.99,
-      category: "Denim Fabric",
-      supplier: "Global Fabrics",
-      stock: 120,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.3,
-      reviews: 86,
-      colors: ["Blue", "Black"],
-      material: "Cotton Lycra",
-      weight: "300 GSM",
-      width: "58 inches",
-      attributes: ["Stretch", "Durable", "Comfortable"],
-      discount: 10
-    },
-    {
-      id: 11,
-      name: "Raw Denim Fabric",
-      description: "Heavyweight raw denim for authentic jeans.",
-      price: 24.99,
-      originalPrice: 32.99,
-      category: "Denim Fabric",
-      supplier: "TexFab India",
-      stock: 75,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
-      rating: 4.6,
-      reviews: 94,
-      colors: ["Blue", "Black"],
-      material: "Cotton",
-      weight: "14 oz",
-      width: "60 inches",
-      attributes: ["Heavyweight", "Durable", "Authentic"],
-      discount: 20
-    },
-
-    // Rayon Fabric Products (2 items)
-    {
-      id: 12,
-      name: "Viscose Rayon Fabric",
-      description: "Soft drapey rayon fabric with excellent flow.",
-      price: 14.99,
-      originalPrice: 18.99,
-      category: "Rayon Fabric",
-      supplier: "WeaveWorld",
-      stock: 95,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.2,
-      reviews: 64,
-      colors: ["Red", "Pink", "Purple"],
-      material: "Viscose",
-      weight: "180 GSM",
-      width: "45 inches",
-      attributes: ["Drapey", "Soft", "Breathable"],
-      discount: 30
-    },
-    {
-      id: 13,
-      name: "Rayon Challis Fabric",
-      description: "Lightweight rayon challis with beautiful drape.",
-      price: 16.50,
-      originalPrice: 21.99,
-      category: "Rayon Fabric",
-      supplier: "Elegant Textiles",
-      stock: 82,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=400&q=80",
-      rating: 4.4,
-      reviews: 73,
-      colors: ["Green", "Blue", "MultiColour"],
-      material: "Viscose",
-      weight: "150 GSM",
-      width: "44 inches",
-      attributes: ["Lightweight", "Drapey", "Soft"],
-      discount: 40
-    },
-
-    // Organza Fabric Products (1 item)
-    {
-      id: 14,
-      name: "Sheer Organza Fabric",
-      description: "Delicate sheer organza for special occasion wear.",
-      price: 9.99,
-      originalPrice: 12.99,
-      category: "Organza Fabric",
-      supplier: "Elegant Textiles",
-      stock: 58,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.0,
-      reviews: 47,
-      colors: ["White", "Black", "Pink"],
-      material: "Polyester",
-      weight: "50 GSM",
-      width: "45 inches",
-      attributes: ["Sheer", "Crisp", "Lightweight"],
-      discount: 50
-    },
-
-    // Printed Fabric Products (2 items)
-    {
-      id: 15,
-      name: "Floral Printed Fabric",
-      description: "Beautiful floral printed cotton fabric.",
-      price: 16.50,
-      originalPrice: 20.99,
-      category: "Printed Fabric",
-      supplier: "TexFab India",
-      stock: 110,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80",
-      rating: 4.6,
-      reviews: 132,
-      colors: ["MultiColour"],
-      material: "Cotton",
-      weight: "200 GSM",
-      width: "44 inches",
-      attributes: ["Printed", "Colorful", "Versatile"],
-      discount: 60
-    },
-    {
-      id: 16,
-      name: "Geometric Printed Fabric",
-      description: "Modern geometric printed viscose fabric.",
-      price: 18.99,
-      originalPrice: 23.99,
-      category: "Printed Fabric",
-      supplier: "WeaveWorld",
-      stock: 87,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80",
-      rating: 4.5,
-      reviews: 98,
-      colors: ["MultiColour"],
-      material: "Viscose",
-      weight: "170 GSM",
-      width: "45 inches",
-      attributes: ["Printed", "Modern", "Drapey"],
-      discount: 70
-    },
-
-    // Chiffon Fabric Products (2 items)
-    {
-      id: 17,
-      name: "Silk Chiffon Fabric",
-      description: "Elegant silk chiffon for flowing garments.",
-      price: 32.99,
-      originalPrice: 39.99,
-      category: "Chiffon Fabric",
-      supplier: "SilkMart",
-      stock: 38,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.7,
-      reviews: 89,
-      colors: ["White", "Black", "Coral"],
-      material: "Silk",
-      weight: "30 GSM",
-      width: "45 inches",
-      attributes: ["Sheer", "Flowing", "Delicate"],
-      discount: 80
-    },
-    {
-      id: 18,
-      name: "Polyester Chiffon Fabric",
-      description: "Affordable polyester chiffon with good drape.",
-      price: 12.99,
-      originalPrice: 16.99,
-      category: "Chiffon Fabric",
-      supplier: "Global Fabrics",
-      stock: 105,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=400&q=80",
-      rating: 4.2,
-      reviews: 67,
-      colors: ["Pink", "Lilac", "Dusty Pink"],
-      material: "Polyester",
-      weight: "35 GSM",
-      width: "45 inches",
-      attributes: ["Affordable", "Drapey", "Lightweight"],
-      discount: 90
-    },
-
-    // Georgette Fabric Products (2 items)
-    {
-      id: 19,
-      name: "Crinkle Georgette Fabric",
-      description: "Textured crinkle georgette with beautiful drape.",
-      price: 18.99,
-      originalPrice: 24.50,
-      category: "Georgette Fabric",
-      supplier: "Global Fabrics",
-      stock: 72,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.4,
-      reviews: 56,
-      colors: ["Purple", "Orange", "Fuscia"],
-      material: "Polyester",
-      weight: "80 GSM",
-      width: "45 inches",
-      attributes: ["Crinkle", "Drapey", "Lightweight"],
-      discount: 10
-    },
-    {
-      id: 20,
-      name: "Silk Georgette Fabric",
-      description: "Luxurious silk georgette with soft drape.",
-      price: 38.50,
-      originalPrice: 45.99,
-      category: "Georgette Fabric",
-      supplier: "SilkMart",
-      stock: 45,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 102,
-      colors: ["Mehroon", "Navy Blue", "Olive"],
-      material: "Silk",
-      weight: "40 GSM",
-      width: "45 inches",
-      attributes: ["Luxurious", "Soft", "Flowing"],
-      discount: 20
-    },
-        {
-      id: 21,
-      name: "Crinkle Georgette Fabric",
-      description: "Textured crinkle georgette with beautiful drape.",
-      price: 18.99,
-      originalPrice: 24.50,
-      category: "Georgette Fabric",
-      supplier: "Global Fabrics",
-      stock: 72,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.4,
-      reviews: 56,
-      colors: ["Purple", "Orange", "Fuscia"],
-      material: "Polyester",
-      weight: "80 GSM",
-      width: "45 inches",
-      attributes: ["Crinkle", "Drapey", "Lightweight"],
-      discount: 30
-    },
-    {
-      id: 22,
-      name: "Silk Georgette Fabric",
-      description: "Luxurious silk georgette with soft drape.",
-      price: 38.50,
-      originalPrice: 45.99,
-      category: "Georgette Fabric",
-      supplier: "SilkMart",
-      stock: 45,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 102,
-      colors: ["Mehroon", "Navy Blue", "Olive"],
-      material: "Silk",
-      weight: "40 GSM",
-      width: "45 inches",
-      attributes: ["Luxurious", "Soft", "Flowing"],
-      discount: 40
-    },
-        {
-      id: 23,
-      name: "Crinkle Georgette Fabric",
-      description: "Textured crinkle georgette with beautiful drape.",
-      price: 18.99,
-      originalPrice: 24.50,
-      category: "Georgette Fabric",
-      supplier: "Global Fabrics",
-      stock: 72,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80",
-      rating: 4.4,
-      reviews: 56,
-      colors: ["Purple", "Orange", "Fuscia"],
-      material: "Polyester",
-      weight: "80 GSM",
-      width: "45 inches",
-      attributes: ["Crinkle", "Drapey", "Lightweight"],
-      discount: 50
-    },
-    {
-      id: 24,
-      name: "Silk Georgette Fabric",
-      description: "Luxurious silk georgette with soft drape.",
-      price: 38.50,
-      originalPrice: 45.99,
-      category: "Georgette Fabric",
-      supplier: "SilkMart",
-      stock: 45,
-      unit: "meter",
-      imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      rating: 4.8,
-      reviews: 102,
-      colors: ["Mehroon", "Navy Blue", "Olive"],
-      material: "Silk",
-      weight: "40 GSM",
-      width: "45 inches",
-      attributes: ["Luxurious", "Soft", "Flowing"],
-      discount: 60
+  // Get all products
+  getProducts(filter?: ProductFilter): Observable<Product[]> {
+    let params = new HttpParams();
+    
+    if (filter) {
+      if (filter.category) params = params.set('category', filter.category);
+      if (filter.vendorId) params = params.set('vendorId', filter.vendorId);
+      if (filter.minPrice) params = params.set('minPrice', filter.minPrice.toString());
+      if (filter.maxPrice) params = params.set('maxPrice', filter.maxPrice.toString());
+      if (filter.rating) params = params.set('rating', filter.rating.toString());
+      if (filter.inStock !== undefined) params = params.set('inStock', filter.inStock.toString());
+      if (filter.search) params = params.set('search', filter.search);
+      if (filter.sortBy) params = params.set('sortBy', filter.sortBy);
+      if (filter.sortOrder) params = params.set('sortOrder', filter.sortOrder);
     }
-  ];
 
-  getFeaturedProducts(): Product[] {
-    return this.products;
+    return this.http.get<Product[]>(`${this.API_URL}/products`, { params });
   }
 
-  // Additional methods to filter by different properties
-  getProductsByCategory(category: string): Product[] {
-    return this.products.filter(product => product.category === category);
+  // Get product by ID
+  getProductById(productId: string): Observable<Product> {
+    return this.http.get<Product>(`${this.API_URL}/products/${productId}`);
   }
 
-  getProductsByMaterial(material: string): Product[] {
-    return this.products.filter(product => product.material === material);
+  // Search products
+  searchProducts(request: ProductSearchRequest): Observable<ProductSearchResponse> {
+    return this.http.post<ProductSearchResponse>(`${this.API_URL}/products/search`, request);
   }
 
-  getProductsByColor(color: string): Product[] {
-    return this.products.filter(product => product.colors.includes(color));
+  // Get featured products
+  getFeaturedProducts(limit: number = 8): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.API_URL}/products/featured?limit=${limit}`);
   }
 
-  getProductsBySupplier(supplier: string): Product[] {
-    return this.products.filter(product => product.supplier === supplier);
+  // Get products by category
+  getProductsByCategory(category: string, limit?: number): Observable<Product[]> {
+    let params = new HttpParams().set('category', category);
+    if (limit) params = params.set('limit', limit.toString());
+    
+    return this.http.get<Product[]>(`${this.API_URL}/products/category`, { params });
   }
 
-  getProductsByRating(minRating: number): Product[] {
-    return this.products.filter(product => product.rating >= minRating);
+  // Get vendor products
+  getVendorProducts(vendorId?: string): Observable<Product[]> {
+    const params = vendorId ? new HttpParams().set('vendorId', vendorId) : new HttpParams();
+    return this.http.get<Product[]>(`${this.API_URL}/vendor/products`, { params });
   }
 
-getProductById(id: number): Product | null {
-  const product = this.products.find(p => p.id === id);
-  return product ? product : null;
-}
+  // Create product (vendor only)
+  createProduct(productData: CreateProductRequest): Observable<Product> {
+    return this.http.post<Product>(`${this.API_URL}/vendor/products`, productData);
+  }
 
+  // Update product (vendor only)
+  updateProduct(productId: string, productData: UpdateProductRequest): Observable<Product> {
+    return this.http.put<Product>(`${this.API_URL}/vendor/products/${productId}`, productData);
+  }
+
+  // Delete product (vendor only)
+  deleteProduct(productId: string): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/vendor/products/${productId}`);
+  }
+
+  // Get product categories
+  getCategories(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.API_URL}/products/categories`);
+  }
+
+  // Get related products
+  getRelatedProducts(productId: string, limit: number = 4): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.API_URL}/products/${productId}/related?limit=${limit}`);
+  }
+
+  // Mock data for development
+  getMockProducts(): Observable<Product[]> {
+    const mockProducts: Product[] = [
+      {
+        id: '1',
+        name: 'Premium Cotton Fabric',
+        description: 'High-quality 100% cotton fabric perfect for clothing and home textiles.',
+        price: 25.99,
+        originalPrice: 32.99,
+        category: 'Cotton',
+        vendorId: 'vendor1',
+        stock: 150,
+        unit: 'meter',
+        images: ['https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80'],
+        rating: 4.8,
+        totalReviews: 124,
+        colors: ['White', 'Blue', 'Red'],
+        material: '100% Cotton',
+        weight: '200 GSM',
+        width: '60 inches',
+        attributes: ['Breathable', 'Soft', 'Durable'],
+        discount: 21,
+        minOrder: 10,
+        isActive: true,
+        isFeatured: true,
+        tags: ['cotton', 'fabric', 'premium'],
+        specifications: [
+          { name: 'Material', value: '100% Cotton' },
+          { name: 'Weight', value: '200 GSM' },
+          { name: 'Width', value: '60 inches' }
+        ],
+        createdAt: new Date('2024-01-01'),
+        updatedAt: new Date('2024-01-15')
+      },
+      {
+        id: '2',
+        name: 'Silk Fabric Roll',
+        description: 'Luxurious silk fabric with natural sheen for premium garments.',
+        price: 89.99,
+        originalPrice: 119.99,
+        category: 'Silk',
+        vendorId: 'vendor1',
+        stock: 50,
+        unit: 'meter',
+        images: ['https://images.unsplash.com/photo-1534215754734-18e55d13e346?auto=format&fit=crop&w=400&q=80'],
+        rating: 4.9,
+        totalReviews: 89,
+        colors: ['Black', 'Gold', 'Silver'],
+        material: '100% Silk',
+        weight: '150 GSM',
+        width: '45 inches',
+        attributes: ['Luxurious', 'Natural Sheen', 'Breathable'],
+        discount: 25,
+        minOrder: 5,
+        isActive: true,
+        isFeatured: true,
+        tags: ['silk', 'luxury', 'premium'],
+        specifications: [
+          { name: 'Material', value: '100% Silk' },
+          { name: 'Weight', value: '150 GSM' },
+          { name: 'Width', value: '45 inches' }
+        ],
+        createdAt: new Date('2024-01-05'),
+        updatedAt: new Date('2024-01-10')
+      },
+      {
+        id: '3',
+        name: 'Wool Blend Fabric',
+        description: 'Warm and durable wool blend fabric for winter clothing.',
+        price: 45.99,
+        originalPrice: 55.99,
+        category: 'Wool',
+        vendorId: 'vendor2',
+        stock: 75,
+        unit: 'meter',
+        images: ['https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80'],
+        rating: 4.6,
+        totalReviews: 67,
+        colors: ['Navy', 'Gray', 'Brown'],
+        material: '70% Wool, 30% Polyester',
+        weight: '280 GSM',
+        width: '58 inches',
+        attributes: ['Warm', 'Durable', 'Wrinkle-resistant'],
+        discount: 18,
+        minOrder: 8,
+        isActive: true,
+        isFeatured: false,
+        tags: ['wool', 'winter', 'warm'],
+        specifications: [
+          { name: 'Material', value: '70% Wool, 30% Polyester' },
+          { name: 'Weight', value: '280 GSM' },
+          { name: 'Width', value: '58 inches' }
+        ],
+        createdAt: new Date('2024-01-08'),
+        updatedAt: new Date('2024-01-12')
+      },
+      {
+        id: '4',
+        name: 'Linen Fabric',
+        description: 'Natural linen fabric for summer clothing and home textiles.',
+        price: 35.99,
+        originalPrice: 42.99,
+        category: 'Linen',
+        vendorId: 'vendor1',
+        stock: 90,
+        unit: 'meter',
+        images: ['https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=400&q=80'],
+        rating: 4.7,
+        totalReviews: 93,
+        colors: ['Natural', 'White', 'Beige'],
+        material: '100% Linen',
+        weight: '220 GSM',
+        width: '54 inches',
+        attributes: ['Natural', 'Breathable', 'Durable'],
+        discount: 16,
+        minOrder: 12,
+        isActive: true,
+        isFeatured: true,
+        tags: ['linen', 'natural', 'summer'],
+        specifications: [
+          { name: 'Material', value: '100% Linen' },
+          { name: 'Weight', value: '220 GSM' },
+          { name: 'Width', value: '54 inches' }
+        ],
+        createdAt: new Date('2024-01-03'),
+        updatedAt: new Date('2024-01-14')
+      }
+    ];
+
+    return of(mockProducts);
+  }
+
+  getMockFeaturedProducts(): Observable<Product[]> {
+    return this.getMockProducts().pipe(
+      map(products => products.filter(p => p.isFeatured).slice(0, 4))
+    );
+  }
+
+  getMockProductsByCategory(category: string): Observable<Product[]> {
+    return this.getMockProducts().pipe(
+      map(products => products.filter(p => p.category === category))
+    );
+  }
 }

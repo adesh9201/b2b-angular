@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './components/core/guards/auth.guard';
+import { AdminGuard } from './components/core/guards/admin.guard';
+import { VendorGuard } from './components/core/guards/vendor.guard';
 
 // Pages
 import { Home } from './components/pages/home/home';
@@ -27,9 +30,8 @@ import { AccountSetting } from './components/vendor/account-setting/account-sett
 import { Logistics } from './components/vendor/logistics/logistics';
 import { ProductCatalog } from './components/vendor/product-catalog/product-catalog';
 
-
 export const routes: Routes = [
-  // Pages
+  // Public Pages
   { path: '', component: Home },
   { path: 'catalogs', component: Catalogs },
   { path: 'products', component: Products },
@@ -40,29 +42,70 @@ export const routes: Routes = [
   { path: 'suppliers', component: Suppliers },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-
-
-// Vendor Pages
-  { path: 'dashboard', component: Dashboard },
-  { path: 'order', component: Order },
-  { path: 'inventory', component: Inventory },
-  { path: 'pricing', component: Pricing },
-  { path: 'claims', component: Claims },
-  { path: 'payment', component: Payment },
-  { path: 'analytics', component: Analytics },
-  { path: 'marketing', component: Marketing },
-  { path: 'reviews', component: Reviews },
-  { path: 'support', component: Support },
-  { path: 'accountsetting', component: AccountSetting },
-  { path: 'logistics', component: Logistics },
-  { path: 'productcatalog', component: ProductCatalog },
-
-
-  //test
-
   { path: 'test', component: Test },
 
+  // Protected Routes - Require Authentication
+  { 
+    path: 'dashboard', 
+    component: Dashboard, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'orders', 
+    component: Order, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'profile', 
+    component: AccountSetting, 
+    canActivate: [AuthGuard] 
+  },
 
-  // wildcard
+  // Vendor Routes - Require Vendor Authentication
+  { 
+    path: 'vendor', 
+    children: [
+      { path: 'dashboard', component: Dashboard, canActivate: [VendorGuard] },
+      { path: 'orders', component: Order, canActivate: [VendorGuard] },
+      { path: 'inventory', component: Inventory, canActivate: [VendorGuard] },
+      { path: 'pricing', component: Pricing, canActivate: [VendorGuard] },
+      { path: 'claims', component: Claims, canActivate: [VendorGuard] },
+      { path: 'payment', component: Payment, canActivate: [VendorGuard] },
+      { path: 'analytics', component: Analytics, canActivate: [VendorGuard] },
+      { path: 'marketing', component: Marketing, canActivate: [VendorGuard] },
+      { path: 'reviews', component: Reviews, canActivate: [VendorGuard] },
+      { path: 'support', component: Support, canActivate: [VendorGuard] },
+      { path: 'account', component: AccountSetting, canActivate: [VendorGuard] },
+      { path: 'logistics', component: Logistics, canActivate: [VendorGuard] },
+      { path: 'products', component: ProductCatalog, canActivate: [VendorGuard] }
+    ]
+  },
+
+  // Admin Routes - Require Admin Authentication
+  { 
+    path: 'admin', 
+    children: [
+      { path: 'dashboard', component: Dashboard, canActivate: [AdminGuard] },
+      { path: 'orders', component: Order, canActivate: [AdminGuard] },
+      { path: 'products', component: ProductCatalog, canActivate: [AdminGuard] },
+      { path: 'vendors', component: Suppliers, canActivate: [AdminGuard] }
+    ]
+  },
+
+  // Legacy routes for backward compatibility
+  { path: 'order', component: Order, canActivate: [AuthGuard] },
+  { path: 'inventory', component: Inventory, canActivate: [VendorGuard] },
+  { path: 'pricing', component: Pricing, canActivate: [VendorGuard] },
+  { path: 'claims', component: Claims, canActivate: [VendorGuard] },
+  { path: 'payment', component: Payment, canActivate: [VendorGuard] },
+  { path: 'analytics', component: Analytics, canActivate: [VendorGuard] },
+  { path: 'marketing', component: Marketing, canActivate: [VendorGuard] },
+  { path: 'reviews', component: Reviews, canActivate: [VendorGuard] },
+  { path: 'support', component: Support, canActivate: [VendorGuard] },
+  { path: 'accountsetting', component: AccountSetting, canActivate: [VendorGuard] },
+  { path: 'logistics', component: Logistics, canActivate: [VendorGuard] },
+  { path: 'productcatalog', component: ProductCatalog, canActivate: [VendorGuard] },
+
+  // Wildcard route
   { path: '**', redirectTo: '' },
 ];

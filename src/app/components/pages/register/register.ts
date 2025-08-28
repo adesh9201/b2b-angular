@@ -1,126 +1,144 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { SupplierService } from '../../core/services/supplier.service';
-import { SupplierRegister } from '../../core/models/supplier.model';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })
-export class Register {
-  registerForm: FormGroup;
-  otpSent = false;
-  otpVerified = false;
-  otpCode = '';
-
-  // 🔔 Toast state
+export class Register implements OnInit {
+  registerForm!: FormGroup;
+  loading = false;
   showToast = false;
   toastMessage = '';
   isError = false;
 
   constructor(
-    private fb: FormBuilder,
-    private supplierService: SupplierService,
-    private cdr: ChangeDetectorRef
-  ) {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      address: [''],
-      pincode: [''],
-      state: [''],
-      city: [''],
-      gstin: [''],
-      pan: [''],
-      emailId: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      contact_Person: ['']
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  private initForm(): void {
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^\+?[\d\s-()]+$/)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]],
+      company: [''],
+      role: ['user', [Validators.required]],
+      acceptTerms: [false, [Validators.requiredTrue]]
+    }, { validators: this.passwordMatchValidator });
+  }
+
+  private passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+    
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      return { passwordMismatch: true };
+    }
+    
+    return null;
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.valid) {
+      this.loading = true;
+      const formValue = this.registerForm.value;
+      
+      const userData = {
+        email: formValue.email,
+        password: formValue.password,
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        phone: formValue.phone,
+        company: formValue.company,
+        role: formValue.role
+      };
+
+      this.authService.register(userData).subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.triggerToast('Registration successful! Welcome to FabHub!');
+          
+          // Navigate to dashboard after successful registration
+          setTimeout(() => {
+            this.router.navigate(['/dashboard']);
+          }, 1000);
+        },
+        error: (error) => {
+          this.loading = false;
+          this.triggerToast(error.error?.message || 'Registration failed. Please try again.', true);
+        }
+      });
+    } else {
+      this.markFormGroupTouched();
+    }
+  }
+
+  private markFormGroupTouched(): void {
+    Object.keys(this.registerForm.controls).forEach(key => {
+      const control = this.registerForm.get(key);
+      control?.markAsTouched();
     });
   }
 
-  private triggerToast(message: string, isError: boolean = false) {
+  private triggerToast(message: string, isError: boolean = false): void {
     this.toastMessage = message;
     this.isError = isError;
     this.showToast = true;
-    this.cdr.detectChanges();
 
     setTimeout(() => {
       this.showToast = false;
-      this.cdr.detectChanges();
-    }, 2500);
+    }, 3000);
   }
 
-  register() {
-    if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
-      this.triggerToast('Please fill all required fields ❌', true);
-      return;
+  getErrorMessage(controlName: string): string {
+    const control = this.registerForm.get(controlName);
+    
+    if (control?.hasError('required')) {
+      return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} is required`;
     }
-
-    const supplier: SupplierRegister = this.registerForm.value;
-
-    this.supplierService.register(supplier).subscribe({
-      next: (res) => {
-        console.log('Register response:', res);
-        this.triggerToast('Registered successfully! Now verify OTP ✅');
-        this.sendOtp(supplier.emailId);
-      },
-      error: (err) => {
-        console.error('Register error:', err);
-        if (err.error) {
-          this.triggerToast(err.error, true);
-        } else if (err.status === 0) {
-          this.triggerToast('Cannot reach server. Check backend ❌', true);
-        } else {
-          this.triggerToast('Unexpected error: ' + err.message, true);
-        }
-      }
-    });
+    
+    if (control?.hasError('email')) {
+      return 'Please enter a valid email address';
+    }
+    
+    if (control?.hasError('minlength')) {
+      const requiredLength = control.getError('minlength').requiredLength;
+      return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} must be at least ${requiredLength} characters`;
+    }
+    
+    if (control?.hasError('pattern')) {
+      return 'Please enter a valid phone number';
+    }
+    
+    if (control?.hasError('requiredTrue')) {
+      return 'You must accept the terms and conditions';
+    }
+    
+    return '';
   }
 
-  sendOtp(contact: string) {
-    this.supplierService.sendOtp(contact).subscribe({
-      next: (res) => {
-        console.log('Send OTP response:', res);
-        this.otpSent = true;
-        this.triggerToast('OTP sent to email 📩');
-      },
-      error: (err) => {
-        console.error('Send OTP error:', err);
-        if (err.error) {
-          this.triggerToast(err.error, true);
-        } else if (err.status === 0) {
-          this.triggerToast('Cannot reach server. Check backend ❌', true);
-        } else {
-          this.triggerToast('Unexpected error: ' + err.message, true);
-        }
-      }
-    });
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.registerForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
   }
 
-  verifyOtp() {
-    const contact = this.registerForm.value.emailId;
-    this.supplierService.verifyOtp(contact, this.otpCode).subscribe({
-      next: (res) => {
-        console.log('Verify OTP response:', res);
-        this.otpVerified = true;
-        this.triggerToast('OTP verified! You can now login 🎉');
-      },
-      error: (err) => {
-        console.error('Verify OTP error:', err);
-        if (err.error) {
-          this.triggerToast(err.error, true);
-        } else if (err.status === 0) {
-          this.triggerToast('Cannot reach server. Check backend ❌', true);
-        } else {
-          this.triggerToast('Unexpected error: ' + err.message, true);
-        }
-      }
-    });
+  hasPasswordMismatch(): boolean {
+    return this.registerForm.hasError('passwordMismatch') && 
+           this.registerForm.get('confirmPassword')?.touched;
   }
 }

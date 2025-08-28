@@ -1,0 +1,136 @@
+<div class="product-card card h-100 border-0 shadow-sm">
+  <!-- Product Image -->
+  <div class="product-image-container position-relative">
+    <img 
+      [src]="product.images[0] || 'https://via.placeholder.com/300x200'" 
+      [alt]="product.name"
+      class="card-img-top product-image"
+      loading="lazy"
+    />
+    
+    <!-- Discount Badge -->
+    <div 
+      *ngIf="getDiscountPercentage(product.originalPrice || product.price, product.price) > 0"
+      class="discount-badge position-absolute top-0 start-0 bg-danger text-white px-2 py-1 rounded-bottom-end"
+    >
+      -{{ getDiscountPercentage(product.originalPrice || product.price, product.price) }}%
+    </div>
+    
+    <!-- Quick View Button -->
+    <div class="product-actions position-absolute top-0 end-0 p-2">
+      <button 
+        class="btn btn-sm btn-light rounded-circle shadow-sm"
+        (click)="onQuickView($event)"
+        title="Quick View"
+      >
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+    
+    <!-- Stock Status -->
+    <div class="stock-status position-absolute bottom-0 start-0 w-100 p-2">
+      <span 
+        class="badge"
+        [ngClass]="getStockStatus(product.stock || 0).class"
+      >
+        {{ getStockStatus(product.stock || 0).text }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="card-body d-flex flex-column">
+    <!-- Category -->
+    <div class="mb-2">
+      <span class="badge bg-light text-dark">{{ product.category }}</span>
+    </div>
+
+    <!-- Product Name -->
+    <h6 class="card-title mb-2">
+      <a 
+        [routerLink]="['/products', product.id]" 
+        class="text-decoration-none text-dark"
+        [title]="product.name"
+      >
+        {{ product.name | truncate:50 }}
+      </a>
+    </h6>
+
+    <!-- Description -->
+    <p class="card-text text-muted small mb-2">
+      {{ product.description | truncate:80 }}
+    </p>
+
+    <!-- Rating -->
+    <div *ngIf="showRating && product.rating" class="mb-2">
+      <div class="d-flex align-items-center">
+        <div class="me-2">
+          <span 
+            *ngFor="let star of getRatingStars(product.rating)"
+            class="text-warning"
+          >
+            <i 
+              class="fas"
+              [ngClass]="star === 1 ? 'fa-star' : star === 0.5 ? 'fa-star-half-alt' : 'fa-star-o'"
+            ></i>
+          </span>
+        </div>
+        <small class="text-muted">({{ product.totalReviews }})</small>
+      </div>
+    </div>
+
+    <!-- Vendor Info -->
+    <div *ngIf="showVendor && product.vendor" class="mb-2">
+      <small class="text-muted">
+        <i class="fas fa-store me-1"></i>
+        {{ product.vendor.businessName }}
+      </small>
+    </div>
+
+    <!-- Price -->
+    <div class="price-section mb-3">
+      <div class="d-flex align-items-center">
+        <span class="h5 mb-0 text-primary fw-bold">
+          {{ product.price | currencyFormat }}
+        </span>
+        <span 
+          *ngIf="product.originalPrice && product.originalPrice > product.price"
+          class="text-muted text-decoration-line-through ms-2"
+        >
+          {{ product.originalPrice | currencyFormat }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Add to Cart Button -->
+    <div class="mt-auto">
+      <button 
+        *ngIf="showAddToCart"
+        class="btn btn-primary w-100"
+        (click)="onAddToCart($event)"
+        [disabled]="(product.stock || 0) === 0"
+      >
+        <i class="fas fa-shopping-cart me-2"></i>
+        {{ (product.stock || 0) === 0 ? 'Out of Stock' : 'Add to Cart' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Card Footer -->
+  <div class="card-footer bg-transparent border-0 pt-0">
+    <div class="row text-center">
+      <div class="col-4">
+        <small class="text-muted d-block">Min Order</small>
+        <small class="fw-semibold">{{ product.minOrder || 1 }}</small>
+      </div>
+      <div class="col-4">
+        <small class="text-muted d-block">Stock</small>
+        <small class="fw-semibold">{{ product.stock || 0 }}</small>
+      </div>
+      <div class="col-4">
+        <small class="text-muted d-block">Material</small>
+        <small class="fw-semibold">{{ product.material | truncate:10 }}</small>
+      </div>
+    </div>
+  </div>
+</div>

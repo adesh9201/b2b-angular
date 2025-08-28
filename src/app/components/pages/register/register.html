@@ -1,4 +1,4 @@
-<!-- 🔔 Toast Notification -->
+<!-- Toast Notification -->
 <div *ngIf="showToast" class="toast-notif show" [ngClass]="{'error': isError}">
   <span class="icon">
     <i class="fas" [ngClass]="isError ? 'fa-times-circle' : 'fa-check-circle'"></i>
@@ -7,61 +7,202 @@
   <span class="close-btn" (click)="showToast = false">&times;</span>
 </div>
 
-<div class="registration-container">
-  <h2>Supplier Registration</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
-    <div class="row g-3">
-      <div
-        class="col-md-6"
-        *ngFor="let field of ['name','address','pincode','state','city','gstin','pan','emailId','phone','contact_Person']"
-      >
-        <label class="form-label" [for]="field">{{ field | titlecase }}</label>
-        <input
-          class="form-control"
-          [formControlName]="field"
-          [id]="field"
-          [type]="field === 'emailId' ? 'email' : 'text'"
-          placeholder="Enter {{ field | titlecase }}"
-        />
-        <div
-          class="text-danger mt-1"
-          *ngIf="registerForm.get(field)?.invalid && registerForm.get(field)?.touched"
-        >
-          {{ field | titlecase }} is required
+<div class="container mt-5 pt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">Create Account</h2>
+            <p class="text-muted">Join FabHub and start your journey</p>
+          </div>
+
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <!-- First Name -->
+              <div class="col-md-6 mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  class="form-control"
+                  formControlName="firstName"
+                  [ngClass]="{'is-invalid': isFieldInvalid('firstName')}"
+                  placeholder="Enter first name"
+                  autocomplete="given-name"
+                />
+                <div class="invalid-feedback" *ngIf="isFieldInvalid('firstName')">
+                  {{ getErrorMessage('firstName') }}
+                </div>
+              </div>
+
+              <!-- Last Name -->
+              <div class="col-md-6 mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  class="form-control"
+                  formControlName="lastName"
+                  [ngClass]="{'is-invalid': isFieldInvalid('lastName')}"
+                  placeholder="Enter last name"
+                  autocomplete="family-name"
+                />
+                <div class="invalid-feedback" *ngIf="isFieldInvalid('lastName')">
+                  {{ getErrorMessage('lastName') }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="{'is-invalid': isFieldInvalid('email')}"
+                placeholder="Enter email address"
+                autocomplete="email"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('email')">
+                {{ getErrorMessage('email') }}
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                class="form-control"
+                formControlName="phone"
+                [ngClass]="{'is-invalid': isFieldInvalid('phone')}"
+                placeholder="Enter phone number"
+                autocomplete="tel"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('phone')">
+                {{ getErrorMessage('phone') }}
+              </div>
+            </div>
+
+            <!-- Company -->
+            <div class="mb-3">
+              <label for="company" class="form-label">Company (Optional)</label>
+              <input
+                type="text"
+                id="company"
+                class="form-control"
+                formControlName="company"
+                placeholder="Enter company name"
+                autocomplete="organization"
+              />
+            </div>
+
+            <!-- Role -->
+            <div class="mb-3">
+              <label for="role" class="form-label">Account Type</label>
+              <select
+                id="role"
+                class="form-select"
+                formControlName="role"
+                [ngClass]="{'is-invalid': isFieldInvalid('role')}"
+              >
+                <option value="user">Customer</option>
+                <option value="vendor">Vendor</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('role')">
+                {{ getErrorMessage('role') }}
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                [ngClass]="{'is-invalid': isFieldInvalid('password')}"
+                placeholder="Enter password"
+                autocomplete="new-password"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('password')">
+                {{ getErrorMessage('password') }}
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                class="form-control"
+                formControlName="confirmPassword"
+                [ngClass]="{'is-invalid': isFieldInvalid('confirmPassword') || hasPasswordMismatch()}"
+                placeholder="Confirm password"
+                autocomplete="new-password"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('confirmPassword') || hasPasswordMismatch()">
+                <span *ngIf="isFieldInvalid('confirmPassword')">{{ getErrorMessage('confirmPassword') }}</span>
+                <span *ngIf="hasPasswordMismatch()">Passwords do not match</span>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                id="acceptTerms"
+                class="form-check-input"
+                formControlName="acceptTerms"
+                [ngClass]="{'is-invalid': isFieldInvalid('acceptTerms')}"
+              />
+              <label class="form-check-label" for="acceptTerms">
+                I agree to the <a href="#" class="text-primary">Terms and Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>
+              </label>
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('acceptTerms')">
+                {{ getErrorMessage('acceptTerms') }}
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mb-3"
+              [disabled]="loading || registerForm.invalid"
+            >
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ loading ? 'Creating Account...' : 'Create Account' }}
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="text-center mb-3">
+            <span class="text-muted">or</span>
+          </div>
+
+          <!-- Social Registration Buttons -->
+          <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="fab fa-google me-2"></i>Sign up with Google
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="fab fa-facebook me-2"></i>Sign up with Facebook
+            </button>
+          </div>
+
+          <!-- Login Link -->
+          <div class="text-center">
+            <span class="text-muted">Already have an account? </span>
+            <a routerLink="/login" class="text-decoration-none text-primary fw-semibold">Sign in</a>
+          </div>
         </div>
       </div>
     </div>
-
-    <button
-      class="btn btn-primary mt-4 w-100"
-      type="submit"
-      [disabled]="otpSent"
-    >
-      Register
-    </button>
-  </form>
-
-  <!-- OTP Section -->
-  <div *ngIf="otpSent && !otpVerified" class="otp-section mt-4">
-    <label for="otpCode">Enter OTP</label>
-    <input
-      type="text"
-      id="otpCode"
-      class="form-control mb-2"
-      [(ngModel)]="otpCode"
-      placeholder="Enter OTP"
-    />
-    <button class="btn btn-success w-100" (click)="verifyOtp()">Verify OTP</button>
-  </div>
-
-  <!-- OTP Verified -->
-  <div *ngIf="otpVerified" class="alert alert-success mt-3">
-    OTP Verified! You can now login.
-  </div>
-
-  <!-- Navigation to Login -->
-  <div class="login-nav mt-4 text-center">
-    <span>Already have an account? </span>
-    <a routerLink="/login" class="text-primary fw-semibold">Go to Login</a>
   </div>
 </div>

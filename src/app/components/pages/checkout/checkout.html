@@ -7,31 +7,37 @@
             <h5 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Shipping Address</h5>
           </div>
           <div class="card-body">
-            <form [formGroup]="form">
+            <form [formGroup]="form" novalidate>
             <div class="row g-3" formGroupName="shipping">
               <div class="col-md-6">
                 <label class="form-label" for="fullName">Full Name</label>
                 <input id="fullName" class="form-control" formControlName="fullName" placeholder="Enter full name">
+                <div class="invalid-feedback d-block" *ngIf="form.get('shipping.fullName')?.touched && form.get('shipping.fullName')?.invalid">Full name is required.</div>
               </div>
               <div class="col-md-6">
                 <label class="form-label" for="phone">Phone</label>
                 <input id="phone" class="form-control" formControlName="phone" placeholder="Enter phone">
+                <div class="invalid-feedback d-block" *ngIf="form.get('shipping.phone')?.touched && form.get('shipping.phone')?.invalid">Phone is required.</div>
               </div>
               <div class="col-12">
                 <label class="form-label" for="address">Address</label>
                 <input id="address" class="form-control" formControlName="address" placeholder="House no, street">
+                <div class="invalid-feedback d-block" *ngIf="form.get('shipping.address')?.touched && form.get('shipping.address')?.invalid">Address is required.</div>
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="city">City</label>
                 <input id="city" class="form-control" formControlName="city" placeholder="City">
+                <div class="invalid-feedback d-block" *ngIf="form.get('shipping.city')?.touched && form.get('shipping.city')?.invalid">City is required.</div>
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="state">State</label>
                 <input id="state" class="form-control" formControlName="state" placeholder="State">
+                <div class="invalid-feedback d-block" *ngIf="form.get('shipping.state')?.touched && form.get('shipping.state')?.invalid">State is required.</div>
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="zip">ZIP</label>
                 <input id="zip" class="form-control" formControlName="zip" placeholder="Postal code">
+                <div class="invalid-feedback d-block" *ngIf="form.get('shipping.zip')?.touched && form.get('shipping.zip')?.invalid">ZIP is required.</div>
               </div>
             </div>
           </form>
@@ -58,18 +64,22 @@
               <div class="col-12">
                 <label class="form-label" for="cardNumber">Card Number</label>
                 <input id="cardNumber" class="form-control" formControlName="cardNumber" placeholder="1234 5678 9012 3456">
+                <div class="invalid-feedback d-block" *ngIf="form.get('payment.cardNumber')?.touched && form.get('payment.cardNumber')?.invalid">Card number is required.</div>
               </div>
               <div class="col-md-6">
                 <label class="form-label" for="nameOnCard">Name on Card</label>
                 <input id="nameOnCard" class="form-control" formControlName="nameOnCard" placeholder="As printed on card">
+                <div class="invalid-feedback d-block" *ngIf="form.get('payment.nameOnCard')?.touched && form.get('payment.nameOnCard')?.invalid">Name on card is required.</div>
               </div>
               <div class="col-md-3">
                 <label class="form-label" for="expiry">Expiry</label>
                 <input id="expiry" class="form-control" formControlName="expiry" placeholder="MM/YY">
+                <div class="invalid-feedback d-block" *ngIf="form.get('payment.expiry')?.touched && form.get('payment.expiry')?.invalid">Expiry is required.</div>
               </div>
               <div class="col-md-3">
                 <label class="form-label" for="cvv">CVV</label>
                 <input id="cvv" class="form-control" formControlName="cvv" placeholder="***">
+                <div class="invalid-feedback d-block" *ngIf="form.get('payment.cvv')?.touched && form.get('payment.cvv')?.invalid">CVV is required.</div>
               </div>
             </div>
           </div>

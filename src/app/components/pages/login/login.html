@@ -17,11 +17,12 @@
         type="text"
         id="contact"
         class="form-control"
+        [class.is-invalid]="form.get('contact')?.touched && form.get('contact')?.invalid"
         formControlName="contact"
         placeholder="Enter your email or phone"
         required
       />
-      <div class="text-danger small" *ngIf="form.get('contact')?.touched && form.get('contact')?.invalid">
+      <div class="invalid-feedback d-block" *ngIf="form.get('contact')?.touched && form.get('contact')?.invalid">
         Contact is required
       </div>
     </div>
@@ -42,10 +43,14 @@
           type="text"
           id="otp"
           class="form-control"
+          [class.is-invalid]="form.get('otp')?.touched && form.get('otp')?.invalid"
           formControlName="otp"
           placeholder="Enter the OTP"
           required
         />
+        <div class="invalid-feedback d-block" *ngIf="form.get('otp')?.touched && form.get('otp')?.invalid">
+          OTP is required
+        </div>
       </div>
       <button class="btn btn-success" type="button" (click)="verifyOtp()" [disabled]="form.get('otp')?.invalid">Login</button>
     </div>

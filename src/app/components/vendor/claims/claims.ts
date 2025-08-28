@@ -4,9 +4,10 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-claims',
+  standalone: true,
   imports: [RouterLink,Sidebar],
   templateUrl: './claims.html',
-  styleUrl: './claims.css'
+  styleUrls: ['./claims.css']
 })
 export class Claims {
 

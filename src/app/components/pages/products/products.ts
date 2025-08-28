@@ -107,7 +107,7 @@ import { ActivatedRoute } from '@angular/router';
   imports: [CommonModule, RouterModule],
   providers: [CurrencyPipe],
   templateUrl: './products.html',
-  styleUrl: './products.css'
+  styleUrls: ['./products.css']
 })
 
 

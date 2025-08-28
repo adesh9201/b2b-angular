@@ -9,7 +9,7 @@ import { TrustedStat } from '../../core/models/trusted-by-users.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './trusted-by-users.html',
-  styleUrl: './trusted-by-users.css'
+  styleUrls: ['./trusted-by-users.css']
 })
 export class TrustedByUsers implements OnInit {
   stats: TrustedStat[] = [];

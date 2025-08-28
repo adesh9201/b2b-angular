@@ -7,32 +7,34 @@
             <h5 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>Shipping Address</h5>
           </div>
           <div class="card-body">
-            <div class="row g-3">
+            <form [formGroup]="form">
+            <div class="row g-3" formGroupName="shipping">
               <div class="col-md-6">
                 <label class="form-label" for="fullName">Full Name</label>
-                <input id="fullName" class="form-control" [(ngModel)]="shipping.fullName" placeholder="Enter full name">
+                <input id="fullName" class="form-control" formControlName="fullName" placeholder="Enter full name">
               </div>
               <div class="col-md-6">
                 <label class="form-label" for="phone">Phone</label>
-                <input id="phone" class="form-control" [(ngModel)]="shipping.phone" placeholder="Enter phone">
+                <input id="phone" class="form-control" formControlName="phone" placeholder="Enter phone">
               </div>
               <div class="col-12">
                 <label class="form-label" for="address">Address</label>
-                <input id="address" class="form-control" [(ngModel)]="shipping.address" placeholder="House no, street">
+                <input id="address" class="form-control" formControlName="address" placeholder="House no, street">
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="city">City</label>
-                <input id="city" class="form-control" [(ngModel)]="shipping.city" placeholder="City">
+                <input id="city" class="form-control" formControlName="city" placeholder="City">
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="state">State</label>
-                <input id="state" class="form-control" [(ngModel)]="shipping.state" placeholder="State">
+                <input id="state" class="form-control" formControlName="state" placeholder="State">
               </div>
               <div class="col-md-4">
                 <label class="form-label" for="zip">ZIP</label>
-                <input id="zip" class="form-control" [(ngModel)]="shipping.zip" placeholder="Postal code">
+                <input id="zip" class="form-control" formControlName="zip" placeholder="Postal code">
               </div>
             </div>
+          </form>
           </div>
         </div>
 
@@ -41,33 +43,33 @@
             <h5 class="mb-0"><i class="fas fa-credit-card me-2"></i>Payment</h5>
           </div>
           <div class="card-body">
-            <div class="mb-3">
+            <div class="mb-3" formGroupName="payment">
               <div class="form-check form-check-inline">
-                <input id="payCod" class="form-check-input" type="radio" name="pay" value="cod" [(ngModel)]="payment.method">
+                <input id="payCod" class="form-check-input" type="radio" name="pay" value="cod" formControlName="method">
                 <label class="form-check-label" for="payCod">Cash on Delivery</label>
               </div>
               <div class="form-check form-check-inline">
-                <input id="payCard" class="form-check-input" type="radio" name="pay" value="card" [(ngModel)]="payment.method">
+                <input id="payCard" class="form-check-input" type="radio" name="pay" value="card" formControlName="method">
                 <label class="form-check-label" for="payCard">Card</label>
               </div>
             </div>
 
-            <div *ngIf="payment.method==='card'" class="row g-3">
+            <div *ngIf="form.get('payment.method')?.value==='card'" class="row g-3" formGroupName="payment">
               <div class="col-12">
                 <label class="form-label" for="cardNumber">Card Number</label>
-                <input id="cardNumber" class="form-control" [(ngModel)]="payment.cardNumber" placeholder="1234 5678 9012 3456">
+                <input id="cardNumber" class="form-control" formControlName="cardNumber" placeholder="1234 5678 9012 3456">
               </div>
               <div class="col-md-6">
                 <label class="form-label" for="nameOnCard">Name on Card</label>
-                <input id="nameOnCard" class="form-control" [(ngModel)]="payment.nameOnCard" placeholder="As printed on card">
+                <input id="nameOnCard" class="form-control" formControlName="nameOnCard" placeholder="As printed on card">
               </div>
               <div class="col-md-3">
                 <label class="form-label" for="expiry">Expiry</label>
-                <input id="expiry" class="form-control" [(ngModel)]="payment.expiry" placeholder="MM/YY">
+                <input id="expiry" class="form-control" formControlName="expiry" placeholder="MM/YY">
               </div>
               <div class="col-md-3">
                 <label class="form-label" for="cvv">CVV</label>
-                <input id="cvv" class="form-control" [(ngModel)]="payment.cvv" placeholder="***">
+                <input id="cvv" class="form-control" formControlName="cvv" placeholder="***">
               </div>
             </div>
           </div>

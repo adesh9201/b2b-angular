@@ -1,54 +1,46 @@
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable, tap } from 'rxjs';
-// import { SendOtpRequest, SupplierRegisterDto, VerifyOtpRequest } from '../models/supplier.model';
-// // import { environment } from '../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, tap } from 'rxjs';
 
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  private readonly tokenKey = 'auth_token';
+  private readonly roleKey = 'auth_role';
+  private readonly contactKey = 'auth_contact';
 
-// @Injectable({ providedIn: 'root' })
-// export class AuthService {
-// private base =  'http://localhost:5000/api/suppliers';
-// private tokenKey = 'auth_token'; // अभी OTP verify success पर pseudo-token सेट करेंगे
-// private contactKey = 'auth_contact';
+  constructor(private http: HttpClient) {}
 
+  // Placeholder login via OTP verification simulation
+  loginWithOtp(contact: string, otp: string): Observable<{ token: string; role: 'user' | 'admin' | 'vendor' } > {
+    const token = btoa(`verified:${contact}:${Date.now()}`);
+    const role: 'user' | 'admin' | 'vendor' = 'vendor';
+    return of({ token, role }).pipe(
+      tap(({ token, role }) => {
+        localStorage.setItem(this.tokenKey, token);
+        localStorage.setItem(this.roleKey, role);
+        localStorage.setItem(this.contactKey, contact);
+      })
+    );
+  }
 
-// constructor(private http: HttpClient) {}
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem(this.tokenKey);
+  }
 
+  hasRole(required: 'admin' | 'vendor' | 'user'): boolean {
+    const role = localStorage.getItem(this.roleKey) as 'admin' | 'vendor' | 'user' | null;
+    if (!role) return false;
+    if (required === 'user') return true;
+    return role === required;
+  }
 
-// register(dto: SupplierRegisterDto): Observable<any> {
-// return this.http.post(`${this.base}/register`, dto);
-// }
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
 
-
-// sendOtp(contact: string): Observable<any> {
-// const body: SendOtpRequest = { contact };
-// return this.http.post(`${this.base}/send-otp`, body);
-// }
-
-
-// verifyOtp(contact: string, otp: string): Observable<any> {
-// const body: VerifyOtpRequest = { contact, otp };
-// return this.http.post(`${this.base}/verify-otp`, body).pipe(
-// tap((res: any) => {
-// // Backend JWT नहीं दे रहा, इसलिए हम local pseudo-session रखते हैं
-// const token = `verified:${contact}`;
-// localStorage.setItem(this.tokenKey, token);
-// localStorage.setItem(this.contactKey, contact);
-// })
-// );
-// }
-
-
-// isLoggedIn(): boolean {
-// return !!localStorage.getItem(this.tokenKey);
-// }
-
-
-// getContact(): string | null { return localStorage.getItem(this.contactKey); }
-
-
-// logout(): void {
-// localStorage.removeItem(this.tokenKey);
-// localStorage.removeItem(this.contactKey);
-// }
-// }
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.roleKey);
+    localStorage.removeItem(this.contactKey);
+  }
+}

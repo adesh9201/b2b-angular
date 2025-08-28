@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './trusted-by-brands.html',
-  styleUrl: './trusted-by-brands.css'
+  styleUrls: ['./trusted-by-brands.css']
 })
 export class TrustedByBrands implements OnInit {
   brands: TrustedBrand[] = [];

@@ -26,6 +26,7 @@ import { Support } from './components/vendor/support/support';
 import { AccountSetting } from './components/vendor/account-setting/account-setting';
 import { Logistics } from './components/vendor/logistics/logistics';
 import { ProductCatalog } from './components/vendor/product-catalog/product-catalog';
+import { AuthGuard, VendorGuard, AdminGuard } from './components/core/services/auth-guards';
 
 
 export const routes: Routes = [
@@ -35,7 +36,7 @@ export const routes: Routes = [
   { path: 'products', component: Products },
   { path: 'products/:id', component: Products },
   { path: 'cart', component: Cart },
-  { path: 'checkout', component: Checkout },
+  { path: 'checkout', component: Checkout, canActivate: [AuthGuard] },
   { path: 'about', component: About },
   { path: 'suppliers', component: Suppliers },
   { path: 'login', component: Login },
@@ -43,19 +44,19 @@ export const routes: Routes = [
 
 
 // Vendor Pages
-  { path: 'dashboard', component: Dashboard },
-  { path: 'order', component: Order },
-  { path: 'inventory', component: Inventory },
-  { path: 'pricing', component: Pricing },
-  { path: 'claims', component: Claims },
-  { path: 'payment', component: Payment },
-  { path: 'analytics', component: Analytics },
-  { path: 'marketing', component: Marketing },
-  { path: 'reviews', component: Reviews },
-  { path: 'support', component: Support },
-  { path: 'accountsetting', component: AccountSetting },
-  { path: 'logistics', component: Logistics },
-  { path: 'productcatalog', component: ProductCatalog },
+  { path: 'dashboard', component: Dashboard, canActivate: [VendorGuard] },
+  { path: 'order', component: Order, canActivate: [VendorGuard] },
+  { path: 'inventory', component: Inventory, canActivate: [VendorGuard] },
+  { path: 'pricing', component: Pricing, canActivate: [VendorGuard] },
+  { path: 'claims', component: Claims, canActivate: [VendorGuard] },
+  { path: 'payment', component: Payment, canActivate: [VendorGuard] },
+  { path: 'analytics', component: Analytics, canActivate: [VendorGuard] },
+  { path: 'marketing', component: Marketing, canActivate: [VendorGuard] },
+  { path: 'reviews', component: Reviews, canActivate: [VendorGuard] },
+  { path: 'support', component: Support, canActivate: [VendorGuard] },
+  { path: 'accountsetting', component: AccountSetting, canActivate: [VendorGuard] },
+  { path: 'logistics', component: Logistics, canActivate: [VendorGuard] },
+  { path: 'productcatalog', component: ProductCatalog, canActivate: [VendorGuard] },
 
 
   //test

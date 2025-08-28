@@ -8,7 +8,7 @@ import { Footer } from './components/shared/footer/footer'
   standalone: true,
   imports: [RouterOutlet, Navbar, Footer],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
   protected readonly title = signal('FabHub');

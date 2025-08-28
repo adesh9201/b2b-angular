@@ -4,9 +4,10 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-payment',
+  standalone: true,
   imports: [RouterLink, Sidebar],
   templateUrl: './payment.html',
-  styleUrl: './payment.css'
+  styleUrls: ['./payment.css']
 })
 export class Payment {
 

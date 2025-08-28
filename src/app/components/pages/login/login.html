@@ -1,4 +1,4 @@
-<!-- 🔔 Toast Notification -->
+<!-- Toast Notification -->
 <div *ngIf="showToast" class="toast-notif show" [ngClass]="{'error': isError}">
   <span class="icon">
     <i class="fas" [ngClass]="isError ? 'fa-times-circle' : 'fa-check-circle'"></i>
@@ -7,47 +7,102 @@
   <span class="close-btn" (click)="showToast = false">&times;</span>
 </div>
 
-<div class="login-container">
-  <h2>Supplier Login</h2>
+<div class="container mt-5 pt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+          <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">Welcome Back</h2>
+            <p class="text-muted">Sign in to your FabHub account</p>
+          </div>
 
-  <div class="form-group mb-3">
-    <label for="contact">Email or Phone</label>
-    <input
-      type="text"
-      id="contact"
-      class="form-control"
-      [(ngModel)]="contact"
-      placeholder="Enter your email or phone"
-      required
-    />
-  </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="{'is-invalid': isFieldInvalid('email')}"
+                placeholder="Enter your email"
+                autocomplete="email"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('email')">
+                {{ getErrorMessage('email') }}
+              </div>
+            </div>
 
-  <button
-    class="btn btn-primary mb-3"
-    (click)="sendOtp()"
-    [disabled]="otpSent"
-  >
-    Send OTP
-  </button>
+            <!-- Password Field -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                [ngClass]="{'is-invalid': isFieldInvalid('password')}"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+              />
+              <div class="invalid-feedback" *ngIf="isFieldInvalid('password')">
+                {{ getErrorMessage('password') }}
+              </div>
+            </div>
 
-  <div *ngIf="otpSent" class="otp-section">
-    <div class="form-group">
-      <label for="otp">Enter OTP</label>
-      <input
-        type="text"
-        id="otp"
-        class="form-control"
-        [(ngModel)]="otp"
-        placeholder="Enter the OTP"
-        required
-      />
+            <!-- Remember Me -->
+            <div class="mb-3 form-check">
+              <input
+                type="checkbox"
+                id="rememberMe"
+                class="form-check-input"
+                formControlName="rememberMe"
+              />
+              <label class="form-check-label" for="rememberMe">
+                Remember me
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary w-100 mb-3"
+              [disabled]="loading || loginForm.invalid"
+            >
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+              {{ loading ? 'Signing In...' : 'Sign In' }}
+            </button>
+          </form>
+
+          <!-- Forgot Password Link -->
+          <div class="text-center mb-3">
+            <a href="#" class="text-decoration-none text-primary">Forgot your password?</a>
+          </div>
+
+          <!-- Divider -->
+          <div class="text-center mb-3">
+            <span class="text-muted">or</span>
+          </div>
+
+          <!-- Social Login Buttons -->
+          <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="fab fa-google me-2"></i>Continue with Google
+            </button>
+            <button class="btn btn-outline-secondary" type="button">
+              <i class="fab fa-facebook me-2"></i>Continue with Facebook
+            </button>
+          </div>
+
+          <!-- Registration Link -->
+          <div class="text-center">
+            <span class="text-muted">Don't have an account? </span>
+            <a routerLink="/register" class="text-decoration-none text-primary fw-semibold">Sign up</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-success" (click)="verifyOtp()">Login</button>
-  </div>
-
-  <!-- Navigation to Registration -->
-  <div class="register-nav mt-4 text-center">
-    <span>Don't have an account? </span>
-    <a routerLink="/register" class="text-primary fw-semibold">Go to Registration</a>
   </div>
 </div>

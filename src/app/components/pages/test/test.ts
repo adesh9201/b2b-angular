@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TestService, ImageColorDetail } from '../../core/services/test.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,24 +7,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './test.html',
   styleUrls: ['./test.css']
 })
-export class Test implements OnInit {
-  imageColors: ImageColorDetail[] = [];
-  loading = true;
+export class Test   {
 
-  constructor(private testService: TestService) {}
-
-  ngOnInit(): void {
-    this.testService.getAll().subscribe({
-      next: (data) => {
-        this.imageColors = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error fetching data', err);
-        this.loading = false;
-      }
-    });
-  }
 }
 
 

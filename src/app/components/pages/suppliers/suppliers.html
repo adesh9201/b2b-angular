@@ -41,6 +41,8 @@
   </div>
 </section>
 
+
+
 <!-- Become a Supplier Section -->
 <section class="py-5">
   <div class="container">
@@ -65,10 +67,14 @@
           </div>
         </div>
 
-        <button class="btn btn-primary btn-lg ripple" [routerLink]="['/test']">
+        <!-- <button class="btn btn-primary btn-lg ripple" [routerLink]="['/test']">
           <i class="fas fa-plus me-2"></i> Apply Now
-        </button>
-
+        </button> -->
+              <button class="btn btn-primary btn-lg ripple"
+  data-bs-toggle="modal"
+  data-bs-target="#addSupplierModal">
+  Apply Now
+</button>
       </div>
 
       <div class="col-lg-6">
@@ -79,3 +85,92 @@
     </div>
   </div>
 </section>
+
+
+
+
+<!-- Add Supplier Modal -->
+<div class="modal fade" id="addSupplierModal" tabindex="-1" aria-labelledby="addSupplierModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content dark-mode-bg">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSupplierModalLabel">Register New Supplier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="name" class="form-label">Supplier Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name" required>
+                <div class="text-danger" *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid">
+                  Name is required
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control" id="address" rows="2" formControlName="address"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label for="pincode" class="form-label">Pincode</label>
+                <input type="text" class="form-control" id="pincode" formControlName="pincode">
+              </div>
+
+              <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" id="state" formControlName="state">
+              </div>
+
+              <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" formControlName="city">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="gstin" class="form-label">GSTIN</label>
+                <input type="text" class="form-control" id="gstin" formControlName="gstin">
+              </div>
+
+              <div class="mb-3">
+                <label for="pan" class="form-label">PAN</label>
+                <input type="text" class="form-control" id="pan" formControlName="pan">
+              </div>
+
+              <div class="mb-3">
+                <label for="emailId" class="form-label">Email</label>
+                <input type="email" class="form-control" id="emailId" formControlName="emailId" required>
+                <div class="text-danger" *ngIf="registerForm.get('emailId')?.touched && registerForm.get('emailId')?.invalid">
+                  Valid email is required
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" formControlName="phone">
+              </div>
+
+              <div class="mb-3">
+                <label for="contact_Person" class="form-label">Contact Person</label>
+                <input type="text" class="form-control" id="contact_Person" formControlName="contact_Person">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary ripple" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary ripple" [disabled]="registerForm.invalid" (click)="register()">
+          Register Supplier
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

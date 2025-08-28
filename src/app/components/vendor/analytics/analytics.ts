@@ -4,9 +4,10 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-analytics',
+  standalone: true,
   imports: [RouterLink, Sidebar],
   templateUrl: './analytics.html',
-  styleUrl: './analytics.css'
+  styleUrls: ['./analytics.css']
 })
 export class Analytics {
 

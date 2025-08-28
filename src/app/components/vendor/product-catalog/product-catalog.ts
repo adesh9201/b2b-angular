@@ -4,9 +4,10 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-product-catalog',
+  standalone: true,
   imports: [RouterLink, Sidebar],
   templateUrl: './product-catalog.html',
-  styleUrl: './product-catalog.css'
+  styleUrls: ['./product-catalog.css']
 })
 export class ProductCatalog {
 

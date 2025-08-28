@@ -1,18 +1,18 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { SupplierService } from '../../core/services/supplier.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
 export class Login {
-  contact = '';
-  otp = '';
+  form: FormGroup;
   otpSent = false;
 
 
@@ -24,8 +24,15 @@ export class Login {
   constructor(
     private supplierService: SupplierService,
     private cdr: ChangeDetectorRef,
-      private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder,
+    private auth: AuthService
+  ) {
+    this.form = this.fb.group({
+      contact: ['', [Validators.required, Validators.minLength(4)]],
+      otp: ['', [Validators.minLength(4)]]
+    });
+  }
 
   private triggerToast(message: string, isError: boolean = false) {
     this.toastMessage = message;
@@ -40,7 +47,8 @@ export class Login {
   }
 
   sendOtp() {
-    this.supplierService.sendOtp(this.contact).subscribe({
+    const contact = this.form.get('contact')!.value;
+    this.supplierService.sendOtp(contact).subscribe({
       next: () => {
         this.otpSent = true;
         this.triggerToast('OTP sent successfully ✅');
@@ -51,7 +59,9 @@ export class Login {
   }
 
   verifyOtp() {
-    this.supplierService.verifyOtp(this.contact, this.otp).subscribe({
+    const contact = this.form.get('contact')!.value;
+    const otp = this.form.get('otp')!.value;
+    this.supplierService.verifyOtp(contact, otp).subscribe({
       next: (res) => {
         this.triggerToast(
           'Login successful! Supplier ID: ' + res.supplierId
@@ -60,8 +70,10 @@ export class Login {
         // ✅ Store supplier data in localStorage
         localStorage.setItem('supplierData', JSON.stringify(res));
 
-        // ✅ Navigate to dashboard
-        this.router.navigate(['/dashboard']);
+        // ✅ Set app auth token for guards/interceptor
+        this.auth.loginWithOtp(contact, otp).subscribe(() => {
+          this.router.navigate(['/dashboard']);
+        });
 
       },
       error: (err) =>

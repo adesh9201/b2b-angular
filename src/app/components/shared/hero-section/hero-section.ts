@@ -11,7 +11,7 @@ import { Subscription, interval } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './hero-section.html',
-  styleUrl: './hero-section.css',
+  styleUrls: ['./hero-section.css'],
 })
 export class HeroSection implements OnInit, OnDestroy {
   heroDataList: HeroSectionModel[] = [];

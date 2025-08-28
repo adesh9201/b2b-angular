@@ -10,40 +10,51 @@
 <div class="login-container">
   <h2>Supplier Login</h2>
 
-  <div class="form-group mb-3">
-    <label for="contact">Email or Phone</label>
-    <input
-      type="text"
-      id="contact"
-      class="form-control"
-      [(ngModel)]="contact"
-      placeholder="Enter your email or phone"
-      required
-    />
-  </div>
-
-  <button
-    class="btn btn-primary mb-3"
-    (click)="sendOtp()"
-    [disabled]="otpSent"
-  >
-    Send OTP
-  </button>
-
-  <div *ngIf="otpSent" class="otp-section">
-    <div class="form-group">
-      <label for="otp">Enter OTP</label>
+  <form [formGroup]="form" novalidate>
+    <div class="form-group mb-3">
+      <label for="contact">Email or Phone</label>
       <input
         type="text"
-        id="otp"
+        id="contact"
         class="form-control"
-        [(ngModel)]="otp"
-        placeholder="Enter the OTP"
+        [class.is-invalid]="form.get('contact')?.touched && form.get('contact')?.invalid"
+        formControlName="contact"
+        placeholder="Enter your email or phone"
         required
       />
+      <div class="invalid-feedback d-block" *ngIf="form.get('contact')?.touched && form.get('contact')?.invalid">
+        Contact is required
+      </div>
     </div>
-    <button class="btn btn-success" (click)="verifyOtp()">Login</button>
-  </div>
+
+    <button
+      class="btn btn-primary mb-3"
+      type="button"
+      (click)="sendOtp()"
+      [disabled]="otpSent || form.get('contact')?.invalid"
+    >
+      Send OTP
+    </button>
+
+    <div *ngIf="otpSent" class="otp-section">
+      <div class="form-group">
+        <label for="otp">Enter OTP</label>
+        <input
+          type="text"
+          id="otp"
+          class="form-control"
+          [class.is-invalid]="form.get('otp')?.touched && form.get('otp')?.invalid"
+          formControlName="otp"
+          placeholder="Enter the OTP"
+          required
+        />
+        <div class="invalid-feedback d-block" *ngIf="form.get('otp')?.touched && form.get('otp')?.invalid">
+          OTP is required
+        </div>
+      </div>
+      <button class="btn btn-success" type="button" (click)="verifyOtp()" [disabled]="form.get('otp')?.invalid">Login</button>
+    </div>
+  </form>
 
   <!-- Navigation to Registration -->
   <div class="register-nav mt-4 text-center">

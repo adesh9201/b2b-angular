@@ -11,7 +11,7 @@ import { FabricCategoryModel } from '../../core/models/fabric-category.model';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './fabric-categories.html',
-  styleUrl: './fabric-categories.css'
+  styleUrls: ['./fabric-categories.css']
 })
 export class FabricCategories {
   allCategories: FabricCategoryModel[] = [];

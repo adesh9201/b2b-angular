@@ -1,28 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
 import { CartItem, OrderSummary } from '../../core/models/cart.model';
 
 @Component({
   selector: 'app-checkout',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './checkout.html',
-  styleUrl: './checkout.css'
+  styleUrls: ['./checkout.css']
 })
 export class Checkout implements OnInit {
   cartItems: CartItem[] = [];
   summary!: OrderSummary;
-
-  // Simple form model
-  shipping = { fullName: '', phone: '', address: '', city: '', state: '', zip: '' };
-  payment = { method: 'cod', cardNumber: '', nameOnCard: '', expiry: '', cvv: '' };
+  form: FormGroup;
   placing = false;
   placed = false;
   error = '';
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      shipping: this.fb.group({
+        fullName: ['', Validators.required],
+        phone: ['', Validators.required],
+        address: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        zip: ['', Validators.required],
+      }),
+      payment: this.fb.group({
+        method: ['cod', Validators.required],
+        cardNumber: [''],
+        nameOnCard: [''],
+        expiry: [''],
+        cvv: ['']
+      })
+    });
+  }
 
   ngOnInit(): void {
     this.cartService.getCartItems().subscribe(items => {
@@ -32,11 +47,18 @@ export class Checkout implements OnInit {
   }
 
   isFormValid(): boolean {
-    if (!this.shipping.fullName || !this.shipping.phone || !this.shipping.address || !this.shipping.city || !this.shipping.state || !this.shipping.zip) return false;
-    if (this.payment.method === 'card') {
-      if (!this.payment.cardNumber || !this.payment.nameOnCard || !this.payment.expiry || !this.payment.cvv) return false;
+    const method = this.form.get('payment.method')?.value;
+    if (method === 'card') {
+      this.form.get('payment.cardNumber')?.addValidators(Validators.required);
+      this.form.get('payment.nameOnCard')?.addValidators(Validators.required);
+      this.form.get('payment.expiry')?.addValidators(Validators.required);
+      this.form.get('payment.cvv')?.addValidators(Validators.required);
+      this.form.get('payment.cardNumber')?.updateValueAndValidity();
+      this.form.get('payment.nameOnCard')?.updateValueAndValidity();
+      this.form.get('payment.expiry')?.updateValueAndValidity();
+      this.form.get('payment.cvv')?.updateValueAndValidity();
     }
-    return this.cartItems.length > 0;
+    return this.form.valid && this.cartItems.length > 0;
   }
 
   placeOrder() {

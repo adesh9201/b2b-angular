@@ -4,9 +4,10 @@ import { Sidebar } from '../shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-logistics',
+  standalone: true,
   imports: [RouterLink, Sidebar],
   templateUrl: './logistics.html',
-  styleUrl: './logistics.css'
+  styleUrls: ['./logistics.css']
 })
 export class Logistics {
 

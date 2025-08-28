@@ -9,7 +9,7 @@
 
 <div class="registration-container">
   <h2>Supplier Registration</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate>
     <div class="row g-3">
       <div
         class="col-md-6"
@@ -18,15 +18,13 @@
         <label class="form-label" [for]="field">{{ field | titlecase }}</label>
         <input
           class="form-control"
+          [class.is-invalid]="registerForm.get(field)?.touched && registerForm.get(field)?.invalid"
           [formControlName]="field"
           [id]="field"
           [type]="field === 'emailId' ? 'email' : 'text'"
           placeholder="Enter {{ field | titlecase }}"
         />
-        <div
-          class="text-danger mt-1"
-          *ngIf="registerForm.get(field)?.invalid && registerForm.get(field)?.touched"
-        >
+        <div class="invalid-feedback d-block" *ngIf="registerForm.get(field)?.invalid && registerForm.get(field)?.touched">
           {{ field | titlecase }} is required
         </div>
       </div>
@@ -43,13 +41,14 @@
 
   <!-- OTP Section -->
   <div *ngIf="otpSent && !otpVerified" class="otp-section mt-4">
-    <label for="otpCode">Enter OTP</label>
+    <label for="otpCode" class="form-label">Enter OTP</label>
     <input
       type="text"
       id="otpCode"
       class="form-control mb-2"
       [(ngModel)]="otpCode"
       placeholder="Enter OTP"
+      required
     />
     <button class="btn btn-success w-100" (click)="verifyOtp()">Verify OTP</button>
   </div>

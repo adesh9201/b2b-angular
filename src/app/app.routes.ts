@@ -3,6 +3,8 @@ import { Routes } from '@angular/router';
 // Pages
 import { Home } from './components/pages/home/home';
 import { Catalogs } from './components/pages/catalogs/catalogs';
+import { Fabric } from './components/pages/fabric/fabric';
+import { FabricDetails } from './components/pages/fabric-details/fabric-details';
 import { Products } from './components/pages/products/products';
 import { Cart } from './components/pages/cart/cart';
 import { About } from './components/pages/about/about';
@@ -32,6 +34,8 @@ export const routes: Routes = [
   // Pages
   { path: '', component: Home },
   { path: 'catalogs', component: Catalogs },
+  { path: 'fabric', component: Fabric },
+  { path: 'fabric-details', component: FabricDetails },
   { path: 'products', component: Products },
   { path: 'products/:id', component: Products },
   { path: 'cart', component: Cart },

@@ -5,16 +5,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-
 @Component({
-  selector: 'app-fabric-categories',
+  selector: 'app-fabric',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './fabric-categories.html',
-  styleUrl: './fabric-categories.css'
+  templateUrl: './fabric.html',
+  styleUrls: ['./fabric.css']
 })
-export class FabricCategories implements OnInit {
-    fabrics: FabricDetails_20241012[] = [];
+export class Fabric implements OnInit {
+  fabrics: FabricDetails_20241012[] = [];
   loading = false;
   search = '';
 
@@ -38,15 +37,13 @@ export class FabricCategories implements OnInit {
 filtered(): FabricDetails_20241012[] {
   const q = this.search.toLowerCase().trim();
 
-  return this.fabrics
-    // remove unnamed fabrics
-    .filter(x => !!x.faB_NAME && x.faB_NAME.trim() !== '')
-    // apply search filter
-    .filter(x =>
-      !q || [x.faB_NAME, x.faB_TYPE, x.quality, x.color, x.count, x.construction, x.reF_NO]
-        .filter(Boolean)
-        .some(v => String(v).toLowerCase().includes(q))
-    );
+  return this.fabrics.filter(x =>
+    !q ||
+    [x.faB_NAME, x.faB_TYPE, x.quality, x.color, x.count, x.construction, x.reF_NO]
+      .filter(Boolean)
+      .some(v => String(v).toLowerCase().includes(q))
+  );
 }
+
 
 }

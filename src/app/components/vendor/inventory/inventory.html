@@ -1,13 +1,13 @@
 <div class="container-fluid mt-5">
   <div class="row flex-nowrap">
 
-    <!-- Sidebar placeholder (keep your existing app-sidebar component) -->
-    <div class="col-auto col-lg-2 px-0 bg-light border-end min-vh-100">
+    <!-- Sidebar -->
+    <div class="col-auto col-lg-2 px-0 border-end min-vh-100">
       <app-sidebar></app-sidebar>
     </div>
 
     <!-- Main content -->
-    <main class="col bg-dark min-vh-100 py-4 text-white">
+    <main class="col min-vh-100 py-4">
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-start mb-3">
         <div>
@@ -15,7 +15,7 @@
           <p class="text-muted small mb-0">Manage your warehouse stock levels and track low stock alerts.</p>
         </div>
         <div class="d-flex gap-2 align-items-start">
-          <button class="btn btn-outline-light me-2" (click)="exportCsv()">Export CSV</button>
+          <button class="btn btn-outline-secondary me-2" (click)="exportCsv()">Export CSV</button>
           <button class="btn btn-success fw-bold">Import CSV</button>
         </div>
       </div>
@@ -23,19 +23,19 @@
       <!-- Controls -->
       <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
         <div class="input-group" style="max-width:420px;">
-          <span class="input-group-text bg-secondary text-white border-secondary">🔍</span>
-          <input class="form-control bg-dark text-white border-secondary" placeholder="Search by name, SKU or category"
+          <span class="input-group-text">🔍</span>
+          <input class="form-control" placeholder="Search by name, SKU or category"
                  [(ngModel)]="searchTerm" (keyup.enter)="applyFilters()" />
           <button class="btn btn-outline-secondary" (click)="applyFilters()">Search</button>
         </div>
 
         <div class="ms-auto d-flex gap-2">
-          <select class="form-select bg-dark text-white border-secondary" [(ngModel)]="selectedCategory" (change)="applyFilters()">
+          <select class="form-select" [(ngModel)]="selectedCategory" (change)="applyFilters()">
             <option value="">All Categories</option>
             <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
           </select>
 
-          <select class="form-select bg-dark text-white border-secondary" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+          <select class="form-select" [(ngModel)]="selectedStatus" (change)="applyFilters()">
             <option value="">All Status</option>
             <option value="In Stock">In Stock</option>
             <option value="Low Stock">Low Stock</option>
@@ -43,11 +43,11 @@
           </select>
 
           <div class="btn-group" role="group" aria-label="view toggle">
-            <button class="btn btn-outline-light" [class.active]="view==='grid'" (click)="setView('grid')">Grid</button>
-            <button class="btn btn-outline-light" [class.active]="view==='list'" (click)="setView('list')">List</button>
+            <button class="btn btn-outline-secondary" [class.active]="view==='grid'" (click)="setView('grid')">Grid</button>
+            <button class="btn btn-outline-secondary" [class.active]="view==='list'" (click)="setView('list')">List</button>
           </div>
 
-          <button class="btn btn-outline-light" (click)="clearFilters()">Clear</button>
+          <button class="btn btn-outline-secondary" (click)="clearFilters()">Clear</button>
         </div>
       </div>
 
@@ -57,7 +57,7 @@
         <div *ngIf="view === 'grid'" class="row g-3">
           <ng-container *ngIf="pagedItems.length; else emptyTpl">
             <div class="col-6 col-md-4 col-lg-3" *ngFor="let p of pagedItems">
-              <div class="card bg-dark border-secondary h-100">
+              <div class="card h-100">
                 <div class="ratio ratio-1x1">
                   <img [src]="p.imageUrl" class="card-img-top object-cover" [alt]="p.name" />
                 </div>
@@ -79,7 +79,7 @@
         <div *ngIf="view === 'list'" class="list-group">
           <ng-container *ngIf="pagedItems.length; else emptyTpl">
             <div *ngFor="let p of pagedItems"
-                 class="list-group-item list-group-item-dark d-flex align-items-center justify-content-between border-secondary">
+                 class="list-group-item d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center gap-3">
                 <img [src]="p.imageUrl" alt="{{p.name}}" class="rounded" style="width:72px;height:72px;object-fit:cover;" />
                 <div>
@@ -106,19 +106,19 @@
 
       <ng-template #loadingTpl>
         <div class="text-center py-4 text-muted">
-          <div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>
+          <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>
         </div>
       </ng-template>
 
       <!-- Pagination -->
       <div class="d-flex justify-content-center align-items-center gap-2 mt-4">
-        <button class="btn btn-outline-light" (click)="changePage(-1)" [disabled]="page === 1">Prev</button>
+        <button class="btn btn-outline-secondary" (click)="changePage(-1)" [disabled]="page === 1">Prev</button>
 
         <ng-container *ngFor="let p of [].constructor(pageCount); let i = index">
-          <button class="btn" [class.btn-light]="page === i+1" [class.btn-outline-light]="page !== i+1" (click)="goToPage(i+1)">{{ i+1 }}</button>
+          <button class="btn" [class.btn-secondary]="page === i+1" [class.btn-outline-secondary]="page !== i+1" (click)="goToPage(i+1)">{{ i+1 }}</button>
         </ng-container>
 
-        <button class="btn btn-outline-light" (click)="changePage(1)" [disabled]="page === pageCount">Next</button>
+        <button class="btn btn-outline-secondary" (click)="changePage(1)" [disabled]="page === pageCount">Next</button>
       </div>
     </main>
   </div>

@@ -14,12 +14,14 @@ export class InventoryService {
 
   // Mock inventory dataset
   private products: InventoryModel[] = [
-    { id: 'p-001', name: 'Eco-Friendly Cleaning Solution', sku: 'SKU-12345', imageUrl: 'https://via.placeholder.com/800x800?text=Cleaning', category: 'Cleaning', stockStatus: 'In Stock', price: 12.5, location: 'Warehouse A', lowStockThreshold: 50, quantity: 1500 },
-    { id: 'p-002', name: 'Organic Laundry Detergent', sku: 'SKU-67890', imageUrl: 'https://via.placeholder.com/800x800?text=Detergent', category: 'Cleaning', stockStatus: 'Low Stock', price: 9.99, location: 'Warehouse B', lowStockThreshold: 20, quantity: 800 },
-    { id: 'p-003', name: 'Plant-Based Dish Soap', sku: 'SKU-11223', imageUrl: 'https://via.placeholder.com/800x800?text=Dish+Soap', category: 'Cleaning', stockStatus: 'In Stock', price: 7.5, location: 'Warehouse A', lowStockThreshold: 30, quantity: 1200 },
-    { id: 'p-004', name: 'Sustainable Paper Towels', sku: 'SKU-33445', imageUrl: 'https://via.placeholder.com/800x800?text=Paper+Towels', category: 'Paper', stockStatus: 'In Stock', price: 15.0, location: 'Warehouse C', lowStockThreshold: 100, quantity: 2000 },
-    { id: 'p-005', name: 'Reusable Shopping Bags', sku: 'SKU-55667', imageUrl: 'https://via.placeholder.com/800x800?text=Bags', category: 'Accessories', stockStatus: 'Low Stock', price: 2.5, location: 'Warehouse B', lowStockThreshold: 10, quantity: 500 },
-    { id: 'p-006', name: 'Bulk Hand Sanitizer', sku: 'SKU-99881', imageUrl: 'https://via.placeholder.com/800x800?text=Sanitizer', category: 'Cleaning', stockStatus: 'Out of Stock', price: 20.0, location: 'Warehouse A', lowStockThreshold: 15, quantity: 0 },
+    { id: 'p-001', name: 'WHITE/LT GREEN CAMBRIC DOT PRINT', sku: 'SKU-12345', imageUrl: 'assets/images/aa.jpeg', category: 'Cleaning', stockStatus: 'In Stock', price: 12.5, location: 'Warehouse A', lowStockThreshold: 50, quantity: 1500 },
+    { id: 'p-002', name: 'COTTON CAMBRIC BORDER PRINT', sku: 'SKU-67890', imageUrl: 'assets/images/aa.jpeg', category: 'Cleaning', stockStatus: 'Low Stock', price: 9.99, location: 'Warehouse B', lowStockThreshold: 20, quantity: 800 },
+    { id: 'p-003', name: 'GREEN/BLACK VISCOSE MOSS CREPE FLOWER PRINT', sku: 'SKU-11223', imageUrl: 'assets/images/aa.jpeg', category: 'Cleaning', stockStatus: 'In Stock', price: 7.5, location: 'Warehouse A', lowStockThreshold: 30, quantity: 1200 },
+    { id: 'p-004', name: 'LILAC COTTON DOUBLE CLOTH BORDER EMBROIDERY DYED', sku: 'SKU-33445', imageUrl: 'assets/images/aa.jpeg', category: 'Paper', stockStatus: 'In Stock', price: 15.0, location: 'Warehouse C', lowStockThreshold: 100, quantity: 2000 },
+    { id: 'p-005', name: 'LIGHT PINK COTTON TWILL DOBBY DYED', sku: 'SKU-55667', imageUrl: 'assets/images/aa.jpeg', category: 'Accessories', stockStatus: 'Low Stock', price: 2.5, location: 'Warehouse B', lowStockThreshold: 10, quantity: 500 },
+    { id: 'p-006', name: 'LILAC POLYESTER TWILL DYED', sku: 'SKU-99881', imageUrl: 'assets/images/aa.jpeg', category: 'Cleaning', stockStatus: 'Out of Stock', price: 20.0, location: 'Warehouse A', lowStockThreshold: 15, quantity: 0 },
+
+
     // add more realistic entries as required
   ];
 

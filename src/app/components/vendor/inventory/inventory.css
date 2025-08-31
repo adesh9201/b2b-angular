@@ -10,24 +10,9 @@
   height: 100%;
 }
 
-/* Dark Theme Tuning */
-.bg-dark { background-color: #162013 !important; }
-.card.bg-dark { background-color: #162013 !important; border-color: #426039 !important; }
-.list-group-item-dark { background-color: #162013 !important; border-color: #426039 !important; }
-.input-group .form-control.bg-dark { background-color: #2e4328 !important; }
-
-.btn-outline-light {
-  border-color: rgba(162,195,152,0.2);
-  color: #fff;
-}
-.btn-outline-secondary {
-  border-color: #426039;
-  color: #a2c398;
-}
-.form-select.bg-dark, .form-control.bg-dark {
-  border-color: #426039;
-  color: #fff;
-}
+/* use only bootstrap default colors */
+.card { border: 1px solid #dee2e6; }
+.list-group-item { border: 1px solid #dee2e6; }
 
 /* responsive tweaks for grid small widths */
 @media (max-width: 576px) {

@@ -4,6 +4,7 @@
   color: #0d6efd;
 }
 
+/* Search box */
 .search-box input {
   max-width: 280px;
   border-radius: 50px;
@@ -14,6 +15,14 @@
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
+/* Sort select compact */
+.sort-select {
+    width: 130px;
+  min-width: 120px;
+  max-width: 160px;
+}
+
+/* Card hover */
 .card {
   transition: all 0.25s ease-in-out;
 }
@@ -22,6 +31,7 @@
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.12);
 }
 
+/* Fabric image wrapper */
 .fabric-img-wrapper {
   position: relative;
   height: 180px;
@@ -45,11 +55,13 @@
   border-radius: 50px;
 }
 
+/* Card title */
 .card-title {
   font-size: 1rem;
   margin-bottom: 0.25rem;
 }
 
+/* Button hover */
 .card-footer button {
   transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }

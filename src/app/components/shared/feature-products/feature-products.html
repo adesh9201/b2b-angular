@@ -2,39 +2,28 @@
   <div class="container-fluid">
     <!-- Title Section -->
     <div class="text-center mb-4">
-      <h2 class="featured-fabrics-title mb-4">{{ featuredFabricsName }}</h2>
-      <p class="featured-fabrics-explore mb-4">{{ Explore }}</p>
+      <h2 class="featured-fabrics-title mb-4">Featured Fabrics</h2>
+      <p class="featured-fabrics-explore mb-4">Explore our top quality fabrics</p>
     </div>
 
     <!-- Products Grid -->
     <div class="row g-3" role="list">
-      <div
-        class="col-lg-2 col-md-4 col-sm-6 col-6"
-        *ngFor="let product of featuredProducts"
-        role="listitem"
-      >
-        <!-- Entire card clickable -->
-        <a
-          [routerLink]="['/products', product.id]"
-          class="card product-card h-100 text-decoration-none"
-        >
+      <div class="col-lg-2 col-md-4 col-sm-6 col-6" *ngFor="let product of fabrics" role="listitem">
+        <a [routerLink]="['/fabric']" class="card product-card h-100 text-decoration-none">
           <div class="product-image-wrapper position-relative overflow-hidden rounded-top">
             <img
-              [src]="product.imageUrl"
-              alt="{{ product.name || 'Fabric image' }}"
-              title="{{ product.name || 'Fabric image' }}"
+              [src]=" 'assets/images/aa.jpeg'"
+              alt="{{ product.fabName || 'Fabric image' }}"
+              title="{{ product.fabName || 'Fabric image' }}"
               class="img-fluid w-100 product-image"
             />
           </div>
           <div class="card-body text-center px-2 py-3">
-            <h6 class="fw-semibold product-title mb-1">{{ product.name }}</h6>
+            <h6 class="fw-semibold product-title mb-1">{{ product.fabName }}</h6>
             <div>
               <span class="fw-bold text-success product-price me-1">
-                {{ product.price | currency: 'INR' }}
+                {{ product.sellPrice  | currency: 'INR' }} <span class="text-dark">/Meter</span>
               </span>
-              <small class="text-muted text-decoration-line-through product-price">
-                {{ product.originalPrice | currency: 'INR' }}
-              </small>
             </div>
           </div>
         </a>
@@ -44,7 +33,7 @@
     <!-- Load More Button -->
     <div class="text-center mt-5">
       <a
-        routerLink="/catalogs"
+        routerLink="/fabric"
         class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill shadow-sm fw-semibold text-uppercase transition-all load-more-btn"
         aria-label="Load more fabric products from catalog"
       >

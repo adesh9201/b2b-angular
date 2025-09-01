@@ -1,32 +1,35 @@
-<!-- fabric-subcategories.component.html -->
-<section class="category-carousel-section">
+<section class="fabric-carousel-section py-4">
   <div class="container-fluid">
-
     <!-- Heading -->
-    <h2 class="category-carousel-title">{{ categoryName }}</h2>
+    <h2 class="fabric-carousel-title mb-4">Available Fabrics</h2>
 
-    <!-- Single-row infinite auto-scroll -->
-    <div class="auto-row" aria-label="Fabric categories auto scroll">
+    <!-- Auto-scroll row -->
+    <div class="auto-row" aria-label="Fabric names auto scroll">
       <div class="track">
-
         <!-- 1st copy -->
-        <div class="category-item" *ngFor="let cat of allCategories">
-          <a class="square-box"
-             [routerLink]="['/catalogs']"
-             [queryParams]="{ category: cat.name }">
-            <span class="product-title">{{ cat.name }}</span>
-          </a>
+        <div class="fabric-item" *ngFor="let r of filtered()">
+          <!-- Image box -->
+          <div class="fabric-box"  [routerLink]="['/fabric']">
+
+            <img src="assets/images/aa.jpeg" alt="Fabric Image" class="fabric-img" />
+          </div>
+          <!-- Name below (outside box) -->
+          <div class="fabric-name">
+            {{ r.fabName }}
+          </div>
+
         </div>
 
-        <!-- 2nd copy (duplicate for seamless loop) -->
-        <div class="category-item" *ngFor="let cat of allCategories">
-          <a class="square-box"
-             [routerLink]="['/catalogs']"
-             [queryParams]="{ category: cat.name }">
-            <span class="product-title">{{ cat.name }}</span>
-          </a>
-        </div>
+        <!-- 2nd copy for seamless loop -->
+        <div class="fabric-item" *ngFor="let r of filtered()" >
+          <div class="fabric-box" [routerLink]="['/fabric']">
+            <img src="assets/images/aa.jpeg" alt="Fabric Image" class="fabric-img" />
+          </div>
+          <div class="fabric-name">
+            {{ r.fabName }}
+          </div>
 
+        </div>
       </div>
     </div>
   </div>

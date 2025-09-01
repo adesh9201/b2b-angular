@@ -17,13 +17,15 @@
 /* Auto-scroll container */
 .auto-row {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-          mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  /* -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); */
 }
 
+/* Track for infinite scroll */
 .track {
-  display: inline-flex;
+  display: flex;
   gap: var(--space-4);
+  width: max-content;
   animation: scroll-marquee var(--marquee-duration, 25s) linear infinite;
   will-change: transform;
 }
@@ -33,7 +35,7 @@
   animation-play-state: paused;
 }
 
-/* Fabric item wrapper */
+/* Fabric item */
 .fabric-item {
   flex: 0 0 auto;
   width: 180px;
@@ -72,7 +74,7 @@
   display: block;
 }
 
-/* Name outside box */
+/* Name below */
 .fabric-name {
   margin-top: var(--space-2);
   text-align: center;

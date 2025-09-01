@@ -35,6 +35,7 @@ export const routes: Routes = [
   { path: '', component: Home },
   { path: 'catalogs', component: Catalogs },
   { path: 'fabric', component: Fabric },
+  { path: 'fabric/:id', component: Fabric },
   { path: 'fabric-details', component: FabricDetails },
   { path: 'products', component: Products },
   { path: 'products/:id', component: Products },

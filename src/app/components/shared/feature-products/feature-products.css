@@ -109,3 +109,15 @@ font-weight: 700;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+/* Featured products grid - center align when few items */
+.featured-products-section .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* default - left align */
+}
+
+/* Agar items kam bache to center align */
+.featured-products-section .row:has(.col-lg-2:nth-last-child(-n+5)) {
+  justify-content: center;
+}

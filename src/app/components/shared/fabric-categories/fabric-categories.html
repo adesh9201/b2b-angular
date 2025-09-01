@@ -5,31 +5,34 @@
 
     <!-- Auto-scroll row -->
     <div class="auto-row" aria-label="Fabric names auto scroll">
-      <div class="track">
+      <div class="track d-flex gap-4">
+
         <!-- 1st copy -->
-        <div class="fabric-item" *ngFor="let r of filtered()">
-          <!-- Image box -->
-          <div class="fabric-box"  [routerLink]="['/fabric']">
-
-            <img src="assets/images/aa.jpeg" alt="Fabric Image" class="fabric-img" />
+        <div *ngFor="let category of categories" class="fabric-item text-center">
+          <div class="fabric-box" [routerLink]="['/fabric',]">
+            <img
+              [src]="'assets/images/aa.jpeg'"
+              [alt]="category.name"
+              class="fabric-img"
+              title="{{ category.name }}"
+            />
           </div>
-          <!-- Name below (outside box) -->
-          <div class="fabric-name">
-            {{ r.fabName }}
-          </div>
-
+          <div class="fabric-name mt-2">{{ category.name }}</div>
         </div>
 
-        <!-- 2nd copy for seamless loop -->
-        <div class="fabric-item" *ngFor="let r of filtered()" >
+        <!-- 2nd copy (duplicate for infinite loop) -->
+        <div *ngFor="let category of categories" class="fabric-item text-center">
           <div class="fabric-box" [routerLink]="['/fabric']">
-            <img src="assets/images/aa.jpeg" alt="Fabric Image" class="fabric-img" />
+            <img
+              [src]="'assets/images/aa.jpeg'"
+              [alt]="category.name"
+              class="fabric-img"
+              title="{{ category.name }}"
+            />
           </div>
-          <div class="fabric-name">
-            {{ r.fabName }}
-          </div>
-
+          <div class="fabric-name mt-2">{{ category.name }}</div>
         </div>
+
       </div>
     </div>
   </div>

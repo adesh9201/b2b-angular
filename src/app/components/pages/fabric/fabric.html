@@ -1,53 +1,138 @@
-<div class="container py-5 mt-5 available-fabrics">
-  <!-- Header -->
-  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
-    <h2 class="fw-bold text-primary m-0">Available Fabrics</h2>
-    <input [(ngModel)]="search" placeholder="Search fabrics..." class="form-control shadow-sm w-auto" />
-  </div>
+<section class="py-4 bg-light featured-products-section">
+  <div class="container-fluid">
+    <div class="row">
 
-  <!-- Loading & Empty -->
-  <div *ngIf="loading" class="alert alert-info text-center">
-    <div class="spinner-border spinner-border-sm me-2"></div> Loading fabrics…
-  </div>
+      <!-- Filters Sidebar -->
+      <aside class="col-lg-3 col-md-4 mb-4 d-none d-md-block">
+        <app-filter (filtersApplied)="onFiltersApplied($event)"></app-filter>
+      </aside>
 
-  <div *ngIf="!loading && !fabrics.length" class="alert alert-warning text-center">
-    No fabrics available right now.
-  </div>
+      <div class="col-lg-9 col-md-8">
+        <div class="container py-5 available-fabrics">
+          <!-- Header -->
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
 
-  <!-- Grid -->
-  <div class="row g-4">
-    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let r of filtered()">
-      <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden">
-        <!-- Image -->
-        <img [src]="'assets/images/Cotton Satin Print Fabric.jpeg'" class="card-img-top" alt="{{ r.fabName || 'Fabric Image' }}" />
+            <!-- Sort By -->
+            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+              <label for="sortBy" class="form-label mb-0 fw-semibold">Sort by:</label>
+              <select class="form-select form-select-sm sort-select" id="sortBy" title="Sort products">
+                <option value="newest">Newest</option>
+                <option value="priceLowHigh">Price: Low to High</option>
+                <option value="priceHighLow">Price: High to Low</option>
+                <option value="popularity">Popularity</option>
+                <option value="rating">Rating</option>
+              </select>
+            </div>
 
-        <span class="badge bg-success fabric-badge" *ngIf="r.quantity && r.quantity > 0"></span>
-        <span class="badge bg-danger fabric-badge" *ngIf="!r.quantity || r.quantity === 0"></span>
+            <!-- Search -->
+            <div class="search-box flex-grow-1 d-flex justify-content-md-end">
+              <input [(ngModel)]="search" placeholder="Search fabrics..."
+                class="form-control shadow-sm w-100 w-md-auto" />
+            </div>
+          </div>
 
-        <!-- Body -->
-        <div class="card-body d-flex flex-column">
-          <h6 class="card-title fw-bold text-dark text-truncate">{{ r.fabName }}</h6>
-          <p class="text-muted small mb-1">{{ r.fabType }} • {{ r.quality }}</p>
-          <p class="small mb-1"><strong>Color:</strong> {{ r.color }}</p>
-          <p class="small mb-1"><strong>GSM:</strong> {{ r.gsm }}</p>
-          <p class="small mb-1"><strong>Available:</strong> {{ r.quantity }} {{ r.uom }}</p>
-        </div>
 
-        <!-- Footer -->
-          <!-- Buttons -->
-              <div class="d-flex justify-content-center gap-3 mt-auto">
-                <button class="btn btn-primary flex-fill shadow-sm" [routerLink]="['/fabric-details', ]">
-                  <i class="bi bi-cart-fill me-1"></i> Buy Now
-                </button>
-                <!-- <button class="btn btn-outline-secondary flex-fill" [routerLink]="['/products', product.id]">
+          <!-- Loading & Empty -->
+          <div *ngIf="loading" class="alert alert-info text-center">
+            <div class="spinner-border spinner-border-sm me-2"></div> Loading fabrics…
+          </div>
+
+          <div *ngIf="!loading && !fabrics.length" class="alert alert-warning text-center">
+            No fabrics available right now.
+          </div>
+
+          <!-- Grid -->
+          <div class="row g-4">
+            <div class="col-6" *ngFor="let r of filtered()">
+              <!-- <div class="col-sm-4 col-md-4 col-lg-6  col-xsm-4" *ngFor="let r of filtered()"> -->
+              <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden">
+                <!-- Image -->
+                <img [src]="'assets/images/Cotton Satin Print Fabric.jpeg'" class="card-img-top"
+                  alt="{{ r.fabName || 'Fabric Image' }}" />
+
+                <span class="badge bg-success fabric-badge" *ngIf="r.quantity && r.quantity > 0"></span>
+                <span class="badge bg-danger fabric-badge" *ngIf="!r.quantity || r.quantity === 0"></span>
+
+                <!-- Body -->
+                <div class="card-body d-flex flex-column">
+                  <h6 class="card-title fw-bold text-dark text-truncate">{{ r.fabName }}</h6>
+                  <p class="text-muted small mb-1"><strong>FabType:</strong>{{ r.fabType }}</p>
+                  <p class="small mb-1"><strong>Color:</strong> {{ r.color }}</p>
+                  <p class="small mb-1"><strong>GSM:</strong> {{ r.gsm }}</p>
+                  <p class="small mb-1"><strong>Available:</strong> {{ r.quantity }} </p>
+                  <p class="small mb-1"><strong>Uom:</strong> {{ r.uom }}</p>
+                  <p class="small mb-1"><strong>Length:</strong> {{ r.length }}</p>
+                  <p class="small mb-1"><strong>Width:</strong> {{ r.width }}</p>
+                  <p class="small mb-1"><strong>CostPrice:</strong> {{ r.costPrice }}</p>
+                  <p class="small mb-1"><strong>SellPrice:</strong> {{ r.sellPrice }}</p>
+                </div>
+
+                <!-- Footer -->
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center gap-3 mt-auto">
+                  <button class="btn btn-primary flex-fill shadow-sm" [routerLink]="['/fabric']">
+                    <i class="bi bi-cart-fill me-1"></i> Buy Now
+                  </button>
+
+                  <!-- <button class="btn btn-outline-secondary flex-fill" [routerLink]="['/products', product.id]">
                   Quick Details
                 </button> -->
-                <button class="btn btn-outline-secondary flex-fill" data-bs-toggle="modal"
-                  data-bs-target="#quickViewModal">
-                  Quick Details
-                </button>
+                  <button class="btn btn-outline-secondary flex-fill" data-bs-toggle="modal"
+                    data-bs-target="#quickViewModal" (click)="openQuickView(r)">
+                    Quick Details
+                  </button>
 
+
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- QUICK VIEW MODAL -->
+<div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">{{ selectedFabric?.fabName }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <!-- Left Image -->
+          <div class="col-md-6">
+            <img [src]="'assets/images/Cotton Satin Print Fabric.jpeg'" alt="{{ selectedFabric?.fabName }}"
+              class="img-fluid rounded-3 shadow-sm w-100">
+          </div>
+
+          <!-- Right Details -->
+          <div class="col-md-6">
+            <p class="text-muted"><strong>Type:</strong> {{ selectedFabric?.fabType }}</p>
+            <p><strong>Quality:</strong> {{ selectedFabric?.quality }}</p>
+            <p><strong>Color:</strong> {{ selectedFabric?.color }}</p>
+            <p><strong>GSM:</strong> {{ selectedFabric?.gsm }}</p>
+            <p><strong>Count:</strong> {{ selectedFabric?.count }}</p>
+            <p><strong>Construction:</strong> {{ selectedFabric?.construction }}</p>
+            <p><strong>Reference:</strong> {{ selectedFabric?.refNo }}</p>
+            <p><strong>Available:</strong> {{ selectedFabric?.quantity }} {{ selectedFabric?.uom }}</p>
+
+            <div class="mt-3 d-flex gap-2">
+              <button class="btn btn-primary flex-fill" (click)="addToCart(selectedFabric!)" data-bs-dismiss="modal">
+                <i class="bi bi-cart-plus me-1"></i> Add to Cart
+              </button>
+              <a [routerLink]="['/fabric']" class="btn btn-outline-secondary flex-fill" data-bs-dismiss="modal">
+                View Details
+              </a>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

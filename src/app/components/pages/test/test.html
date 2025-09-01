@@ -1,0 +1,31 @@
+<!-- product-card.component.html -->
+<div class="col-md-4 col-sm-6 col-12 mb-4">
+  <div class="card product-card shadow-sm border-0 rounded-3">
+
+    <!-- Product Image -->
+    <div class="card-img-wrapper">
+      <img src="assets/images/aa.jpeg" alt="Product Image" class="card-img-top">
+      <span class="badge bg-success position-absolute top-0 start-0 m-2">In Stock</span>
+    </div>
+
+    <!-- Product Info -->
+    <div class="card-body">
+      <h5 class="card-title text-truncate">560 GSM PVC Fabric Purple 1.37</h5>
+      <p class="text-muted small mb-1">Category: PVC Fabric</p>
+      <p class="fw-bold mb-1">₹240.00 <small class="text-muted">/ Mtr</small></p>
+    </div>
+
+    <!-- Quantity Selector + Add to Cart -->
+    <div class="card-footer bg-white border-0 d-flex flex-column">
+      <div class="input-group mb-2">
+        <button class="btn btn-outline-secondary btn-sm">-</button>
+        <input type="number" class="form-control text-center" value="1" min="1">
+        <button class="btn btn-outline-secondary btn-sm">+</button>
+      </div>
+      <button class="btn btn-primary w-100">
+        <i class="bi bi-cart-fill me-1"></i> Add to Cart
+      </button>
+    </div>
+
+  </div>
+</div>

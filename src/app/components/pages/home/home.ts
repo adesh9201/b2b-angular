@@ -21,7 +21,7 @@ import { FabricSubcategories } from '../../shared/fabric-subcategories/fabric-su
   standalone: true,
   templateUrl: './home.html',
   styleUrls: ['./home.css'],
-  imports: [CommonModule, RouterModule, AutoscrollProducts, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands, FeatureProducts, AutoscrollCategory, FabricCategories, FabricSubcategories],
+  imports: [CommonModule, RouterModule, HeroSection, WhyChoose, TrustedByUsers, TrustedByBrands, FeatureProducts, FabricCategories, FabricSubcategories],
   providers: [CurrencyPipe]
 })
 export class Home {

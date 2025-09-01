@@ -1,11 +1,11 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { SupplierService } from '../../core/services/supplier.service';
-import { SupplierRegister } from '../../core/models/supplier.model';
+import { SupplierRegister, Supplier, Feature } from '../../core/models/supplier.model';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { Supplier, Feature } from '../../core/models/supplier.model';
+import { RouterModule, Router } from '@angular/router';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-suppliers',
@@ -15,19 +15,16 @@ import { Supplier, Feature } from '../../core/models/supplier.model';
   imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
 })
 export class Suppliers  {
-
-    suppliers: Supplier[] = [];
+  contact = '';
+  otp = '';
+  suppliers: Supplier[] = [];
   filteredSuppliers: Supplier[] = [];
-
   features: Feature[] = [];
   selectedState: string = '';
-
   states: string[] = [];
-
-    registerForm: FormGroup;
+  registerForm: FormGroup;
   otpSent = false;
   otpVerified = false;
-  otpCode = '';
 
   // 🔔 Toast state
   showToast = false;
@@ -37,7 +34,8 @@ export class Suppliers  {
   constructor(
     private fb: FormBuilder,
     private supplierService: SupplierService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
@@ -58,13 +56,13 @@ export class Suppliers  {
     this.isError = isError;
     this.showToast = true;
     this.cdr.detectChanges();
-
     setTimeout(() => {
       this.showToast = false;
       this.cdr.detectChanges();
     }, 2500);
   }
 
+  // ================== REGISTER ==================
   register() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -73,79 +71,77 @@ export class Suppliers  {
     }
 
     const supplier: SupplierRegister = this.registerForm.value;
-
     this.supplierService.register(supplier).subscribe({
       next: (res) => {
-        console.log('Register response:', res);
         this.triggerToast('Registered successfully! Now verify OTP ✅');
-        this.sendOtp(supplier.emailId);
+        this.sendOtp(supplier.emailId); // send OTP to registered email
       },
       error: (err) => {
-        console.error('Register error:', err);
-        if (err.error) {
-          this.triggerToast(err.error, true);
-        } else if (err.status === 0) {
-          this.triggerToast('Cannot reach server. Check backend ❌', true);
-        } else {
-          this.triggerToast('Unexpected error: ' + err.message, true);
-        }
+        this.triggerToast(err.error || 'Registration failed ❌', true);
       }
     });
   }
 
-  sendOtp(contact: string) {
-    this.supplierService.sendOtp(contact).subscribe({
-      next: (res) => {
-        console.log('Send OTP response:', res);
+  // ================== LOGIN MODAL ==================
+  sendOtp(contact?: string) {
+    const sendTo = contact || this.contact;
+    if (!sendTo) {
+      this.triggerToast('Please enter Email or Phone ❌', true);
+      return;
+    }
+
+    this.supplierService.sendOtp(sendTo).subscribe({
+      next: () => {
         this.otpSent = true;
-        this.triggerToast('OTP sent to email 📩');
+        this.triggerToast('OTP sent successfully ✅');
       },
-      error: (err) => {
-        console.error('Send OTP error:', err);
-        if (err.error) {
-          this.triggerToast(err.error, true);
-        } else if (err.status === 0) {
-          this.triggerToast('Cannot reach server. Check backend ❌', true);
-        } else {
-          this.triggerToast('Unexpected error: ' + err.message, true);
-        }
-      }
+      error: (err) => this.triggerToast(err.error || 'Failed to send OTP ❌', true)
     });
   }
 
   verifyOtp() {
-    const contact = this.registerForm.value.emailId;
-    this.supplierService.verifyOtp(contact, this.otpCode).subscribe({
+    if (!this.contact || !this.otp) {
+      this.triggerToast('Please enter Email/Phone and OTP ❌', true);
+      return;
+    }
+
+    this.supplierService.verifyOtp(this.contact, this.otp).subscribe({
       next: (res) => {
-        console.log('Verify OTP response:', res);
         this.otpVerified = true;
-        this.triggerToast('OTP verified! You can now login 🎉');
+        this.triggerToast('OTP verified! You are now logged in 🎉');
+
+        // ✅ Store supplier data in localStorage
+        localStorage.setItem('supplierData', JSON.stringify(res));
+
+        // ✅ Hide login modal
+        const loginModalEl = document.getElementById('loginSupplierModal');
+        const loginModal = bootstrap.Modal.getInstance(loginModalEl);
+        loginModal?.hide();
+
+        // ✅ Navigate to dashboard
+        this.router.navigate(['/dashboard']);
       },
-      error: (err) => {
-        console.error('Verify OTP error:', err);
-        if (err.error) {
-          this.triggerToast(err.error, true);
-        } else if (err.status === 0) {
-          this.triggerToast('Cannot reach server. Check backend ❌', true);
-        } else {
-          this.triggerToast('Unexpected error: ' + err.message, true);
-        }
-      }
+      error: (err) => this.triggerToast(err.error || 'OTP verification failed ❌', true)
     });
   }
 
+  openLoginFromRegister() {
+    const registerModalEl = document.getElementById('addSupplierModal');
+    const registerModal = bootstrap.Modal.getInstance(registerModalEl);
+    registerModal?.hide();
+
+    const loginModalEl = document.getElementById('loginSupplierModal');
+    if (loginModalEl) {
+      const loginModal = new bootstrap.Modal(loginModalEl);
+      loginModal.show();
+    }
+  }
 
   ngOnInit(): void {
-    // Fetch suppliers
     this.supplierService.getAllSuppliers().subscribe(data => {
       this.suppliers = data;
       this.filteredSuppliers = data;
-
-      // Extract unique states for filter dropdown
-      // this.states = [...new Set(data.map(s => s.state).filter(Boolean))];
     });
-
-    // Use local features array
     this.features = this.supplierService.getFeatures();
   }
 
@@ -154,41 +150,4 @@ export class Suppliers  {
       return this.selectedState ? supplier.state === this.selectedState : true;
     });
   }
-
-
 }
-
-
-  // suppliers: Supplier[] = [];
-  // filteredSuppliers: Supplier[] = [];
-
-  // features: Feature[] = [];
-  // selectedState: string = '';
-
-  // states: string[] = [];
-
-//   constructor(private supplierService: SupplierService) {}
-
-//   ngOnInit(): void {
-//     // Fetch suppliers
-//     this.supplierService.getAllSuppliers().subscribe(data => {
-//       this.suppliers = data;
-//       this.filteredSuppliers = data;
-
-//       // Extract unique states for filter dropdown
-//       // this.states = [...new Set(data.map(s => s.state).filter(Boolean))];
-//     });
-
-//     // Use local features array
-//     this.features = this.supplierService.getFeatures();
-//   }
-
-//   onFilterChange(): void {
-//     this.filteredSuppliers = this.suppliers.filter(supplier => {
-//       return this.selectedState ? supplier.state === this.selectedState : true;
-//     });
-//   }
-// }
-
-
-

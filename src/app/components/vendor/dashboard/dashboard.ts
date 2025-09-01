@@ -21,9 +21,40 @@ export class Dashboard implements OnInit {
   ngOnInit(): void {
     const data = localStorage.getItem('supplierData');
 
-    if (!data) {
+    // if (!data) {
+    //   // ❌ Agar user login nahi hai → Login page pe bhej do
+    //   this.router.navigate(['/login']);
+    //   return;
+    // }
+
+  //       const parsed = JSON.parse(data);
+
+  //   // ✅ supplierId localStorage se uthao
+  //   const supplierId = parsed.supplierId;
+  //   if (supplierId) {
+  //     this.supplierService.getSupplierById(supplierId).subscribe({
+  //       next: (res: Supplier) => {
+  //         this.supplierData = res;
+  //         this.loading = false;
+  //       },
+  //       error: () => {
+  //         localStorage.removeItem('supplierData');
+  //         this.router.navigate(['/login']);
+  //       }
+  //     });
+  //   } else {
+  //     this.router.navigate(['/login']);
+  //   }
+  // }
+
+  // logout() {
+  //   localStorage.removeItem('supplierData');
+  //   this.router.navigate(['/login']);
+  // }
+
+        if (!data) {
       // ❌ Agar user login nahi hai → Login page pe bhej do
-      this.router.navigate(['/login']);
+      this.router.navigate(['/suppliers']);
       return;
     }
 
@@ -39,16 +70,16 @@ export class Dashboard implements OnInit {
         },
         error: () => {
           localStorage.removeItem('supplierData');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/suppliers']);
         }
       });
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/suppliers']);
     }
   }
 
   logout() {
     localStorage.removeItem('supplierData');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/suppliers']);
   }
 }

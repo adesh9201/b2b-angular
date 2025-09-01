@@ -16,7 +16,7 @@ export class FabricService {
     return this.http.get<FabricModel[]>(this.apiUrl);
   }
 
-  getById(id: number): Observable<FabricModel> {
-    return this.http.get<FabricModel>(`${this.apiUrl}/${id}`);
-  }
+getById(id: number): Observable<FabricModel> {
+  return this.http.get<FabricModel>(`${this.apiUrl}/${id}`);
+}
 }

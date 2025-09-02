@@ -1,178 +1,108 @@
-// // Data come from  Api and local both
-
-
-// // src/app/core/services/HeroSection.service.ts
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable, of } from 'rxjs';
-// import { catchError } from 'rxjs/operators';
-// import { HeroSectionModel } from '../models/HeroSection.model';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class HeroSectionService {
-//   private apiUrl = 'http://localhost:5108/api/herosection';
-
-//   // Hardcoded fallback data
-//   private fallbackData: HeroSectionModel[] = [
-//     {
-//       title: 'Welcome to FabHub',
-//       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-//       imageUrl: 'assets/images/aa.jpeg',
-//       stats: [
-//         { number: '10K+', label: 'Active Users' },
-//         { number: '99%', label: 'Satisfaction' },
-//         { number: '24/7', label: 'Support' }
-//       ]
-//     },
-//     {
-//       title: 'Empower Your Business',
-//       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-//       imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-//       stats: [
-//         { number: '5K+', label: 'Partners' },
-//         { number: '98%', label: 'Customer Retention' },
-//         { number: 'Dedicated', label: 'Team' }
-//       ]
-//     },
-//         {
-//       title: 'Welcome to FabHub',
-//       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-//       imageUrl: 'https://images.unsplash.com/photo-1566140967404-b8b3932483f5?auto=format&fit=crop&w=400&q=80',
-//       stats: [
-//         { number: '10K+', label: 'Active Users' },
-//         { number: '99%', label: 'Satisfaction' },
-//         { number: '24/7', label: 'Support' }
-//       ]
-//     },
-//   ];
-
-//   constructor(private http: HttpClient) {}
-
-//   getHeroDataList(): Observable<HeroSectionModel[]> {
-//     return this.http.get<HeroSectionModel[]>(this.apiUrl)
-//       .pipe(
-//         catchError(error => {
-//           console.error('API failed, using fallback data:', error);
-//           return of(this.fallbackData); // Fallback data agar API fail ho
-//         })
-//       );
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Data come from  local text
-
-
-// src/app/core/services/hero-section.service.ts
+// services/hero.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HeroSectionModel } from '../models/HeroSection.model'; // ✅ Correct import
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { HeroContent, FabricCategory, SearchSuggestion } from '../models/test.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HeroSectionService {
-  constructor() {}
-
-  getHeroDataList(): Observable<HeroSectionModel[]> { // ✅ Correct type
-    const heroDataList: HeroSectionModel[] = [
+export class HeroService {
+  private heroContent: HeroContent = {
+    id: 'main-hero',
+    title: 'India\'s Largest B2B Fabric Marketplace',
+    subtitle: 'Connect. Trade. Grow.',
+    description: 'Source premium fabrics directly from verified manufacturers and suppliers across India. Join thousands of businesses already growing with FabHub.',
+    ctaButtons: [
       {
-        title: 'Welcome to FabHub',
-        subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-        imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
-        stats: [
-          { number: '10K+', label: 'Active Users' },
-          { number: '99%', label: 'Satisfaction' },
-          { number: '24/7', label: 'Support' }
-        ]
+        text: 'Start Buying',
+        link: '/fabric',
+        type: 'primary',
+        icon: 'fas fa-shopping-cart'
       },
       {
-        title: 'Empower Your Business',
-        subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-        imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-        stats: [
-          { number: '5K+', label: 'Partners' },
-          { number: '98%', label: 'Customer Retention' },
-          { number: 'Dedicated', label: 'Team' }
-        ]
+        text: 'Become a Seller',
+        link: '/register',
+        type: 'secondary',
+        icon: 'fas fa-store'
       }
-    ];
-    return of(heroDataList);
+    ],
+    backgroundImage: 'assets/images/aa.jpeg',
+    statistics: [
+      {
+        value: '50,000+',
+        label: 'Total Active  Buyers',
+        icon: 'fas fa-users'
+      },
+      {
+        value: '10,000+',
+        label: 'Verified Suppliers',
+        icon: 'fas fa-industry'
+      },
+      {
+        value: '5L+',
+        label: 'Fabric Varieties',
+        icon: 'fas fa-th-large'
+      },
+      {
+        value: '500+',
+        label: 'Cities Covered',
+        icon: 'fas fa-map-marker-alt'
+      }
+    ],
+    features: [
+      'Quality Assured Products',
+      'Bulk Order Management',
+      'Competitive Pricing',
+      'Pan-India Logistics'
+    ],
+    isActive: true
+  };
+
+  private fabricCategories: FabricCategory[] = [
+    { id: '1', name: 'Cotton', count: 15000, icon: 'fab-cotton' },
+    { id: '2', name: 'Silk', count: 8500, icon: 'fab-silk' },
+    { id: '3', name: 'Polyester', count: 12000, icon: 'fab-polyester' },
+    { id: '4', name: 'Denim', count: 6500, icon: 'fab-denim' },
+    { id: '5', name: 'Linen', count: 4200, icon: 'fab-linen' },
+    { id: '6', name: 'Wool', count: 3800, icon: 'fab-wool' },
+    { id: '7', name: 'Denim', count: 6500, icon: 'fab-denim' },
+    { id: '8', name: 'Linen', count: 4200, icon: 'fab-linen' },
+    { id: '9', name: 'Wool', count: 3800, icon: 'fab-wool' }
+  ];
+
+  private searchSuggestions: SearchSuggestion[] = [
+    { id: '1', term: 'Cotton Twill', category: 'Cotton', popularity: 95 },
+    { id: '2', term: 'Pure Silk Saree', category: 'Silk', popularity: 88 },
+    { id: '3', term: 'Stretch Denim', category: 'Denim', popularity: 82 },
+    { id: '4', term: 'Linen Blend', category: 'Linen', popularity: 76 }
+  ];
+
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  public loading$ = this.loadingSubject.asObservable();
+
+  getHeroContent(): Observable<HeroContent> {
+    this.loadingSubject.next(true);
+    return of(this.heroContent).pipe(
+      delay(500),
+      // tap(() => this.loadingSubject.next(false))
+    );
+  }
+
+  getFabricCategories(): Observable<FabricCategory[]> {
+    return of(this.fabricCategories).pipe(delay(300));
+  }
+
+  getSearchSuggestions(query: string): Observable<SearchSuggestion[]> {
+    const filtered = this.searchSuggestions.filter(suggestion =>
+      suggestion.term.toLowerCase().includes(query.toLowerCase()) ||
+      suggestion.category.toLowerCase().includes(query.toLowerCase())
+    );
+    return of(filtered).pipe(delay(200));
+  }
+
+  updateHeroContent(content: Partial<HeroContent>): Observable<boolean> {
+    this.heroContent = { ...this.heroContent, ...content };
+    return of(true).pipe(delay(500));
   }
 }
-
-
-
-
-// // Data come from Only Api
-
-// // src/app/core/services/HeroSection.service.ts
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http'; // ✅ import HttpClient
-// import { Observable } from 'rxjs';
-// import { HeroSectionModel } from '../models/HeroSection.model';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class HeroSectionService {
-//   private apiUrl = 'http://localhost:5108/api/herosection';
-
-//   // ✅ inject HttpClient in the constructor
-//   constructor(private http: HttpClient) {}
-
-//   getHeroDataList(): Observable<HeroSectionModel[]> {
-//     return this.http.get<HeroSectionModel[]>(this.apiUrl);
-//   }
-
-
-//   // getHeroDataList(): Observable<HeroSectionModel[]> {
-//   //   const heroDataList: HeroSectionModel[] = [
-//   //     {
-//   //       title: 'Welcome to FabHub',
-//   //       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-//   //       imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80',
-//   //       stats: [
-//   //         { number: '10K+', label: 'Active Users' },
-//   //         { number: '99%', label: 'Satisfaction' },
-//   //         { number: '24/7', label: 'Support' }
-//   //       ]
-//   //     },
-//   //     {
-//   //       title: 'Empower Your Business',
-//   //       subtitle: 'Harness the power of our platform to scale and grow your business efficiently.',
-//   //       imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
-//   //       stats: [
-//   //         { number: '5K+', label: 'Partners' },
-//   //         { number: '98%', label: 'Customer Retention' },
-//   //         { number: 'Dedicated', label: 'Team' }
-//   //       ]
-//   //     }
-//   //     // Add more objects as needed
-//   //   ];
-//   //   return of(heroDataList);
-//   // }
-// }
-
-
-
-
-

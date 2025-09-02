@@ -14,6 +14,8 @@ import { Register } from './components/pages/register/register';
 import { Test } from './components/pages/test/test';
 import { Checkout } from './components/pages/checkout/checkout';
 
+
+
 // Vendor Pages
 import { Dashboard } from './components/vendor/dashboard/dashboard';
 import { Order } from './components/vendor/order/order';
@@ -28,6 +30,20 @@ import { Support } from './components/vendor/support/support';
 import { AccountSetting } from './components/vendor/account-setting/account-setting';
 import { Logistics } from './components/vendor/logistics/logistics';
 import { ProductCatalog } from './components/vendor/product-catalog/product-catalog';
+
+
+//Admin Pages
+
+import { Admin } from './admin/admin';
+// import { Use } from './admin/users/users';
+// import { Produc } from './admin/products/products';
+// import { Orde } from './admin/orders/orders';
+// import { Settin } from './admin/settings/settings';
+
+
+
+
+
 
 
 export const routes: Routes = [
@@ -67,6 +83,20 @@ export const routes: Routes = [
 
   { path: 'test', component: Test },
 
+
+//Admin Pages
+//  { path: 'admin', component: Admin } ,  // 👈 admin route add
+{
+    path: 'admin',
+    component: Admin,
+    children: [
+      // { path: 'users', component: Use },
+      // { path: 'products', component: Products },
+      // { path: 'orders', component: Orde },
+      // { path: 'settings', component: Settin },
+      // { path: '', redirectTo: 'users', pathMatch: 'full' } // default
+    ]
+  },
 
   // wildcard
   { path: '**', redirectTo: '' },

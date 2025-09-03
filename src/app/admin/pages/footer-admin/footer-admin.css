@@ -1,0 +1,67 @@
+/* ================= FooterAdmin Modal ================= */
+
+/* Ensure modal content is slightly wider for large form */
+.footer-admin-modal .modal-dialog {
+  max-width: 95%;
+  margin: auto;
+}
+
+/* Modal content styling */
+.footer-admin-modal .modal-content {
+  background: var(--modal-bg, #fff);
+  color: var(--surface-text, #111);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: block; /* remove flex to allow scrolling */
+  max-height: 90vh;
+  overflow: hidden; /* keep header/footer fixed */
+}
+
+/* Modal body scroll */
+.footer-admin-modal .modal-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 120px); /* adjust for header/footer */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Modal header/footer spacing */
+.footer-admin-modal .modal-header,
+.footer-admin-modal .modal-footer {
+  padding: 1rem 1.25rem;
+  border: none;
+}
+
+/* Form arrays spacing */
+.footer-admin-modal .modal-body .row.g-2 {
+  margin-bottom: 0.75rem;
+}
+
+/* Buttons spacing in arrays */
+.footer-admin-modal button.btn-sm {
+  min-width: 60px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-admin-modal .modal-dialog {
+    width: 95%;
+  }
+  .footer-admin-modal .modal-body {
+    max-height: calc(85vh - 120px);
+  }
+}
+
+/* Smooth scrollbar */
+.footer-admin-modal .modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.footer-admin-modal .modal-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.footer-admin-modal .modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -35,6 +35,7 @@ import { ProductCatalog } from './components/vendor/product-catalog/product-cata
 //Admin Pages
 
 import { Admin } from './admin/admin';
+import { FooterAdmin } from './admin/pages/footer-admin/footer-admin';
 // import { Use } from './admin/users/users';
 // import { Produc } from './admin/products/products';
 // import { Orde } from './admin/orders/orders';
@@ -90,7 +91,8 @@ export const routes: Routes = [
     path: 'admin',
     component: Admin,
     children: [
-      // { path: 'users', component: Use },
+
+      { path: 'footer-admin', component: FooterAdmin },
       // { path: 'products', component: Products },
       // { path: 'orders', component: Orde },
       // { path: 'settings', component: Settin },

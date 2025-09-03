@@ -12,8 +12,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './footer.html',
   styleUrls: ['./footer.css']
 })
-export class Footer implements OnInit {
-  footerData!: FooterData;
+export class Footer implements OnInit {   // ✅ class ka naam FooterComponent rakho
+  footerData: FooterData | null = null;           // ✅ safe default
 
   constructor(private footerService: FooterService) {}
 

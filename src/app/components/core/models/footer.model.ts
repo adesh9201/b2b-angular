@@ -15,31 +15,33 @@ export interface FooterSocial {
 }
 
 export interface FooterData {
+  id?: number;
+
   newsletterHeading: string;
-  newsletterPlaceholder: string;
-  newsletterButton: string;
+  newsletterPlaceholder?: string;
+  newsletterButton?: string;
 
   brandName: string;
-  logoUrl: string;
+  logoUrl?: string;
 
-  mobileAppHeading: string;
-  playStoreLink: string;   // navigate hone wala URL
-  appStoreLink: string;    // navigate hone wala URL
-  playStoreBadge: string;  // image
-  appStoreBadge: string;   // image
+  mobileAppHeading?: string;
+  playStoreLink?: string;   // navigate hone wala URL
+  appStoreLink?: string;    // navigate hone wala URL
+  playStoreBadge?: string;  // image
+  appStoreBadge?: string;   // image
 
-  helpHeading: string;
-  phoneNumber: string;
-  timings: string;
+  helpHeading?: string;
+  phoneNumber?: string;
+  timings?: string;
 
   companyLinks: FooterLink[];
   helpLinks: FooterLink[];
   quickLinks: FooterLink[];
   topCategories: FooterLink[];
 
-  usps: FooterUSP[];
+  usPs: FooterUSP[];
   socials: FooterSocial[];
 
   policies: FooterLink[];
-  copyText: string;
+  copyText?: string;
 }

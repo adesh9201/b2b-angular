@@ -1,0 +1,192 @@
+<div class="container my-4 mt-5">
+  <!-- Header + Search + New Footer Button -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Footer Management</h3>
+    <div>
+      <button class="btn btn-primary me-2" (click)="openCreate()">+ New Footer</button>
+      <input type="text" class="form-control d-inline-block" style="width:220px"
+             placeholder="Search" [(ngModel)]="search" (ngModelChange)="applyFilter()" />
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="mb-3">
+    <div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>
+  </div>
+
+  <!-- Error / No Data Messages -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="!loading && filtered.length === 0" class="alert alert-info">No records found.</div>
+
+  <!-- Footer Table -->
+  <div *ngIf="filtered.length > 0">
+    <table class="table table-striped table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Brand</th>
+          <th>Newsletter</th>
+          <th>Phone</th>
+          <th>Copy Text</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of paged; let i = index">
+          <td>{{ (page-1)*pageSize + i + 1 }}</td>
+          <td>{{ item.brandName }}</td>
+          <td>{{ item.newsletterHeading }}</td>
+          <td>{{ item.phoneNumber }}</td>
+          <td>{{ (item.copyText || '').slice(0,60) }}{{ (item.copyText || '').length > 60 ? '...' : '' }}
+</td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-secondary me-2" (click)="openEdit(item)">Edit</button>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(item)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Footer pagination">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="page === 1">
+          <button class="page-link" (click)="prevPage()" [disabled]="page===1">Previous</button>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">Page {{page}} / {{ totalPages }}</span>
+        </li>
+        <li class="page-item" [class.disabled]="page >= totalPages">
+          <button class="page-link" (click)="nextPage()" [disabled]="page >= totalPages">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Scrollable Modal -->
+<div class="modal fade footer-admin-modal" tabindex="-1" #modal>
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isEdit ? 'Edit Footer' : 'Create Footer' }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                  (click)="bootstrapModal?.hide()"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="row g-3">
+
+            <!-- Basic Fields -->
+            <div class="col-md-6">
+              <label class="form-label">Brand Name</label>
+              <input formControlName="brandName" class="form-control" />
+              <div *ngIf="form.get('brandName')?.touched && form.get('brandName')?.invalid"
+                   class="text-danger small">Brand name is required.</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Logo URL</label>
+              <input formControlName="logoUrl" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Newsletter Heading</label>
+              <input formControlName="newsletterHeading" class="form-control" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Newsletter Placeholder</label>
+              <input formControlName="newsletterPlaceholder" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Phone</label>
+              <input formControlName="phoneNumber" class="form-control" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Timings</label>
+              <input formControlName="timings" class="form-control" />
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">Copy Text</label>
+              <textarea rows="2" formControlName="copyText" class="form-control"></textarea>
+            </div>
+
+            <!-- Company Links -->
+            <div class="col-12" formArrayName="companyLinks">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6>Company Links</h6>
+                <button type="button" class="btn btn-sm btn-outline-primary" (click)="addLink('companyLinks')">Add Link</button>
+              </div>
+              <div *ngFor="let c of companyLinks().controls; let idx = index" [formGroupName]="idx"
+                   class="row g-2 align-items-center mb-2">
+                <div class="col-md-5"><input formControlName="label" placeholder="Label" class="form-control" /></div>
+                <div class="col-md-5"><input formControlName="url" placeholder="URL" class="form-control" /></div>
+                <div class="col-md-2 text-end">
+                  <button type="button" class="btn btn-sm btn-danger" (click)="removeAt('companyLinks', idx)">Remove</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- USPs -->
+            <div class="col-12" formArrayName="usPs">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6>USPs</h6>
+                <button type="button" class="btn btn-sm btn-outline-primary" (click)="addUSP()">Add USP</button>
+              </div>
+              <div *ngFor="let u of usPs().controls; let i = index" [formGroupName]="i"
+                   class="row g-2 align-items-center mb-2">
+                <div class="col-md-3"><input formControlName="icon" placeholder="Icon classname" class="form-control" /></div>
+                <div class="col-md-4"><input formControlName="title" placeholder="Title" class="form-control" /></div>
+                <div class="col-md-4"><input formControlName="subtitle" placeholder="Subtitle" class="form-control" /></div>
+                <div class="col-md-1 text-end">
+                  <button type="button" class="btn btn-sm btn-danger" (click)="removeAt('usPs', i)">Remove</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Socials -->
+            <div class="col-12" formArrayName="socials">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6>Socials</h6>
+                <button type="button" class="btn btn-sm btn-outline-primary" (click)="addSocial()">Add Social</button>
+              </div>
+              <div *ngFor="let s of socials().controls; let i = index" [formGroupName]="i"
+                   class="row g-2 align-items-center mb-2">
+                <div class="col-md-5"><input formControlName="icon" placeholder="Icon" class="form-control" /></div>
+                <div class="col-md-5"><input formControlName="url" placeholder="URL" class="form-control" /></div>
+                <div class="col-md-2 text-end">
+                  <button type="button" class="btn btn-sm btn-danger" (click)="removeAt('socials', i)">Remove</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="bootstrapModal?.hide()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="loading">{{ isEdit ? 'Save changes' : 'Create' }}</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+  <div #toast class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2500">
+    <div class="toast-header">
+      <strong class="me-auto">Footer Admin</strong>
+      <small>Now</small>
+      <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast"></button>
+    </div>
+    <div class="toast-body"></div>
+  </div>
+</div>

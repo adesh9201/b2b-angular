@@ -1,71 +1,106 @@
-<div class="container-fluid vh-100">
-  <div class="row h-100">
-    <!-- Sidebar -->
-    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse border-end">
-      <div class="p-3">
-        <h2 class="h4 text-primary">Shoply</h2>
-        <ul class="nav flex-column mt-4">
-          <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
-              <i class="bi bi-speedometer2"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="products" routerLinkActive="active">
-              <i class="bi bi-box-seam"></i> Products
-            </a>
-          </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="orders" routerLinkActive="active">
-              <i class="bi bi-bag"></i> Orders
-            </a>
-          </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="customers" routerLinkActive="active">
-              <i class="bi bi-people"></i> Customers
-            </a>
-          </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="analytics" routerLinkActive="active">
-              <i class="bi bi-graph-up"></i> Analytics
-            </a>
-          </li>
-          <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="settings" routerLinkActive="active">
-              <i class="bi bi-gear"></i> Settings
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+<!-- Top Header Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" routerLink="/">Marketplace Admin</a>
 
-    <!-- Main Content -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 d-flex flex-column">
-      <!-- Header -->
-      <header class="d-flex justify-content-between align-items-center py-3 border-bottom">
-        <div>
-          <h2 class="h4 mb-0">Dashboard</h2>
-          <small class="text-muted">Overview of your e-commerce performance</small>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-          <button class="btn btn-light position-relative">
-            <i class="bi bi-bell"></i>
-            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
-          </button>
-          <div class="d-flex align-items-center">
-            <img src="https://i.pravatar.cc/40" alt="Admin" class="rounded-circle me-2">
-            <div>
-              <p class="mb-0 fw-semibold small">Alexandre</p>
-              <small class="text-muted">Admin</small>
-            </div>
-          </div>
-        </div>
-      </header>
+    <!-- Toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <!-- Router Outlet -->
-      <section class="flex-grow-1 py-4">
-        <router-outlet></router-outlet>
-      </section>
-    </main>
+    <!-- Menu Items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+
+        <!-- Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/catalogs" routerLinkActive="active">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+        </li>
+
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">
+            <i class="bi bi-house"></i> Home
+          </a>
+        </li>
+
+        <!-- Fabric -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/fabric" routerLinkActive="active">
+            <i class="bi bi-grid"></i> Fabric
+          </a>
+        </li>
+
+        <!-- About -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">
+            <i class="bi bi-info-circle"></i> About
+          </a>
+        </li>
+
+        <!-- User Permission Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-people"></i> User Permission
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/user/register" routerLinkActive="active">
+                <i class="bi bi-person-plus"></i> Register
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/user/login" routerLinkActive="active">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Supplier Permission Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="supplierDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-truck"></i> Supplier Permission
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="supplierDropdown">
+            <li>
+              <a class="dropdown-item" routerLink="/supplier/register" routerLinkActive="active">
+                <i class="bi bi-person-plus"></i> Register
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/supplier/login" routerLinkActive="active">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Header -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/header-admin" routerLinkActive="active">
+            <i class="bi bi-textarea-t"></i> Header
+          </a>
+        </li>
+
+        <!-- Footer -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/footer-admin" routerLinkActive="active">
+            <i class="bi bi-speedometer2"></i> Footer
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
+</nav>
+
+<!-- Content Section -->
+<div class="container-fluid py-4">
+  <router-outlet></router-outlet>
 </div>

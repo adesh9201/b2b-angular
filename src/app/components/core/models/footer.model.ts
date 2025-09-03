@@ -17,12 +17,12 @@ export interface FooterSocial {
 export interface FooterData {
   id?: number;
 
-  newsletterHeading: string;
-  newsletterPlaceholder?: string;
-  newsletterButton?: string;
-
   brandName: string;
   logoUrl?: string;
+
+  newsletterHeading?: string;
+  newsletterPlaceholder?: string;
+  newsletterButton?: string;
 
   mobileAppHeading?: string;
   playStoreLink?: string;   // navigate hone wala URL
@@ -44,4 +44,5 @@ export interface FooterData {
 
   policies: FooterLink[];
   copyText?: string;
+  updatedAt?: Date;
 }

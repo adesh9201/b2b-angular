@@ -8,7 +8,7 @@
         <p class="lead text-muted-custom">{{ aboutData.header.subtitle }}</p>
       </div>
       <div class="col-lg-6">
-        <img [src]="aboutData.header.imageUrl" [alt]="aboutData.header.imageAlt" class="img-fluid rounded shadow" />
+        <img title="img" [src]="aboutData.header.imageUrl" [alt]="aboutData.header.imageAlt" class="img-fluid rounded shadow" />
       </div>
     </div>
   </div>
@@ -111,7 +111,7 @@
       <div class="col-lg-3 col-md-6" *ngFor="let member of aboutData.team.members">
         <div class="card card-lift animate-on-scroll text-center">
           <div class="card-body p-4">
-            <img [src]="member.imageUrl" [alt]="member.name" class="rounded-circle mb-3 team-img" />
+            <img title="img" [src]="member.imageUrl" [alt]="member.name" class="rounded-circle mb-3 team-img" />
             <h5 class="mb-1">{{ member.name }}</h5>
             <p class="role-text mb-2">{{ member.role }}</p>
             <p class="text-muted-custom small">{{ member.description }}</p>

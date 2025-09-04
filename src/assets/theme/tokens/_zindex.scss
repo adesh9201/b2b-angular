@@ -1,0 +1,19 @@
+// Z-index scale
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-toast: 1080;
+
+// CSS custom properties for z-index
+:root {
+  --z-navbar: #{$z-index-sticky};
+  --z-sticky: #{$z-index-sticky};
+  --z-dropdown: #{$z-index-dropdown};
+  --z-modal: #{$z-index-modal};
+  --z-toast: #{$z-index-toast};
+  --z-tooltip: #{$z-index-tooltip};
+}

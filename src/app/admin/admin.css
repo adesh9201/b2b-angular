@@ -1,16 +1,124 @@
-.navbar-nav .nav-link {
-  color: #fff !important;
-  font-weight: 500;
-  transition: background 0.3s;
+
+
+
+
+
+
+
+
+
+.marketplace-navbar {
+  background: #ffffff !important;
+  color: var(--dark-color, #333) !important;
+  box-shadow: var(--box-shadow, 0 2px 6px rgba(0,0,0,0.1));
+  padding: 0.6rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-navbar, 1050);
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
+.navbar-brand .brand-text {
+  color: var(--dark-color, #333) !important;
 }
 
-.dropdown-menu {
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.nav-link {
+  color: var(--dark-color, #333) !important;
+  transition: var(--transition, 0.3s all ease);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color, #009688) !important;
+}
+
+.btn-outline-dark {
+  border-radius: var(--border-radius, 0.25rem);
+  border: 1px solid var(--dark-color, #333);
+  background-color: transparent;
+  color: var(--dark-color, #333);
+  transition: var(--transition, 0.3s all ease);
+}
+
+.btn-outline-dark:hover {
+  background: var(--primary-color, #009688);
+  color: #fff;
+  border-color: var(--primary-color, #009688);
+}
+
+/* Search Box */
+.search-box {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  width: 100%;
+  border-radius: var(--border-radius, 0.25rem);
+  border: 1px solid #ddd;
+  padding: 0.35rem 0.75rem;
+  box-sizing: border-box;
+}
+
+.search-box button {
+  flex-shrink: 0;
+}
+
+/* Badge */
+.badge {
+  font-size: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons */
+.btn-outline {
+  border: 2px solid var(--primary-700, #00796b);
+  color: var(--primary-700, #00796b);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: linear-gradient(45deg, var(--primary-700, #00796b), var(--primary-400, #26a69a));
+  color: white;
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}
+
+/* Compact Dropdown */
+.dropdown-compact .btn {
+  min-width: 100px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Scrollable Dropdown Menu */
+.dropdown-scroll {
+  max-height: 250px;
+  overflow-y: auto;
+  min-width: 180px;
+}
+
+.dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/* Dropdown Hover */
+.dropdown-item:hover {
+  background-color: var(--primary-50, #f5f7fa);
+  color: var(--primary-color, #009688);
 }

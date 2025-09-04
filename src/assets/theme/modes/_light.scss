@@ -1,0 +1,42 @@
+[data-theme="light"] {
+  color-scheme: light;
+
+  // Base Colors
+  --color-background: #f7fafc;
+  --color-text: #23272f;
+
+  // Surface Colors
+  --surface-bg: #ffffff;
+  --surface-text: #000000;
+  --surface-border: #ced4da;
+
+  // Component Colors
+  --card-bg: var(--surface-bg);
+  --card-text: var(--surface-text);
+  --navbar-bg: var(--surface-bg);
+  --navbar-text: #181c22;
+  --modal-bg: var(--surface-bg);
+  --table-bg: var(--surface-bg);
+  --table-header-bg: #f6f8fa;
+  --form-control-bg: var(--surface-bg);
+  --form-control-text: var(--surface-text);
+  --toast-bg: rgba(16, 20, 24, 0.95);
+  --scrollbar-bg: #f1f1f1;
+
+  // Gray Scale
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+}

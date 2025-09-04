@@ -114,7 +114,7 @@
 /* Dropdown Item Hover */
 .dropdown-item:hover {
   background-color: var(--primary-50, #f5f7fa);
-  color: var(--primary-color, #007bff);
+  color: var(--primary-color);
 }
 
 

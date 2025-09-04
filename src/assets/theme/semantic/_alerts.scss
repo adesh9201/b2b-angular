@@ -1,0 +1,64 @@
+.alert {
+  position: relative;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  &-icon {
+    flex-shrink: 0;
+    font-size: 1.25rem;
+  }
+
+  &-content {
+    flex: 1;
+  }
+
+  &-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  &-dismiss {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0;
+    align-self: flex-start;
+    color: inherit;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  // Alert variants
+  &-success {
+    color: shade-color($success, 30%);
+    background-color: tint-color($success, 90%);
+    border-color: tint-color($success, 70%);
+  }
+
+  &-danger {
+    color: shade-color($danger, 30%);
+    background-color: tint-color($danger, 90%);
+    border-color: tint-color($danger, 70%);
+  }
+
+  &-warning {
+    color: shade-color($warning, 40%);
+    background-color: tint-color($warning, 90%);
+    border-color: tint-color($warning, 70%);
+  }
+
+  &-info {
+    color: shade-color($info, 30%);
+    background-color: tint-color($info, 90%);
+    border-color: tint-color($info, 70%);
+  }
+}

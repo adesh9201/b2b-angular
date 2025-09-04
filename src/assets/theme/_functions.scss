@@ -1,0 +1,29 @@
+// Color manipulation functions
+@function tint-color($color, $weight) {
+  @return mix(white, $color, $weight);
+}
+
+@function shade-color($color, $weight) {
+  @return mix(black, $color, $weight);
+}
+
+@function teal-color($level: 500) {
+  @return var(--primary-#{$level});
+}
+
+// Accessibility contrast check
+@function color-contrast($background, $color-contrast-dark: $dark-color, $color-contrast-light: $light-color) {
+  $foregrounds: $color-contrast-light, $color-contrast-dark;
+  $max-ratio: 0;
+  $max-ratio-color: null;
+
+  @each $color in $foregrounds {
+    $contrast-ratio: contrast-ratio($background, $color);
+    @if $contrast-ratio > $max-ratio {
+      $max-ratio: $contrast-ratio;
+      $max-ratio-color: $color;
+    }
+  }
+
+  @return $max-ratio-color;
+}

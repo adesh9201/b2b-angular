@@ -1,0 +1,16 @@
+// Animation durations
+$transition-duration-base: 0.3s;
+$transition-duration-fast: 0.15s;
+$transition-duration-slow: 0.45s;
+
+// Animation timing functions
+$transition-timing-function-base: ease;
+$transition-timing-function-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// CSS custom properties for motion
+:root {
+  --transition: all #{$transition-duration-base} #{$transition-timing-function-base};
+  --transition-fast: all #{$transition-duration-fast} #{$transition-timing-function-base};
+  --transition-slow: all #{$transition-duration-slow} #{$transition-timing-function-base};
+  --transition-bounce: all #{$transition-duration-base} #{$transition-timing-function-bounce};
+}

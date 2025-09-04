@@ -1,0 +1,41 @@
+[data-theme="high-contrast"] {
+  color-scheme: light dark;
+
+  // Base Colors
+  --color-background: #000000;
+  --color-text: #ffffff;
+
+  // Surface Colors
+  --surface-bg: #000000;
+  --surface-text: #ffffff;
+  --surface-border: #ffffff;
+
+  // Brand Colors
+  --primary-500: #00ffff;
+  --primary-600: #00cccc;
+  --primary-700: #009999;
+
+  // Component Colors
+  --card-bg: #000000;
+  --card-text: #ffffff;
+  --navbar-bg: #000000;
+  --navbar-text: #ffffff;
+  --modal-bg: #000000;
+  --table-bg: #000000;
+  --table-header-bg: #333333;
+  --form-control-bg: #000000;
+  --form-control-text: #ffffff;
+  --toast-bg: #000000;
+  --scrollbar-bg: #333333;
+
+  // Status Colors
+  --success: #00ff00;
+  --danger: #ff0000;
+  --warning: #ffff00;
+  --info: #00ffff;
+
+  // Shadows
+  --shadow-sm: 0 0 0 1px #ffffff;
+  --shadow-md: 0 0 0 2px #ffffff;
+  --shadow-lg: 0 0 0 3px #ffffff;
+}

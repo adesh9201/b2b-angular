@@ -1,0 +1,41 @@
+// Import functions and mixins first
+@use './functions' as *;
+@use './mixins' as *;
+
+// Tokens (atomic design variables)
+@use './tokens/colors' as *;
+@use './tokens/spacing' as *;
+@use './tokens/typography' as *;
+@use './tokens/radius' as *;
+@use './tokens/shadows' as *;
+@use './tokens/zindex' as *;
+@use './tokens/breakpoints' as *;
+@use './tokens/motion' as *;
+
+// Foundations (base styles & resets)
+@use './foundations/reset';
+@use './foundations/utilities';
+@use './foundations/globals';
+
+// Semantic (component-level design)
+@use './semantic/buttons';
+@use './semantic/forms';
+@use './semantic/links';
+@use './semantic/alerts';
+@use './semantic/cards';
+@use './semantic/modals';
+@use './semantic/tables';
+@use './semantic/badges';
+@use './semantic/breadcrumbs';
+@use './semantic/navbar';
+@use './semantic/footer';
+@use './semantic/filters';
+@use './semantic/grids';
+
+// Modes (themes like light/dark/high-contrast)
+@use './modes/light';
+@use './modes/dark';
+@use './modes/high-contrast';
+
+// Apply global styles
+@include globals.global-styles();

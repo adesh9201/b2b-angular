@@ -1,0 +1,90 @@
+@mixin global-styles {
+  // Reset / Normalize
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+
+// Global styles
+html,
+body {
+  height: auto;
+  min-height: 100%;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--scrollbar-bg);
+  scroll-behavior: smooth;
+}
+
+// Accessibility
+:focus {
+  @include focus-ring();
+}
+
+:focus-visible {
+  @include focus-ring(3px, rgba(teal-color(500), 0.3));
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", Arial, sans-serif;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+p,
+a,
+span,
+li,
+button,
+input,
+textarea,
+select {
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--secondary-color);
+}
+
+.truncate-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+}

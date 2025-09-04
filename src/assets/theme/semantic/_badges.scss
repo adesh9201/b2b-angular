@@ -1,0 +1,75 @@
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--border-radius);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+
+  // Badge variants
+  &-primary {
+    color: #fff;
+    background-color: var(--primary-500);
+  }
+
+  &-secondary {
+    color: #fff;
+    background-color: var(--secondary-500);
+  }
+
+  &-success {
+    color: #fff;
+    background-color: var(--success);
+  }
+
+  &-danger {
+    color: #fff;
+    background-color: var(--danger);
+  }
+
+  &-warning {
+    color: #000;
+    background-color: var(--warning);
+  }
+
+  &-info {
+    color: #fff;
+    background-color: var(--info);
+  }
+
+  &-light {
+    color: #000;
+    background-color: var(--gray-100);
+  }
+
+  &-dark {
+    color: #fff;
+    background-color: var(--gray-800);
+  }
+
+  // Pill badges
+  &-pill {
+    border-radius: var(--border-radius-full);
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+  }
+
+  // Outline badges
+  &-outline {
+    &-primary {
+      color: var(--primary-500);
+      border: 1px solid var(--primary-500);
+      background-color: transparent;
+    }
+
+    &-secondary {
+      color: var(--secondary-500);
+      border: 1px solid var(--secondary-500);
+      background-color: transparent;
+    }
+  }
+}

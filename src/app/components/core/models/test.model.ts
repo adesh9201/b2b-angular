@@ -1,40 +1,34 @@
-// models/hero.model.ts
-export interface HeroContent {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  ctaButtons: CtaButton[];
-  backgroundImage: string;
-  statistics: Statistic[];
-  features: string[];
-  isActive: boolean;
-}
-
-export interface CtaButton {
-  text: string;
-  link: string;
-  type: 'primary' | 'secondary';
-  icon?: string;
-}
-
-export interface Statistic {
-  value: string;
+export interface NavItem {
+  navItemId: string;
+  tenantId: string;
   label: string;
-  icon: string;
+  icon?: string;
+  route: string;
+  roles?: string; // comma separated
 }
 
-// models/fabric.model.ts
-export interface FabricCategory {
-  id: string;
+
+export interface Role {
+  roleId: string;
+  tenantId: string;
   name: string;
-  count: number;
-  icon: string;
+  normalizedName: string;
+  description?: string;
+  isSystemRole: boolean;
 }
 
-export interface SearchSuggestion {
-  id: string;
-  term: string;
-  category: string;
-  popularity: number;
+export interface AccountAction {
+  actionId: string;
+  tenantId: string;
+  label: string;
+  icon?: string;
+  route: string;
+  roles?: string;
+}
+
+export interface Marketplace {
+  marketplaceId: string;
+  tenantId: string;
+  name: string;
+  logoUrl?: string;
 }

@@ -1,5 +1,5 @@
 export interface Supplier {
-  id: number;               // backend ka ID
+  supplierId: number;               // backend ka ID
   name: string;
   address: string;
   pincode: string;

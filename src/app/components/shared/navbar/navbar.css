@@ -8,7 +8,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100% - 10px); /* keep scrollbar visible */
+  /* width: calc(100% - 10px);  */
+  /* keep scrollbar visible */
 }
 
 .navbar-brand .brand-text {
@@ -119,3 +120,156 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.marketplace-navbar {
+  background: #ffffff !important;
+  color: var(--dark-color) !important;
+  box-shadow: var(--box-shadow);
+  padding: 0.6rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px);
+}
+
+.navbar-brand .brand-text {
+  color: var(--dark-color) !important;
+}
+
+.nav-link {
+  color: var(--dark-color) !important;
+  transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color) !important;
+}
+
+.btn-outline-dark {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--dark-color);
+  background-color: transparent;
+  color: var(--dark-color);
+  transition: var(--transition);
+}
+
+.btn-outline-dark:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+
+.search-box {
+  max-width: 500px;
+  width: 100%;
+}
+
+
+.search-box input {
+  width: 100%;
+  border-radius: var(--border-radius);
+  border: 1px solid #ddd;
+  padding: 0.35rem 0.75rem;
+  box-sizing: border-box;
+}
+
+
+.search-box button {
+  flex-shrink: 0;
+}
+
+.badge {
+  font-size: 0.75rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.logo-icon svg {
+  display: block;
+}
+
+.btn-outline {
+    border: 2px solid var(--primary-700);
+    color: var(--primary-700);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: linear-gradient(45deg, var(--primary-700), var(--primary-400));
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 150, 136, 0.3);
+}
+
+
+.dropdown-compact .btn {
+  min-width: 100px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+
+.dropdown-scroll {
+  max-height: 250px;
+  overflow-y: auto;
+  min-width: 180px;
+}
+
+
+.dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+
+.dropdown-item:hover {
+  background-color: var(--primary-50, #f5f7fa);
+  color: var(--primary-color);
+}
+
+
+ */

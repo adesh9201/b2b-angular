@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { HeroContent, FabricCategory, SearchSuggestion } from '../models/test.model';
+import { HeroContent, FabricCategory, SearchSuggestion } from '../models/HeroSection.model';
 
 @Injectable({
   providedIn: 'root'

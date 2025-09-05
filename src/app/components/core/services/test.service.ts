@@ -1,108 +1,48 @@
-// services/hero.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { HeroContent, FabricCategory, SearchSuggestion } from '../models/test.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { NavItem, Role, AccountAction, Marketplace } from '../models/test.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class HeroService {
-  private heroContent: HeroContent = {
-    id: 'main-hero',
-    title: 'India\'s Largest B2B Fabric Marketplace',
-    subtitle: 'Connect. Trade. Grow.',
-    description: 'Source premium fabrics directly from verified manufacturers and suppliers across India. Join thousands of businesses already growing with FabHub.',
-    ctaButtons: [
-      {
-        text: 'Start Buying',
-        link: '/fabric',
-        type: 'primary',
-        icon: 'fas fa-shopping-cart'
-      },
-      {
-        text: 'Become a Seller',
-        link: '/register',
-        type: 'secondary',
-        icon: 'fas fa-store'
-      }
-    ],
-    backgroundImage: 'assets/images/aa.jpeg',
-    statistics: [
-      {
-        value: '50,000+',
-        label: 'Total Active  Buyers',
-        icon: 'fas fa-users'
-      },
-      {
-        value: '10,000+',
-        label: 'Verified Suppliers',
-        icon: 'fas fa-industry'
-      },
-      {
-        value: '5L+',
-        label: 'Fabric Varieties',
-        icon: 'fas fa-th-large'
-      },
-      {
-        value: '500+',
-        label: 'Cities Covered',
-        icon: 'fas fa-map-marker-alt'
-      }
-    ],
-    features: [
-      'Quality Assured Products',
-      'Bulk Order Management',
-      'Competitive Pricing',
-      'Pan-India Logistics'
-    ],
-    isActive: true
-  };
+@Injectable({ providedIn: 'root' })
+export class NavService {
+  private apiUrl = 'http://localhost:5008/api/NavItems';
+  constructor(private http: HttpClient) { }
 
-  private fabricCategories: FabricCategory[] = [
-    { id: '1', name: 'Cotton', count: 15000, icon: 'fab-cotton' },
-    { id: '2', name: 'Silk', count: 8500, icon: 'fab-silk' },
-    { id: '3', name: 'Polyester', count: 12000, icon: 'fab-polyester' },
-    { id: '4', name: 'Denim', count: 6500, icon: 'fab-denim' },
-    { id: '5', name: 'Linen', count: 4200, icon: 'fab-linen' },
-    { id: '6', name: 'Wool', count: 3800, icon: 'fab-wool' },
-    { id: '7', name: 'Denim', count: 6500, icon: 'fab-denim' },
-    { id: '8', name: 'Linen', count: 4200, icon: 'fab-linen' },
-    { id: '9', name: 'Wool', count: 3800, icon: 'fab-wool' }
-  ];
-
-  private searchSuggestions: SearchSuggestion[] = [
-    { id: '1', term: 'Cotton Twill', category: 'Cotton', popularity: 95 },
-    { id: '2', term: 'Pure Silk Saree', category: 'Silk', popularity: 88 },
-    { id: '3', term: 'Stretch Denim', category: 'Denim', popularity: 82 },
-    { id: '4', term: 'Linen Blend', category: 'Linen', popularity: 76 }
-  ];
-
-  private loadingSubject = new BehaviorSubject<boolean>(false);
-  public loading$ = this.loadingSubject.asObservable();
-
-  getHeroContent(): Observable<HeroContent> {
-    this.loadingSubject.next(true);
-    return of(this.heroContent).pipe(
-      delay(500),
-      // tap(() => this.loadingSubject.next(false))
-    );
+  getNavItemsByTenant(tenantId: string): Observable<NavItem[]> {
+    return this.http.get<NavItem[]>(`${this.apiUrl}/ByTenant/${tenantId}`);
   }
 
-  getFabricCategories(): Observable<FabricCategory[]> {
-    return of(this.fabricCategories).pipe(delay(300));
+  updateNavItem(navItem: NavItem): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${navItem.navItemId}`, navItem);
   }
+}
 
-  getSearchSuggestions(query: string): Observable<SearchSuggestion[]> {
-    const filtered = this.searchSuggestions.filter(suggestion =>
-      suggestion.term.toLowerCase().includes(query.toLowerCase()) ||
-      suggestion.category.toLowerCase().includes(query.toLowerCase())
-    );
-    return of(filtered).pipe(delay(200));
+@Injectable({ providedIn: 'root' })
+export class RoleService {
+  private apiUrl = 'http://localhost:5008/api/Roles';
+  constructor(private http: HttpClient) { }
+
+  getRolesByTenant(tenantId: string): Observable<Role[]> {
+    return this.http.get<Role[]>(`${this.apiUrl}/ByTenant/${tenantId}`);
   }
+}
 
-  updateHeroContent(content: Partial<HeroContent>): Observable<boolean> {
-    this.heroContent = { ...this.heroContent, ...content };
-    return of(true).pipe(delay(500));
+@Injectable({ providedIn: 'root' })
+export class AccountActionService {
+  private apiUrl = 'http://localhost:5008/api/AccountActions';
+  constructor(private http: HttpClient) { }
+
+  getActionsByTenant(tenantId: string): Observable<AccountAction[]> {
+    return this.http.get<AccountAction[]>(`${this.apiUrl}/ByTenant/${tenantId}`);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class MarketplaceService {
+  private apiUrl = 'http://localhost:5008/api/Marketplace/11111111-1111-1111-1111-111111111111';
+  constructor(private http: HttpClient) { }
+
+  getMarketplaceByTenant(tenantId: string): Observable<Marketplace> {
+    return this.http.get<Marketplace>(`${this.apiUrl}/ByTenant/${tenantId}`);
   }
 }

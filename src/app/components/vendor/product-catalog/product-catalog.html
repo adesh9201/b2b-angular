@@ -25,7 +25,7 @@
         <div class="input-group" style="max-width:420px;">
           <span class="input-group-text">🔍</span>
           <input type="text" class="form-control"
-                 placeholder="Search products by name, SKU or category"
+                 placeholder="Search by name, SKU, fabric type, color or description"
                  [(ngModel)]="searchTerm" (keyup.enter)="applyFilters()" />
           <button class="btn btn-outline-secondary" (click)="applyFilters()">Search</button>
         </div>
@@ -57,74 +57,128 @@
 
       <!-- Products Section -->
       <div *ngIf="!loading; else loadingTpl">
-        <!-- GRID -->
+        <!-- GRID VIEW -->
         <div *ngIf="view === 'grid'" class="row g-3">
           <ng-container *ngIf="pagedItems.length; else emptyTpl">
             <div class="col-6 col-md-4 col-lg-3" *ngFor="let p of pagedItems">
               <div class="card h-100">
                 <div class="ratio ratio-1x1">
-                  <img [src]="p.imageUrl" class="card-img-top object-cover" [alt]="p.name" />
+                  <img [src]="getProductImageUrl(p)" class="card-img-top object-cover" [alt]="p.name" />
                 </div>
                 <div class="card-body">
                   <h6 class="card-title mb-1">{{ p.name }}</h6>
-                  <div class="text-muted small mb-2">SKU: {{ p.sku }}</div>
-                  <span class="badge bg-success" *ngIf="p.stockStatus==='In Stock'">{{ p.stockStatus }}</span>
-                  <span class="badge bg-warning text-dark" *ngIf="p.stockStatus==='Low Stock'">{{ p.stockStatus }}</span>
-                  <span class="badge bg-danger" *ngIf="p.stockStatus==='Out of Stock'">{{ p.stockStatus }}</span>
+                  <div class="text-muted small mb-1">SKU: {{ p.sku }}</div>
+
+                  <!-- Price Display -->
+                  <div class="mb-2">
+                    <span class="fw-bold text-primary">${{ getFinalPrice(p) | number:'1.2-2' }}</span>
+                    <span *ngIf="p.discountPercent && p.discountPercent > 0"
+                          class="text-decoration-line-through text-muted small ms-1">
+                      ${{ p.price | number:'1.2-2' }}
+                    </span>
+                  </div>
+
+                  <!-- Fabric and Color Info -->
+                  <div class="small text-muted mb-2">
+                    <span *ngIf="p.fabricType">{{ p.fabricType }}</span>
+                    <span *ngIf="p.fabricType && p.color"> • </span>
+                    <span *ngIf="p.color">{{ p.color }}</span>
+                  </div>
+
+                  <!-- Stock Status Badge -->
+                  <span class="badge bg-success" *ngIf="getStockStatus(p)==='In Stock'">{{ getStockStatus(p) }}</span>
+                  <span class="badge bg-warning text-dark" *ngIf="getStockStatus(p)==='Low Stock'">{{ getStockStatus(p) }}</span>
+                  <span class="badge bg-danger" *ngIf="getStockStatus(p)==='Out of Stock'">{{ getStockStatus(p) }}</span>
+
+                  <small class="text-muted d-block mt-1">Stock: {{ p.stockQuantity }}</small>
                 </div>
               </div>
             </div>
           </ng-container>
         </div>
 
-        <!-- LIST -->
+        <!-- LIST VIEW -->
         <div *ngIf="view === 'list'" class="list-group">
           <ng-container *ngIf="pagedItems.length; else emptyTpl">
             <div *ngFor="let p of pagedItems"
                  class="list-group-item d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center gap-3">
-                <img [src]="p.imageUrl" alt="{{p.name}}" class="rounded"
+                <img [src]="getProductImageUrl(p)" alt="{{p.name}}" class="rounded"
                      style="width:72px;height:72px;object-fit:cover;" />
                 <div>
                   <div class="fw-bold">{{ p.name }}</div>
-                  <div class="text-muted small">SKU: {{ p.sku }} • {{ p.category }}</div>
+                  <div class="text-muted small">SKU: {{ p.sku }}</div>
+                  <div class="text-muted small" *ngIf="p.fabricType || p.color">
+                    <span *ngIf="p.fabricType">{{ p.fabricType }}</span>
+                    <span *ngIf="p.fabricType && p.color"> • </span>
+                    <span *ngIf="p.color">{{ p.color }}</span>
+                  </div>
+                  <div class="small">
+                    <span class="fw-bold text-primary">${{ getFinalPrice(p) | number:'1.2-2' }}</span>
+                    <span *ngIf="p.discountPercent && p.discountPercent > 0"
+                          class="text-decoration-line-through text-muted ms-1">
+                      ${{ p.price | number:'1.2-2' }}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div class="d-flex flex-column align-items-end">
-                <span class="badge bg-success" *ngIf="p.stockStatus==='In Stock'">{{ p.stockStatus }}</span>
-                <span class="badge bg-warning text-dark" *ngIf="p.stockStatus==='Low Stock'">{{ p.stockStatus }}</span>
-                <span class="badge bg-danger" *ngIf="p.stockStatus==='Out of Stock'">{{ p.stockStatus }}</span>
-                <small class="text-muted mt-2">View</small>
+                <span class="badge bg-success" *ngIf="getStockStatus(p)==='In Stock'">{{ getStockStatus(p) }}</span>
+                <span class="badge bg-warning text-dark" *ngIf="getStockStatus(p)==='Low Stock'">{{ getStockStatus(p) }}</span>
+                <span class="badge bg-danger" *ngIf="getStockStatus(p)==='Out of Stock'">{{ getStockStatus(p) }}</span>
+                <small class="text-muted mt-1">Stock: {{ p.stockQuantity }}</small>
+                <small class="text-muted mt-1 text-primary" style="cursor: pointer;">View Details</small>
               </div>
             </div>
           </ng-container>
         </div>
 
-        <!-- Empty -->
+        <!-- Empty State -->
         <ng-template #emptyTpl>
-          <div class="text-center text-muted py-5">No products found.</div>
+          <div class="text-center text-muted py-5">
+            <div class="mb-3">
+              <i class="fas fa-box-open fa-3x"></i>
+            </div>
+            <h5>No products found</h5>
+            <p class="small">Try adjusting your search criteria or add new products to get started.</p>
+          </div>
         </ng-template>
       </div>
 
-      <!-- Loading -->
+      <!-- Loading State -->
       <ng-template #loadingTpl>
         <div class="text-center py-4 text-muted">
           <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">Loading products...</span>
           </div>
+          <p class="mt-2 small">Loading your product catalog...</p>
         </div>
       </ng-template>
 
       <!-- Pagination -->
-      <div class="d-flex justify-content-center align-items-center gap-2 mt-4">
-        <button class="btn btn-outline-light" (click)="changePage(-1)" [disabled]="page === 1">Prev</button>
+      <div class="d-flex justify-content-center align-items-center gap-2 mt-4" *ngIf="pageCount > 1">
+        <button class="btn btn-outline-light" (click)="changePage(-1)" [disabled]="page === 1">
+          <i class="fas fa-chevron-left"></i> Prev
+        </button>
+
         <ng-container *ngFor="let p of [].constructor(pageCount); let i = index">
           <button class="btn"
                   [class.btn-dark]="page === i+1"
                   [class.btn-outline-light]="page !== i+1"
                   (click)="page = i+1">{{ i+1 }}</button>
         </ng-container>
-        <button class="btn btn-outline-light" (click)="changePage(1)" [disabled]="page === pageCount">Next</button>
+
+        <button class="btn btn-outline-light" (click)="changePage(1)" [disabled]="page === pageCount">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Summary -->
+      <div class="text-center text-muted mt-3 small">
+        Showing {{ (page-1) * perPage + 1 }} to {{ Math.min(page * perPage, displayed.length) }} of {{ displayed.length }} products
+        <span *ngIf="displayed.length !== products.length">
+          (filtered from {{ products.length }} total)
+        </span>
       </div>
     </main>
   </div>

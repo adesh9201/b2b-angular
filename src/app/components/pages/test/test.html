@@ -1,49 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mt-5">
-  <div class="container-fluid">
 
-    <!-- Marketplace Logo -->
-    <a class="navbar-brand" routerLink="/">
-      <img *ngIf="marketplace?.logoUrl" [src]="marketplace?.logoUrl" alt="{{marketplace?.name}}" height="40">
-      <span *ngIf="!marketplace?.logoUrl">{{ marketplace?.name || 'FabHub Admin' }}</span>
-    </a>
+<div  class="container mt-5">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="product-list">
+  <h2>Products</h2>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+  <div *ngIf="loading">Loading products...</div>
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
 
-      <!-- Dynamic Nav Items -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <ng-container *ngFor="let item of navItems">
-          <li class="nav-item" *ngIf="canAccess(item)">
-            <a class="nav-link" [routerLink]="item.route">
-              <i *ngIf="item.icon" class="{{ item.icon }}"></i>
-              {{ item.label }}
-            </a>
-          </li>
-        </ng-container>
-      </ul>
+  <div *ngIf="products.length === 0 && !loading">No products available.</div>
 
-      <!-- Account Actions Dropdown -->
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown">
-            Account
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-            <ng-container *ngFor="let action of accountActions">
-              <li *ngIf="canAccess(action)">
-                <a class="dropdown-item" [routerLink]="action.route">
-                  <i *ngIf="action.icon" class="{{ action.icon }}"></i>
-                  {{ action.label }}
-                </a>
-              </li>
-            </ng-container>
-          </ul>
-        </li>
-      </ul>
-
+  <div class="products-grid" *ngIf="products.length > 0">
+    <div class="product-card" *ngFor="let product of products">
+      <img *ngIf="product.imagePath" [src]="product.imagePath" alt="{{ product.name }}" />
+      <h3>{{ product.name }}</h3>
+      <p>SKU: {{ product.sku }}</p>
+      <p>Price: ₹{{ product.finalPrice | number:'1.2-2' }}</p>
+      <p>Stock: {{ product.stockQuantity }}</p>
+      <p *ngIf="product.color">
+        Color: <span [style.background]="product.colorHexCode" class="color-box"></span> {{ product.color }}
+      </p>
+      <p *ngIf="product.fabricType">Fabric: {{ product.fabricType }}</p>
+      <p *ngIf="product.pattern">Pattern: {{ product.pattern }}</p>
     </div>
   </div>
-</nav>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalProducts > pageSize">
+    <button (click)="prevPage()" [disabled]="page === 1">Prev</button>
+    <span>Page {{ page }} of {{ getTotalPages() }}</span>
+    <button (click)="nextPage()" [disabled]="page === getTotalPages()">Next</button>
+  </div>
+</div>
+</div>

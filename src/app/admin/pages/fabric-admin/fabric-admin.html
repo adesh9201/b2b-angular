@@ -1,0 +1,274 @@
+<div class="fabric-marketplace">
+  <!-- Header Section -->
+  <div class="marketplace-header bg-light py-4 mb-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h2 class="mb-0 text-primary fw-bold">
+            <i class="fas fa-cut me-2"></i>Fabric Collection
+          </h2>
+          <p class="text-muted mb-0">{{ filteredFabrics.length }} products available</p>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex justify-content-end gap-2">
+            <div class="btn-group" role="group">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                [class.active]="viewType === 'grid'"
+                (click)="viewType = 'grid'">
+                <i class="fas fa-th"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                [class.active]="viewType === 'list'"
+                (click)="viewType = 'list'">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3 mb-4">
+        <div class="filters-sidebar bg-white rounded shadow-sm p-3 sticky-top">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-dark mb-0">Filters</h5>
+            <button class="btn btn-link btn-sm text-danger p-0" (click)="clearFilters()">
+              Clear All
+            </button>
+          </div>
+
+          <!-- Search -->
+          <div class="filter-group mb-4">
+            <label class="form-label fw-semibold">Search</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search fabrics..."
+                [(ngModel)]="searchTerm"
+                (input)="onSearchChange()">
+            </div>
+          </div>
+
+          <!-- Fabric Type Filter -->
+          <div class="filter-group mb-4">
+            <label class="form-label fw-semibold">Fabric Type</label>
+            <select
+              class="form-select"
+              [(ngModel)]="selectedFabType"
+              (change)="onFilterChange()">
+              <option value="">All Types</option>
+              <option *ngFor="let type of getUniqueValues('fabType')" [value]="type">
+                {{ type }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Quality Filter -->
+          <div class="filter-group mb-4">
+            <label class="form-label fw-semibold">Quality</label>
+            <select
+              class="form-select"
+              [(ngModel)]="selectedQuality"
+              (change)="onFilterChange()">
+              <option value="">All Qualities</option>
+              <option *ngFor="let quality of getUniqueValues('quality')" [value]="quality">
+                {{ quality }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Sort Options -->
+          <div class="filter-group">
+            <label class="form-label fw-semibold">Sort By</label>
+            <div class="d-flex gap-2">
+              <select
+                class="form-select"
+                [(ngModel)]="sortBy"
+                (change)="onSortChange()">
+                <option value="fabName">Name</option>
+                <option value="sellPrice">Price</option>
+                <option value="fabType">Type</option>
+                <option value="quality">Quality</option>
+              </select>
+              <button
+                class="btn btn-outline-secondary"
+                (click)="toggleSortOrder()"
+                [title]="sortOrder === 'asc' ? 'Ascending' : 'Descending'">
+                <i class="fas" [class.fa-sort-up]="sortOrder === 'asc'" [class.fa-sort-down]="sortOrder === 'desc'"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Section -->
+      <div class="col-lg-9">
+        <!-- Loading State -->
+        <div *ngIf="loading" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-3 text-muted">Loading fabrics...</p>
+        </div>
+
+        <!-- Error State -->
+        <div *ngIf="error && !loading" class="alert alert-danger text-center">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          {{ error }}
+          <button class="btn btn-outline-danger btn-sm ms-3" (click)="loadFabrics()">
+            Retry
+          </button>
+        </div>
+
+        <!-- No Results -->
+        <div *ngIf="!loading && !error && filteredFabrics.length === 0" class="text-center py-5">
+          <i class="fas fa-search fa-3x text-muted mb-3"></i>
+          <h5 class="text-muted">No fabrics found</h5>
+          <p class="text-muted">Try adjusting your filters or search term</p>
+        </div>
+
+        <!-- Grid View -->
+        <div *ngIf="!loading && !error && filteredFabrics.length > 0 && viewType === 'grid'"
+             class="row g-4">
+          <div *ngFor="let fabric of filteredFabrics" class="col-lg-4 col-md-6">
+            <div class="product-card h-100">
+              <div class="card border-0 shadow-sm h-100 product-hover">
+                <div class="position-relative overflow-hidden">
+                  <img
+                    [src]="getFabricImage(fabric)"
+                    [alt]="fabric.fabName"
+                    class="card-img-top product-image"
+                    style="height: 200px; object-fit: cover;">
+                  <div class="product-overlay">
+                    <button class="btn btn-primary btn-sm">
+                      <i class="fas fa-eye me-1"></i>View Details
+                    </button>
+                  </div>
+                  <div class="position-absolute top-0 end-0 m-2">
+                    <span *ngIf="fabric.quantity && fabric.quantity > 0"
+                          class="badge bg-success">In Stock</span>
+                    <span *ngIf="!fabric.quantity || fabric.quantity === 0"
+                          class="badge bg-danger">Out of Stock</span>
+                  </div>
+                </div>
+
+                <div class="card-body d-flex flex-column">
+                  <div class="mb-2">
+                    <small class="text-muted">{{ fabric.refNo }}</small>
+                  </div>
+                  <h6 class="card-title fw-bold text-truncate mb-2">{{ fabric.fabName }}</h6>
+
+                  <div class="fabric-details mb-3 flex-grow-1">
+                    <div class="row g-1">
+                      <div class="col-6">
+                        <small class="text-muted d-block">Type:</small>
+                        <small class="fw-semibold">{{ fabric.fabType || 'N/A' }}</small>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">Quality:</small>
+                        <small class="fw-semibold">{{ fabric.quality || 'N/A' }}</small>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">GSM:</small>
+                        <small class="fw-semibold">{{ fabric.gsm || 'N/A' }}</small>
+                      </div>
+                      <div class="col-6">
+                        <small class="text-muted d-block">Color:</small>
+                        <small class="fw-semibold">{{ fabric.color || 'N/A' }}</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="price-section mt-auto">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <span class="h5 text-primary fw-bold mb-0">
+                          ₹{{ fabric.sellPrice | number:'1.2-2' }}
+                        </span>
+                        <div class="text-muted small">
+                          per {{ fabric.uom || 'unit' }}
+                        </div>
+                      </div>
+                      <button class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-shopping-cart me-1"></i>Add
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- List View -->
+        <div *ngIf="!loading && !error && filteredFabrics.length > 0 && viewType === 'list'"
+             class="list-view">
+          <div *ngFor="let fabric of filteredFabrics" class="card border-0 shadow-sm mb-3">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-md-2">
+                  <img
+                    [src]="getFabricImage(fabric)"
+                    [alt]="fabric.fabName"
+                    class="img-fluid rounded"
+                    style="height: 80px; width: 100%; object-fit: cover;">
+                </div>
+                <div class="col-md-4">
+                  <h6 class="fw-bold mb-1">{{ fabric.fabName }}</h6>
+                  <small class="text-muted d-block mb-1">Ref: {{ fabric.refNo }}</small>
+                  <div class="d-flex gap-3">
+                    <small><strong>Type:</strong> {{ fabric.fabType }}</small>
+                    <small><strong>Quality:</strong> {{ fabric.quality }}</small>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row g-1">
+                    <div class="col-6">
+                      <small class="text-muted d-block">GSM</small>
+                      <small class="fw-semibold">{{ fabric.gsm || 'N/A' }}</small>
+                    </div>
+                    <div class="col-6">
+                      <small class="text-muted d-block">Color</small>
+                      <small class="fw-semibold">{{ fabric.color || 'N/A' }}</small>
+                    </div>
+                    <div class="col-6">
+                      <small class="text-muted d-block">Width</small>
+                      <small class="fw-semibold">{{ fabric.width || 'N/A' }}</small>
+                    </div>
+                    <div class="col-6">
+                      <small class="text-muted d-block">Quantity</small>
+                      <small class="fw-semibold">{{ fabric.quantity || 0 }}</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="text-end">
+                    <h5 class="text-primary fw-bold mb-1">₹{{ fabric.sellPrice | number:'1.2-2' }}</h5>
+                    <small class="text-muted">per {{ fabric.uom || 'unit' }}</small>
+                  </div>
+                </div>
+                <div class="col-md-1 text-end">
+                  <button class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

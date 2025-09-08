@@ -1,0 +1,157 @@
+/* fabric-marketplace.component.css */
+.fabric-marketplace {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.marketplace-header {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.filters-sidebar {
+  top: 20px;
+}
+
+.filter-group {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+}
+
+.filter-group:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.product-card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+}
+
+.product-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.product-image {
+  transition: transform 0.3s ease;
+}
+
+.product-hover:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-hover:hover .product-overlay {
+  opacity: 1;
+}
+
+.fabric-details {
+  font-size: 0.85rem;
+}
+
+.price-section {
+  border-top: 1px solid #e9ecef;
+  padding-top: 0.75rem;
+}
+
+.list-view .card {
+  transition: all 0.2s ease;
+}
+
+.list-view .card:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filters-sidebar {
+    position: static !important;
+    margin-bottom: 1rem;
+  }
+
+  .marketplace-header .col-md-6:last-child {
+    margin-top: 1rem;
+  }
+
+  .fabric-details .row {
+    font-size: 0.8rem;
+  }
+}
+
+/* Custom scrollbar for filters */
+.filters-sidebar {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.filters-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.filters-sidebar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.filters-sidebar::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 4px;
+}
+
+.filters-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+}
+
+/* Animation for loading */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.product-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Badge styling */
+.badge {
+  font-size: 0.7rem;
+}
+
+/* Button hover effects */
+.btn {
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Active filter styles */
+.btn-group .btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Search input focus */
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}

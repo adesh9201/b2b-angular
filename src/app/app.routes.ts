@@ -36,6 +36,7 @@ import { ProductCatalog } from './components/vendor/product-catalog/product-cata
 
 import { Admin } from './admin/admin';
 import { FooterAdmin } from './admin/pages/footer-admin/footer-admin';
+import { FabricAdmin } from './admin/pages/fabric-admin/fabric-admin';
 // import { Use } from './admin/users/users';
 // import { Produc } from './admin/products/products';
 // import { Orde } from './admin/orders/orders';
@@ -93,6 +94,7 @@ export const routes: Routes = [
     children: [
 
       { path: 'footer-admin', component: FooterAdmin },
+       { path: 'fabric-admin', component: FabricAdmin },
       // { path: 'products', component: Products },
       // { path: 'orders', component: Orde },
       // { path: 'settings', component: Settin },

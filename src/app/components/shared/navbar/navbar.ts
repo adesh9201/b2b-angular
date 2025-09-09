@@ -6,7 +6,7 @@ import { CartService } from '../../core/services/cart.service';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CountrySelector } from '../../shared/country-selector/country-selector';
+
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink, RouterLinkActive, FormsModule, CommonModule],

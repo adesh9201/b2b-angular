@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   templateUrl: './catalogs.html',
   styleUrls: ['./catalogs.css'],
-  imports: [CommonModule, Filter, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   providers: [CurrencyPipe]
 })
 export class Catalogs {

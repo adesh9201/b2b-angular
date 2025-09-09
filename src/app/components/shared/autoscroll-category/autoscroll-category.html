@@ -1,38 +1,61 @@
-<section class="category-carousel-section py-4">
-  <div class="container-fluid">
-    <!-- Heading -->
-    <h2 class="category-carousel-title mb-4">{{ categoryName }}</h2>
+<div class="container-fluid py-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="mb-0">All Fabric Categories</h1>
 
-    <!-- Carousel Wrapper -->
-   <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" aria-label="Category product carousel">
-
-
-      <!-- Indicators -->
-      <div class="carousel-indicators">
-        <button title="dot-autoscroll-button" *ngFor="let chunk of productChunks; let i = index" type="button"
-          [attr.data-bs-target]="'#categoryCarousel'" [attr.data-bs-slide-to]="i" [class.active]="i === 0"
-          [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide ' + (i + 1)">
-        </button>
+    <div class="d-flex gap-2 align-items-center">
+      <div class="input-group">
+        <input type="search" class="form-control" placeholder="Search categories"
+          (input)="onSearch($any($event.target).value)" aria-label="Search categories">
       </div>
 
-      <!-- Slides -->
-      <div class="carousel-inner text-center">
-        <div *ngFor="let chunk of productChunks; let i = index" class="carousel-item" [class.active]="i === 0">
-          <div class="row g-2">
-            <div class="col-2" *ngFor="let product of chunk">
-              <a [routerLink]="['/catalogs']" class="text-decoration-none text-reset d-block h-100"  [attr.aria-label]="product.category + ' category product'">
-                <div class="square-box rounded-4 d-flex align-items-center justify-content-center overflow-hidden" style="background-color: var(--color-background);">
-                  <img title="product-images" [src]="product.imageUrl" class="img-cover" [alt]="product.category">
-                </div>
-                <div class="card-body text-center px-2 py-3">
-                  <h6 class="fw-semibold text-global mb-1 product-title">{{ product.category }}</h6>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <select class="form-select" style="width: 170px;" (change)="onSortChange($any($event.target).value)">
+        <option value="name-asc">Name: A → Z</option>
+        <option value="name-desc">Name: Z → A</option>
+      </select>
     </div>
   </div>
-</section>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border" role="status" aria-hidden="true"></div>
+    <span class="sr-only visually-hidden">Loading...</span>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div class="row g-4" *ngIf="!loading && !error">
+    <div class="col-6 col-md-4 col-lg-3" *ngFor="let cat of paginated()">
+      <div class="card category-card h-100" (click)="openCategory(cat)" role="button" tabindex="0" (keydown.enter)="openCategory(cat)">
+        <div class="category-img-container">
+          <img [src]="'assets/images/aa.jpeg' "
+               [alt]="cat.name" class="category-img" loading="lazy">
+        </div>
+        <div class="card-body text-center">
+          <h4 class="category-title">{{ cat.name }}</h4>
+          <p class="text-muted small">Explore curated fabrics &amp; products</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- empty state -->
+    <div class="col-12" *ngIf="filtered.length === 0">
+      <div class="alert alert-info">No categories found.</div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav *ngIf="!loading && totalPages > 1" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="page === 1">
+        <button class="page-link" (click)="goToPage(page - 1)" aria-label="Previous">Previous</button>
+      </li>
+
+      <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === (i+1)">
+        <button class="page-link" (click)="goToPage(i+1)">{{ i + 1 }}</button>
+      </li>
+
+      <li class="page-item" [class.disabled]="page === totalPages">
+        <button class="page-link" (click)="goToPage(page + 1)" aria-label="Next">Next</button>
+      </li>
+    </ul>
+  </nav>
+</div>

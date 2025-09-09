@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FabHub - Premium Fabric Marketplace</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Import your theme variables */
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --secondary-500: #10b981;
+            --secondary-600: #059669;
+            --accent-500: #a855f7;
+            --accent-600: #9333ea;
+            --gray-100: #f5f5f5;
+            --gray-200: #eeeeee;
+            --gray-300: #e0e0e0;
+            --gray-400: #bdbdbd;
+            --gray-600: #757575;
+            --gray-700: #616161;
+            --gray-800: #424242;
+            --gray-900: #212121;
+            --surface-bg: #ffffff;
+            --surface-bg-secondary: #f8f9fa;
+            --surface-border: #e0e0e0;
+            --surface-border-light: #f0f0f0;
+            --color-text: #212121;
+            --color-text-secondary: #757575;
+            --color-text-muted: #9e9e9e;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-sm: 0.125rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-xl: 0.75rem;
+            --radius-full: 9999px;
+            --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-family-heading: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--surface-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-family-heading);
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-500), var(--primary-700));
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-500), var(--accent-500));
+            margin: 0.5rem auto;
+            border-radius: var(--radius-full);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1550355191-aa8a80b41353?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        /* Category Cards */
+        .category-card {
+            background: var(--surface-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--surface-border-light);
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-500);
+        }
+
+        .category-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Fabric Cards */
+        .fabric-card {
+            border: 1px solid var(--surface-border-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: var(--surface-bg);
+        }
+
+        .fabric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .fabric-img {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            background: linear-gradient(to right, var(--primary-500), var(--accent-500));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Pattern Cards */
+        .pattern-card {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            height: 150px;
+        }
+
+        .pattern-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pattern-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: var(--surface-bg);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--surface-border-light);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-500);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-500);
+        }
+
+        /* Trust badges */
+        .trust-badge {
+            height: 80px;
+            background: var(--surface-bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--surface-border-light);
+        }
+
+        .trust-badge img {
+            max-height: 50px;
+            max-width: 100%;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer a {
+            color: var(--gray-300);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-500);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3 text-primary" href="#">
+                <i class="fas fa-tshirt me-2"></i>FabHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Fabrics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Suppliers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-search me-1"></i> Search
+                    </a>
+                    <a href="#" class="btn btn-outline-primary me-2">
+                        <i class="fas fa-user me-1"></i> Sign In
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-store me-1"></i> Become a Seller
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">Discover Premium Fabrics from Trusted Suppliers</h1>
+                    <p class="lead mb-5">FabHub connects you with the finest fabric manufacturers and wholesalers worldwide. Quality assured with every purchase.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="#" class="btn btn-primary btn-lg">
+                            Explore Fabrics <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-lg">
+                            Become a Supplier
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Categories Section -->
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="section-title">Shop By Category</h2>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" alt="Cotton" class="category-img w-100">
+                        <div class="p-3">
+                            <h5 class="mb-0">Cotton</h5>
+                            <p class="text-muted small mb-0">1,240 products</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Silk" class="category-img w-100">
+                        <div class="p-3">
+                            <h5 class="mb-0">Silk</h5>
+                            <p class="text-muted small mb-0">850 products</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1592066575517-68aac448c0c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=715&q=80" alt="Linen" class="category-img w-100">
+                        <div class="p-3">
+                            <h5 class="mb-0">Linen</h5>
+                            <p class="text-muted small mb-0">720 products</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1587846817617-dbf9e21167d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Denim" class="category-img w-100">
+                        <div class="p-3">
+                            <h5 class="mb-0">Denim</h5>
+                            <p class="text-muted small mb-0">950 products</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-outline-primary">View All Categories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Fabrics Section -->
+    <section class="py-5">
+        <div class="container py-5">
+            <h2 class="section-title">Trending Fabrics</h2>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="fabric-card">
+                        <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=684&q=80" alt="Organic Cotton" class="fabric-img w-100">
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-primary">Bestseller</span>
+                                <span class="price-tag">$12.99/yd</span>
+                            </div>
+                            <h5 class="mb-1">Organic Cotton Twill</h5>
+                            <p class="text-muted small mb-2">Premium weight for garments</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                    <span class="ms-1 small">4.5</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="fabric-card">
+                        <img src="https://images.unsplash.com/photo-1618662160492-a2e2c79a305d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Silk Chiffon" class="fabric-img w-100">
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-success">New</span>
+                                <span class="price-tag">$24.99/yd</span>
+                            </div>
+                            <h5 class="mb-1">Silk Chiffon</h5>
+                            <p class="text-muted small mb-2">Lightweight & flowing</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="far fa-star text-warning"></i>
+                                    <span class="ms-1 small">4.0</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="fabric-card">
+                        <img src="https://images.unsplash.com/photo-1583688729734-5ba70bc391f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Linen Blend" class="fabric-img w-100">
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-info">Eco-Friendly</span>
+                                <span class="price-tag">$18.50/yd</span>
+                            </div>
+                            <h5 class="mb-1">Linen-Cotton Blend</h5>
+                            <p class="text-muted small mb-2">Perfect for summer clothing</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <span class="ms-1 small">5.0</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="fabric-card">
+                        <img src="https://images.unsplash.com/photo-1586880247938-9f68e3aa2c5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Wool Suiting" class="fabric-img w-100">
+                        <div class="p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="badge bg-warning text-dark">Limited</span>
+                                <span class="price-tag">$35.75/yd</span>
+                            </div>
+                            <h5 class="mb-1">Premium Wool Suiting</h5>
+                            <p class="text-muted small mb-2">Ideal for formal wear</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star text-warning"></i>
+                                    <i class="fas fa-star-half-alt text-warning"></i>
+                                    <span class="ms-1 small">4.5</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary">View All Fabrics</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patterns & Colors Section -->
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="section-title">Popular Patterns & Colors</h2>
+            <div class="row g-3">
+                <div class="col-md-2 col-4">
+                    <div class="pattern-card">
+                        <img src="https://images.unsplash.com/photo-1558769136-3ca150b01db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80" alt="Floral Pattern">
+                        <div class="pattern-overlay">
+                            <span>Floral</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="pattern-card">
+                        <img src="https://images.unsplash.com/photo-1596460109870-30dd8c32c097?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Stripes Pattern">
+                        <div class="pattern-overlay">
+                            <span>Stripes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="pattern-card">
+                        <img src="https://images.unsplash.com/photo-1596460109870-30dd8c32c097?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Plaid Pattern">
+                        <div class="pattern-overlay">
+                            <span>Plaid</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="pattern-card">
+                        <img src="https://images.unsplash.com/photo-1586023492127-6c10015209ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Geometric Pattern">
+                        <div class="pattern-overlay">
+                            <span>Geometric</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="pattern-card">
+                        <img src="https://images.unsplash.com/photo-1605108721178-97a9514c0b9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Abstract Pattern">
+                        <div class="pattern-overlay">
+                            <span>Abstract</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="pattern-card">
+                        <img src="https://images.unsplash.com/photo-1596460109870-30dd8c32c097?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Animal Print">
+                        <div class="pattern-overlay">
+                            <span>Animal Print</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-outline-primary">Explore Patterns</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose FabHub Section -->
+    <section class="py-5">
+        <div class="container py-5">
+            <h2 class="section-title">Why Choose FabHub</h2>
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h5>Verified Suppliers</h5>
+                        <p class="text-muted">All our suppliers undergo strict verification process to ensure quality and reliability.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h5>Quality Assurance</h5>
+                        <p class="text-muted">Every fabric is quality checked before shipping to ensure it meets industry standards.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h5>Global Reach</h5>
+                        <p class="text-muted">Source fabrics from across the globe with our extensive network of manufacturers.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5>Secure Transactions</h5>
+                        <p class="text-muted">Our secure payment system ensures your transactions are protected at all times.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By Section -->
+    <section class="py-5 bg-light">
+        <div class="container py-5">
+            <h2 class="section-title">Trusted By Industry Leaders</h2>
+            <div class="row g-4 align-items-center">
+                <div class="col-md-2 col-4">
+                    <div class="trust-badge">
+                        <img src="https://via.placeholder.com/150x80/ffffff/666666?text=FashionCo" alt="FashionCo">
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="trust-badge">
+                        <img src="https://via.placeholder.com/150x80/ffffff/666666?text=TextileGroup" alt="TextileGroup">
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="trust-badge">
+                        <img src="https://via.placeholder.com/150x80/ffffff/666666?text=DesignHouse" alt="DesignHouse">
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="trust-badge">
+                        <img src="https://via.placeholder.com/150x80/ffffff/666666?text=ApparelInc" alt="ApparelInc">
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="trust-badge">
+                        <img src="https://via.placeholder.com/150x80/ffffff/666666?text=StyleMakers" alt="StyleMakers">
+                    </div>
+                </div>
+                <div class="col-md-2 col-4">
+                    <div class="trust-badge">
+                        <img src="https://via.placeholder.com/150x80/ffffff/666666?text=FabricWorld" alt="FabricWorld">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <h4 class="text-white mb-4">
+                        <i class="fas fa-tshirt me-2"></i>FabHub
+                    </h4>
+                    <p class="mb-4">Connecting fabric buyers with trusted suppliers worldwide. Quality fabrics, seamless transactions, and global delivery.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">About Us</a></li>
+                        <li class="mb-2"><a href="#">Contact Us</a></li>
+                        <li class="mb-2"><a href="#">FAQs</a></li>
+                        <li class="mb-2"><a href="#">Terms & Conditions</a></li>
+                        <li class="mb-2"><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5 class="text-white mb-4">Categories</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Cotton</a></li>
+                        <li class="mb-2"><a href="#">Silk</a></li>
+                        <li class="mb-2"><a href="#">Linen</a></li>
+                        <li class="mb-2"><a href="#">Wool</a></li>
+                        <li class="mb-2"><a href="#">Synthetic</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="mb-3">Subscribe to our newsletter for the latest updates and fabric trends.</p>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your email address" aria-label="Email">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                    <div class="mt-4">
+                        <h6 class="text-white mb-3">Contact Info</h6>
+                        <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i> 123 Fabric Street, Textile City</p>
+                        <p class="mb-1"><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+                        <p class="mb-0"><i class="fas fa-envelope me-2"></i> info@fabhub.com</p>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4 border-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2023 FabHub. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <img src="https://via.placeholder.com/50x30/ffffff/666666?text=Visa" alt="Visa" class="me-2">
+                    <img src="https://via.placeholder.com/50x30/ffffff/666666?text=MC" alt="MasterCard" class="me-2">
+                    <img src="https://via.placeholder.com/50x30/ffffff/666666?text=PayPal" alt="PayPal" class="me-2">
+                    <img src="https://via.placeholder.com/50x30/ffffff/666666?text=Amex" alt="American Express">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

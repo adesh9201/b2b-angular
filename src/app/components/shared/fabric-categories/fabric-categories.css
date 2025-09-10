@@ -1,92 +1,14 @@
-/* Section wrapper */
-.fabric-carousel-section {
-  background-color: var(--color-background);
-  padding: var(--space-4) 0;
-}
 
-/* Title */
-.fabric-carousel-title {
-  font-size: var(--font-2xl);
-  font-weight: var(--font-bold);
-  color: var(--primary-700);
-  text-align: center;
-  margin-bottom: var(--space-4);
-  font-family: var(--font-sans);
-}
 
-/* Auto-scroll container */
-.auto-row {
+
+.category-card {
+  border-radius: 0.7rem;
   overflow: hidden;
-  /* -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-          mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); */
-}
-
-/* Track for infinite scroll */
-.track {
-  display: flex;
-  gap: var(--space-4);
-  width: max-content;
-  animation: scroll-marquee var(--marquee-duration, 25s) linear infinite;
-  will-change: transform;
-}
-
-/* Pause on hover */
-.auto-row:hover .track {
-  animation-play-state: paused;
-}
-
-/* Fabric item */
-.fabric-item {
-  flex: 0 0 auto;
-  width: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-@media (max-width: 991.98px) {
-  .fabric-item { width: 140px; }
-}
-@media (max-width: 575.98px) {
-  .fabric-item { width: 100px; }
-}
-
-/* Image box - square */
-.fabric-box {
-  width: 100%;
-  aspect-ratio: 1 / 1; /* square */
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: var(--transition);
+  transition: transform .22s ease, box-shadow .22s ease;
   cursor: pointer;
-  background: #fff;
-}
-.fabric-box:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-5px);
-}
-
-/* Image inside box */
-.fabric-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  border: none;
+  .category-img-container { height: 160px; overflow: hidden; }
+  .category-img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+  &:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); .category-img { transform: scale(1.06); } }
 }
 
-/* Name below */
-.fabric-name {
-  margin-top: var(--space-2);
-  text-align: center;
-  font-weight: var(--font-semibold);
-  font-size: var(--font-sm);
-  color: var(--primary-700);
-  line-height: 1.3;
-  word-break: break-word;
-}
-
-/* Animation */
-@keyframes scroll-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}

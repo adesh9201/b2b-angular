@@ -1,61 +1,42 @@
-<div class="container-fluid py-5">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="mb-0">All Fabric Categories</h1>
 
-    <div class="d-flex gap-2 align-items-center">
-      <div class="input-group">
-        <input type="search" class="form-control" placeholder="Search categories"
-          (input)="onSearch($any($event.target).value)" aria-label="Search categories">
-      </div>
 
-      <select class="form-select" style="width: 170px;" (change)="onSortChange($any($event.target).value)">
-        <option value="name-asc">Name: A → Z</option>
-        <option value="name-desc">Name: Z → A</option>
-      </select>
-    </div>
-  </div>
 
-  <div *ngIf="loading" class="text-center py-5">
-    <div class="spinner-border" role="status" aria-hidden="true"></div>
-    <span class="sr-only visually-hidden">Loading...</span>
-  </div>
+<section class="fabric-carousel-section py-4">
+  <div class="container-fluid">
+    <!-- Heading -->
+    <h2 class="fabric-carousel-title mb-4">Available Fabrics</h2>
 
-  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <!-- Auto-scroll row -->
+    <div class="auto-row" aria-label="Fabric names auto scroll">
+      <div class="track d-flex gap-4">
 
-  <div class="row g-4" *ngIf="!loading && !error">
-    <div class="col-6 col-md-4 col-lg-3" *ngFor="let cat of paginated()">
-      <div class="card category-card h-100" (click)="openCategory(cat)" role="button" tabindex="0" (keydown.enter)="openCategory(cat)">
-        <div class="category-img-container">
-          <img [src]="'assets/images/aa.jpeg' "
-               [alt]="cat.name" class="category-img" loading="lazy">
+        <!-- 1st copy -->
+        <div *ngFor="let category of categories" class="fabric-item text-center">
+          <div class="fabric-box" [routerLink]="['/fabric',]">
+            <img
+              [src]="'assets/images/aa.jpeg'"
+              [alt]="category.name"
+              class="fabric-img"
+              title="{{ category.name }}"
+            />
+          </div>
+          <div class="fabric-name mt-2">{{ category.name }}</div>
         </div>
-        <div class="card-body text-center">
-          <h4 class="category-title">{{ cat.name }}</h4>
-          <p class="text-muted small">Explore curated fabrics &amp; products</p>
+
+        <!-- 2nd copy (duplicate for infinite loop) -->
+        <div *ngFor="let category of categories" class="fabric-item text-center">
+          <div class="fabric-box" [routerLink]="['/fabric']">
+            <img
+              [src]="'assets/images/aa.jpeg'"
+              [alt]="category.name"
+              class="fabric-img"
+              title="{{ category.name }}"
+            />
+          </div>
+          <div class="fabric-name mt-2">{{ category.name }}</div>
         </div>
+
       </div>
     </div>
-
-    <!-- empty state -->
-    <div class="col-12" *ngIf="filtered.length === 0">
-      <div class="alert alert-info">No categories found.</div>
-    </div>
   </div>
-
-  <!-- Pagination -->
-  <nav *ngIf="!loading && totalPages > 1" class="mt-4">
-    <ul class="pagination justify-content-center">
-      <li class="page-item" [class.disabled]="page === 1">
-        <button class="page-link" (click)="goToPage(page - 1)" aria-label="Previous">Previous</button>
-      </li>
-
-      <li class="page-item" *ngFor="let p of [].constructor(totalPages); let i = index" [class.active]="page === (i+1)">
-        <button class="page-link" (click)="goToPage(i+1)">{{ i + 1 }}</button>
-      </li>
-
-      <li class="page-item" [class.disabled]="page === totalPages">
-        <button class="page-link" (click)="goToPage(page + 1)" aria-label="Next">Next</button>
-      </li>
-    </ul>
-  </nav>
-</div>
+</section>

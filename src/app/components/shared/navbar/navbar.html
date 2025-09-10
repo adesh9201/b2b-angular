@@ -30,10 +30,14 @@
 
      <!-- Core Links -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active">
-            <i class="bi bi-house"></i> Home
-          </a>
-        </li>
+    <li class="nav-item">
+  <a class="nav-link"
+     routerLink="/"
+     routerLinkActive="active"
+     [routerLinkActiveOptions]="{ exact: true }">
+    <i class="bi bi-house"></i> Home
+  </a>
+</li>
 
               <li class="nav-item">
           <a class="nav-link" routerLink="/catalogs" routerLinkActive="active">

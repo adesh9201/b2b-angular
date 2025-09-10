@@ -1,44 +1,32 @@
-<section class="py-4 bg-light featured-products-section">
+<section class="category-section py-5 mt-5">
   <div class="container-fluid">
-    <!-- Title Section -->
-    <div class="text-center mb-4">
-      <h2 class="featured-fabrics-title mb-4">Featured Fabrics</h2>
-      <p class="featured-fabrics-explore mb-4">Explore our top quality fabrics</p>
+    <h2 class="section-title mb-4">Shop by Fabric Categories</h2>
+
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-primary"></div>
     </div>
 
-    <!-- Products Grid -->
-    <div class="row g-3" role="list">
-      <div class="col-lg-2 col-md-4 col-sm-6 col-6" *ngFor="let product of fabrics" role="listitem">
-        <a [routerLink]="['/fabric']" class="card product-card h-100 text-decoration-none">
-          <div class="product-image-wrapper position-relative overflow-hidden rounded-top">
+    <div class="row g-4" *ngIf="!loading">
+      <div class="col-6 col-md-4 col-lg-3" *ngFor="let fabric of fabrics">
+        <div class="category-card">
+          <div class="category-img-container">
+            <!-- placeholder / random image for each fabric (nykaa-like look) -->
             <img
-              [src]=" 'assets/images/aa.jpeg'"
-              alt="{{ product.fabName || 'Fabric image' }}"
-              title="{{ product.fabName || 'Fabric image' }}"
-              class="img-fluid w-100 product-image"
-            />
+              src= "assets/images/aa.jpeg"
+              [alt]="fabric.fabName"
+              class="category-img">
           </div>
-          <div class="card-body text-center px-2 py-3">
-            <h6 class="fw-semibold product-title mb-1">{{ product.fabName }}</h6>
-            <div>
-              <span class="fw-bold text-success product-price me-1">
-                {{ product.sellPrice  | currency: 'INR' }} <span class="text-dark">/Meter</span>
-              </span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
+          <div class="category-content">
+            <h3 class="category-title">{{fabric.fabName}}</h3>
+<p class="category-subtitle text-success">
+  {{ fabric.sellPrice | currency:'INR':'symbol':'1.0-0' }}<span>/M</span>
+</p>
 
-    <!-- Load More Button -->
-    <div class="text-center mt-5">
-      <a
-        routerLink="/fabric"
-        class="btn btn-outline-primary btn-sm px-4 py-2 rounded-pill shadow-sm fw-semibold text-uppercase transition-all load-more-btn"
-        aria-label="Load more fabric products from catalog"
-      >
-        <i class="bi bi-box-seam me-2"></i> Load More Fabrics
-      </a>
+
+            <button class="btn btn-shop-now">Shop Now</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

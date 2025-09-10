@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FabricCategoryService } from '../../core/services/fabric-category.service';
 import { FabricCategoryModel } from '../../core/models/fabric-category.model';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -13,24 +13,31 @@ import { RouterModule } from '@angular/router';
 })
 export class FabricCategories implements OnInit {
   categories: FabricCategoryModel[] = [];
-  loading = false;
+  loading = true;
+  error = '';
 
-  constructor(private fabricCategoryService: FabricCategoryService) {}
+  constructor(private svc: FabricCategoryService) {}
 
   ngOnInit(): void {
-    this.fetchCategories();
-  }
-
-  fetchCategories(): void {
-    this.loading = true;
-    this.fabricCategoryService.getAllFabricCategory().subscribe({
-      next: (data) => {
-        this.categories = data;
+    this.svc.getAllFabricCategory().subscribe({
+      next: res => {
+        const allCategories = res || [];
+        this.categories = allCategories.slice(0, 8);
         this.loading = false;
       },
-      error: () => {
+      error: err => {
+        console.error(err);
+        this.error = 'Failed to load categories';
         this.loading = false;
       }
     });
+  }
+
+  openCategory(c?: FabricCategoryModel) {
+    if (!c) {
+      console.log('Load more clicked');
+    } else {
+      console.log('Open category', c);
+    }
   }
 }

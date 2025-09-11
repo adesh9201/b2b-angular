@@ -2,8 +2,8 @@
   import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { CartService } from '../../core/services/cart.service';
-import { Observable } from 'rxjs';
+// import { CartService } from '../../core/services/cart.service';
+// import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -16,13 +16,13 @@ import { CommonModule } from '@angular/common';
 })
 export class Navbar {
   // cartCount: number = 0;
-cartCount$!: Observable<number>;
+// cartCount$!: Observable<number>;
 
-constructor(private cartService: CartService) {}
+// constructor(private cartService: CartService) {}
 
-ngOnInit() {
-  this.cartCount$ = this.cartService.getCartItemCount();
-}
+// ngOnInit() {
+//   this.cartCount$ = this.cartService.getCartItemCount();
+// }
 
 
 }

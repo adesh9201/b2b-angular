@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 
 // Pages
 import { Home } from './components/pages/home/home';
-import { Catalogs } from './components/pages/catalogs/catalogs';
+// import { Catalogs } from './components/pages/catalogs/catalogs';
 import { Fabric } from './components/pages/fabric/fabric';
 import { FabricDetails } from './components/pages/fabric-details/fabric-details';
 import { Products } from './components/pages/products/products';
-import { Cart } from './components/pages/cart/cart';
+// import { Cart } from './components/pages/cart/cart';
 import { About } from './components/pages/about/about';
 import { Suppliers } from './components/pages/suppliers/suppliers';
 import { Login } from './components/pages/login/login';
@@ -51,13 +51,13 @@ import { FabricAdmin } from './admin/pages/fabric-admin/fabric-admin';
 export const routes: Routes = [
   // Pages
   { path: '', component: Home },
-  { path: 'catalogs', component: Catalogs },
+  // { path: 'catalogs', component: Catalogs },
   { path: 'fabric', component: Fabric },
   { path: 'fabric/:id', component: Fabric },
   { path: 'fabric-details', component: FabricDetails },
   { path: 'products', component: Products },
   { path: 'products/:id', component: Products },
-  { path: 'cart', component: Cart },
+  // { path: 'cart', component: Cart },
   { path: 'checkout', component: Checkout },
   { path: 'about', component: About },
   { path: 'suppliers', component: Suppliers },
